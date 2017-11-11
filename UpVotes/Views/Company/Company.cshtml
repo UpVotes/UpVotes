@@ -1,0 +1,210 @@
+﻿@using System.web.Mvc
+@model UpVotes.Models.CompanyViewModel
+
+@{
+    <title>@ViewBag.Title - "CompanyName"</title>
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="~/Scripts/HighChartsUnMinify.js"></script>
+    <script src="~/Scripts/UserScripts/Company.js"></script>
+    <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
+
+    <script type="text/javascript" lang="en">
+        $(function () {
+            var companyFocusData = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData)))
+            $.getCompanyFocus(companyFocusData);
+        });
+    </script>
+</head>
+
+<div>
+    @foreach (var company in Model.CompanyList)
+    {
+        <input type="hidden" value="@company.CompanyID" id="hdnCompanyID" />
+        <input type="hidden" value="@company.CompanyName" id="hdnCompanyName" />
+
+        <div class="meni-breadcrumbs main-sect">
+            <div class="container">
+                <span><a href="/Home/HomePage" target="_self">Home</a></span>
+                <span>@company.CompanyName</span>
+            </div>
+        </div>
+
+        <div class="main-banner">
+            <div class="container">
+                <div class="comapany-logi">
+                    <img src="~/images/CompanyLogos/@company.LogoName" />
+                </div>
+
+                <div class="company-name">
+                    <h1>@company.CompanyName</h1>
+                    <ul class="ratings">
+                        @for (int i = 0; i < company.UserRating; i++)
+                        {
+                            <li><span class="rate" aria-hidden="true">★</span></li>
+                        }
+                        @for (int i = company.UserRating; i < 5; i++)
+                        {
+                            <li><span class="ratedisabled" aria-hidden="true">★</span></li>
+                        }
+                    </ul>
+
+                    <span><span>@company.UserRating.0/5.0</span><span>-&nbsp;@company.NoOfUsersRated users</span></span>
+                    <p class="location-company"><i class="fa fa-map-marker" aria-hidden="true"></i>@company.City,@company.CountryName</p>
+                    <ul class="social-media-icons-header">
+                        @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
+                        {
+                            <li><a href="@company.LinkedInProfileURL"><i class="linked-header" aria-hidden="true"></i></a></li>
+                        }
+                        @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
+                        {
+                            <li><a href="@company.FacebookProfileURL"><i class="fb-header" aria-hidden="true"></i></a></li>
+                        }
+                        @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
+                        {
+                            <li><a href="@company.TwitterProfileURL"><i class="twitter-header" aria-hidden="true"></i></a></li>
+                        }
+                        @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
+                        {
+                            <li><a href="@company.GooglePlusProfileURL"><i class="google-header" aria-hidden="true"></i></a></li>
+                        }
+                    </ul>
+
+                    <ul class="header-contact firstrow">
+                        <li><a href="#"><i class="fa fa-clock-o font-awesome-styling" aria-hidden="true"></i>@company.AveragHourlyRate</a></li>
+                        <li><a href="#"><i class="fa fa-user font-awesome-styling" aria-hidden="true"></i>@company.TotalEmployees</a></li>
+                        <li><a href="#"><i class="fa fa-flag-o font-awesome-styling" aria-hidden="true"></i>Founded:@company.FoundedYear</a></li>
+                    </ul>
+
+                    <ul class="header-contact secondrow">
+                        <li><a href="#"><i class="fa fa-external-link font-awesome-styling" aria-hidden="true"></i>@company.URL</a></li>
+                        <li><a href="#"><i class="fa fa-phone-square font-awesome-styling" aria-hidden="true"></i>@company.PhoneNumber</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o font-awesome-styling" aria-hidden="true"></i>@company.Email</a></li>
+                    </ul>
+                </div>
+
+                <div class="header-buttons-main-nav">
+                    <button class="btn btn-default header-buttons" id="btnVote"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i><span class="header-count">@company.NoOfVotes</span></button>
+                    <button class="btn btn-default header-buttons-two" id="btnSubmitReview">Submit Review</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="breadcrumbs company-profile-breadcrumbs">
+            <div class="container">
+                <ul class="nav nav-tabs menu-breadcrumbs">
+                    <li class="activeuphold"><a href="#over-view-main">Overview</a></li>
+                    @if (company.CompanyFocus.Count > 0)
+                {
+                        <li><a href="#Focus-main">Focus</a></li>
+                    }
+
+                    @if (company.CompanyReviews.Count > 0)
+                {
+                        <li><a href="#Reviews-main">Reviews</a></li>
+                    }
+
+                    @if (company.CompanyPortFolio.Count > 0)
+                {
+                        <li><a href="#portfolio-main">Portfolio</a></li>
+                    }
+                </ul>
+
+                <div class="company-paragraphs">
+                    @if (company.Summary != null && company.Summary != string.Empty)
+                    {
+                        <p>@company.Summary</p>
+                    }
+
+                    @if (company.Summary1 != null && company.Summary1 != string.Empty)
+                    {
+                        <p>@company.Summary1</p>
+                    }
+
+                    @if (company.Summary2 != null && company.Summary2 != string.Empty)
+                    {
+                        <p>@company.Summary2</p>
+                    }
+
+                    @if (company.Summary3 != null && company.Summary3 != string.Empty)
+                    {
+                        <p>@company.Summary3</p>
+                    }
+
+                    @if (company.KeyClients != null && company.KeyClients != string.Empty)
+                    {
+                        <p>Our key clients are</p>
+                        <p>@company.KeyClients</p>
+                    }
+                </div>
+
+                @if (company.CompanyBranches.Count > 0)
+                {
+                    <div class="company-multiple-branches">
+                        <h3>Address</h3>
+                        <div class="wrapper-for-lists">
+                            @foreach (var address in company.CompanyBranches)
+                    {
+                                <ul class="company-multiple-branches-lists">
+                                    <li>@address.BranchName</li>
+                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>@address.Address</li>
+                                    <li>@address.City , @address.PostalCode</li>
+                                    <li>@address.StateName, @address.CountryName</li>
+                                    <li><i class="fa fa-phone" aria-hidden="true"></i>@address.PhoneNumber</li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        if (company.CompanyFocus.Count > 0)
+        {
+            <div class="container">
+                <div class="focus-section" id="Focus-main">
+                    <h3>Focus:</h3>
+                    <div id="container" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+        }
+
+        if (company.CompanyPortFolio.Count > 0)
+        {
+            <div class="container">
+                <div class="focus-section portfolio-pic-section-main" id="portfolio-main">
+                    <h3>Portfolio:</h3>
+                    @foreach (var portFolio in company.CompanyPortFolio)
+                    {
+                    <div class="portfolio-pic-section">
+                        <img src="@portFolio.ImageURL">
+                        <p>@portFolio.Title</p>
+                        <p>@portFolio.Description</p>
+                    </div>
+                    }
+                </div>
+
+            </div>
+        }
+
+        if (company.CompanyReviews.Count > 0)
+        {
+            <div class="container">
+                @Html.Partial("_CompanyReviews")
+            </div>
+
+            <div class="load-more-buttons">
+                <button type="button" class="btn btn-default">Load more reviews...</button>
+            </div>
+        }
+
+        <div id="dialog" style="display: none">
+            @Html.Partial("_SubmitReview")
+        </div>
+    }
+</div>
+
+@Html.Partial("_CompanyFooter")

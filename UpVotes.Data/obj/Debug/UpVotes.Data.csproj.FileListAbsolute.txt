@@ -1,0 +1,10 @@
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\UpVotes.Data.dll.config
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\UpVotes.Data.dll
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\UpVotes.Data.pdb
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\EntityFramework.dll
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\EntityFramework.xml
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\obj\Debug\UpVotes.Data.csprojResolveAssemblyReference.cache
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\obj\Debug\UpVotes.Data.dll
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes.Data\obj\Debug\UpVotes.Data.pdb

@@ -1,0 +1,344 @@
+﻿@{
+    ViewBag.Title = "CompanyAddEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="nav nav-tabs menu-breadcrumbs">
+            <li class="activeuphold"><a data-toggle="tab" href="#company-profile">company profile</a></li>
+            <li><a data-toggle="tab" href="#focus-division">Focus</a></li>
+            <li><a data-toggle="tab" href="#locations">locations</a></li>
+            <li><a data-toggle="tab" href="#portfolio">portfolio</a></li>
+        </ul>
+    </div>
+</div>
+<div class="tab-content">
+    <div id="company-profile" class="tab-pane fade in active">
+        <div class="company-profile">
+            <div class="container">
+                <h3>company profile</h3>
+                <span>last step! we just need your contact information to verify that you are who you are.</span>
+                <div class="row company-form">
+                    <div class="col-md-12">
+                        <label for="usr">company name:*</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="col-md-5 col-sm-4 col-xs-8">
+                        <label for="usr">Logo:</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="col-md-1 col-sm-2 col-xs-4  browse-buttonfor">
+                        <label for="usr">&nbsp;</label>
+                        <button>browse</button>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Tagline:</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Founded</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="ddlEmployees">Employees:*</label>
+                        <select class="form-control" id="ddlEmployees">
+                            <option value="0">--Select--</option>
+                            <option value="10-50">10 - 50</option>
+                            <option value="51-100">51 - 100</option>
+                            <option value="101-500">101 - 500</option>
+                            <option value="501-1000">501 - 1000</option>
+                            <option value="1001-5000">1001 - 5000</option>
+                            <option value="5000+">5000+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Avg.Hourly Rate (in US $):*</label>
+                        <select class="form-control" id="ddlAvgHourlyRate">
+                            <option value="0">--Select--</option>
+                            <option value="0-25">< $25 </option>
+                            <option value="25-50">$25 - $50</option>
+                            <option value="51-100">$51 - $100</option>
+                            <option value="101-150">$101 - $150</option>
+                            <option value="151-200">$151 - $200</option>
+                            <option value="201-300">$201 - $300</option>
+                            <option value="300+">$300+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Website:*</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">LinkedIn:*</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Twitter:*</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Facebook:*</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Google+:*</label>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">company Summary*</label>
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Key Clients:*</label>
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                        <button class="btn btn-info prim-save">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="focus-division" class="tab-pane fade">
+        <div class="company-profile">
+            <div class="container">
+                <h3>company focus:</h3>
+                <div class="row focus-fields">
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Digital Marketing:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Search Engine optimization:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Web Design:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">UX/UI Design:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Web Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Mobile App Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">IOT Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Ecommerce Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Web Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Wearable App Developement:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Custom Software Developemt:*</label>
+                        <input type="text" class="form-control" id="usr">
+                        <span>%</span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-info prim-save focus-but" data-toggle="modal" data-target="#myModal">SAVE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="locations" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <h3>company location:</h3>
+                <div class="locations-section">
+                    <div class="col-md-12 mini-heading">
+                        Head Quater company Loaction:
+                    </div>
+                    <div class="row company-form company-locations">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Country:</label>
+                            <div class="input-group">
+                                <input class="form-control" aria-label="Text input with segmented button dropdown">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Street:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">City:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">State/Provience:</label>
+                            <div class="input-group">
+                                <input class="form-control" aria-label="Text input with segmented button dropdown">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-refresh"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Postal Code:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Phone Number</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                    </div>
+                </div>
+                <div class="locations-section">
+                    <div class="col-md-12 mini-heading">
+                        Head Quater company Loaction:
+                    </div>
+                    <div class="row company-form company-locations">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Country:</label>
+                            <div class="input-group">
+                                <input class="form-control" aria-label="Text input with segmented button dropdown">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Street:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">City:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">State/Provience:</label>
+                            <div class="input-group">
+                                <input class="form-control" aria-label="Text input with segmented button dropdown">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-refresh"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Postal Code:</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <label for="usr">Phone Number</label>
+                            <input type="text" class="form-control" id="usr">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-info prim-save-location">Add another Branch</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="portfolio" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <h3>company portfolio:</h3>
+                <span>last step! we just need your contact information to verify that you are who you are.</span>
+                <div class="row company-form">
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Title:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Company Profile:*</label>
+                        <div class="input-group">
+                            <input class="form-control" aria-label="Text input with segmented button dropdown">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-4 col-xs-8">
+                        <label for="usr">Image:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-4  browse-buttonfor">
+                        <label for="usr">&nbsp;</label>
+                        <button>browse</button>
+                    </div>
+                    <div class="col-md-5 col-sm-4 col-xs-8">
+                        <label for="usr">Video:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-4  browse-buttonfor">
+                        <label for="usr">&nbsp;</label>
+                        <button>browse</button>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Description*</label>
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                        <button class="btn btn-info prim-save">SAVE</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

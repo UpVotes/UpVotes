@@ -1,0 +1,92 @@
+﻿
+<script src="~/Scripts/UserScripts/SubmitReview.js"></script>
+
+<div class="company-profile create-review">
+    <div class="container">
+        <div class="row company-form">
+
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Company Being Reviewed :</label><span style="color:red">*</span>
+                <input class="form-control" type="text" id="txtCompanyBeingReviewed">
+                <input type="hidden" id="hdnCompanyID" />
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Project Name :</label><span style="color:red">*</span>
+                <input type="text" class="form-control" id="txtProjectName">
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Service category :</label><span style="color:red">*</span>
+
+                <select id="ddlServiceCategory" class="form-control">
+                    <option value="0">--Select--</option>
+                </select>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">FeedBack :</label><span style="color:red">*</span>
+                <textarea class="form-control" rows="3" id="txtFeedBackSummary"></textarea>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="company-profile">
+    <div class="container">
+        <h3>Rating :<span style="color:red">*</span></h3>
+        <div id="divAddRating">
+            <ul class="ratings" id="ulRating">
+                <li><span id="spnRate_1" class="ratedisabledaddreview" aria-hidden="true" onclick="addRating(1)">★</span></li>
+                <li><span id="spnRate_2" class="ratedisabledaddreview" aria-hidden="true" onclick="addRating(2)">★</span></li>
+                <li><span id="spnRate_3" class="ratedisabledaddreview" aria-hidden="true" onclick="addRating(3)">★</span></li>
+                <li><span id="spnRate_4" class="ratedisabledaddreview" aria-hidden="true" onclick="addRating(4)">★</span></li>
+                <li><span id="spnRate_5" class="ratedisabledaddreview" aria-hidden="true" onclick="addRating(5)">★</span></li>
+            </ul>
+        </div>
+        <input type="hidden" id="hdnRating" />
+    </div>
+</div>
+
+<div class="company-profile">
+    <div class="container">
+        <h3>Contact info:</h3>
+
+        <span>last step! we just need your contact information to verify that you are who you are.</span>
+        <div class="row company-form">
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Full Name :</label>
+                <input type="text" class="form-control" id="txtUserName" readonly disabled="disabled">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Designation :</label>
+                <input type="text" class="form-control" id="txtDesignation">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Comapany Name :</label>
+                <input type="text" class="form-control" id="txtcompanyName">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Phone Number :</label><span style="color:red">*</span>
+                <input type="text" class="form-control" id="txtPhoneNumber">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="usr">Email :</label><span style="color:red">*</span>
+                <input type="text" class="form-control" id="txtEmail">
+                <span class="warning-ticker">this update will go in review backend part.</span>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <input type="button" class="btn btn-info prim-save" id="btnSaveReviews" value="Save" />
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <div id="divErrorMessage" style="display:none;color:red;">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

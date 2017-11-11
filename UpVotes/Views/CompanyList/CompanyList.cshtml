@@ -1,0 +1,84 @@
+﻿@model UpVotes.Models.CompanyViewModel
+
+@{
+    ViewBag.Title = "CompanyList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="jumbotron-main">Top Mobile App Developement Firms 2017</h1>
+<div>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs main-tabs-navi">
+                <li><a data-toggle="tab" href="#company-profile"><i class="view-compare"></i>View & Compare</a></li>
+                <li><a data-toggle="tab" href="#locations"><i class="custom-quote"></i>Custom quote</a></li>
+                <li><a data-toggle="tab" href="#portfolio"><i class="user-reviews"></i>User reviews</a></li>
+                <li><a data-toggle="tab" href="#portfolio"><i class="overview"></i>Overview?</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content">
+    <div id="company-profile" class="container tab-pane fade in active">
+        <div class="rt-pg-menu-desc">
+            <div class="rt-pg-menu-desc-lbl">
+                <span>We found 150 mobile app development firms - <b>4.0/5.0 from 10 users</b></span>
+            </div>
+            <div class="rt-pg-menu-desc-filter">
+                <ul>
+                    <li><a class="rt-pg-menu-filter" href="javascript:void(0)"><span class="glyphicon glyphicon-refresh"></span>Clear Filters</a></li>
+                    <li><a class="rt-pg-menu-alert" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-bell"></span>Get Alerts</a></li>
+                    <li><a class="rt-pg-menu-like" href="javascript:void(0)">Like</a></li>
+                    <li><a class="rt-pg-menu-share" href="javascript:void(0)">Share</a></li>
+                    <li><a class="rt-pg-menu-gplus" href="javascript:void(0)">G+1</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sf-wrapper">
+            <div class="filter-by">
+                <span>Filter by:</span>
+                <span>Company Name</span>
+                <span class="dropdown filterdropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Avg hourly rate<span class="fa fa-chevron-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="companydetail" href="#" minrate="0" maxrate="50">$0 - $50</a></li>
+                        <li><a class="companydetail" href="#" minrate="51" maxrate="100">$51 - $100</a></li>
+                        <li><a class="companydetail" href="#" minrate="101" maxrate="200">$101 - $200</a></li>
+                        <li><a class="companydetail" href="#" minrate="200" maxrate="">$200+</a></li>
+                    </ul>
+                </span>
+                <span class="dropdown filterdropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees <span class="fa fa-chevron-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="companydetail" minEmployee="0" maxEmployee="50">0 - 50</a></li>
+                        <li><a href="#" class="companydetail" minEmployee="51" maxEmployee="100">51 - 100</a></li>
+                        <li><a href="#" class="companydetail" minEmployee="101" maxEmployee="200">101 - 200</a></li>
+                        <li><a href="#" class="companydetail" minEmployee="200" maxEmployee="0">200+</a></li>
+                    </ul>
+                </span>
+                <span class="dropdown filterdropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Locations <span class="fa fa-chevron-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="#">Page 1-2</a></li>
+                        <li><a href="#">Page 1-3</a></li>
+                    </ul>
+                </span>
+            </div>
+            <div class="sort-by">
+                <span>Sort by:</span>
+                <span>Sponsored</span>
+                <span>Top voted firm</span>
+                <span>Top reviews</span>
+                <span>Company names</span>
+            </div>
+        </div>
+
+
+
+      <div id="complist">
+          @Html.Partial("~/Views/CompanyList/_CompList.cshtml",Model);
+      </div>
+    </div>
+</div>

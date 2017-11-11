@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UpVotesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LogoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TagLine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FoundedYear" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeCount" Type="Int32" Nullable="false" />
+    <Property Name="AvgHourleyRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LinkedInProfileURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TwitterProfileURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FacebookProfileURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GooglePlusProfileURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KeyClients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompanyBranch" Relationship="Self.FK_CompanyBranche_Company" FromRole="Company" ToRole="CompanyBranch" />
+    <NavigationProperty Name="CompanyFocus" Relationship="Self.FK_CompanyFocus_Company" FromRole="Company" ToRole="CompanyFocus" />
+    <NavigationProperty Name="CompanyPortFolio" Relationship="Self.FK_CompanyPortFolio_Company_CompanyID" FromRole="Company" ToRole="CompanyPortFolio" />
+  </EntityType>
+  <EntityType Name="CompanyBranch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="StateID" Type="Int32" Nullable="false" />
+    <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsHeadQuarters" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_CompanyBranche_Company" FromRole="CompanyBranch" ToRole="Company" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_CompanyBranche_Country" FromRole="CompanyBranch" ToRole="Country" />
+    <NavigationProperty Name="State" Relationship="Self.FK_CompanyBranche_State" FromRole="CompanyBranch" ToRole="State" />
+  </EntityType>
+  <EntityType Name="CompanyFocus">
+    <Key>
+      <PropertyRef Name="CompanyFocusID" />
+    </Key>
+    <Property Name="CompanyFocusID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="FocusAreaID" Type="Int32" Nullable="false" />
+    <Property Name="FocusAreaPercentage" Type="Double" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_CompanyFocus_Company" FromRole="CompanyFocus" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="CompanyPortFolio">
+    <Key>
+      <PropertyRef Name="CompanyPortFolioID" />
+    </Key>
+    <Property Name="CompanyPortFolioID" Type="Int32" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImageURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VideoURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_CompanyPortFolio_Company_CompanyID" FromRole="CompanyPortFolio" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrencyID" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CompanyBranch" Relationship="Self.FK_CompanyBranche_Country" FromRole="Country" ToRole="CompanyBranch" />
+    <NavigationProperty Name="Currency" Relationship="Self.FK_Country_Currency_CurrencyID" FromRole="Country" ToRole="Currency" />
+    <NavigationProperty Name="State" Relationship="Self.FK_State_Country_CountryID" FromRole="Country" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyID" />
+    </Key>
+    <Property Name="CurrencyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CurrencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrencySymbol" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrencyCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Country_Currency_CurrencyID" FromRole="Currency" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="FocusArea">
+    <Key>
+      <PropertyRef Name="FocusAreaID" />
+    </Key>
+    <Property Name="FocusAreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FocusAreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+    </Key>
+    <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CompanyBranch" Relationship="Self.FK_CompanyBranche_State" FromRole="State" ToRole="CompanyBranch" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_State_Country_CountryID" FromRole="State" ToRole="Country" />
+  </EntityType>
+  <Association Name="FK_CompanyBranche_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="CompanyBranch">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyFocus_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyFocus" Type="Self.CompanyFocus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="CompanyFocus">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyPortFolio_Company_CompanyID">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyPortFolio" Type="Self.CompanyPortFolio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="CompanyPortFolio">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyBranche_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="CompanyBranch">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyBranche_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateID" />
+      </Principal>
+      <Dependent Role="CompanyBranch">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Country_Currency_CurrencyID">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Country" Type="Self.Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="Country">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_Country_CountryID">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UpVotesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Company" EntityType="Self.Company" />
+    <EntitySet Name="CompanyBranch" EntityType="Self.CompanyBranch" />
+    <EntitySet Name="CompanyFocus" EntityType="Self.CompanyFocus" />
+    <EntitySet Name="CompanyPortFolio" EntityType="Self.CompanyPortFolio" />
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" />
+    <EntitySet Name="FocusArea" EntityType="Self.FocusArea" />
+    <EntitySet Name="State" EntityType="Self.State" />
+    <AssociationSet Name="FK_CompanyBranche_Company" Association="Self.FK_CompanyBranche_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyFocus_Company" Association="Self.FK_CompanyFocus_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyFocus" EntitySet="CompanyFocus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyPortFolio_Company_CompanyID" Association="Self.FK_CompanyPortFolio_Company_CompanyID">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyPortFolio" EntitySet="CompanyPortFolio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyBranche_Country" Association="Self.FK_CompanyBranche_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyBranche_State" Association="Self.FK_CompanyBranche_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Country_Currency_CurrencyID" Association="Self.FK_Country_Currency_CurrencyID">
+      <End Role="Currency" EntitySet="Currency" />
+      <End Role="Country" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_Country_CountryID" Association="Self.FK_State_Country_CountryID">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

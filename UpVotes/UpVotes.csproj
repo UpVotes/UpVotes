@@ -1,0 +1,999 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEBA5548-81DA-46E3-9C3D-EDE02D88BB54}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UpVotes</RootNamespace>
+    <AssemblyName>UpVotes</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UpVotes.BussinessEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\UpVotes.Services\UpVotes.BussinessEntities\bin\Debug\UpVotes.BussinessEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\CompanyService.cs" />
+    <Compile Include="Business\FocusAreaService.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CompanyListController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyReviewViewModel.cs" />
+    <Compile Include="Models\CompanyViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ClientHelper.cs" />
+    <Compile Include="Utility\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\home-design.css" />
+    <Content Include="Content\jQuery\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\jQuery\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\jQuery\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\jQuery\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\jQuery\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\jQuery\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\jQuery\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jQuery\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\jQuery\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\jQuery\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\jQuery\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\jQuery\jquery-ui.min.css" />
+    <Content Include="Content\jQuery\jquery-ui.structure.min.css" />
+    <Content Include="Content\jQuery\jquery-ui.theme.min.css" />
+    <Content Include="Content\jQuery\ui.jqgrid.css" />
+    <Content Include="Content\StarRating.css" />
+    <Content Include="Content\wvr-styles.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Open_Sans\LICENSE.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\1.png" />
+    <Content Include="images\2.png" />
+    <Content Include="images\3.png" />
+    <Content Include="images\4.png" />
+    <Content Include="images\brain.png" />
+    <Content Include="images\comments.png" />
+    <Content Include="images\CompanyListLogos\360DegreeTechnosoft.png" />
+    <Content Include="images\CompanyListLogos\3five.png" />
+    <Content Include="images\CompanyListLogos\47Degrees.png" />
+    <Content Include="images\CompanyListLogos\8ninths.png" />
+    <Content Include="images\CompanyListLogos\8thLight.png" />
+    <Content Include="images\CompanyListLogos\97thFloor.png" />
+    <Content Include="images\CompanyListLogos\ABMobileApps.png" />
+    <Content Include="images\CompanyListLogos\Ackmann_Dickenson.png" />
+    <Content Include="images\CompanyListLogos\ActBoldMediaGroup.png" />
+    <Content Include="images\CompanyListLogos\AgicentTechnologies.png" />
+    <Content Include="images\CompanyListLogos\AgilisTechLabs.png" />
+    <Content Include="images\CompanyListLogos\AguaiSolutionsPvtLtd.png" />
+    <Content Include="images\CompanyListLogos\AirTightDesign.png" />
+    <Content Include="images\CompanyListLogos\Algoworks.png" />
+    <Content Include="images\CompanyListLogos\AMPAgency.png" />
+    <Content Include="images\CompanyListLogos\AnvilMedia.png" />
+    <Content Include="images\CompanyListLogos\ApolloMatrix Inc.png" />
+    <Content Include="images\CompanyListLogos\AppetizerMobile.png" />
+    <Content Include="images\CompanyListLogos\Appinventiv.png" />
+    <Content Include="images\CompanyListLogos\AppSquadzTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Appstem.png" />
+    <Content Include="images\CompanyListLogos\Appster.png" />
+    <Content Include="images\CompanyListLogos\AppworksTechnologies.png" />
+    <Content Include="images\CompanyListLogos\ArbormoonSoftwareInc.png" />
+    <Content Include="images\CompanyListLogos\ArcTouch.png" />
+    <Content Include="images\CompanyListLogos\AtomicObject.png" />
+    <Content Include="images\CompanyListLogos\AvalaunchMedia.png" />
+    <Content Include="images\CompanyListLogos\BeFoundOnline.png" />
+    <Content Include="images\CompanyListLogos\Bitbean.png" />
+    <Content Include="images\CompanyListLogos\BitOrderTechnologies.png" />
+    <Content Include="images\CompanyListLogos\BKLYN.png" />
+    <Content Include="images\CompanyListLogos\Blend.png" />
+    <Content Include="images\CompanyListLogos\BLITZ.png" />
+    <Content Include="images\CompanyListLogos\BlueHatMarketing.png" />
+    <Content Include="images\CompanyListLogos\BlueLabelLabs.png" />
+    <Content Include="images\CompanyListLogos\BlueRocket.png" />
+    <Content Include="images\CompanyListLogos\BlueWhaleApps.png" />
+    <Content Include="images\CompanyListLogos\BOLDTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Boostability.png" />
+    <Content Include="images\CompanyListLogos\BottleRocket.png" />
+    <Content Include="images\CompanyListLogos\BrainBytesCreative.png" />
+    <Content Include="images\CompanyListLogos\BreakthroughTechnologies.png" />
+    <Content Include="images\CompanyListLogos\BrightBrightGreat.png" />
+    <Content Include="images\CompanyListLogos\BrightInteractive.png" />
+    <Content Include="images\CompanyListLogos\BruceClayInc.png" />
+    <Content Include="images\CompanyListLogos\Byndyusoft.png" />
+    <Content Include="images\CompanyListLogos\CabForward.png" />
+    <Content Include="images\CompanyListLogos\CazarinInteractive.png" />
+    <Content Include="images\CompanyListLogos\ChaoticMoonStudios.png" />
+    <Content Include="images\CompanyListLogos\CheekyMonkeyMediaInc..png" />
+    <Content Include="images\CompanyListLogos\ChromeInfoTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Clay.png" />
+    <Content Include="images\CompanyListLogos\ClearlyInnovative.png" />
+    <Content Include="images\CompanyListLogos\ClearSummit.png" />
+    <Content Include="images\CompanyListLogos\Codal.png" />
+    <Content Include="images\CompanyListLogos\CodewaveTechnologies.png" />
+    <Content Include="images\CompanyListLogos\CognitiveClouds.png" />
+    <Content Include="images\CompanyListLogos\ColorJar.png" />
+    <Content Include="images\CompanyListLogos\Concepta.png" />
+    <Content Include="images\CompanyListLogos\ConvergeSol.png" />
+    <Content Include="images\CompanyListLogos\CoolBlueInteractive.png" />
+    <Content Include="images\CompanyListLogos\Coplex.png" />
+    <Content Include="images\CompanyListLogos\CopperMobile.png" />
+    <Content Include="images\CompanyListLogos\CoreMobileApp.png" />
+    <Content Include="images\CompanyListLogos\Creative360.png" />
+    <Content Include="images\CompanyListLogos\CredencysSolutions Inc.png" />
+    <Content Include="images\CompanyListLogos\CTP.png" />
+    <Content Include="images\CompanyListLogos\DAGMARMarketing.png" />
+    <Content Include="images\CompanyListLogos\Definition6.png" />
+    <Content Include="images\CompanyListLogos\DeloitteDigital.png" />
+    <Content Include="images\CompanyListLogos\DetroitLabs.png" />
+    <Content Include="images\CompanyListLogos\DevMynd.png" />
+    <Content Include="images\CompanyListLogos\DevTeamSpace.png" />
+    <Content Include="images\CompanyListLogos\Devvela.png" />
+    <Content Include="images\CompanyListLogos\DigiFutura.png" />
+    <Content Include="images\CompanyListLogos\DigitalCurrent.png" />
+    <Content Include="images\CompanyListLogos\DigitalOutlooks.png" />
+    <Content Include="images\CompanyListLogos\DigitalManagementInc.png" />
+    <Content Include="images\CompanyListLogos\DirectiveConsulting.png" />
+    <Content Include="images\CompanyListLogos\DockYard.png" />
+    <Content Include="images\CompanyListLogos\Doejo.png" />
+    <Content Include="images\CompanyListLogos\DogfishSoftware.png" />
+    <Content Include="images\CompanyListLogos\DogtownMedia.png" />
+    <Content Include="images\CompanyListLogos\DomandTom.png" />
+    <Content Include="images\CompanyListLogos\EastBancTechnologies.png" />
+    <Content Include="images\CompanyListLogos\EastCoastProduct.png" />
+    <Content Include="images\CompanyListLogos\Echobind.png" />
+    <Content Include="images\CompanyListLogos\EDUCO.png" />
+    <Content Include="images\CompanyListLogos\EightBitStudios.png" />
+    <Content Include="images\CompanyListLogos\Eldarion.png" />
+    <Content Include="images\CompanyListLogos\Endeavour.png" />
+    <Content Include="images\CompanyListLogos\ePageCity.png" />
+    <Content Include="images\CompanyListLogos\Ethervision.png" />
+    <Content Include="images\CompanyListLogos\ExtensionEngine.png" />
+    <Content Include="images\CompanyListLogos\FinoitTechnologies.png" />
+    <Content Include="images\CompanyListLogos\FirestarterSEO.png" />
+    <Content Include="images\CompanyListLogos\FishermenLabs.png" />
+    <Content Include="images\CompanyListLogos\FivePackCreative.png" />
+    <Content Include="images\CompanyListLogos\Fomaxtech.png" />
+    <Content Include="images\CompanyListLogos\Fruition.png" />
+    <Content Include="images\CompanyListLogos\Fueled.png" />
+    <Content Include="images\CompanyListLogos\FulcrumCollaborations.png" />
+    <Content Include="images\CompanyListLogos\GennovacapTechnology.png" />
+    <Content Include="images\CompanyListLogos\Genuine.png" />
+    <Content Include="images\CompanyListLogos\GlobalInfonet.png" />
+    <Content Include="images\CompanyListLogos\GoingClearInteractive.png" />
+    <Content Include="images\CompanyListLogos\HanekeDesign.png" />
+    <Content Include="images\CompanyListLogos\Hashrocket.png" />
+    <Content Include="images\CompanyListLogos\Hashtaag.png" />
+    <Content Include="images\CompanyListLogos\HedgehogLab.png" />
+    <Content Include="images\CompanyListLogos\HiddenBrainsInfoTech.png" />
+    <Content Include="images\CompanyListLogos\HiveDigital.png" />
+    <Content Include="images\CompanyListLogos\Icreon.png" />
+    <Content Include="images\CompanyListLogos\IgniteDigital.png" />
+    <Content Include="images\CompanyListLogos\IgniteVisibility.png" />
+    <Content Include="images\CompanyListLogos\InfinixSoft.png" />
+    <Content Include="images\CompanyListLogos\InfrontWebworks.png" />
+    <Content Include="images\CompanyListLogos\Inviqa.png" />
+    <Content Include="images\CompanyListLogos\Invonto.png" />
+    <Content Include="images\CompanyListLogos\IPhoneAppDeveloper.png" />
+    <Content Include="images\CompanyListLogos\i2integration.png" />
+    <Content Include="images\CompanyListLogos\iCoderzSolutionsPvtLtd.png" />
+    <Content Include="images\CompanyListLogos\IdeaPlungeSolutions.png" />
+    <Content Include="images\CompanyListLogos\Iflexion.png" />
+    <Content Include="images\CompanyListLogos\Impekable.png" />
+    <Content Include="images\CompanyListLogos\InfiCareTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Infinum.png" />
+    <Content Include="images\CompanyListLogos\InflecticaTechnologies.png" />
+    <Content Include="images\CompanyListLogos\InnateAgency.png" />
+    <Content Include="images\CompanyListLogos\InnovationM.png" />
+    <Content Include="images\CompanyListLogos\inobrightinc.png" />
+    <Content Include="images\CompanyListLogos\IntegratedWebWorks.png" />
+    <Content Include="images\CompanyListLogos\Intrepid.png" />
+    <Content Include="images\CompanyListLogos\IntuitiveAppz.png" />
+    <Content Include="images\CompanyListLogos\Intuz.png" />
+    <Content Include="images\CompanyListLogos\IrishTitan.png" />
+    <Content Include="images\CompanyListLogos\ISBX.png" />
+    <Content Include="images\CompanyListLogos\JackrabbitMobile.png" />
+    <Content Include="images\CompanyListLogos\JAKT.png" />
+    <Content Include="images\CompanyListLogos\JasonSafirInteractive.png" />
+    <Content Include="images\CompanyListLogos\JuegoStudioPrivate.png" />
+    <Content Include="images\CompanyListLogos\JulyRapid.png" />
+    <Content Include="images\CompanyListLogos\kohactive.png" />
+    <Content Include="images\CompanyListLogos\KoMarketing.png" />
+    <Content Include="images\CompanyListLogos\Labotec.png" />
+    <Content Include="images\CompanyListLogos\LADSolutions.png" />
+    <Content Include="images\CompanyListLogos\LaunchPadLab.png" />
+    <Content Include="images\CompanyListLogos\LeadtoConversion.png" />
+    <Content Include="images\CompanyListLogos\LLTGroup.png" />
+    <Content Include="images\CompanyListLogos\LoadsysSolutions.png" />
+    <Content Include="images\CompanyListLogos\Lochbridge.png" />
+    <Content Include="images\CompanyListLogos\LogicSolutions.png" />
+    <Content Include="images\CompanyListLogos\LunarMedia.png" />
+    <Content Include="images\CompanyListLogos\Macadamian.png" />
+    <Content Include="images\CompanyListLogos\MagespiderInfowebPvt.png" />
+    <Content Include="images\CompanyListLogos\Majestyk.png" />
+    <Content Include="images\CompanyListLogos\MannixMarketing.png" />
+    <Content Include="images\CompanyListLogos\MassTechnology.png" />
+    <Content Include="images\CompanyListLogos\Matchstic.png" />
+    <Content Include="images\CompanyListLogos\MendiosTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Messapps.png" />
+    <Content Include="images\CompanyListLogos\MichiganLabs.png" />
+    <Content Include="images\CompanyListLogos\Millennium.png" />
+    <Content Include="images\CompanyListLogos\MindInventory.png" />
+    <Content Include="images\CompanyListLogos\MOBIKASA.png" />
+    <Content Include="images\CompanyListLogos\MobisoftInfotech.png" />
+    <Content Include="images\CompanyListLogos\Mobomo.png" />
+    <Content Include="images\CompanyListLogos\Mobrill.png" />
+    <Content Include="images\CompanyListLogos\MobulousTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Moby.png" />
+    <Content Include="images\CompanyListLogos\MontanaBanana.png" />
+    <Content Include="images\CompanyListLogos\MoonTechnolabsPvtLtd.png" />
+    <Content Include="images\CompanyListLogos\MotiffMedia.png" />
+    <Content Include="images\CompanyListLogos\MotivoMedia.png" />
+    <Content Include="images\CompanyListLogos\Mouko.png" />
+    <Content Include="images\CompanyListLogos\MoveoApps.png" />
+    <Content Include="images\CompanyListLogos\MSTQ.png" />
+    <Content Include="images\CompanyListLogos\MutualMobile.png" />
+    <Content Include="images\CompanyListLogos\Myplanet.png" />
+    <Content Include="images\CompanyListLogos\NeolynxGroupInc.png" />
+    <Content Include="images\CompanyListLogos\NeonRoots.png" />
+    <Content Include="images\CompanyListLogos\NerlandCo.png" />
+    <Content Include="images\CompanyListLogos\NexiaDigital.png" />
+    <Content Include="images\CompanyListLogos\Nickelfox.png" />
+    <Content Include="images\CompanyListLogos\NimblechappsLtd.png" />
+    <Content Include="images\CompanyListLogos\NNCServices.png" />
+    <Content Include="images\CompanyListLogos\Nomtek.png" />
+    <Content Include="images\CompanyListLogos\Northcutt.png" />
+    <Content Include="images\CompanyListLogos\NorthwestIndependent.png" />
+    <Content Include="images\CompanyListLogos\NotionTheory.png" />
+    <Content Include="images\CompanyListLogos\NovaSolutions.png" />
+    <Content Include="images\CompanyListLogos\OlibroDesign.png" />
+    <Content Include="images\CompanyListLogos\OneByte.png" />
+    <Content Include="images\CompanyListLogos\OneMonthApps.png" />
+    <Content Include="images\CompanyListLogos\Onyx.png" />
+    <Content Include="images\CompanyListLogos\OpenXcell.png" />
+    <Content Include="images\CompanyListLogos\OperationTechnology.png" />
+    <Content Include="images\CompanyListLogos\OptFirstInternetMarketing.png" />
+    <Content Include="images\CompanyListLogos\OrbitMediaStudios.png" />
+    <Content Include="images\CompanyListLogos\OriginEight.png" />
+    <Content Include="images\CompanyListLogos\OrNsoftCorporation.png" />
+    <Content Include="images\CompanyListLogos\ParangatTechnologies.png" />
+    <Content Include="images\CompanyListLogos\PathPartnerTechnology.png" />
+    <Content Include="images\CompanyListLogos\Peerbits.png" />
+    <Content Include="images\CompanyListLogos\Phase3.png" />
+    <Content Include="images\CompanyListLogos\PoeticSystems.png" />
+    <Content Include="images\CompanyListLogos\Praxent.png" />
+    <Content Include="images\CompanyListLogos\ProlificInteractive.png" />
+    <Content Include="images\CompanyListLogos\Promodo.png" />
+    <Content Include="images\CompanyListLogos\PugetWorksInc.png" />
+    <Content Include="images\CompanyListLogos\QuestGlobalTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Radixweb.png" />
+    <Content Include="images\CompanyListLogos\Raizlabs.png" />
+    <Content Include="images\CompanyListLogos\Raka.png" />
+    <Content Include="images\CompanyListLogos\RalphWalkerDesigns.png" />
+    <Content Include="images\CompanyListLogos\RapidOpsInc.png" />
+    <Content Include="images\CompanyListLogos\RapidsoftTechnologies.png" />
+    <Content Include="images\CompanyListLogos\Ratio.png" />
+    <Content Include="images\CompanyListLogos\RealmWebDesign.png" />
+    <Content Include="images\CompanyListLogos\RedFoundry.png" />
+    <Content Include="images\CompanyListLogos\RenovatioCloudSolutions.png" />
+    <Content Include="images\CompanyListLogos\ResultFirst.png" />
+    <Content Include="images\CompanyListLogos\RipeMediaInc.png" />
+    <Content Include="images\CompanyListLogos\RobosoftTechnologies.png" />
+    <Content Include="images\CompanyListLogos\RocketClicks.png" />
+    <Content Include="images\CompanyListLogos\RocketshipSEO.png" />
+    <Content Include="images\CompanyListLogos\SachsMarketingGroup.png" />
+    <Content Include="images\CompanyListLogos\SangananITSolutionsPvt.png" />
+    <Content Include="images\CompanyListLogos\Searchbloom.png" />
+    <Content Include="images\CompanyListLogos\SeductiveMobile.png" />
+    <Content Include="images\CompanyListLogos\SegueTechnologies.png" />
+    <Content Include="images\CompanyListLogos\seoinc.png" />
+    <Content Include="images\CompanyListLogos\seoplus.png" />
+    <Content Include="images\CompanyListLogos\SFCD.png" />
+    <Content Include="images\CompanyListLogos\SiamComputing.png" />
+    <Content Include="images\CompanyListLogos\Sidebench.png" />
+    <Content Include="images\CompanyListLogos\Sideways8Interactive.png" />
+    <Content Include="images\CompanyListLogos\SimformLLC.png" />
+    <Content Include="images\CompanyListLogos\SmallPlanetDigital.png" />
+    <Content Include="images\CompanyListLogos\SmashingIdeas.png" />
+    <Content Include="images\CompanyListLogos\SnapMobile.png" />
+    <Content Include="images\CompanyListLogos\SnyxiusTechnologies.png" />
+    <Content Include="images\CompanyListLogos\SocialSEO.png" />
+    <Content Include="images\CompanyListLogos\Sofmen.png" />
+    <Content Include="images\CompanyListLogos\Sourcebits.png" />
+    <Content Include="images\CompanyListLogos\Sourcetoad.png" />
+    <Content Include="images\CompanyListLogos\SPMarketplace.png" />
+    <Content Include="images\CompanyListLogos\Stanfy.png" />
+    <Content Include="images\CompanyListLogos\STATEMENT.png" />
+    <Content Include="images\CompanyListLogos\StationFour.png" />
+    <Content Include="images\CompanyListLogos\StickOutSocial.png" />
+    <Content Include="images\CompanyListLogos\StoneLabs.png" />
+    <Content Include="images\CompanyListLogos\StraightNorth.png" />
+    <Content Include="images\CompanyListLogos\StudioUmbrella.png" />
+    <Content Include="images\CompanyListLogos\SunlightMediaLLC.png" />
+    <Content Include="images\CompanyListLogos\Suventure.png" />
+    <Content Include="images\CompanyListLogos\Swarm.png" />
+    <Content Include="images\CompanyListLogos\SwensonHe.png" />
+    <Content Include="images\CompanyListLogos\SwiftKickMobile.png" />
+    <Content Include="images\CompanyListLogos\SwingDev.png" />
+    <Content Include="images\CompanyListLogos\Syrup.png" />
+    <Content Include="images\CompanyListLogos\TableXI.png" />
+    <Content Include="images\CompanyListLogos\TanzaniteInfotech.png" />
+    <Content Include="images\CompanyListLogos\TechAhead.png" />
+    <Content Include="images\CompanyListLogos\Techugo.png" />
+    <Content Include="images\CompanyListLogos\TekshapersSoftware.png" />
+    <Content Include="images\CompanyListLogos\TheBHWGroup.png" />
+    <Content Include="images\CompanyListLogos\thinkbigsites.png" />
+    <Content Include="images\CompanyListLogos\Thoughtbot.png" />
+    <Content Include="images\CompanyListLogos\ThriveInternetMarketing.png" />
+    <Content Include="images\CompanyListLogos\TopDraw.png" />
+    <Content Include="images\CompanyListLogos\Toptal.png" />
+    <Content Include="images\CompanyListLogos\TriKonnectTechnologies.png" />
+    <Content Include="images\CompanyListLogos\TriStateTechnology.png" />
+    <Content Include="images\CompanyListLogos\TroyWebConsulting.png" />
+    <Content Include="images\CompanyListLogos\TuvaInteractive.png" />
+    <Content Include="images\CompanyListLogos\Type2Designs.png" />
+    <Content Include="images\CompanyListLogos\UKAD.png" />
+    <Content Include="images\CompanyListLogos\UnitOneNine.png" />
+    <Content Include="images\CompanyListLogos\UpTop.png" />
+    <Content Include="images\CompanyListLogos\UXMStudio.png" />
+    <Content Include="images\CompanyListLogos\Vectorform.png" />
+    <Content Include="images\CompanyListLogos\VentureAviator.png" />
+    <Content Include="images\CompanyListLogos\VentusoLLC.png" />
+    <Content Include="images\CompanyListLogos\VitalDesign.png" />
+    <Content Include="images\CompanyListLogos\VizionInteractive.png" />
+    <Content Include="images\CompanyListLogos\WallarooMedia.png" />
+    <Content Include="images\CompanyListLogos\WaverleySoftware.png" />
+    <Content Include="images\CompanyListLogos\WEBITMD.png" />
+    <Content Include="images\CompanyListLogos\WebMobTechnologies.png" />
+    <Content Include="images\CompanyListLogos\WebpageFX.png" />
+    <Content Include="images\CompanyListLogos\WebPlanexInfotechPvtLtd.png" />
+    <Content Include="images\CompanyListLogos\Westwerk.png" />
+    <Content Include="images\CompanyListLogos\WisdekCorp.png" />
+    <Content Include="images\CompanyListLogos\WorryFreeLabs.png" />
+    <Content Include="images\CompanyListLogos\WowLabz.png" />
+    <Content Include="images\CompanyListLogos\WrightIMC.png" />
+    <Content Include="images\CompanyListLogos\WveLabs.png" />
+    <Content Include="images\CompanyListLogos\YDesignsInc.png" />
+    <Content Include="images\CompanyListLogos\ZazmicInc.png" />
+    <Content Include="images\CompanyListLogos\zGames.png" />
+    <Content Include="images\CompanyLogos\360DegreeTechnosoft.png" />
+    <Content Include="images\CompanyLogos\3five.png" />
+    <Content Include="images\CompanyLogos\47Degrees.png" />
+    <Content Include="images\CompanyLogos\8ninths.png" />
+    <Content Include="images\CompanyLogos\8thLight.png" />
+    <Content Include="images\CompanyLogos\97thFloor.png" />
+    <Content Include="images\CompanyLogos\ABMobileApps.png" />
+    <Content Include="images\CompanyLogos\Ackmann_Dickenson.png" />
+    <Content Include="images\CompanyLogos\ActBoldMediaGroup.png" />
+    <Content Include="images\CompanyLogos\AgicentTechnologies.png" />
+    <Content Include="images\CompanyLogos\AgilisTechLabs.png" />
+    <Content Include="images\CompanyLogos\AguaiSolutionsPvtLtd.png" />
+    <Content Include="images\CompanyLogos\AirTightDesign.png" />
+    <Content Include="images\CompanyLogos\Algoworks.png" />
+    <Content Include="images\CompanyLogos\AMPAgency.png" />
+    <Content Include="images\CompanyLogos\AnvilMedia.png" />
+    <Content Include="images\CompanyLogos\ApolloMatrixInc.png" />
+    <Content Include="images\CompanyLogos\AppetizerMobile.png" />
+    <Content Include="images\CompanyLogos\Appinventiv.png" />
+    <Content Include="images\CompanyLogos\AppSquadzTechnologies.png" />
+    <Content Include="images\CompanyLogos\Appstem.png" />
+    <Content Include="images\CompanyLogos\Appster.png" />
+    <Content Include="images\CompanyLogos\AppworksTechnologies.png" />
+    <Content Include="images\CompanyLogos\ArbormoonSoftwareInc.png" />
+    <Content Include="images\CompanyLogos\ArcTouch.png" />
+    <Content Include="images\CompanyLogos\AtomicObject.png" />
+    <Content Include="images\CompanyLogos\AvalaunchMedia.png" />
+    <Content Include="images\CompanyLogos\BeFoundOnline.png" />
+    <Content Include="images\CompanyLogos\Bitbean.png" />
+    <Content Include="images\CompanyLogos\BitOrderTechnologies.png" />
+    <Content Include="images\CompanyLogos\BKLYN.png" />
+    <Content Include="images\CompanyLogos\Blend.png" />
+    <Content Include="images\CompanyLogos\BLITZ.png" />
+    <Content Include="images\CompanyLogos\BlueHatMarketing.png" />
+    <Content Include="images\CompanyLogos\BlueLabelLabs.png" />
+    <Content Include="images\CompanyLogos\BlueRocket.png" />
+    <Content Include="images\CompanyLogos\BlueWhaleApps.png" />
+    <Content Include="images\CompanyLogos\BOLDTechnologies.png" />
+    <Content Include="images\CompanyLogos\Boostability.png" />
+    <Content Include="images\CompanyLogos\BottleRocket.png" />
+    <Content Include="images\CompanyLogos\BrainBytesCreative.png" />
+    <Content Include="images\CompanyLogos\BreakthroughTechnologies.png" />
+    <Content Include="images\CompanyLogos\BrightBrightGreat.png" />
+    <Content Include="images\CompanyLogos\BrightInteractive.png" />
+    <Content Include="images\CompanyLogos\BruceClayInc.png" />
+    <Content Include="images\CompanyLogos\Byndyusoft.png" />
+    <Content Include="images\CompanyLogos\CabForward.png" />
+    <Content Include="images\CompanyLogos\CazarinInteractive.png" />
+    <Content Include="images\CompanyLogos\ChaoticMoonStudios.png" />
+    <Content Include="images\CompanyLogos\CheekyMonkeyMediaInc..png" />
+    <Content Include="images\CompanyLogos\ChromeInfoTechnologies.png" />
+    <Content Include="images\CompanyLogos\Clay.png" />
+    <Content Include="images\CompanyLogos\ClearlyInnovative.png" />
+    <Content Include="images\CompanyLogos\ClearSummit.png" />
+    <Content Include="images\CompanyLogos\Codal.png" />
+    <Content Include="images\CompanyLogos\CodewaveTechnologies.png" />
+    <Content Include="images\CompanyLogos\CognitiveClouds.png" />
+    <Content Include="images\CompanyLogos\ColorJar.png" />
+    <Content Include="images\CompanyLogos\Concepta.png" />
+    <Content Include="images\CompanyLogos\ConvergeSol.png" />
+    <Content Include="images\CompanyLogos\CoolBlueInteractive.png" />
+    <Content Include="images\CompanyLogos\Coplex.png" />
+    <Content Include="images\CompanyLogos\CopperMobile.png" />
+    <Content Include="images\CompanyLogos\CoreMobileApp.png" />
+    <Content Include="images\CompanyLogos\Creative360.png" />
+    <Content Include="images\CompanyLogos\CredencysSolutionsInc.png" />
+    <Content Include="images\CompanyLogos\CTP.png" />
+    <Content Include="images\CompanyLogos\DAGMARMarketing.png" />
+    <Content Include="images\CompanyLogos\Definition6.png" />
+    <Content Include="images\CompanyLogos\DeloitteDigital.png" />
+    <Content Include="images\CompanyLogos\DetroitLabs.png" />
+    <Content Include="images\CompanyLogos\DevMynd.png" />
+    <Content Include="images\CompanyLogos\DevTeamSpace.png" />
+    <Content Include="images\CompanyLogos\Devvela.png" />
+    <Content Include="images\CompanyLogos\DigiFutura.png" />
+    <Content Include="images\CompanyLogos\DigitalCurrent.png" />
+    <Content Include="images\CompanyLogos\DigitalOutlooks.png" />
+    <Content Include="images\CompanyLogos\DigitalManagementInc.png" />
+    <Content Include="images\CompanyLogos\DirectiveConsulting.png" />
+    <Content Include="images\CompanyLogos\DockYard.png" />
+    <Content Include="images\CompanyLogos\Doejo.png" />
+    <Content Include="images\CompanyLogos\DogfishSoftware.png" />
+    <Content Include="images\CompanyLogos\DogtownMedia.png" />
+    <Content Include="images\CompanyLogos\DomandTom.png" />
+    <Content Include="images\CompanyLogos\EastBancTechnologies.png" />
+    <Content Include="images\CompanyLogos\EastCoastProduct.png" />
+    <Content Include="images\CompanyLogos\Echobind.png" />
+    <Content Include="images\CompanyLogos\EDUCO.png" />
+    <Content Include="images\CompanyLogos\EightBitStudios.png" />
+    <Content Include="images\CompanyLogos\Eldarion.png" />
+    <Content Include="images\CompanyLogos\Endeavour.png" />
+    <Content Include="images\CompanyLogos\ePageCity.png" />
+    <Content Include="images\CompanyLogos\Ethervision.png" />
+    <Content Include="images\CompanyLogos\ExtensionEngine.png" />
+    <Content Include="images\CompanyLogos\FinoitTechnologies.png" />
+    <Content Include="images\CompanyLogos\FirestarterSEO.png" />
+    <Content Include="images\CompanyLogos\FishermenLabs.png" />
+    <Content Include="images\CompanyLogos\FivePackCreative.png" />
+    <Content Include="images\CompanyLogos\FlynautLLC.png" />
+    <Content Include="images\CompanyLogos\Fomaxtech.png" />
+    <Content Include="images\CompanyLogos\Fruition.png" />
+    <Content Include="images\CompanyLogos\Fueled.png" />
+    <Content Include="images\CompanyLogos\FulcrumCollaborations.png" />
+    <Content Include="images\CompanyLogos\GennovacapTechnology.png" />
+    <Content Include="images\CompanyLogos\Genuine.png" />
+    <Content Include="images\CompanyLogos\GlobalInfonet.png" />
+    <Content Include="images\CompanyLogos\GoingClearInteractive.png" />
+    <Content Include="images\CompanyLogos\HanekeDesign.png" />
+    <Content Include="images\CompanyLogos\Hashrocket.png" />
+    <Content Include="images\CompanyLogos\Hashtaag.png" />
+    <Content Include="images\CompanyLogos\HedgehogLab.png" />
+    <Content Include="images\CompanyLogos\HiddenBrainsInfoTech.png" />
+    <Content Include="images\CompanyLogos\HiveDigital.png" />
+    <Content Include="images\CompanyLogos\Icreon.png" />
+    <Content Include="images\CompanyLogos\IgniteDigital.png" />
+    <Content Include="images\CompanyLogos\IgniteVisibility.png" />
+    <Content Include="images\CompanyLogos\IhoneAppDeveloper.png" />
+    <Content Include="images\CompanyLogos\i2integration.png" />
+    <Content Include="images\CompanyLogos\iCoderzSolutionsPvtLtd.png" />
+    <Content Include="images\CompanyLogos\IdeaPlungeSolutions.png" />
+    <Content Include="images\CompanyLogos\Iflexion.png" />
+    <Content Include="images\CompanyLogos\Impekable.png" />
+    <Content Include="images\CompanyLogos\InfiCareTechnologies.png" />
+    <Content Include="images\CompanyLogos\InfinixSoft.png" />
+    <Content Include="images\CompanyLogos\Infinum.png" />
+    <Content Include="images\CompanyLogos\InflecticaTechnologies.png" />
+    <Content Include="images\CompanyLogos\InfrontWebworks.png" />
+    <Content Include="images\CompanyLogos\InnateAgency.png" />
+    <Content Include="images\CompanyLogos\InnovationM.png" />
+    <Content Include="images\CompanyLogos\inobrightinc.png" />
+    <Content Include="images\CompanyLogos\IntegratedWebWorks.png" />
+    <Content Include="images\CompanyLogos\Intrepid.png" />
+    <Content Include="images\CompanyLogos\IntuitiveAppz.png" />
+    <Content Include="images\CompanyLogos\Intuz.png" />
+    <Content Include="images\CompanyLogos\Inviqa.png" />
+    <Content Include="images\CompanyLogos\Invonto.png" />
+    <Content Include="images\CompanyLogos\IrishTitan.png" />
+    <Content Include="images\CompanyLogos\ISBX.png" />
+    <Content Include="images\CompanyLogos\JackrabbitMobile.png" />
+    <Content Include="images\CompanyLogos\JAKT.png" />
+    <Content Include="images\CompanyLogos\JasonSafirInteractive.png" />
+    <Content Include="images\CompanyLogos\JuegoStudioPrivate.png" />
+    <Content Include="images\CompanyLogos\JulyRapid.png" />
+    <Content Include="images\CompanyLogos\kohactive.png" />
+    <Content Include="images\CompanyLogos\KoMarketing.png" />
+    <Content Include="images\CompanyLogos\Labotec.png" />
+    <Content Include="images\CompanyLogos\LADSolutions.png" />
+    <Content Include="images\CompanyLogos\LaunchPadLab.png" />
+    <Content Include="images\CompanyLogos\LeadtoConversion.png" />
+    <Content Include="images\CompanyLogos\LLTGroup.png" />
+    <Content Include="images\CompanyLogos\LoadsysSolutions.png" />
+    <Content Include="images\CompanyLogos\Lochbridge.png" />
+    <Content Include="images\CompanyLogos\LogicSolutions.png" />
+    <Content Include="images\CompanyLogos\LunarMedia.png" />
+    <Content Include="images\CompanyLogos\Macadamian.png" />
+    <Content Include="images\CompanyLogos\MagespiderInfowebPvt.png" />
+    <Content Include="images\CompanyLogos\Majestyk.png" />
+    <Content Include="images\CompanyLogos\MannixMarketing.png" />
+    <Content Include="images\CompanyLogos\MassTechnology.png" />
+    <Content Include="images\CompanyLogos\Matchstic.png" />
+    <Content Include="images\CompanyLogos\MendiosTechnologies.png" />
+    <Content Include="images\CompanyLogos\Messapps.png" />
+    <Content Include="images\CompanyLogos\MichiganLabs.png" />
+    <Content Include="images\CompanyLogos\Mightybytes.png" />
+    <Content Include="images\CompanyLogos\Millennium.png" />
+    <Content Include="images\CompanyLogos\MindInventory.png" />
+    <Content Include="images\CompanyLogos\MOBIKASA.png" />
+    <Content Include="images\CompanyLogos\MobisoftInfotech.png" />
+    <Content Include="images\CompanyLogos\Mobomo.png" />
+    <Content Include="images\CompanyLogos\Mobrill.png" />
+    <Content Include="images\CompanyLogos\MobulousTechnologies.png" />
+    <Content Include="images\CompanyLogos\Moby.png" />
+    <Content Include="images\CompanyLogos\MontanaBanana.png" />
+    <Content Include="images\CompanyLogos\MoonTechnolabsPvtLtd.png" />
+    <Content Include="images\CompanyLogos\MotiffMedia.png" />
+    <Content Include="images\CompanyLogos\MotivoMedia.png" />
+    <Content Include="images\CompanyLogos\Mouko.png" />
+    <Content Include="images\CompanyLogos\MoveoApps.png" />
+    <Content Include="images\CompanyLogos\MSTQ.png" />
+    <Content Include="images\CompanyLogos\MutualMobile.png" />
+    <Content Include="images\CompanyLogos\Myplanet.png" />
+    <Content Include="images\CompanyLogos\NeolynxGroupInc.png" />
+    <Content Include="images\CompanyLogos\NeonRoots.png" />
+    <Content Include="images\CompanyLogos\NerlandCo.png" />
+    <Content Include="images\CompanyLogos\NexiaDigital.png" />
+    <Content Include="images\CompanyLogos\Nickelfox.png" />
+    <Content Include="images\CompanyLogos\NimblechappsLtd.png" />
+    <Content Include="images\CompanyLogos\NNCServices.png" />
+    <Content Include="images\CompanyLogos\Nomtek.png" />
+    <Content Include="images\CompanyLogos\Northcutt.png" />
+    <Content Include="images\CompanyLogos\NorthwestIndependent.png" />
+    <Content Include="images\CompanyLogos\NotionTheory.png" />
+    <Content Include="images\CompanyLogos\NovaSolutions.png" />
+    <Content Include="images\CompanyLogos\OlibroDesign.png" />
+    <Content Include="images\CompanyLogos\OneByte.png" />
+    <Content Include="images\CompanyLogos\OneMonthApps.png" />
+    <Content Include="images\CompanyLogos\Onyx.png" />
+    <Content Include="images\CompanyLogos\OpenXcell.png" />
+    <Content Include="images\CompanyLogos\OperationTechnology.png" />
+    <Content Include="images\CompanyLogos\OptFirstInternetMarketing.png" />
+    <Content Include="images\CompanyLogos\OrbitMediaStudios.png" />
+    <Content Include="images\CompanyLogos\OriginEight.png" />
+    <Content Include="images\CompanyLogos\OrNsoftCorporation.png" />
+    <Content Include="images\CompanyLogos\ParangatTechnologies.png" />
+    <Content Include="images\CompanyLogos\PathPartnerTechnology.png" />
+    <Content Include="images\CompanyLogos\Peerbits.png" />
+    <Content Include="images\CompanyLogos\Phase3.png" />
+    <Content Include="images\CompanyLogos\PoeticSystems.png" />
+    <Content Include="images\CompanyLogos\Praxent.png" />
+    <Content Include="images\CompanyLogos\ProlificInteractive.png" />
+    <Content Include="images\CompanyLogos\Promodo.png" />
+    <Content Include="images\CompanyLogos\PugetWorksInc.png" />
+    <Content Include="images\CompanyLogos\QuestGlobalTechnologies.png" />
+    <Content Include="images\CompanyLogos\Radixweb.png" />
+    <Content Include="images\CompanyLogos\Raizlabs.png" />
+    <Content Include="images\CompanyLogos\Raka.png" />
+    <Content Include="images\CompanyLogos\RalphWalkerDesigns.png" />
+    <Content Include="images\CompanyLogos\RapidOpsInc.png" />
+    <Content Include="images\CompanyLogos\RapidsoftTechnologies.png" />
+    <Content Include="images\CompanyLogos\Ratio.png" />
+    <Content Include="images\CompanyLogos\RealmWebDesign.png" />
+    <Content Include="images\CompanyLogos\RedFoundry.png" />
+    <Content Include="images\CompanyLogos\RenovatioCloud Solutions.png" />
+    <Content Include="images\CompanyLogos\ResultFirst.png" />
+    <Content Include="images\CompanyLogos\RipeMediaInc.png" />
+    <Content Include="images\CompanyLogos\RobosoftTechnologies.png" />
+    <Content Include="images\CompanyLogos\RocketClicks.png" />
+    <Content Include="images\CompanyLogos\RocketshipSEO.png" />
+    <Content Include="images\CompanyLogos\SachsMarketingGroup.png" />
+    <Content Include="images\CompanyLogos\SangananITSolutionsPvt.png" />
+    <Content Include="images\CompanyLogos\Searchbloom.png" />
+    <Content Include="images\CompanyLogos\SeductiveMobile.png" />
+    <Content Include="images\CompanyLogos\SegueTechnologies.png" />
+    <Content Include="images\CompanyLogos\SEOAdvantage.png" />
+    <Content Include="images\CompanyLogos\seoinc.png" />
+    <Content Include="images\CompanyLogos\seoplus.png" />
+    <Content Include="images\CompanyLogos\SFCD.png" />
+    <Content Include="images\CompanyLogos\SiamComputing.png" />
+    <Content Include="images\CompanyLogos\Sidebench.png" />
+    <Content Include="images\CompanyLogos\Sideways8Interactive.png" />
+    <Content Include="images\CompanyLogos\SimformLLC.png" />
+    <Content Include="images\CompanyLogos\SmallPlanetDigital.png" />
+    <Content Include="images\CompanyLogos\SmashingIdeas.png" />
+    <Content Include="images\CompanyLogos\SnapMobile.png" />
+    <Content Include="images\CompanyLogos\SnyxiusTechnologies.png" />
+    <Content Include="images\CompanyLogos\SocialSEO.png" />
+    <Content Include="images\CompanyLogos\Sofmen.png" />
+    <Content Include="images\CompanyLogos\Sourcebits.png" />
+    <Content Include="images\CompanyLogos\Sourcetoad.png" />
+    <Content Include="images\CompanyLogos\SPMarketplace.png" />
+    <Content Include="images\CompanyLogos\Stanfy.png" />
+    <Content Include="images\CompanyLogos\STATEMENT.png" />
+    <Content Include="images\CompanyLogos\StationFour.png" />
+    <Content Include="images\CompanyLogos\StickOutSocial.png" />
+    <Content Include="images\CompanyLogos\StoneLabs.png" />
+    <Content Include="images\CompanyLogos\StraightNorth.png" />
+    <Content Include="images\CompanyLogos\StudioUmbrella.png" />
+    <Content Include="images\CompanyLogos\SunlightMediaLLC.png" />
+    <Content Include="images\CompanyLogos\Suventure.png" />
+    <Content Include="images\CompanyLogos\Swarm.png" />
+    <Content Include="images\CompanyLogos\SwensonHe.png" />
+    <Content Include="images\CompanyLogos\SwiftKickMobile.png" />
+    <Content Include="images\CompanyLogos\SwingDev.png" />
+    <Content Include="images\CompanyLogos\Syrup.png" />
+    <Content Include="images\CompanyLogos\TableXI.png" />
+    <Content Include="images\CompanyLogos\TanzaniteInfotech.png" />
+    <Content Include="images\CompanyLogos\TechAhead.png" />
+    <Content Include="images\CompanyLogos\Techugo.png" />
+    <Content Include="images\CompanyLogos\TekshapersSoftware.png" />
+    <Content Include="images\CompanyLogos\TheBHWGroup.png" />
+    <Content Include="images\CompanyLogos\ThinkBIGsites.png" />
+    <Content Include="images\CompanyLogos\Thoughtbot.png" />
+    <Content Include="images\CompanyLogos\ThriveInternetMarketing.png" />
+    <Content Include="images\CompanyLogos\TopDraw.png" />
+    <Content Include="images\CompanyLogos\Toptal.png" />
+    <Content Include="images\CompanyLogos\TriKonnectTechnologies.png" />
+    <Content Include="images\CompanyLogos\TriStateTechnology.png" />
+    <Content Include="images\CompanyLogos\TroyWebConsulting.png" />
+    <Content Include="images\CompanyLogos\TuvaInteractive.png" />
+    <Content Include="images\CompanyLogos\Type2Designs.png" />
+    <Content Include="images\CompanyLogos\UKAD.png" />
+    <Content Include="images\CompanyLogos\UnitOneNine.png" />
+    <Content Include="images\CompanyLogos\UpTop.png" />
+    <Content Include="images\CompanyLogos\UXMStudio.png" />
+    <Content Include="images\CompanyLogos\Vectorform.png" />
+    <Content Include="images\CompanyLogos\VentureAviator.png" />
+    <Content Include="images\CompanyLogos\VentusoLLC.png" />
+    <Content Include="images\CompanyLogos\VitalDesign.png" />
+    <Content Include="images\CompanyLogos\VizionInteractive.png" />
+    <Content Include="images\CompanyLogos\WallarooMedia.png" />
+    <Content Include="images\CompanyLogos\WaverleySoftware.png" />
+    <Content Include="images\CompanyLogos\WEBITMD.png" />
+    <Content Include="images\CompanyLogos\WebMobTechnologies.png" />
+    <Content Include="images\CompanyLogos\WebpageFX.png" />
+    <Content Include="images\CompanyLogos\WebPlanexInfotechPvtLtd.png" />
+    <Content Include="images\CompanyLogos\Westwerk.png" />
+    <Content Include="images\CompanyLogos\WisdekCorp.png" />
+    <Content Include="images\CompanyLogos\WorryFreeLabs.png" />
+    <Content Include="images\CompanyLogos\WowLabz.png" />
+    <Content Include="images\CompanyLogos\WrightIMC.png" />
+    <Content Include="images\CompanyLogos\WveLabs.png" />
+    <Content Include="images\CompanyLogos\YDesignsInc.png" />
+    <Content Include="images\CompanyLogos\ZazmicInc.png" />
+    <Content Include="images\CompanyLogos\zGames.png" />
+    <Content Include="images\finger.png" />
+    <Content Include="images\icon.png" />
+    <Content Include="images\main-banner.png" />
+    <Content Include="images\main-logo.png" />
+    <Content Include="images\main.jpg" />
+    <Content Include="images\message-image-lates.jpg" />
+    <Content Include="images\pp.jpeg" />
+    <Content Include="images\sublogo.png" />
+    <Content Include="images\Untitled-1.jpg" />
+    <Content Include="images\Untitled-11.png" />
+    <Content Include="images\Untitled-12.jpg" />
+    <Content Include="images\Untitled-13.png" />
+    <Content Include="images\Untitled-15.png" />
+    <Content Include="images\Untitled-16.png" />
+    <Content Include="images\Untitled-17.png" />
+    <Content Include="images\Untitled-4.jpg" />
+    <Content Include="images\Untitled-6.png" />
+    <Content Include="images\Untitled-7.png" />
+    <Content Include="images\Untitled-8.png" />
+    <Content Include="images\Untitled-9.png" />
+    <Content Include="images\yellow-line.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\Open_Sans\OpenSans-Bold.ttf" />
+    <Content Include="fonts\Open_Sans\OpenSans-Italic.ttf" />
+    <Content Include="fonts\Open_Sans\OpenSans-Light.ttf" />
+    <Content Include="fonts\Open_Sans\OpenSans-LightItalic.ttf" />
+    <Content Include="fonts\Open_Sans\OpenSans-Regular.ttf" />
+    <Content Include="fonts\Open_Sans\OpenSans-SemiBold.ttf" />
+    <Content Include="Scripts\CompanyFocus.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\HighChartsUnMinify.js" />
+    <Content Include="images\CompanyLogos\desktop.ini" />
+    <Content Include="images\CompanyListLogos\desktop.ini" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\jquery-1.8.3.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\media.js" />
+    <Content Include="Scripts\media.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\StarRating.js" />
+    <Content Include="Scripts\UserScripts\Company.js" />
+    <Content Include="Scripts\UserScripts\CompanyReviews.js" />
+    <Content Include="Scripts\UserScripts\CompanyVote.js" />
+    <Content Include="Scripts\UserScripts\Login.js" />
+    <Content Include="Scripts\UserScripts\SubmitReview.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Company\Company.cshtml" />
+    <Content Include="Views\Shared\_FooterPartialView.cshtml" />
+    <Content Include="Views\Shared\_HeaderPartialView.cshtml" />
+    <Content Include="Views\Company\_CompanyReviews.cshtml" />
+    <Content Include="Views\Company\_CompanyFooter.cshtml" />
+    <Content Include="Views\CompanyList\CompanyList.cshtml" />
+    <Content Include="Views\Company\_SubmitReview.cshtml" />
+    <Content Include="Views\CompanyList\_CompanyAddEdit.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Login\_Login.cshtml" />
+    <Content Include="Views\CompanyList\_CompList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57671</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:57671/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
