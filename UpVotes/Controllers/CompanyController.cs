@@ -12,22 +12,24 @@ namespace UpVotes.Controllers
     public class CompanyController : Controller
     {
         private string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
-
-        private CompanyService _companyService = null;
-
-        private int _userID = 1;
         /// <summary>
         ///
         /// </summary>
         /// <param name="companyID"></param>
         /// <returns></returns>
+        [ValidateInput(false)]
         public ActionResult Company()
         {
             try
             {
-                string companyName = Convert.ToString(Request.Url.Segments[3]).Trim();
-                _companyService = new CompanyService();
-                CompanyViewModel companyViewModel = _companyService.GetCompany(companyName, 0, 0, 0, 0, "DESC", 0, 1);
+                Session["calledPage"] = "C";
+                string companyName = Convert.ToString(Request.Url.Segments[2]).Trim();
+                if(companyName != string.Empty)
+                {
+                    Session["CompanyName"] = companyName;
+                }
+
+                CompanyViewModel companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, Convert.ToInt32(Session["UserID"]));
                 companyViewModel.WebBaseURL = _webBaseURL;
                 return View(companyViewModel);
             }
@@ -64,9 +66,8 @@ namespace UpVotes.Controllers
                 {
                     JObject jobj = JObject.Parse(Request.Params["companyReviewModel"]);
                     CompanyReviewViewModel companyReviewModel = jobj.ToObject<CompanyReviewViewModel>();
-                    _companyService = new CompanyService();
-
-                    bool isSuccess = _companyService.AddReview(companyReviewModel);
+                    companyReviewModel.UserID = Convert.ToInt32(Session["UserID"]);
+                    bool isSuccess = new CompanyService().AddReview(companyReviewModel);
                     return isSuccess;
                 }
                 else
@@ -82,12 +83,19 @@ namespace UpVotes.Controllers
 
         public string VoteForCompany(int companyID)
         {
-            return new CompanyService().VoteForCompany(companyID, _userID);
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {
+                return new CompanyService().VoteForCompany(companyID, Convert.ToInt32(Session["UserID"]));
+            }
+            else
+            {
+                return "0";
+            }
         }
 
         public string ThanksNoteForReview(int companyID, int companyReviewID)
         {
-            return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, _userID);
+            return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
         }
     }
 }

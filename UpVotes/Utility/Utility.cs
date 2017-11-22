@@ -9,7 +9,7 @@ namespace UpVotes.Utility
     {
         public static async System.Threading.Tasks.Task<string> GetAuthToken(string userName, string password)
         {
-            string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+            string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
             string authToken = string.Empty;
 
             using (HttpClient httpClient = new HttpClient())

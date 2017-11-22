@@ -1,0 +1,208 @@
+﻿@using UpVotes.BusinessEntities.Entities
+
+<style type="text/css">
+    .img-circle {
+        border-radius: 50%;
+        width: 35px;
+        margin-top: -5px;
+        margin-right: -20px;
+    }
+</style>
+<script src="~/Scripts/UserScripts/Login.js"></script>
+<script type="text/javascript">
+    function closeSession() {
+        IN.User.logout();
+        $.ajax({
+            type: "POST",   //GET or POST or PUT or DELETE verb
+            url: '/Login/logout',//?companyid='+compid,
+            data: {},// Location of the service
+            success: function (json) {
+                debugger; //On Successful service call
+                //window.location.reload();
+            }
+
+        });
+
+
+    }
+    $(document).ready(function () {
+        var compid = 0;
+        var calledPage = '';
+
+        $("#btnlinkedin").click(function () {
+            $.LoginWithLinkedIn(compid, '@Session["calledPage"].ToString()')
+
+        });
+
+        $("#btnTwitter").click(function () {
+            $.ajax({
+                type: "POST",   //GET or POST or PUT or DELETE verb
+                url: '/Login/TwitterCall',//?companyid='+compid,
+                data: { companyid: compid },// Location of the service
+                success: function (json) {//On Successful service call
+                    window.location.href = json;
+                }
+
+            });
+
+        });
+
+        //$(document).ready(function () {
+
+
+        $(".half-circle").click(function () {
+            debugger;
+            compid = $(this).attr('compid');
+            calledPage = $(this).attr('calledPage');
+            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
+            if (userObj == null) {
+                $('#myModal').modal();
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: '/Login/VoteForCompany',
+                    data: { companyID: compid, userID: userObj.UserID },
+                    success: function (json) {
+                        alert(eval(json));
+                        window.location.reload();
+                    }
+
+                });
+            }
+        });
+
+        $(".companydetail").click(function () {
+            var compid = 0;
+            var AvgminRate = '0';
+            var Avgmaxrate = '0';
+            var minEmp = '0';
+            var maxEmp = '0';
+            var sortby = 'Asc';
+            var focusAreaID = '0';
+
+            if ($(this).attr('minEmployee') == undefined) {
+                AvgminRate = $(this).attr('minrate');
+                Avgmaxrate = $(this).attr('maxrate');
+            }
+
+            if ($(this).attr('minrate') == undefined) {
+                minEmp = $(this).attr('minEmployee');
+                maxEmp = $(this).attr('maxEmployee');
+            }
+
+
+            $.ajax({
+                type: "POST",   //GET or POST or PUT or DELETE verb
+                url: '/CompanyList/CompanyList',//?companyid='+compid,
+                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, focusAreaID: focusAreaID },// Location of the service
+                success: function (json) {//On Successful service call
+                    $('#complist').html(json);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+@if (Session["UserObj"] == null)
+{
+    <ul class="nav navbar-nav navbar-right sign-up">
+        <li><a href="#"><span data-toggle="modal" data-target="#myModal" class="head-log-in">Log In</span></a></li>
+    </ul>
+    @*<ul class="nav navbar-nav navbar-right sign-up log-in">
+            <li><a href="#"><span data-toggle="modal" data-target="#myModallog" class="">Sign Up</span></a></li>
+        </ul>*@
+}
+else
+{
+    UserEntity userObj = Session["UserObj"] as UserEntity;
+    <ul class="nav navbar-nav navbar-right sign-up">
+        <li>
+            <a href="#">
+                @if (userObj == null)
+                {<span class="fa fa-user-circle sign-use"></span>}
+                else
+                {
+                    <img class="img-circle" src="@userObj.ProfilePictureURL.ToString()">
+                }
+            </a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi, @userObj.FirstName.ToString() &nbsp;@userObj.LastName.ToString() <span class="head-caret caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">My Profile</a></li>
+                <li><a onclick="closeSession()">LogOut</a></li>
+                <li><a href="#">Page 1-3</a></li>
+            </ul>
+        </li>
+    </ul>
+}
+
+<div class="modal fade" id="myModallog" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <h1>upvotes</h1>
+
+        <div class="modal-content upvote-modals">
+
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+        </div>
+        <p class="modal-tagline">sign up for upvote</p>
+        <p class="modal-subtagline">Upvote is a place where experienced founders share advice to save each other time and money</p>
+        <div class="modal-buttons">
+
+            @*@using (Html.BeginForm("TwitterAuth", "Login", FormMethod.Get))*@
+            @*  {*@
+            <button id="btnTwitter1" class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
+            @*}*@
+            @*@ @using (Html.BeginForm("LinkedINcall", "Login", FormMethod.Get))*@
+            @*@ {*@
+            <button id="btnlinkedin1" class="btn btn-info modal-buttons-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i>Log in with LinkedIn</button>
+            @*@ }*@
+            <p>We will never post to either without your permission</p>
+            <input type="text" placeholder="User Name" class="form-control" id="usr">
+            <input type="Password" placeholder="Password" class="form-control" id="usr">
+            <button class="btn btn-info modal-buttons-twitter login-modal">Log in</button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <h1>upvotes</h1>
+
+        <div class="modal-content upvote-modals">
+
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+        </div>
+        <p class="modal-tagline">sign up for upvote</p>
+        <p class="modal-subtagline">Upvote is a place where experienced founders share advice to save each other time and money</p>
+        <div class="modal-buttons">
+
+
+            <button id="btnTwitter" class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
+
+            <button id="btnlinkedin" class="btn btn-info modal-buttons-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i>Log in with LinkedIn</button>
+
+            <p>We will never post to either without your permission</p>
+
+
+        </div>
+
+    </div>
+</div>

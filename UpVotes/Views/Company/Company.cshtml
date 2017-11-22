@@ -2,7 +2,7 @@
 @model UpVotes.Models.CompanyViewModel
 
 @{
-    <title>@ViewBag.Title - "CompanyName"</title>
+    ViewBag.Title = Model.CompanyList[0].CompanyName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -73,20 +73,20 @@
                     </ul>
 
                     <ul class="header-contact firstrow">
-                        <li><a href="#"><i class="fa fa-clock-o font-awesome-styling" aria-hidden="true"></i>@company.AveragHourlyRate</a></li>
-                        <li><a href="#"><i class="fa fa-user font-awesome-styling" aria-hidden="true"></i>@company.TotalEmployees</a></li>
-                        <li><a href="#"><i class="fa fa-flag-o font-awesome-styling" aria-hidden="true"></i>Founded:@company.FoundedYear</a></li>
+                        <li><a><i class="fa fa-clock-o font-awesome-styling" aria-hidden="true"></i>@company.AveragHourlyRate</a></li>
+                        <li><a><i class="fa fa-user font-awesome-styling" aria-hidden="true"></i>@company.TotalEmployees</a></li>
+                        <li><a><i class="fa fa-flag-o font-awesome-styling" aria-hidden="true"></i>Founded:@company.FoundedYear</a></li>
                     </ul>
 
                     <ul class="header-contact secondrow">
-                        <li><a href="#"><i class="fa fa-external-link font-awesome-styling" aria-hidden="true"></i>@company.URL</a></li>
-                        <li><a href="#"><i class="fa fa-phone-square font-awesome-styling" aria-hidden="true"></i>@company.PhoneNumber</a></li>
-                        <li><a href="#"><i class="fa fa-envelope-o font-awesome-styling" aria-hidden="true"></i>@company.Email</a></li>
+                        <li><a href="@company.URL" target="_blank"><i class="fa fa-external-link font-awesome-styling" aria-hidden="true"></i>@company.URL</a></li>
+                        <li><a href="tel:@company.PhoneNumber"><i class="fa fa-phone-square font-awesome-styling" aria-hidden="true"></i>@company.PhoneNumber</a></li>
+                        <li><a href="mailto:@company.Email"><i class="fa fa-envelope-o font-awesome-styling" aria-hidden="true"></i>@company.Email</a></li>
                     </ul>
                 </div>
 
                 <div class="header-buttons-main-nav">
-                    <button class="btn btn-default header-buttons" id="btnVote"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i><span class="header-count">@company.NoOfVotes</span></button>
+                    <button class="btn btn-default header-buttons" id="btnVote" compid="@company.CompanyID" calledPage="L"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i><span class="header-count">@company.NoOfVotes</span></button>
                     <button class="btn btn-default header-buttons-two" id="btnSubmitReview">Submit Review</button>
                 </div>
 

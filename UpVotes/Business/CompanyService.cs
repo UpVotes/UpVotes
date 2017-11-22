@@ -15,9 +15,9 @@ namespace UpVotes.Business
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetCompany"; string apiParameter = companyName;
-                string completeURL = baseURL + apiMethod + '/' + apiParameter;
+                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
                 var response = httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
 
@@ -43,12 +43,12 @@ namespace UpVotes.Business
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetCompany";
                 if (string.IsNullOrEmpty(sortby))
                     sortby = "asc";
                 string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + userID;
-                string completeURL = baseURL + apiMethod + '/' + apiParameter;
+                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
                 var response = httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
 
@@ -82,9 +82,9 @@ namespace UpVotes.Business
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "SaveCompanyReview";
-                string completeURL = baseURL + apiMethod + '/';
+                string completeURL = WebAPIURL + apiMethod + '/';
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsEntity), Encoding.UTF8, "application/json");
 
@@ -105,7 +105,7 @@ namespace UpVotes.Business
             CompanyReviewsEntity companyReviewEntity = new CompanyReviewsEntity();
             companyReviewEntity.CompanyID = companyReviewModel.CompanyID;
             companyReviewEntity.FocusAreaID = companyReviewModel.FocusAreaID;
-            companyReviewEntity.UserID = 1;
+            companyReviewEntity.UserID = companyReviewModel.UserID;
             companyReviewEntity.ReviewerCompanyName = companyReviewModel.ReviewerCompanyName;
             companyReviewEntity.ReviewerDesignation = companyReviewModel.Designation;
             companyReviewEntity.ReviewerProjectName = companyReviewModel.ProjectName;
@@ -123,9 +123,9 @@ namespace UpVotes.Business
             using (HttpClient httpClient = new HttpClient())
             {
                 string message = string.Empty;
-                string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "VoteForCompany";
-                string completeURL = baseURL + apiMethod + '/';
+                string completeURL = WebAPIURL + apiMethod + '/';
 
                 CompanyVoteEntity companyVote = new CompanyVoteEntity
                 {
@@ -155,9 +155,9 @@ namespace UpVotes.Business
             using (HttpClient httpClient = new HttpClient())
             {
                 string message = string.Empty;
-                string baseURL = System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString();
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "ThanksNoteForReview";
-                string completeURL = baseURL + apiMethod + '/';
+                string completeURL = WebAPIURL + apiMethod + '/';
 
                 CompanyReviewThankNoteEntity companyReviewThankNoteEntity = new CompanyReviewThankNoteEntity
                 {

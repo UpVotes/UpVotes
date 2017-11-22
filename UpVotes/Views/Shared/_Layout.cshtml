@@ -17,16 +17,21 @@
     <script src="~/Scripts/media.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+        api_key: 81emosqfu7h5el
+        authorize: true
+        credentials_cookie: true
+    </script>
 </head>
 <body>
 
-    @Html.Partial("_HeaderPartialView");
+    @Html.Partial("_HeaderPartialView")
 
     <div class="body-content">
         @RenderBody()
     </div>
 
-    @Html.Partial("_FooterPartialView");
+    @Html.Partial("_FooterPartialView")
 
 </body>
 </html>

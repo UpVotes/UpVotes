@@ -17,7 +17,7 @@ namespace UpVotes.Utility
             var client = new HttpClient()
             {
                 DefaultRequestHeaders = { Authorization = authValue },
-                BaseAddress = new Uri(System.Configuration.ConfigurationManager.AppSettings["BaseURL"].ToString())
+                BaseAddress = new Uri(System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString())
             //Set some other client defaults like timeout / BaseAddress
         };
             return client;

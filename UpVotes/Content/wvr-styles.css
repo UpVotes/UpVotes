@@ -746,7 +746,7 @@ header >.navbar-inverse {
   content: " ";
   position: absolute;
   bottom: 50px;
-  left: 20%;
+  left: 21%;
 }
 
 .rt-pg-menu-desc-lbl,
@@ -1124,20 +1124,20 @@ header >.navbar-inverse {
 }
 
 .view-compare {
-  background-image: url(../images/icon.png);
+  background-image: url(../images/viewcompare.png);
       margin-left: 12px;
 }
 
 .custom-quote {
-  background-image: url(../images/comments.png);
+  background-image: url(../images/quote-mainicon.png);
 }
 
 .user-reviews {
-  background-image: url(../images/finger.png);
+  background-image: url(../images/reviews-mainicon.png);
 }
 
 .overview {
-  background-image: url(../images/brain.png);
+  background-image: url(../images/overview-mainicon.png);
 }
 
 .main-tabs-navi {
@@ -1242,6 +1242,7 @@ header >.navbar-inverse {
 
 .block1 {
   width: 20%;
+  cursor:pointer;
 }
 
 .block2 {
@@ -1265,7 +1266,7 @@ header >.navbar-inverse {
 }
 
 .block5 {
-  width: 16%;
+  width: 15%;
 }
 
 .block6 {
@@ -1320,12 +1321,14 @@ header >.navbar-inverse {
   line-height: 12px;
   padding-top: 4px;
     cursor: pointer;
+    font-size:15px;
 }
 
 
 
 .half-circle > span >.fa-arrow-circle-up {
   color: #009fa6;
+      font-size: 19px;
 }
 
 .ribbon {
@@ -1378,7 +1381,7 @@ header >.navbar-inverse {
   transform: scaleX(1) scaleY(1) scaleZ(1);
   -webkit-transform-origin: 50% 50% 0;
   transform-origin: 50% 50% 0;
-  margin-left: 25px;
+  margin-left: 0;
 }
 
 .ratings {
@@ -1960,6 +1963,7 @@ position: absolute;
 .block1 >p>img{
  height: 120px;
     width: 120px;
+        box-shadow: 1px 1px 1px 1px #888888;
 }
 
 .block1 >.company-complete-name>span{
@@ -1981,6 +1985,11 @@ position: absolute;
 .jumbotron-main{
   text-align: center;
   font-family: OpenSans-Bold;
+      text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 auto;
+    padding-top: 50px;
+    font-family: OpenSans-Bold;
 }
 
 .focus-fields{
@@ -2207,4 +2216,34 @@ top: 110px;
 .header-pop-down{
         right: -49px;
     top: 35px;
+}
+
+
+.Logo-main-page,.Logo-main-page-pop{
+     background-image: url(../images/IMG_0617.png);
+       width: 166px;
+    height: 41px;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    margin-top: 4px;
+}
+
+.Logo-main-page-pop {
+    margin:0 auto;
+}
+
+.rt-pg-menu-like{
+    background: #1da1f2;
+}
+.rt-pg-menu-share{
+        background: #0077b5;
+}
+
+.rt-pg-menu-like >i, .rt-pg-menu-share >i{
+    padding-right:4px;
+}
+
+.loca-box{
+    padding:0;
 }

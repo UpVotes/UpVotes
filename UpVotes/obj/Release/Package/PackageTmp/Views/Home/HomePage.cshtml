@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/home-design.css" rel="stylesheet" />
+
+
+<div class="mark-home-banner">
+    <h2>Explore Top Agencies and Choose The Most Suitable Partner for Next Big project</h2>
+    <div>
+        <span>Which type of companies are you looking for ?</span>
+        <a href="#divCategory">select firms<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
+</div>
+<div class="mark-who-are-we">
+    <div class="container">
+        <h2><span>who</span> we are ?</h2>
+        <p class="head1p">At Upvotes.co our aim is to help you choose the perfect technology partner for your business.</p>
+        <p class="head2p">Upvotes.co is the B2B community to help you find the top most Mobile App Development, Web Development, Software Development & eCommerce Development, Digital Marketing Agencies, SEO Companies across the globe.  Meet the crème da la crème of the industry and give your project the right start with the right partner.</p>
+        <div class="supscript">
+            <p>700+</p>
+            <p>Real Voters</p>
+        </div>
+        <div>
+            <p>200+</p>
+            <p>Verified Companies</p>
+        </div>
+    </div>
+
+</div>
+<div class="rearch-category" id="divCategory">
+    <div>
+        <p class="head1p">Research Category</p>
+        <p class="head2p"></p>
+        <div class="reserch-categoy-tiles">
+            <div class="r-tile">
+                <div> <img src="~/images/Untitled-6.png"></div>
+                <p><a href="/mobile-application-developers" >Mobile App Development</a></p>
+                <p>Searching for the best Mobile App Development for your business? Start choosing from the very best in the industry that deliver end-end app development services.</p>
+            </div>
+            <div class="r-tile">
+                <div><img src="~/images/Untitled-7.png"></div>
+                <p><a href="/digital-marketing-companies" >Digital Marketing</a></p>
+                <p>Searching for a brilliant digital marketing agency to take your digital marketing strategy to the next level? Choose from the list of the best-in-class agencies with shower of votes and awesome reviews from clients.</p>
+            </div>
+            <div class="r-tile">
+                <div><img src="~/images/Untitled-8.png"></div>
+                <p><a href="/web-design-companies" >Web Design</a></p>
+                <p>Searching for the most creative Web design Agency to build a world class website for you? Choose from the most proficient ones with remarkable votes and reviews and who can deliver full cycle of web designs.</p>
+            </div>
+            <div class="r-tile">
+                <div><img src="~/images/Untitled-9.png"></div>
+                <p><a href="/web-development-companies" >Web Developement</a></p>
+                <p>Searching for the most tech-savvy web development partner to develop your website? Start choosing from the list of the top in the game players in the industry with rave reviews and votes from clients.</p>
+            </div>
+            <div class="r-tile">
+                <div><img src="~/images/Untitled-11.png"></div>
+                <p><a href="/seo-companies" >Search Engine Optimization</a></p>
+                <p>Searching for a strategy oriented best-in-class SEO partner to stay at the top of the search engine game? Choose from the finest ones who deliver full pack of SEO solutions and have gained the trust of prestigious clients who have given them wonderful reviews and votes for the awesome work.</p>
+            </div>
+            <div class="r-tile">
+                <div><img src="~/images/Untitled-13.png"></div>
+                <p><a href="/software-development-companies" >Software Developement</a></p>
+                <p>Searching for the perfect software development partner for your business? Start choosing from the list of the best-in-class software developers that deliver end to end custom software development services.</p>
+            </div>
+            <span class="chord"></span>
+        </div>
+    </div>
+</div>
+<div class="world-map">
+    <div class="world-legal">
+        <h3>are you a leading service provider</h3>
+        <span>we work hard, we play hard, we show the results.</span>
+    </div>
+    <div class="world-tiles">
+        <div class="w-tiles">
+            <img src="~/images/Untitled-15.png">
+            <span class="w1-tile">create company profile</span>
+            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" />
+        </div>
+        <div class="w-tiles">
+            <img src="~/images/Untitled-16.png">
+            <span class="w2-tile">upvote</span>
+        </div>
+        <div class="w-tiles">
+            <img src="~/images/Untitled-17.png">
+            <span class="w3-tile">submit your review</span>
+            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" />
+        </div>
+    </div>
+</div>
+
+<div id="dialog" style="display:none">
+    @Html.Partial("~/Views/Company/_SubmitReview.cshtml");
+</div>
+

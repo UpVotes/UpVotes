@@ -9,8 +9,13 @@
             type: 'POST',
             success: function (response) {
                 response = eval(response);
-                alert(response);
-                window.location.reload();
+                if (response == '0') {
+                    $('#myModal').modal();
+                }
+                else {
+                    alert(response);
+                    window.location.reload();
+                }
             }
         });
     }

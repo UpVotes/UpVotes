@@ -1,0 +1,75 @@
+﻿@model UpVotes.Models.CompanyViewModel
+<script type="text/javascript">
+    function GetCompany(companyName)
+    {
+        var baseAddress = 'http://localhost:57671/Profile/' + companyName
+        window.open(baseAddress, '_blank');
+        return false;
+        //window.location.assign(baseAddress);
+    }
+</script>
+
+<script src="~/Scripts/UserScripts/CompanyVote.js"></script>
+
+<div class="card-heading">
+    <div class="head1">Company Name</div>
+    <div class="head2">Avg hourly rate</div>
+    <div class="head3">Employees</div>
+    <div class="head4">Reviews</div>
+    <div class="head5">Locations</div>
+</div>
+
+
+@foreach (var company in Model.CompanyList)
+{
+    <div class="main-card">
+
+        <div class="block1" onclick="GetCompany('@company.CompanyName')">
+            <p>
+                <img src="~/images/CompanyListLogos/@company.LogoName" />
+            </p>
+            <p class="company-complete-name">
+                @*<span>@Html.ActionLink(company.CompanyName, "Company", "Company", new { companyID = company.CompanyID }, null) </span>*@
+                <span> @company.CompanyName </span>
+            </p>
+        </div>
+        <div class="block2">
+            <p><i class="fa fa-clock-o" aria-hidden="true"></i>@company.AveragHourlyRate</p>
+        </div>
+        <div class="block3">
+            <p><i class="fa fa-user-o" aria-hidden="true"></i>@company.TotalEmployees</p>
+        </div>
+        <div class="block4">
+            <div>
+                @for (int i = 0; i < company.UserRating; i++)
+                {
+                    <span style="color:#fab200">★</span>
+                }
+                <span><span>@company.UserRating.0/5.0 - </span><span>@company.NoOfUsersRated users</span></span>
+            </div>
+        </div>
+        <div class="block5">
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i>@company.City, @company.StateName, @company.CountryName</p>
+        </div>
+        <div class="block6">
+            <div class="block61">
+                <div class="block612"><span onclick="GetCompany('@company.CompanyName')"><i class="fa fa-search" aria-hidden="true"></i>Explore</span></div>
+                <div class="block613"><span onclick="window.open('@company.URL', '_blank')"><i class="fa fa-external-link" aria-hidden="true"></i>Website</span></div>
+
+
+            </div>
+            <div class="block62">
+                <div>
+                    <p><span href="#"><i class="fa fa-envelope-o " aria-hidden="true"></i><a href="mailto: @company.Email" target="_blank">@company.Email</a></span></p>
+                    <p><span href="#"><i class="fa fa-phone-square " aria-hidden="true"></i>@company.PhoneNumber</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="half-circle" compid="@company.CompanyID" calledPage="L">
+            <span><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>
+            <span>@company.NoOfVotes</span>
+
+        </div>
+        <div class="ribbon"><span>1</span></div>
+    </div>
+}

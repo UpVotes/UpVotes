@@ -11,6 +11,7 @@ namespace UpVotes.Controllers
         // GET: Home
         public ActionResult HomePage()
         {
+            Session["calledPage"] = "H";
             return View();
         }
     }

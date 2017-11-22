@@ -16,5 +16,7 @@ namespace UpVotes.Models
         public CompanyReviewsEntity CompanyReview { get; set; }
 
         public string WebBaseURL { get; set; }
+
+        public string CategoryHeadLine { get; set; }
     }
 }
