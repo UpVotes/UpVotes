@@ -18,5 +18,7 @@ namespace UpVotes.Models
         public string WebBaseURL { get; set; }
 
         public string CategoryHeadLine { get; set; }
+        public string Title { get; set; }
+        public string MetaTag { get; set; }
     }
 }

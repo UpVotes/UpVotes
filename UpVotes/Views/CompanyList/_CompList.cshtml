@@ -1,9 +1,15 @@
 ﻿@model UpVotes.Models.CompanyViewModel
+
+@{ 
+    ViewBag.MetaTag = @Model.MetaTag;
+    ViewBag.Title = Model.Title;
+}
+
 <script type="text/javascript">
     function GetCompany(companyName)
     {
         companyName = companyName.replace(/ /g, "-");
-        var baseAddress = 'http://localhost:57671/Profile/' + companyName;
+        var baseAddress = 'https://upvotes.co/profile/' + companyName.toLowerCase();
         window.open(baseAddress, '_blank')
         return false
         //window.location.assign(baseAddress)

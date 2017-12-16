@@ -1,11 +1,28 @@
 ﻿
 @{
-    ViewBag.Title = "HomePage";
+    string meta = "<meta name='description' content='Upvotes is a B2B research and voting platform for leading development, design and marketing firms. Which type of firms are you looking for?' />";
+    meta = meta + "<meta property='og:url' content='https://www.upvotes.co/' />";
+    meta = meta + "<meta property='og:type' content='website' />";
+    meta = meta + "<meta property='og:title' content='Upvotes - Voting Platform for Leading Development, Design and Marketing firms.' />";
+    meta = meta + "<meta property='og:description' content='Upvotes is a B2B research and voting platform for leading development, design and marketing firms. Which type of firms are you looking for?' />";
+    meta = meta + "<meta property='og:image' content='' />";
+    meta = meta + "<meta name='twitter:card' content='summary_large_image' />";
+    meta = meta + "<meta name='twitter:site' content=@upvotes_co'>";
+    meta = meta + "<meta name='twitter:creator' content=@upvotes_co'>";
+    meta = meta + "<meta name='twitter:description' content='Upvotes is a B2B research and voting platform for leading development, design and marketing firms. Which type of firms are you looking for?' />";
+    meta = meta + "<meta name='twitter:title' content='Upvotes - Voting Platform for Leading Development, Design and Marketing firms.' />";
+    meta = meta + "<meta name='twitter:image' content='' />";
+    meta = meta + "<link rel='canonical' href='https://www.upvotes.co/' />";
+    meta = meta + "<link rel='publisher' href='' />";
+    ViewBag.MetaTag = meta;
+    ViewBag.Title = "Upvotes.co - Voting Platform for Leading Development, Design and Marketing firms.";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/Content/home-design.css" rel="stylesheet" />
+<head>
 
+</head>
 
 <div class="mark-home-banner">
     <h2>Explore Top Agencies and Choose The Most Suitable Partner for Next Big project</h2>
@@ -78,7 +95,7 @@
         <div class="w-tiles">
             <img src="~/images/Untitled-15.png">
             <span class="w1-tile">create company profile</span>
-            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" />
+            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" style="display:none;"/>
         </div>
         <div class="w-tiles">
             <img src="~/images/Untitled-16.png">
@@ -87,7 +104,7 @@
         <div class="w-tiles">
             <img src="~/images/Untitled-17.png">
             <span class="w3-tile">submit your review</span>
-            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" />
+            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" style="display:none;"/>
         </div>
     </div>
 </div>

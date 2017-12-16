@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     $.getFocusAreas = function () {
         $.ajax({
-            url: '/Company/GetFocusArea',
+            url: $.absoluteurl('/Company/GetFocusArea'),
             cache: false,
             async: false,
             datatype: 'json',
@@ -160,7 +160,7 @@ $(document).ready(function () {
             var companyReviewModel = '{CompanyID:\'' + parseInt(CompanyID) + '\',FocusAreaID:\'' + parseInt(FocusAreaID) + '\',ReviewerCompanyName:\'' + ReviewerCompanyName + '\',Email:\'' + Email + '\',PhoneNumber:\'' + PhoneNumber + '\',Designation:\'' + Designation + '\',ProjectName:\'' + ProjectName + '\',FeedBack:\'' + FeedBack + '\', Rating:\'' + parseInt(Rating) + '\'}';
 
             $.ajax({
-                url: '/Company/AddReview',
+                url: $.absoluteurl('/Company/AddReview'),
                 mtype: 'POST',
                 cache: false,
                 datatype: 'json',

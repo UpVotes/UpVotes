@@ -88,3 +88,4 @@ C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes\bin\Microsoft.Owin.Security.Micr
 C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes\obj\Debug\UpVotes.dll
 C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes\obj\Debug\UpVotes.pdb
 C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes\obj\Debug\UpVotes.csprojResolveAssemblyReference.cache
+C:\PUNEETH_DATA\MyProjects\Code\UpVotes\UpVotes\obj\Debug\UpVotes.csproj.CoreCompileInputs.cache

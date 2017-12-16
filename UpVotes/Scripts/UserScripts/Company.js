@@ -50,16 +50,14 @@
         var companyReviewID = $(this).attr('CompanyReviewID');
         var companyID = $('#hdnCompanyID')[0].value;
 
-        debugger;
         $.ajax({
-            url: '/Company/ThanksNoteForReview',
+            url: $.absoluteurl('/Company/ThanksNoteForReview'),
             cache: false,
             async: false,
             datatype: 'json',
             data: { companyID: companyID, companyReviewID: companyReviewID },
             type: 'POST',
             success: function (response) {
-                debugger;
                 response = eval(response);
                 alert(response);
                 window.location.reload();

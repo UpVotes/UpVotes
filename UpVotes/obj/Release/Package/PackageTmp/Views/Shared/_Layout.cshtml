@@ -22,16 +22,27 @@
         authorize: true
         credentials_cookie: true
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.absoluteurl = function (url) {
+                var path = '@Request.ApplicationPath'
+                if (path == '/')
+                    return url;
+                return path + url;
+            }
+        });
+    </script>
 </head>
 <body>
 
-    @Html.Partial("_HeaderPartialView");
+    @Html.Partial("_HeaderPartialView")
 
     <div class="body-content">
         @RenderBody()
     </div>
 
-    @Html.Partial("_FooterPartialView");
+    @Html.Partial("_FooterPartialView")
 
 </body>
 </html>

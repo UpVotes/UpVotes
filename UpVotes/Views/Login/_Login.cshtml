@@ -11,12 +11,12 @@
 <script src="~/Scripts/UserScripts/Login.js"></script>
 <script type="text/javascript">
     function closeSession() {
-        IN.User.logout();
+        //IN.User.logout();
         $.ajax({
             type: "POST",
-            url: '/Login/logout',
+            url:$.absoluteurl('/Login/logout'),
             success: function (json) {
-                window.location.href = json;
+                window.location.href =$.absoluteurl(json);
             }
 
         });
@@ -39,10 +39,10 @@
         $("#btnTwitter").click(function () {
             $.ajax({
                 type: "POST",   //GET or POST or PUT or DELETE verb
-                url: '/Login/TwitterCall',//?companyid='+compid,
+                url:$.absoluteurl('/Login/TwitterCall'),//?companyid='+compid,
                 data: { companyid: compid },// Location of the service
                 success: function (json) {//On Successful service call
-                    window.location.href = json;
+                    window.location.href =$.absoluteurl(json);
                 }
 
             });
@@ -62,7 +62,7 @@
             else {
                 $.ajax({
                     type: "POST",
-                    url: '/Login/VoteForCompany',
+                    url: $.absoluteurl('/Login/VoteForCompany'),
                     data: { companyID: compid },
                     success: function (json) {
                         alert(eval(json));
@@ -95,7 +95,7 @@
 
             $.ajax({
                 type: "POST",   //GET or POST or PUT or DELETE verb
-                url: '/CompanyList/CompanyList',//?companyid='+compid,
+                url:$.absoluteurl('/CompanyList/CompanyList'),//?companyid='+compid,
                 data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, focusAreaID: focusAreaID },// Location of the service
                 success: function (json) {//On Successful service call
                     $('#complist').html(json);
@@ -160,7 +160,7 @@ else
 
             @*@using (Html.BeginForm("TwitterAuth", "Login", FormMethod.Get))*@
             @*  {*@
-            <button id="btnTwitter1" class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
+            <button id="btnTwitter1" class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true" style="display:none;"></i>Log in with twitter</button>
             @*}*@
             @*@ @using (Html.BeginForm("LinkedINcall", "Login", FormMethod.Get))*@
             @*@ {*@
@@ -195,7 +195,7 @@ else
         <div class="modal-buttons">
 
 
-            <button id="btnTwitter" class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
+            <button id="btnTwitter" class="btn btn-info modal-buttons-twitter" style="display:none;"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
 
             <button id="btnlinkedin" class="btn btn-info modal-buttons-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i>Log in with LinkedIn</button>
 

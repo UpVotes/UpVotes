@@ -95,7 +95,14 @@ namespace UpVotes.Controllers
 
         public string ThanksNoteForReview(int companyID, int companyReviewID)
         {
-            return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {
+                return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+            }
+            else
+            {
+                return "Please login to provide thanks note.";
+            }
         }
     }
 }

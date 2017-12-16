@@ -160,10 +160,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2013 15:40:26</publishTime>
     </File>
     <File Include="bin/UpVotes.BussinessEntities.dll">
-      <publishTime>11/17/2017 23:33:31</publishTime>
+      <publishTime>11/23/2017 17:55:45</publishTime>
     </File>
     <File Include="bin/UpVotes.dll">
-      <publishTime>11/17/2017 23:46:13</publishTime>
+      <publishTime>11/23/2017 17:56:41</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/10/2013 17:28:38</publishTime>
@@ -178,7 +178,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2017 13:30:36</publishTime>
     </File>
     <File Include="Content/home-design.css">
-      <publishTime>10/15/2017 19:23:51</publishTime>
+      <publishTime>11/18/2017 16:06:12</publishTime>
     </File>
     <File Include="Content/jQuery/images/ui-bg_glass_55_fbf9ee_1x400.png">
       <publishTime>10/10/2017 12:01:22</publishTime>
@@ -232,7 +232,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/06/2017 18:30:44</publishTime>
     </File>
     <File Include="Content/wvr-styles.css">
-      <publishTime>11/13/2017 12:59:32</publishTime>
+      <publishTime>11/18/2017 18:02:20</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>08/16/2017 15:37:57</publishTime>
@@ -2115,6 +2115,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/finger.png">
       <publishTime>08/24/2017 12:59:59</publishTime>
     </File>
+    <File Include="images/IMG_0617.PNG">
+      <publishTime>11/18/2017 16:23:58</publishTime>
+    </File>
     <File Include="images/main-banner.png">
       <publishTime>08/24/2017 12:59:59</publishTime>
     </File>
@@ -2245,25 +2248,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/05/2017 13:03:00</publishTime>
     </File>
     <File Include="Scripts/UserScripts/Company.js">
-      <publishTime>11/03/2017 14:06:01</publishTime>
+      <publishTime>11/23/2017 17:44:15</publishTime>
     </File>
     <File Include="Scripts/UserScripts/CompanyReviews.js">
       <publishTime>11/03/2017 15:02:52</publishTime>
     </File>
     <File Include="Scripts/UserScripts/CompanyVote.js">
-      <publishTime>11/03/2017 14:05:41</publishTime>
+      <publishTime>11/23/2017 17:45:01</publishTime>
     </File>
     <File Include="Scripts/UserScripts/Login.js">
-      <publishTime>11/17/2017 22:50:04</publishTime>
+      <publishTime>11/23/2017 17:45:17</publishTime>
     </File>
     <File Include="Scripts/UserScripts/SubmitReview.js">
-      <publishTime>11/03/2017 14:14:27</publishTime>
+      <publishTime>11/23/2017 17:45:46</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>11/03/2017 14:35:01</publishTime>
     </File>
     <File Include="Views/Company/Company.cshtml">
-      <publishTime>11/03/2017 14:41:33</publishTime>
+      <publishTime>11/22/2017 14:21:23</publishTime>
     </File>
     <File Include="Views/Company/_CompanyFooter.cshtml">
       <publishTime>10/30/2017 20:48:57</publishTime>
@@ -2275,19 +2278,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/13/2017 12:25:56</publishTime>
     </File>
     <File Include="Views/CompanyList/CompanyList.cshtml">
-      <publishTime>10/30/2017 20:25:28</publishTime>
+      <publishTime>11/22/2017 15:09:21</publishTime>
     </File>
     <File Include="Views/CompanyList/_CompanyAddEdit.cshtml">
       <publishTime>10/12/2017 10:22:04</publishTime>
     </File>
     <File Include="Views/CompanyList/_CompList.cshtml">
-      <publishTime>11/13/2017 12:49:28</publishTime>
+      <publishTime>11/22/2017 15:51:04</publishTime>
     </File>
     <File Include="Views/Home/HomePage.cshtml">
-      <publishTime>11/13/2017 14:08:26</publishTime>
+      <publishTime>11/23/2017 17:55:04</publishTime>
     </File>
     <File Include="Views/Login/_Login.cshtml">
-      <publishTime>11/17/2017 23:26:35</publishTime>
+      <publishTime>11/23/2017 17:53:10</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>08/16/2017 15:38:04</publishTime>
@@ -2296,13 +2299,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2017 15:38:05</publishTime>
     </File>
     <File Include="Views/Shared/_FooterPartialView.cshtml">
-      <publishTime>08/24/2017 13:34:24</publishTime>
+      <publishTime>11/19/2017 20:55:24</publishTime>
     </File>
     <File Include="Views/Shared/_HeaderPartialView.cshtml">
-      <publishTime>10/30/2017 20:51:20</publishTime>
+      <publishTime>11/20/2017 00:15:39</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/17/2017 20:02:17</publishTime>
+      <publishTime>11/23/2017 17:35:30</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>08/16/2017 15:37:57</publishTime>
@@ -2311,7 +2314,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2017 15:37:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/17/2017 23:46:14</publishTime>
+      <publishTime>11/23/2017 17:56:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

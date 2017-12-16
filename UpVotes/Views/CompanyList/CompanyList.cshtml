@@ -1,7 +1,9 @@
 ﻿@model UpVotes.Models.CompanyViewModel
 
 @{
-    ViewBag.Title = @Model.CategoryHeadLine;
+
+    ViewBag.MetaTag = Model.MetaTag;
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $.VoteForCompany = function (companyID, companyName) {
         $.ajax({
-            url: '/Company/VoteForCompany',
+            url: $.absoluteurl('/Company/VoteForCompany'),
             cache: false,
             async: false,
             datatype: 'json',

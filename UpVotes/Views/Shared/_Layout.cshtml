@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" type="image/png" href="~/images/upvotesicon.jpg" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
-    <title>@ViewBag.Title - UpVotes</title>
-
+    <title>@ViewBag.Title</title>
+    @Html.Raw(!string.IsNullOrEmpty(@ViewBag.MetaTag) ? @ViewBag.MetaTag : "")
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/wvr-styles.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -15,12 +16,23 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/media.js"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+    @*<script type="text/javascript" src="http://platform.linkedin.com/in.js">
         api_key: 81emosqfu7h5el
         authorize: true
         credentials_cookie: true
+    </script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.absoluteurl = function (url) {
+                var path = '@Request.ApplicationPath'
+                if (path == '/')
+                    return url;
+                return path + url;
+            }
+        });
     </script>
 </head>
 <body>

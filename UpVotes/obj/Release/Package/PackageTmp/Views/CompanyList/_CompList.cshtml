@@ -2,21 +2,25 @@
 <script type="text/javascript">
     function GetCompany(companyName)
     {
-        var baseAddress = 'http://localhost:57671/Profile/' + companyName
-        window.open(baseAddress, '_blank');
-        return false;
-        //window.location.assign(baseAddress);
+        companyName = companyName.replace(/ /g, "-");
+        var baseAddress = 'http://localhost:57671/Profile/' + companyName;
+        window.open(baseAddress, '_blank')
+        return false
+        //window.location.assign(baseAddress)
     }
 </script>
 
 <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
 
-<div class="card-heading">
-    <div class="head1">Company Name</div>
-    <div class="head2">Avg hourly rate</div>
-    <div class="head3">Employees</div>
-    <div class="head4">Reviews</div>
-    <div class="head5">Locations</div>
+<div class="fixed-for">
+
+    <div class="card-heading">
+        <div class="head1">Company Name</div>
+        <div class="head2">Avg hourly rate</div>
+        <div class="head3">Employees</div>
+        <div class="head4">Reviews</div>
+        <div class="head5">Locations</div>
+    </div>
 </div>
 
 
@@ -70,6 +74,6 @@
             <span>@company.NoOfVotes</span>
 
         </div>
-        <div class="ribbon"><span>1</span></div>
+        <div class="ribbon"><span>@company.Ranks</span></div>
     </div>
 }

@@ -78,7 +78,7 @@
         <div class="w-tiles">
             <img src="~/images/Untitled-15.png">
             <span class="w1-tile">create company profile</span>
-            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" />
+            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" style="display:none;"/>
         </div>
         <div class="w-tiles">
             <img src="~/images/Untitled-16.png">
@@ -87,12 +87,12 @@
         <div class="w-tiles">
             <img src="~/images/Untitled-17.png">
             <span class="w3-tile">submit your review</span>
-            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" />
+            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" style="display:none;"/>
         </div>
     </div>
 </div>
 
 <div id="dialog" style="display:none">
-    @Html.Partial("~/Views/Company/_SubmitReview.cshtml");
+    @Html.Partial("~/Views/Company/_SubmitReview.cshtml")
 </div>
 

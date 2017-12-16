@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -889,6 +890,7 @@
     <Content Include="images\Untitled-7.png" />
     <Content Include="images\Untitled-8.png" />
     <Content Include="images\Untitled-9.png" />
+    <Content Include="images\upvotesicon.jpg" />
     <Content Include="images\viewcompare.png" />
     <Content Include="images\yellow-line.png" />
     <Content Include="Scripts\bootstrap.js" />
