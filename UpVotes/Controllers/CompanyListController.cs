@@ -37,9 +37,11 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby, int focusAreaID)
+        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby)
         {
             CompanyService companyService = new CompanyService();
+            string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);
+            int focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
             CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
 

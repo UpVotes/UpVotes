@@ -7,9 +7,9 @@
 
 <script type="text/javascript">
     function GetCompany(companyName)
-    {
-        companyName = companyName.replace(/ /g, "-");
-        var baseAddress = 'https://upvotes.co/profile/' + companyName.toLowerCase();
+    {        
+        companyName = companyName.replace(/ /g, "-");        
+        var baseAddress = $.absoluteurl('profile/' + encodeURI(companyName.toLowerCase()));        
         window.open(baseAddress, '_blank')
         return false
         //window.location.assign(baseAddress)
