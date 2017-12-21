@@ -74,7 +74,7 @@
         });
 
         $(".companydetail").click(function () {
-            
+            var location = '0';
             var compid = 0;
             var AvgminRate = '0';
             var Avgmaxrate = '0';
@@ -90,13 +90,18 @@
             if ($(this).attr('minrate') == undefined) {
                 minEmp = $(this).attr('minEmployee');
                 maxEmp = $(this).attr('maxEmployee');
-            }            
+            }
+
+            if (window.location.href.split('/').length == 5)
+            {
+                location = window.location.href.split('/')[4];
+            }
 
             $.ajax({
                 type: "POST",   //GET or POST or PUT or DELETE verb
                 //url: $.absoluteurl('/CompanyList/CompanyList'),//?companyid='+compid,
                 url: $.absoluteurl('/' + jQuery.parseJSON('@Html.Raw(Json.Encode(Session["FocusAreaName"]))')),
-                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby },// Location of the service
+                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location },// Location of the service
                 success: function (json) {//On Successful service call
                     $('#complist').html(json);
                 }

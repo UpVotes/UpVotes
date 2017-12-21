@@ -39,7 +39,7 @@ namespace UpVotes.Business
                 return companyViewModel;
             }
         }
-        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, int userID = 0)
+        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0,string location="0", int userID = 0)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -47,7 +47,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetCompany";
                 if (string.IsNullOrEmpty(sortby))
                     sortby = "asc";
-                string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + userID;
+                string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + location + "/"+ userID;
                 string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
                 var response = httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);

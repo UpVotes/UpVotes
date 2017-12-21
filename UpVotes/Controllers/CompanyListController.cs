@@ -12,11 +12,16 @@ namespace UpVotes.Controllers
         private string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
 
         // GET: CompanyList
-        public ActionResult CompanyList()
+        public ActionResult CompanyList(string id)
         {
+
             Session["calledPage"] = "L";
             string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);
             int focusAreaID = 0;
+            if(Request.Url.Segments.Length >2)
+            {
+                urlFocusAreaName = urlFocusAreaName.Replace("/", "");
+            }
             string actualFocusAreaName = string.Empty;
             if (urlFocusAreaName != string.Empty)
             {
@@ -24,7 +29,11 @@ namespace UpVotes.Controllers
                 focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
             }
             CompanyService companyService = new CompanyService();
-            CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID, Convert.ToInt32(Session["UserID"]));
+            if(string.IsNullOrEmpty(id))
+            {
+                id = "0";
+            }            
+            CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID,id, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel);
             if (companyViewModel.CompanyList.Count > 0)
@@ -37,12 +46,13 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby)
+        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby,string location)
         {
             CompanyService companyService = new CompanyService();
-            string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);
+            string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);            
+            
             int focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
-            CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, Convert.ToInt32(Session["UserID"]));
+            CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
 
             return PartialView("_CompList", companyViewModel);
@@ -178,7 +188,7 @@ namespace UpVotes.Controllers
                     MetaStr.Append("<meta property='og:description' content='Here is a list of top software development companies and Agencies 2017 with rankings and ratings. Find best software development companies from the globe.' />");
                     MetaStr.Append("<meta property='og:image' content='' />");
                     MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>');");
+                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
                     MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
                     MetaStr.Append("<meta name='twitter:description' content='Here is a list of top software development companies and Agencies 2017 with rankings and ratings. Find best software development companies from the globe.' />");
                     MetaStr.Append("<meta name='twitter:title' content='Top software development Companies & Agencies - 2017 | upvotes.co' />");
