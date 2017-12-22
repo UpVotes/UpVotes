@@ -35,7 +35,7 @@ namespace UpVotes.Controllers
             }
             else
             {
-                id = id.Replace("-", "");
+                id = id.Replace("-", "space");
             }          
             CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID,id, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
@@ -56,7 +56,7 @@ namespace UpVotes.Controllers
             string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);            
             if(location != "0")
             {
-                location = location.Replace("-", "");
+                location = location.Replace("-", "space");
             }
             int focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
             CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]));
