@@ -1,5 +1,5 @@
 .mark-home-banner {
-  background-image: url(../images/Untitled-12.jpg);
+  /*background-image: url(../images/Untitled-12.jpg);*/
   height: 520px;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -46,7 +46,7 @@
 }
 
 .mark-who-are-we {
-  background-image: url(../images/Untitled-4.jpg);
+  /*background-image: url(../images/Untitled-4.jpg);*/
   height: 480px;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -177,7 +177,7 @@
 }
 
 .world-map {
-  background-image: url(../images/Untitled-1.jpg);
+  /*background-image: url(../images/Untitled-1.jpg);*/
          height: 710px;
     background-size: 100%;
     background-repeat: no-repeat;

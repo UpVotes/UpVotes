@@ -24,11 +24,22 @@ namespace UpVotes
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.css",
+            //          "~/Content/bootstrap-theme.min.css",
+            //          "~/Content/wvr - styles.css",
+            //          "~/Content/site.css"));
+            BundleTable.Bundles.UseCdn = true;
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-theme.min.css",
-                      "~/Content/wvr - styles.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/wvr-styles.css"));            
+            bundles.Add(new StyleBundle("~/Content/Homecss").Include("~/Content/home-design.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/media.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

@@ -27,7 +27,7 @@
 
         <div class="meni-breadcrumbs main-sect">
             <div class="container">
-                <span><a href="/Home/HomePage" target="_self">Home</a></span>
+                <span><a href="https://upvotes.co" target="_self">Home</a></span>
                 <span>@company.CompanyName</span>
             </div>
         </div>
@@ -56,19 +56,19 @@
                     <ul class="social-media-icons-header">
                         @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
                         {
-                            <li><a href="@company.LinkedInProfileURL"><i class="linked-header" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank" href="@company.LinkedInProfileURL"><i class="linked-header" aria-hidden="true"></i></a></li>
                         }
                         @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
                         {
-                            <li><a href="@company.FacebookProfileURL"><i class="fb-header" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank" href="@company.FacebookProfileURL"><i class="fb-header" aria-hidden="true"></i></a></li>
                         }
                         @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
                         {
-                            <li><a href="@company.TwitterProfileURL"><i class="twitter-header" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank" href="@company.TwitterProfileURL"><i class="twitter-header" aria-hidden="true"></i></a></li>
                         }
                         @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
                         {
-                            <li><a href="@company.GooglePlusProfileURL"><i class="google-header" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank" href="@company.GooglePlusProfileURL"><i class="google-header" aria-hidden="true"></i></a></li>
                         }
                     </ul>
 
