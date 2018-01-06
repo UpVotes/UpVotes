@@ -39,7 +39,7 @@ namespace UpVotes.Controllers
             }          
             CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID,id, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
-            GetCategoryHeadLine(urlFocusAreaName, companyViewModel);
+            GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "));
             if (companyViewModel.CompanyList.Count > 0)
             {
                 companyViewModel.AverageUserRating = 4;
@@ -70,160 +70,115 @@ namespace UpVotes.Controllers
             return PartialView("_CompanyAddEdit");
         }
 
-        private void GetCategoryHeadLine(string urlFocusAreaName, CompanyViewModel companyViewModel)
+        private void GetCategoryHeadLine(string urlFocusAreaName, CompanyViewModel companyViewModel,string Country)
         {
+            Country = Country == "0" ? "globe" : Country;
+            Country = Country.ToUpper() == "UNITED STATES" ? "USA" : Country;
+            int year = DateTime.Now.Year;
             switch (urlFocusAreaName.Trim())
             {
                 case "mobile-application-developers":
-                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies";
-                    companyViewModel.Title = "Top Mobile App Development Companies - 2017 | upvotes.co";
-                    companyViewModel.MetaTag=CategoryMetaTags("mobile-application-developers");
+                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in "+ (Country == "globe"?"" : Country);
+                    companyViewModel.Title = "Top Mobile App Development Companies in "+ Country + "- "+ year + " | upvotes.co";
+                    companyViewModel.MetaTag=CategoryMetaTags("mobile-application-developers", Country);
                     break;
 
                 case "seo-companies":
-                    companyViewModel.CategoryHeadLine = "SEO Companies";
-                    companyViewModel.Title = " Top SEO Companies and Services -2017 | upvotes.co ";
-                    companyViewModel.MetaTag = CategoryMetaTags("seo-companies");
+                    companyViewModel.CategoryHeadLine = "SEO Companies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = " Top SEO Companies and Services in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.MetaTag = CategoryMetaTags("seo-companies", Country);
                     break;
 
                 case "digital-marketing-companies":
-                    companyViewModel.CategoryHeadLine = "Digital Marketing Companies and Agencies";
-                    companyViewModel.Title = " Top Digital Marketing Companies & Agencies - 2017 | upvotes.co ";
-                    companyViewModel.MetaTag = CategoryMetaTags("digital-marketing-companies");
+                    companyViewModel.CategoryHeadLine = "Digital Marketing Companies and Agencies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = " Top Digital Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.MetaTag = CategoryMetaTags("digital-marketing-companies", Country);
                     break;
 
                 case "web-design-companies":
-                    companyViewModel.CategoryHeadLine = "Web Design Companies";
-                    companyViewModel.Title = " Top Web Design Companies & Agencies - 2017 | upvotes.co ";
-                    companyViewModel.MetaTag = CategoryMetaTags("web-design-companies");
+                    companyViewModel.CategoryHeadLine = "Web Design Companies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = " Top Web Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.MetaTag = CategoryMetaTags("web-design-companies", Country);
                     break;
 
                 case "software-development-companies":
-                    companyViewModel.CategoryHeadLine = "Custom Software Development Companies";
-                    companyViewModel.Title = " Top Software Development Companies & Agencies - 2017 | upvotes.co ";
-                    companyViewModel.MetaTag = CategoryMetaTags("software-development-companies");
+                    companyViewModel.CategoryHeadLine = "Custom Software Development Companies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = " Top Software Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.MetaTag = CategoryMetaTags("software-development-companies", Country);
                     break;
 
                 case "web-development-companies":
-                    companyViewModel.CategoryHeadLine = "Web Development Companies";
-                    companyViewModel.Title = "Top Web Development Companies & Agencies - 2017 | upvotes.co";
-                    companyViewModel.MetaTag = CategoryMetaTags("web-development-companies");
+                    companyViewModel.CategoryHeadLine = "Web Development Companies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = "Top Web Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("web-development-companies", Country);
                     break;
 
                 default:
-                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies";
-                    companyViewModel.Title = "Top Mobile App Development Companies - 2017 | upvotes.co";
-                    companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers");
+                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + (Country == "globe" ? "" : Country);
+                    companyViewModel.Title = "Top Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers",Country);
                     break;
             }
         }
 
-        private string CategoryMetaTags(string category)
+        private string CategoryMetaTags(string category,string Country)
         {
             StringBuilder MetaStr = new StringBuilder();
+            string CategoryName = string.Empty;
+            int year = DateTime.Now.Year;            
+            MetaStr.Append("<meta property='og:url' content='{WebsiteUrl}' />");
+            MetaStr.Append("<meta property='og:type' content='website' />");
+            MetaStr.Append("<meta property='og:title' content='Top 10 {Category} Companies in {Country} - "+ year +"' />");            
+            MetaStr.Append("<meta property='og:image' content='' />");
+            MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
+            MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
+            MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
+            //MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+            MetaStr.Append("<meta name='twitter:title' content='Top 10 {Category} Companies in {Country} - "+ year +"' />");
+            MetaStr.Append("<meta name='twitter:image' content='' />");
+            MetaStr.Append("<link rel='canonical' href='{WebsiteUrl}' />");
+            MetaStr.Append("<link rel='publisher' href='' />");
+
             switch (category)
             {
                 case "mobile-application-developers":
-                    MetaStr.Append("<meta name = 'description' content = 'Here is a list of top mobile app development companies 2017 (iOS, iPhone and Android) with user votes. Select top mobile app developers from the globe.' />");
-                    MetaStr.Append("<meta property = 'og:url' content = 'https://www.upvotes.co/mobile-application-developers' />");
-                    MetaStr.Append("<meta property = 'og:type' content = 'website' />");
-                    MetaStr.Append("<meta property = 'og:title' content = 'Top Mobile App Development Companies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property = 'og:description'   content = 'Here is a list of top mobile app development companies 2017 (iOS, iPhone and Android) with user votes. Select top mobile app developers from the globe.' />");
-                    MetaStr.Append("<meta property = 'og:image' content = '' />");
-                    MetaStr.Append("<meta name = 'twitter:card' content = 'summary_large_image' />");
-                    MetaStr.Append("<meta name = 'twitter:site' content = '@upvotes_co' >");
-                    MetaStr.Append("<meta name = 'twitter:creator' content = '@upvotes_co' >");
-                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a list of top mobile app development companies 2017 (iOS, iPhone and Android) with user votes. Select top mobile app developers from the globe.' />");
-                    MetaStr.Append("<meta name = 'twitter:title' content = 'Top Mobile App Development Companies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name = 'twitter:image' content = '' />");
-                    MetaStr.Append("<link rel = 'canonical' href = 'https://www.upvotes.co/mobile-application-developers' />");
-                    MetaStr.Append("<link rel = 'publisher' href = '' /> ");
+                    CategoryName = "mobile app development companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
                     break;
                 case "seo-companies":
-                    MetaStr.Append("<meta name='description' content='Rankings and votes of the top SEO companies and Services 2017 with user votes. Select the best SEO agencies, SEO firms from the globe.'/>");
-                    MetaStr.Append("<meta property='og:url' content='https://www.upvotes.co/seo-companies' />");
-                    MetaStr.Append("<meta property='og:type' content='website' />");
-                    MetaStr.Append("<meta property='og:title' content='Top SEO Companies and Services - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property='og:description'   content='Rankings and votes of the top SEO companies and Services 2017 with user votes. Select the best SEO agencies, SEO firms from the globe.' />");
-                    MetaStr.Append("<meta property='og:image' content='' />");
-                    MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:description' content='Rankings and votes of the top SEO companies and Services 2017 with user votes. Select the best SEO agencies, SEO firms from the globe.' />");
-                    MetaStr.Append("<meta name='twitter:title' content='Top SEO Companies and Services - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name='twitter:image' content='' />");
-                    MetaStr.Append("<link rel='canonical' href='https://www.upvotes.co/seo-companies' />");
-                    MetaStr.Append("<link rel='publisher' href='' />");
+                    CategoryName = "SEO companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
+                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}. />");
                     break;
                 case "digital-marketing-companies":
-                    MetaStr.Append("<meta name='description' content='Are you looking for top digital marketing companies? Here is the list of top digital agencies 2017 with user votes. Select best marketing firms from the globe.' />");
-                    MetaStr.Append("<meta property='og:url' content='https://www.upvotes.co/digital-marketing-companies' />");
-                    MetaStr.Append("<meta property='og:type' content='website' />");
-                    MetaStr.Append("<meta property='og:title' content='Top SEO Companies and Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property='og:description' content='Are you looking for top digital marketing companies? Here is the list of top digital agencies 2017 with user votes. Select best marketing firms from the globe.' />");
-                    MetaStr.Append("<meta property='og:image' content='' />");
-                    MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:description' content='Are you looking for top digital marketing companies? Here is the list of top digital agencies 2017 with user votes. Select best marketing firms from the globe.' />");
-                    MetaStr.Append("<meta name='twitter:title' content='Top Digital Marketing Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name='twitter:image' content='' />");
-                    MetaStr.Append("<link rel='canonical' href='https://www.upvotes.co/digital-marketing-companies' />");
-                    MetaStr.Append("<link rel='publisher' href='' />");
+                    CategoryName = "digital marketing companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
                     break;
                 case "web-design-companies":
-                    MetaStr.Append("<meta name='description' content='Looking for the top web design companies? Here is the list of best web design agencies 2017 with rankings and ratings. Select best web design firms from the globe.' />");
-                    MetaStr.Append("<meta property='og:url' content='https://www.upvotes.co/web-design-companies' />");
-                    MetaStr.Append("<meta property='og:type' content='website' />");
-                    MetaStr.Append("<meta property='og:title' content='Top Web Design Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property='og:description' content='Looking for the top web design companies? Here is the list of best web design agencies 2017 with rankings and ratings. Select best web design firms from the globe.' />");
-                    MetaStr.Append("<meta property='og:image' content='' />");
-                    MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:description' content='Looking for the top web design companies? Here is the list of best web design agencies 2017 with rankings and ratings. Select best web design firms from the globe.' />");
-                    MetaStr.Append("<meta name='twitter:title' content='Top Web Design Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name='twitter:image' content='' />");
-                    MetaStr.Append("<link rel='canonical' href='https://www.upvotes.co/web-design-companies' />");
-                    MetaStr.Append("<link rel='publisher' href='' />");
+                    CategoryName = "web design companies";
+                    MetaStr.Append("<meta property='og:description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
                     break;
-                case "software-development-companies":
-                    MetaStr.Append("<meta name='description' content='Here is a list of top software development companies and Agencies 2017 with rankings and ratings. Find best software development companies from the globe.' />");
-                    MetaStr.Append("<meta property='og:url' content='https://www.upvotes.co/software-development-companies' />");
-                    MetaStr.Append("<meta property='og:type' content='website' />");
-                    MetaStr.Append("<meta property='og:title' content='Top software development Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property='og:description' content='Here is a list of top software development companies and Agencies 2017 with rankings and ratings. Find best software development companies from the globe.' />");
-                    MetaStr.Append("<meta property='og:image' content='' />");
-                    MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a list of top software development companies and Agencies 2017 with rankings and ratings. Find best software development companies from the globe.' />");
-                    MetaStr.Append("<meta name='twitter:title' content='Top software development Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name='twitter:image' content='' />");
-                    MetaStr.Append("<link rel='canonical' href='https://www.upvotes.co/software-development-companies' />");
-                    MetaStr.Append("<link rel='publisher' href='' />");
+                case "software-development-companies":   
+                    CategoryName = "software development companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
                     break;
                 case "web-development-companies":
-                    MetaStr.Append("<meta name='description' content='' />");
-                    MetaStr.Append("<meta property='og:url' content='https://www.upvotes.co/web-development-companies' />");
-                    MetaStr.Append("<meta property='og:type' content='website' />");
-                    MetaStr.Append("<meta property='og:title' content='Top web development Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta property='og:description' content='Here is a list of top web development companies and Agencies 2017 with rankings and ratings. Find best web development companies from the globe.' />");
-                    MetaStr.Append("<meta property='og:image' content='' />");
-                    MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
-                    MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a list of top web development companies and Agencies 2017 with rankings and ratings. Find best web development companies from the globe.' />");
-                    MetaStr.Append("<meta name='twitter:title' content='Top web development Companies & Agencies - 2017 | upvotes.co' />");
-                    MetaStr.Append("<meta name='twitter:image' content='' />");
-                    MetaStr.Append("<link rel='canonical' href='https://www.upvotes.co/web-development-companies' />");
-                    MetaStr.Append("<link rel='publisher' href='' />");
+                    CategoryName = "web development Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
                     break;
-            }
-            
-
-
-            return MetaStr.ToString();
+            }       
+            return MetaStr.Replace("{Category}",CategoryName).Replace("{Country}", Country).Replace("{WebsiteUrl}",Request.Url.ToString()).ToString();
         }
     }
 }
