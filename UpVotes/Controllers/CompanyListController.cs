@@ -151,7 +151,7 @@ namespace UpVotes.Controllers
                     CategoryName = "SEO companies";
                     MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
                     MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
-                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}. />");
+                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
                     break;
                 case "digital-marketing-companies":
                     CategoryName = "digital marketing companies";
