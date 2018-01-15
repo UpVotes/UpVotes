@@ -933,7 +933,6 @@
     <Content Include="fonts\Open_Sans\OpenSans-SemiBold.ttf" />
     <Content Include="Scripts\CompanyFocus.js" />
     <Content Include="Scripts\highcharts.js" />
-    <Content Include="Scripts\HighChartsUnMinify.js" />
     <Content Include="images\CompanyLogos\desktop.ini" />
     <Content Include="images\CompanyListLogos\desktop.ini" />
     <Content Include="manifest.json" />

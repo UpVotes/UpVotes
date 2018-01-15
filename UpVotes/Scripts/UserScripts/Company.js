@@ -2,47 +2,55 @@
 
     //Method to display focus areas in horizontal bar.
     $.getCompanyFocus = function (companyFocusData) {
-        var companyFocusAreaArray = [];
-        for (var i = 0; i < companyFocusData.split(',').length; i++) {
-            var a = companyFocusData.split(',')[i].split(':');
-            var companyFocusObj = {};
-            companyFocusObj["name"] = companyFocusData.split(',')[i].split(':')[0];
-            companyFocusObj["data"] = [parseFloat(companyFocusData.split(',')[i].split(':')[1])];
-            companyFocusAreaArray.push(companyFocusObj);
-        }
+        // Radialize the colors
+        Highcharts.setOptions({
+            colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+                return {
+                    radialGradient: {
+                        cx: 0.5,
+                        cy: 0.3,
+                        r: 0.7
+                    },
+                    stops: [
+                        [0, color],
+                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                    ]
+                };
+            })
+        });
 
-        $('#container').highcharts({
+        // Build the chart
+        Highcharts.chart('container', {
             chart: {
-                type: 'bar'
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
             title: {
                 text: ''
             },
-
-            legend: {
-                reversed: false
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-
             plotOptions: {
-                series: {
-                    stacking: 'normal'
-                },
-                bar: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        distance: -50,
-                        formatter: function () {
-                            var dlabel = Math.round(this.percentage * 100) / 100 + ' %';
-                            return dlabel
-                        },
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                         style: {
-                            color: 'white',
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         },
-                    },
-
-                },
-            },
-            series: companyFocusAreaArray
+                        connectorColor: 'silver'
+                    }
+                }
+            },            
+            series: [{
+                name: 'Focus',
+                data: eval(companyFocusData)
+            }]
         });
     };
 
