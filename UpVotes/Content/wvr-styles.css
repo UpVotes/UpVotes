@@ -1162,7 +1162,7 @@ header >.navbar-inverse {
 .filter-by {
   float: left;
   font-size: 13px;
-  padding: 10px 0;
+  padding: 4px 0;
   font-family: OpenSans-Semibold;
 }
 
@@ -1181,7 +1181,7 @@ header >.navbar-inverse {
 
 .filter-by>span,
 .sort-by>span {
-  padding: 0 10px;
+  padding: 0 5px;
   border-right: 1px solid #545454;
 }
 
@@ -2247,3 +2247,42 @@ top: 110px;
 .loca-box{
     padding:0;
 }
+
+.filterHourlyRateClass {
+    border: none;
+    width: 167px;
+    padding: 5px 0px 5px 35px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.filterHourlyRateClass::-ms-expand {
+        display: block; /* remove default arrow on ie10 and ie11 */
+}
+
+.filterEmployeeClass {
+    border: none;
+    width: 80px;
+    padding: 5px 0px 5px 9px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.filterEmployeeClass::-ms-expand {
+        display: block; /* remove default arrow on ie10 and ie11 */
+}
+
+.filterCompanyNameClass {
+    border: none;
+    width: 150px;
+    padding: 5px 0px 5px 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+    .filterCompanyNameClass::-ms-expand {
+        display: block; /* remove default arrow on ie10 and ie11 */
+    }

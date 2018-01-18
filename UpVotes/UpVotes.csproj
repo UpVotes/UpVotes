@@ -235,6 +235,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home-design.css" />
+    <Content Include="Content\jquery-te-1.4.0.css" />
+    <Content Include="Content\jquery-te.png" />
     <Content Include="Content\jQuery\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\jQuery\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Content\jQuery\images\ui-bg_glass_75_dadada_1x400.png" />
@@ -937,6 +939,7 @@
     <Content Include="images\CompanyListLogos\desktop.ini" />
     <Content Include="manifest.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-te-1.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -948,11 +951,14 @@
     <Content Include="Scripts\media.js" />
     <Content Include="Scripts\media.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\nicEdit.js" />
+    <Content Include="images\nicEditorIcons.gif" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\StarRating.js" />
     <Content Include="Scripts\UserScripts\Company.js" />
+    <Content Include="Scripts\UserScripts\CompanyList.js" />
     <Content Include="Scripts\UserScripts\CompanyReviews.js" />
     <Content Include="Scripts\UserScripts\CompanyVote.js" />
     <Content Include="Scripts\UserScripts\Login.js" />
@@ -979,10 +985,10 @@
     <Content Include="Views\Company\_CompanyFooter.cshtml" />
     <Content Include="Views\CompanyList\CompanyList.cshtml" />
     <Content Include="Views\Company\_SubmitReview.cshtml" />
-    <Content Include="Views\CompanyList\_CompanyAddEdit.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Views\Login\_Login.cshtml" />
     <Content Include="Views\CompanyList\_CompList.cshtml" />
+    <Content Include="Views\Company\CreateCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
