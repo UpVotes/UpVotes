@@ -14,10 +14,37 @@
         return false
         //window.location.assign(baseAddress)
     }
+    $(document).ready(function () {
+        $(".Pagenumber").click(function () {           
+            if (this.className.indexOf("disabled") == -1) {
+                var location = '0';
+                var compid = 0;
+                var AvgminRate = '0';
+                var Avgmaxrate = '0';
+                var minEmp = '0';
+                var maxEmp = '0';
+                var sortby = 'Asc';
+
+                var PageNo = parseInt($(this).attr('page'));
+                var PageSize = 10;
+                var FirstPage = parseInt($('.FirstPageindex').attr('page'));
+                var LastPage = parseInt($('.LastPageindex').attr('page'));
+
+                $.ajax({
+                    type: "POST",   //GET or POST or PUT or DELETE verb
+                    url: $.absoluteurl('/CompanyList/CompanyList'),//?companyid='+compid,
+                    //url: $.absoluteurl('/' + jQuery.parseJSON('@Html.Raw(Json.Encode(Session["FocusAreaName"]))')),
+                    data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
+                    success: function (json) {//On Successful service call
+                        $('#complist').html(json);
+                        $('.lazy').lazy();
+                    }
+                });
+            }
+        });
+    });
 </script>
-
 <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
-
 <div class="fixed-for">
 
     <div class="card-heading">
@@ -36,7 +63,7 @@
 
         <div class="block1" onclick="GetCompany('@company.CompanyName')">
             <p>
-                <img src="~/images/CompanyListLogos/@company.LogoName" />
+                <img class="lazy" data-src="images/CompanyListLogos/@company.LogoName" />
             </p>
             <p class="company-complete-name">
                 @*<span>@Html.ActionLink(company.CompanyName, "Company", "Company", new { companyID = company.CompanyID }, null) </span>*@
@@ -83,3 +110,61 @@
         <div class="ribbon"><span>@company.Ranks</span></div>
     </div>
 }
+<div class="paginate">
+
+    <nav aria-label="...">
+<ul class="pagination">
+    
+    @for (int i = 0; i < Model.PageCount; i++)
+    {
+        if(i+1 == 1)
+        { 
+            <li class="@(Model.PageIndex == 1 ? "disabled FirstPage Pagenumber" : "FirstPage Pagenumber")" page="@(i+1)" ><a aria-label="First"><span aria-hidden="true"><i class="fa fa-step-backward" aria-hidden="true"></i></span></a></li>
+            <li class="PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)"><a><span aria-hidden="true"><i class="fa fa-caret-left" aria-hidden="true"></i></span></a></li>
+        }
+
+        if (i + 1 <= 5)
+        {
+            if (Model.PageCount >= 5)
+            {
+                if (i + 1 == 1)
+                {
+                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+                else if (i + 1 == 5)
+                {
+                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+                else
+                {
+                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+            }
+            else
+            {
+                if (i + 1 == 1)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber FirstPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+                else if (i + 1 == Model.PageCount)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber LastPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+                else
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                }
+            }
+        }
+
+        if (i + 1 == Model.PageCount)
+        {
+            <li class="NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)"><a><span aria-hidden="true"><i class="fa fa-caret-right" aria-hidden="true"></i></span></a></li>
+            <li class="@(Model.PageNumber == Model.PageCount ? "disabled LastPage Pagenumber" : "LastPage Pagenumber")" page="@(Model.PageCount)"><a aria-label="Last"><span aria-hidden="true"><i class="fa fa-step-forward" aria-hidden="true"></i></span></a></li>
+        }
+        Model.PageIndex = Model.PageIndex + 1;
+    }
+        </ul>
+    </nav>
+
+</div>

@@ -40,17 +40,21 @@ namespace UpVotes.Controllers
             CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID,id, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "));
+            companyViewModel.PageCount = 0;
+            companyViewModel.PageNumber = 1;
+            companyViewModel.PageIndex = 1;
             if (companyViewModel.CompanyList.Count > 0)
             {
                 companyViewModel.AverageUserRating = 4;
                 companyViewModel.TotalNoOfUsers = 10;
+                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 10 - 1) / 10;                
             }
 
             return View(companyViewModel);
         }
 
         [HttpPost]
-        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby,string location)
+        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby,string location,int PageNo, int PageSize,int FirstPage,int LastPage)
         {
             CompanyService companyService = new CompanyService();
             string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);            
@@ -59,9 +63,34 @@ namespace UpVotes.Controllers
                 location = location.Replace("-", "space");
             }
             int focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
-            CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]));
+            CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]), PageNo, PageSize);
             companyViewModel.WebBaseURL = _webBaseURL;
-
+            companyViewModel.PageCount = 0;
+            companyViewModel.PageNumber = PageNo;
+            companyViewModel.PageIndex = 1;            
+            if (companyViewModel.CompanyList.Count > 0)
+            {                
+                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + PageSize - 1) / PageSize;
+            }
+            if ((PageNo == FirstPage || PageNo == LastPage) && LastPage >= 5)
+            {
+                if (PageNo == FirstPage && PageNo != 1)
+                {
+                    companyViewModel.PageIndex = FirstPage - 1;
+                }
+                else if (PageNo == LastPage)
+                {
+                    if(PageNo == companyViewModel.PageCount)
+                        companyViewModel.PageIndex = (PageNo - 5) + 1;
+                    else
+                        companyViewModel.PageIndex = FirstPage + 1;
+                }
+            }
+            else if(PageNo > LastPage && LastPage >= 5)
+            {
+                companyViewModel.PageIndex = (PageNo-5) + 1;
+            }
+            
             return PartialView("_CompList", companyViewModel);
         }
 
