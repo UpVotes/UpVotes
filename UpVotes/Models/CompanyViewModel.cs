@@ -20,5 +20,8 @@ namespace UpVotes.Models
         public string CategoryHeadLine { get; set; }
         public string Title { get; set; }
         public string MetaTag { get; set; }
+        public int PageCount { get; set; }
+        public int PageNumber { get; set; }
+        public int PageIndex { get; set; }
     }
 }
