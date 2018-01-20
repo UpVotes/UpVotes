@@ -1564,6 +1564,7 @@ header >.navbar-inverse {
 div >.ratings {
   float: left;
   padding-left: 15px;
+  width:100%;
 }
 
 .founder-name {
@@ -2679,6 +2680,9 @@ top: 110px;
     .rt-pg-menu-desc:after{
         left:2%;
     }
+    .main-tabs-navi > li{
+        padding-right:18px;
+    }
 }
 
 
@@ -2696,4 +2700,8 @@ top: 110px;
     background-size: 20px;
     background-repeat: no-repeat;
     border:0;
+}
+
+.ui-widget.ui-widget-content{
+    width:150px !important;
 }

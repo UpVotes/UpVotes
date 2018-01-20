@@ -552,3 +552,11 @@ footer{
     float:left;
     width:100%;
 }
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a{
+    color:white;
+}
+
+.ui-widget.ui-widget-content {
+    display:inline-block !important;
+}
