@@ -296,3 +296,259 @@
 .r-tile >p>a{
     color:#ffffff;
 }
+
+
+@media (max-width: 991px) {
+    .mark-home-banner > h2 {
+        padding-top: 71px;
+        font-size: 16px;
+        width: 425px;
+    }
+
+    .mark-home-banner {
+        height: 295px;
+    }
+
+    .mark-who-are-we > .container {
+        padding-top: 5px;
+    }
+
+        .mark-who-are-we > .container > h2 {
+            font-size: 18px;
+            padding-bottom: 0;
+        }
+
+        .mark-who-are-we > .container > .head1p {
+            font-size: 13px;
+            width: 300px;
+        }
+
+        .mark-who-are-we > .container > .head2p {
+            font-size: 13px;
+            width:255px;
+        }
+
+    .mark-who-are-we {
+        height: auto;
+        padding-bottom:20px;
+    }
+
+    .rearch-category > div {
+        width: 100%;
+        margin: 0;
+    }
+
+    .chord {
+        background-image: none;
+    }
+
+    .rearch-category > div > .head2p {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .world-map {
+        margin-top: 0;
+        background-size: cover;
+        height: 380px;
+    }
+
+    .world-legal {
+        padding-top: 30px;
+        width: 100%;
+        margin: 0;
+    }
+
+    .world-tiles {
+        width: 100%;
+        padding-top: 50px;
+    }
+
+        .world-tiles > .w-tiles > img {
+            width: 170px;
+        }
+
+    .w-tiles > .w1-tile {
+        font-size: 10px;
+        width: 87px;
+        left: 82px;
+        top: 10px;
+    }
+
+    .create-submit {
+        position: absolute;
+        width: 85px;
+        bottom: 25px;
+        left: 80px;
+        background: #f1f2f3;
+        PADDING: 4PX;
+        border-radius: 4px;
+        color: #0e0e0e;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 10px;
+    }
+
+    .w-tiles > .w2-tile {
+        position: absolute;
+        bottom: 22px;
+        left: 87px;
+        font-weight: bold;
+        color: #717277;
+        font-size: 10px;
+    }
+
+    .w-tiles > .w3-tile {
+        font-size: 10px;
+        left: 39px;
+        width: 98px;
+    }
+
+    .submitbut {
+        left: 44px;
+        bottom: 18px;
+    }
+
+    .world-tiles {
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 767px) {
+    .mark-home-banner {
+        height: 200px;
+        background-size: cover;
+    }
+
+        .mark-home-banner > h2 {
+            padding-top: 34px;
+            font-size: 10px;
+            width: 200px;
+        }
+
+        .mark-home-banner > div {
+            text-align: center;
+            margin-left: 32px;
+            width: auto;
+            padding-top: 10px;
+        }
+
+            .mark-home-banner > div > span {
+                font-size: 10px;
+            }
+
+            .mark-home-banner > div > a {
+                left: 68px;
+                width: 94px;
+                font-size: 8px;
+                padding: 0;
+                padding: 9px;
+            }
+
+                .mark-home-banner > div > a > i {
+                    padding-left: 5px;
+                }
+
+    .mark-who-are-we > .container {
+        padding: 0;
+    }
+
+    .mark-who-are-we {
+        background-image: none !important;
+        padding: 0 30px;
+        height: 230px;
+    }
+
+        .mark-who-are-we > .container > .head1p {
+            font-size: 10px;
+        }
+
+        .mark-who-are-we > .container > .head2p {
+            font-size: 10px;
+        }
+
+    .rearch-category > div > .head1p {
+        font-size: 15px;
+        padding-top: 30px;
+    }
+
+    .r-tile {
+        width: 48%;
+    }
+
+        .r-tile > div > img {
+            width: 50px;
+        }
+
+        .r-tile > p {
+            font-size: 15px;
+            width: auto;
+        }
+
+            .r-tile > p:last-child {
+                font-size: 10px;
+            }
+
+        .r-tile > div {
+            height: 50px;
+        }
+
+    .world-tiles > .w-tiles {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .world-legal > h3 {
+        font-size: 15px;
+    }
+
+    .world-legal > span {
+        font-size: 13px;
+    }
+
+    .world-map {
+        height: auto;
+    }
+
+    .world-tiles {
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
+
+    .w-tiles > .w1-tile {
+        left: 140px;
+    }
+
+    .create-submit {
+        left: 142px;
+        bottom: 43px;
+    }
+
+    .w-tiles > .w3-tile {
+        left: 87px;
+    }
+
+    .submitbut {
+        left: 103px;
+        bottom: 35px;
+    }
+
+    .w-tiles > .w2-tile {
+        bottom: 40px;
+        left: 150px;
+    }
+
+    .chord {
+        display: none;
+    }
+    .rearch-category{
+        padding-top:20px;
+    }
+  
+}
+
+footer{
+    float:left;
+    width:100%;
+}

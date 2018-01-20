@@ -27,51 +27,64 @@ namespace UpVotes.Business
 
         public int GetFocusAreaID(string urlfocusAreaName)
         {
-            using (_httpClient = new HttpClient())
-            {
-                this._apiMethod = "GetFocusAreaID";
-                this._completeURL = _baseURL + _apiMethod + '/' + GetActualFocusAreaName(urlfocusAreaName);
-                var response = _httpClient.GetStringAsync(this._completeURL).Result;
-                int focusAreaID = JsonConvert.DeserializeObject<int>(response);
-                return focusAreaID;
-            }
+            return GetFocusAreaIDByEnum(urlfocusAreaName);
         }
 
-        private string GetActualFocusAreaName(string urlFocusAreaName)
+        private int GetFocusAreaIDByEnum(string urlfocusAreaName)
         {
-            string focusAreaName = string.Empty;
-            switch (urlFocusAreaName.Trim())
+            int focusAreaID = 0;
+            switch (urlfocusAreaName.Trim())
             {
                 case "mobile-application-developers":
-                    focusAreaName = "Mobile App Developement";
+                    focusAreaID = (int)FocusAreas.MobileAppDevelopement;
                     break;
 
                 case "seo-companies":
-                    focusAreaName = "Search Engine Optimization";
+                    focusAreaID = (int)FocusAreas.SearchEngineOptimization;
                     break;
 
                 case "digital-marketing-companies":
-                    focusAreaName = "Digital Marketing";
+                    focusAreaID = (int)FocusAreas.DigitalMarketing;
                     break;
 
                 case "web-design-companies":
-                    focusAreaName = "Web Design";
+                    focusAreaID = (int)FocusAreas.WebDesign;
                     break;
 
                 case "software-development-companies":
-                    focusAreaName = "Software Developement";
+                    focusAreaID = (int)FocusAreas.SoftwareDevelopement;
                     break;
 
                 case "web-development-companies":
-                    focusAreaName = "Web Developement";
+                    focusAreaID = (int)FocusAreas.WebDevelopement;
                     break;
 
                 default:
-                    focusAreaName = "Software Developement";
+                    focusAreaID = (int)FocusAreas.MobileAppDevelopement;
                     break;
             }
 
-            return focusAreaName;
-        }
+            return focusAreaID;
+        }        
+    }
+
+    public enum FocusAreas
+    {
+
+        DigitalMarketing = 1,
+        WebDesign,
+        SoftwareDevelopement,
+        IOTDevelopement,
+        WebDevelopement,
+        CustomSoftwareDevelopemt,
+        SearchEngineOptimization,
+        UXUIDesign,
+        MobileAppDevelopement,
+        EcommerceDevelopement,
+        WearableAppDevelopement,
+        ARVRDevelopment,
+        SocialMediaMarketing,
+        PayPerClick,
+        ContentMarketing,
     }
 }

@@ -1,45 +1,23 @@
 ﻿@model UpVotes.Models.CompanyViewModel
 
-@{ 
+@{
     ViewBag.MetaTag = @Model.MetaTag;
     ViewBag.Title = Model.Title;
 }
 
 <script type="text/javascript">
-    function GetCompany(companyName)
-    {        
-        companyName = companyName.replace(/ /g, "-");        
+    function GetCompany(companyName) {
+        companyName = companyName.replace(/ /g, "-");
         var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyName.toLowerCase()));
         window.open(baseAddress, '_blank')
         return false
         //window.location.assign(baseAddress)
     }
+
     $(document).ready(function () {
-        $(".Pagenumber").click(function () {           
+        $(".Pagenumber").click(function () {
             if (this.className.indexOf("disabled") == -1) {
-                var location = '0';
-                var compid = 0;
-                var AvgminRate = '0';
-                var Avgmaxrate = '0';
-                var minEmp = '0';
-                var maxEmp = '0';
-                var sortby = 'Asc';
-
-                var PageNo = parseInt($(this).attr('page'));
-                var PageSize = 10;
-                var FirstPage = parseInt($('.FirstPageindex').attr('page'));
-                var LastPage = parseInt($('.LastPageindex').attr('page'));
-
-                $.ajax({
-                    type: "POST",   //GET or POST or PUT or DELETE verb
-                    url: $.absoluteurl('/CompanyList/CompanyList'),//?companyid='+compid,
-                    //url: $.absoluteurl('/' + jQuery.parseJSON('@Html.Raw(Json.Encode(Session["FocusAreaName"]))')),
-                    data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
-                    success: function (json) {//On Successful service call
-                        $('#complist').html(json);
-                        $('.lazy').lazy();
-                    }
-                });
+                $.GetCompanyListBasedOnCriteria(this);
             }
         });
     });
@@ -51,8 +29,8 @@
         <div class="head1">Company Name</div>
         <div class="head2">Avg hourly rate</div>
         <div class="head3">Employees</div>
-        <div class="head4">Reviews</div>
         <div class="head5">Locations</div>
+        <div class="head4">Reviews</div>
     </div>
 </div>
 
@@ -76,17 +54,24 @@
         <div class="block3">
             <p><i class="fa fa-user-o" aria-hidden="true"></i>@company.TotalEmployees</p>
         </div>
-        <div class="block4">
-            <div>
-                @for (int i = 0; i < company.UserRating; i++)
-                {
-                    <span style="color:#fab200">★</span>
-                }
-                <span><span>@company.UserRating.0/5.0 - </span><span>@company.NoOfUsersRated users</span></span>
-            </div>
-        </div>
         <div class="block5">
             <p><i class="fa fa-map-marker" aria-hidden="true"></i>@company.City, @company.StateName, @company.CountryName</p>
+        </div>
+        <div class="block4">
+            <div>
+                <ul class="ratings">
+                    @for (int i = 0; i < company.UserRating; i++)
+                    {
+                        <li><span class="rate" aria-hidden="true">★</span></li>
+                    }
+                    @for (int i = company.UserRating; i < 5; i++)
+                    {
+                        <li><span class="ratedisabled" aria-hidden="true">★</span></li>
+                    }
+                </ul>
+                <br />
+                <span><span>@company.UserRating.0/5.0 - </span><span>@company.NoOfUsersRated users</span></span>
+            </div>
         </div>
         <div class="block6">
             <div class="block61">
@@ -113,57 +98,58 @@
 <div class="paginate">
 
     <nav aria-label="...">
-<ul class="pagination">
-    
-    @for (int i = 0; i < Model.PageCount; i++)
-    {
-        if(i+1 == 1)
-        { 
-            <li class="@(Model.PageIndex == 1 ? "disabled FirstPage Pagenumber" : "FirstPage Pagenumber")" page="@(i+1)" ><a aria-label="First"><span aria-hidden="true"><i class="fa fa-step-backward" aria-hidden="true"></i></span></a></li>
-            <li class="PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)"><a><span aria-hidden="true"><i class="fa fa-caret-left" aria-hidden="true"></i></span></a></li>
-        }
+        <ul class="pagination">
 
-        if (i + 1 <= 5)
-        {
-            if (Model.PageCount >= 5)
+            @for (int i = 0; i < Model.PageCount; i++)
             {
                 if (i + 1 == 1)
                 {
-                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
+                    <li class="@(Model.PageIndex == 1 ? "disabled FirstPage Pagenumber" : "FirstPage Pagenumber")" page="@(i+1)" style="cursor:pointer;"><a aria-label="First"><span aria-hidden="true"><i class="fa fa-step-backward" aria-hidden="true"></i></span></a></li>
+                    <li class="PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)" style="cursor:pointer;"><a><span aria-hidden="true"><i class="fa fa-caret-left" aria-hidden="true"></i></span></a></li>
                 }
-                else if (i + 1 == 5)
-                {
-                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
-                }
-                else
-                {
-                <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
-                }
-            }
-            else
-            {
-                if (i + 1 == 1)
-                {
-                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber FirstPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
-                }
-                else if (i + 1 == Model.PageCount)
-                {
-                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber LastPageindex")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
-                }
-                else
-                {
-                    <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)"><a>@(Model.PageIndex)</a></li>
-                }
-            }
-        }
 
-        if (i + 1 == Model.PageCount)
-        {
-            <li class="NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)"><a><span aria-hidden="true"><i class="fa fa-caret-right" aria-hidden="true"></i></span></a></li>
-            <li class="@(Model.PageNumber == Model.PageCount ? "disabled LastPage Pagenumber" : "LastPage Pagenumber")" page="@(Model.PageCount)"><a aria-label="Last"><span aria-hidden="true"><i class="fa fa-step-forward" aria-hidden="true"></i></span></a></li>
-        }
-        Model.PageIndex = Model.PageIndex + 1;
-    }
+                if (i + 1 <= 5)
+                {
+                    if (Model.PageCount >= 5)
+                    {
+                        if (i + 1 == 1)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                        else if (i + 1 == 5)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                        else
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                    }
+                    else
+                    {
+                        if (i + 1 == 1)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                        else if (i + 1 == Model.PageCount)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                        else
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
+                        }
+                    }
+                }
+
+                if (i + 1 == Model.PageCount)
+                {
+                    <li class="NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)" style="cursor:pointer;"><a><span aria-hidden="true"><i class="fa fa-caret-right" aria-hidden="true"></i></span></a></li>
+
+                    <li class="@(Model.PageNumber == Model.PageCount ? "disabled LastPage Pagenumber" : "LastPage Pagenumber")" page="@(Model.PageCount)" style="cursor:pointer;"><a aria-label="Last"><span aria-hidden="true"><i class="fa fa-step-forward" aria-hidden="true"></i></span></a></li>
+                }
+                Model.PageIndex = Model.PageIndex + 1;
+            }
         </ul>
     </nav>
 

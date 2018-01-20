@@ -11,37 +11,39 @@ namespace UpVotes.Business
 {
     public class CompanyService
     {
-        public CompanyViewModel GetCompany(string companyName)
+        HttpClient _httpClient = null;
+
+        //public CompanyViewModel GetCompany(string companyName)
+        //{
+        //    using (_httpClient = new HttpClient())
+        //    {
+        //        string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+        //        string apiMethod = "GetCompany"; string apiParameter = companyName;
+        //        string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
+        //        var response = _httpClient.GetStringAsync(completeURL).Result;
+        //        CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+
+        //        foreach (CompanyEntity company in companyViewModel.CompanyList)
+        //        {
+        //            if (companyName.Length > 0 && company.CompanyFocus.Count > 0)
+        //            {
+        //                StringBuilder sb = new StringBuilder();
+        //                foreach (var item in company.CompanyFocus)
+        //                {
+        //                    sb.Append(item.FocusAreaName + ":");
+        //                    sb.Append(item.FocusAreaPercentage.ToString() + ",");
+        //                }
+
+        //                companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
+        //            }
+        //        }
+
+        //        return companyViewModel;
+        //    }
+        //}
+        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, string location = "0", int userID = 0, int PageNo = 1, int PageSize = 10)
         {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "GetCompany"; string apiParameter = companyName;
-                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
-                var response = httpClient.GetStringAsync(completeURL).Result;
-                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
-
-                foreach (CompanyEntity company in companyViewModel.CompanyList)
-                {
-                    if (companyName.Length > 0 && company.CompanyFocus.Count > 0)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        foreach (var item in company.CompanyFocus)
-                        {
-                            sb.Append(item.FocusAreaName + ":");
-                            sb.Append(item.FocusAreaPercentage.ToString() + ",");
-                        }
-
-                        companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
-                    }
-                }
-
-                return companyViewModel;
-            }
-        }
-        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, string location = "0", int userID = 0,int PageNo = 1,int PageSize = 10)
-        {
-            using (HttpClient httpClient = new HttpClient())
+            using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetCompany";
@@ -49,7 +51,7 @@ namespace UpVotes.Business
                     sortby = "asc";
                 string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + location + "/" + userID + "/" + PageNo + "/" + PageSize;
                 string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
-                var response = httpClient.GetStringAsync(completeURL).Result;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
 
                 if (companyViewModel != null && companyViewModel.CompanyList.Count > 1)
@@ -89,7 +91,7 @@ namespace UpVotes.Business
 
         private bool AddCompanyReview(CompanyReviewsEntity companyReviewsEntity)
         {
-            using (HttpClient httpClient = new HttpClient())
+            using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "SaveCompanyReview";
@@ -97,7 +99,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsEntity), Encoding.UTF8, "application/json");
 
-                var response = httpClient.PostAsync(completeURL, httpContent).Result;
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -129,7 +131,7 @@ namespace UpVotes.Business
 
         public string VoteForCompany(int companyID, int userID)
         {
-            using (HttpClient httpClient = new HttpClient())
+            using (_httpClient = new HttpClient())
             {
                 string message = string.Empty;
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
@@ -145,7 +147,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyVote), Encoding.UTF8, "application/json");
 
-                var response = httpClient.PostAsync(completeURL, httpContent).Result;
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = response.Content.ReadAsStringAsync().Result;
@@ -161,7 +163,7 @@ namespace UpVotes.Business
 
         internal string ThanksNoteForReview(int companyID, int companyReviewID, int userID)
         {
-            using (HttpClient httpClient = new HttpClient())
+            using (_httpClient = new HttpClient())
             {
                 string message = string.Empty;
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
@@ -178,7 +180,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewThankNoteEntity), Encoding.UTF8, "application/json");
 
-                var response = httpClient.PostAsync(completeURL, httpContent).Result;
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = response.Content.ReadAsStringAsync().Result;
@@ -189,6 +191,19 @@ namespace UpVotes.Business
                 }
 
                 return message;
+            }
+        }
+
+        internal List<string> GetDataForAutoComplete(int type, int focusAreaID, string searchTerm)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetDataForAutoComplete";
+                string completeURL = WebAPIURL + apiMethod + '/' + type + '/' + focusAreaID + '/' + searchTerm;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<string> myAutoCompleteList = JsonConvert.DeserializeObject<List<string>>(response);
+                return myAutoCompleteList;
             }
         }
     }

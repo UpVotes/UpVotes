@@ -7,6 +7,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/UserScripts/CompanyList.js"></script>
+
+
 <h1 class="jumbotron-main">Top @Model.CategoryHeadLine @DateTime.Now.Year</h1>
 <div>
     <div class="container">
@@ -40,34 +43,33 @@
             <div class="filter-by">
                 <span>Filter by:</span>
                 <span class="dropdown filterdropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Company Name<span class="fa fa-chevron-down"></span></a>
-                    <ul class="dropdown-menu loca-box">
-                        <li><input type="search" name="googlesearch" placeholder="Company Name"></li>
-                    </ul>
+                    <input type="text" id="txtCompanySearch" placeholder="Company Name" class="filterCompanyNameClass" />
                 </span>
                 <span class="dropdown filterdropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Avg hourly rate<span class="fa fa-chevron-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="companydetail" href="#" minrate="0" maxrate="50">$0 - $50</a></li>
-                        <li><a class="companydetail" href="#" minrate="51" maxrate="100">$51 - $100</a></li>
-                        <li><a class="companydetail" href="#" minrate="101" maxrate="200">$101 - $200</a></li>
-                        <li><a class="companydetail" href="#" minrate="200" maxrate="">$200+</a></li>
-                    </ul>
+                    <select class="filterHourlyRateClass" id="ddlAvgHourlyRateSearch">
+                        <option value="0">Avg Hourly Rate</option>
+                        <option value="0-25">< $25 </option>
+                        <option value="25-50">$25 - $50</option>
+                        <option value="51-100">$51 - $100</option>
+                        <option value="101-150">$101 - $150</option>
+                        <option value="151-200">$151 - $200</option>
+                        <option value="201-300">$201 - $300</option>
+                        <option value="300-0">$300+</option>
+                    </select>
                 </span>
                 <span class="dropdown filterdropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees <span class="fa fa-chevron-down"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" class="companydetail" minEmployee="0" maxEmployee="50">0 - 50</a></li>
-                        <li><a href="#" class="companydetail" minEmployee="51" maxEmployee="100">51 - 100</a></li>
-                        <li><a href="#" class="companydetail" minEmployee="101" maxEmployee="200">101 - 200</a></li>
-                        <li><a href="#" class="companydetail" minEmployee="200" maxEmployee="0">200+</a></li>
-                    </ul>
+                    <select class="filterEmployeeClass" id="ddlEmployeesSearch">
+                        <option value="0">Employee</option>
+                        <option value="10-50">10 - 50</option>
+                        <option value="51-100">51 - 100</option>
+                        <option value="101-500">101 - 500</option>
+                        <option value="501-1000">501 - 1000</option>
+                        <option value="1001-5000">1001 - 5000</option>
+                        <option value="5000-0">5000+</option>
+                    </select>
                 </span>
                 <span class="dropdown filterdropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Locations <span class="fa fa-chevron-down"></span></a>
-                    <ul class="dropdown-menu loca-box">
-                        <li><input type="search" name="googlesearch" placeholder="Search Locations"></li>
-                    </ul>
+                    <input type="text" id="txtLocationSearch" placeholder="City or State or Country" class="filterCompanyNameClass">
                 </span>
             </div>
             <div class="sort-by">

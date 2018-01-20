@@ -29,7 +29,7 @@ namespace UpVotes.Controllers
                     Session["CompanyName"] = companyName;
                 }
 
-                CompanyViewModel companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0,"0", Convert.ToInt32(Session["UserID"]));
+                CompanyViewModel companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0", Convert.ToInt32(Session["UserID"]));
                 companyViewModel.WebBaseURL = _webBaseURL;
                 return View(companyViewModel);
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using UpVotes.Business;
@@ -28,6 +30,8 @@ namespace UpVotes.Controllers
                 Session["FocusAreaName"] = urlFocusAreaName.ToString();
                 focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
             }
+
+
             CompanyService companyService = new CompanyService();
             if(string.IsNullOrEmpty(id))
             {
@@ -36,8 +40,8 @@ namespace UpVotes.Controllers
             else
             {
                 id = id.Replace("-", "space");
-            }          
-            CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID,id, Convert.ToInt32(Session["UserID"]));
+            }
+            CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID, id, Convert.ToInt32(Session["UserID"]));
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "));
             companyViewModel.PageCount = 0;
@@ -54,16 +58,16 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby,string location,int PageNo, int PageSize,int FirstPage,int LastPage)
+        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby, string location, int PageNo, int PageSize, int FirstPage, int LastPage)
         {
             CompanyService companyService = new CompanyService();
-            string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);            
+            string urlFocusAreaName = Convert.ToString(Session["FocusAreaName"]);            
             if(location != "0")
             {
                 location = location.Replace("-", "space");
             }
             int focusAreaID = new FocusAreaService().GetFocusAreaID(urlFocusAreaName);
-            CompanyViewModel companyViewModel = companyService.GetCompany("0", minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]), PageNo, PageSize);
+            CompanyViewModel companyViewModel = companyService.GetCompany(companyID, minRate, maxRate, minEmployee, maxEmployee, sortby, focusAreaID, location, Convert.ToInt32(Session["UserID"]), PageNo, PageSize);
             companyViewModel.WebBaseURL = _webBaseURL;
             companyViewModel.PageCount = 0;
             companyViewModel.PageNumber = PageNo;
@@ -209,5 +213,26 @@ namespace UpVotes.Controllers
             }       
             return MetaStr.Replace("{Category}",CategoryName).Replace("{Country}", Country).Replace("{WebsiteUrl}",Request.Url.ToString()).ToString();
         }
-    }
+
+        public JsonResult GetDataForAutoComplete(int type)
+        {
+            try
+            {
+                var jsonResult = default(dynamic);
+                string searchTerm = Convert.ToString(Request.Params["starts_with"]);
+                int focusAreaID = new FocusAreaService().GetFocusAreaID(Convert.ToString(Session["FocusAreaName"]));
+                List<string> myAutoCompleteList = new CompanyService().GetDataForAutoComplete(type, focusAreaID, searchTerm);
+                jsonResult = from a in myAutoCompleteList
+                             select new
+                             {
+                                 Name = a
+                             };
+                return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }        
+    }    
 }

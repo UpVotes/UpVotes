@@ -1,14 +1,20 @@
 ﻿$(document).ready(function () {
 
-    $.setData = function (ui) {
-        $("#txtCompanySearch")[0].value = ui.item.value;
-        $("#txtCompanySearch").change();
+    $.setData = function (ui, type) {
+        if (type == 1) {
+            $("#txtCompanySearch")[0].value = ui.item.value;
+            $("#txtCompanySearch").change();
+        }
+        else if (type == 2) {
+            $("#txtLocationSearch")[0].value = ui.item.value;
+            $("#txtLocationSearch").change();
+        }
     }
 
     $.getData = function (request, response, type) {
         if ($.trim(request.term) != "" && $.trim(request.term).length > 0) {
             $.ajax({
-                url: $.absoluteurl('/CompanyList/GetData?type=' + type + '&focusArea=' + $("#hdnFocusArea")[0].value),
+                url: $.absoluteurl('/CompanyList/GetDataForAutoComplete?type=' + type),
                 dataType: "json",
                 data:
                 {
@@ -21,17 +27,9 @@
                     response(
                         $.map(data,
                             function (item) {
-                                if (type == 1) {
-                                    return {
-                                        label: item.Name,
-                                        value: item.Name,                                        
-                                    }
-                                }
-                                else if (type == 2) {
-                                    return {
-                                        label: item.Location,
-                                        value: item.City,
-                                    }
+                                return {
+                                    label: item.Name,
+                                    value: item.Name,
                                 }
                             }))
                 }
@@ -43,50 +41,81 @@
         source: function (request, response) {
             $.getData(request, response, 1)
         },
+        delay: 0,
         focus: function () {
             return false;
         },
-        //minLength: 3,
+        minLength: 3,
         select: function (event, ui) {
-            $.setData(ui);
+            $.setData(ui, 1);
         }
     });
 
-
-
-    var companyName = "";
-    var avgHourlyRate = "";
-    var employeeCount = "";
-    var location = "";
-    var sortBy = 'ASC';
-
-
-
+    $("#txtLocationSearch").autocomplete({
+        source: function (request, response) {
+            $.getData(request, response, 2)
+        },
+        delay: 0,
+        focus: function () {
+            return false;
+        },
+        minLength: 3,
+        select: function (event, ui) {
+            $.setData(ui, 2);
+        }
+    });    
+    
     $("#txtCompanySearch").change(function () {
-        debugger;
-
-        companyName = $("#txtCompanySearch")[0].value;
-
-        $.ajax({
-            type: "POST",
-            url: $.absoluteurl('/' + jQuery.parseJSON('@Html.Raw(Json.Encode(Session["FocusAreaName"]))')),
-            data: { companyid: companyName, minRate: 0, maxRate: 0, minEmployee: 0, maxEmployee: 0, sortby: sortBy, location: location },// Location of the service
-            success: function (json) {//On Successful service call
-                $('#complist').html(json);
-            }
-        });
+        $.GetCompanyListBasedOnCriteria(this);
     });
 
-    $("#ddlAvgHourlyRateSearch").change(function () {
-        debugger;
-
-        $.ajax({
-            type: "POST",
-            url: $.absoluteurl('/' + $("#hdnFocusArea")[0].value),
-            data: { companyid: companyName, minRate: 0, maxRate: 0, minEmployee: 0, maxEmployee: 0, sortby: sortBy, location: location },// Location of the service
-            success: function (json) {//On Successful service call
-                $('#complist').html(json);
-            }
-        });
+    $("#txtLocationSearch").change(function () {
+        $.GetCompanyListBasedOnCriteria(this);
     });
+
+    $("#ddlAvgHourlyRateSearch").change(function () {        
+        $.GetCompanyListBasedOnCriteria(this);
+    });
+
+    $("#ddlEmployeesSearch").change(function () {        
+        $.GetCompanyListBasedOnCriteria(this);
+    });
+
+    $.GetCompanyListBasedOnCriteria = function (e) {        
+        try {
+            var location = $("#txtLocationSearch")[0].value == "" ? "0" : $("#txtLocationSearch")[0].value;
+            var compid = $("#txtCompanySearch")[0].value == "" ? "0" : $("#txtCompanySearch")[0].value;
+            var avgHourlyRate = $("#ddlAvgHourlyRateSearch")[0].value;
+            var employeeCount = $("#ddlEmployeesSearch")[0].value;
+            var sortby = 'Asc';
+
+            var hourlyRateArray = avgHourlyRate.split("-");
+            var employeeArray = employeeCount.split("-");
+
+            var AvgminRate = hourlyRateArray[0];
+            var Avgmaxrate = hourlyRateArray[1] == undefined ? '0' : hourlyRateArray[1];
+            var minEmp = employeeArray[0];
+            var maxEmp = employeeArray[1] == undefined ? '0' : employeeArray[1];
+
+            var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));//1;//parseInt($(this).attr('page'));            
+            var PageSize = 10;
+            var FirstPage = parseInt($('.FirstPageindex').attr('page'));
+            var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));            
+
+            $.ajax({
+                type: "POST",
+                url: $.absoluteurl('/CompanyList/CompanyList'),
+                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
+                success: function (json) {                    
+                    $('#complist').html(json);
+                    $('.lazy').lazy();
+                },
+                error: function (a, b, c) {
+                    debugger;
+                }
+            });
+        }
+        catch (e) { debugger; }
+    }
+
 });
