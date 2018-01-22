@@ -47,6 +47,7 @@ namespace UpVotes.Controllers
             companyViewModel.PageCount = 0;
             companyViewModel.PageNumber = 1;
             companyViewModel.PageIndex = 1;
+            companyViewModel.TotalNoOfCompanies = companyViewModel.CompanyList.Select(a => a.TotalCount).FirstOrDefault();
             if (companyViewModel.CompanyList.Count > 0)
             {
                 companyViewModel.AverageUserRating = 4;
@@ -108,47 +109,50 @@ namespace UpVotes.Controllers
             Country = Country == "0" ? "globe" : Country;
             Country = Country.ToUpper() == "UNITED STATES" ? "USA" : Country;
             int year = DateTime.Now.Year;
+
+            string headLine = Country == "globe" ? "Top" : "Top 10+ ";
+
             switch (urlFocusAreaName.Trim())
             {
                 case "mobile-application-developers":
-                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in "+ (Country == "globe"?"" : Country);
-                    companyViewModel.Title = "Top Mobile App Development Companies in "+ Country + "- "+ year + " | upvotes.co";
+                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag=CategoryMetaTags("mobile-application-developers", Country);
                     break;
 
                 case "seo-companies":
-                    companyViewModel.CategoryHeadLine = "SEO Companies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = " Top SEO Companies and Services in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.CategoryHeadLine = "SEO Companies in " + Country;
+                    companyViewModel.Title = headLine + "SEO Companies and Services in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("seo-companies", Country);
                     break;
 
                 case "digital-marketing-companies":
-                    companyViewModel.CategoryHeadLine = "Digital Marketing Companies and Agencies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = " Top Digital Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.CategoryHeadLine = "Digital Marketing Companies and Agencies in " + Country;
+                    companyViewModel.Title = headLine + "Digital Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("digital-marketing-companies", Country);
                     break;
 
                 case "web-design-companies":
-                    companyViewModel.CategoryHeadLine = "Web Design Companies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = " Top Web Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.CategoryHeadLine = "Web Design Companies in " + Country;
+                    companyViewModel.Title = headLine + "Web Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("web-design-companies", Country);
                     break;
 
                 case "software-development-companies":
-                    companyViewModel.CategoryHeadLine = "Custom Software Development Companies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = " Top Software Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.CategoryHeadLine = "Custom Software Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Software Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("software-development-companies", Country);
                     break;
 
                 case "web-development-companies":
-                    companyViewModel.CategoryHeadLine = "Web Development Companies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = "Top Web Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.CategoryHeadLine = "Web Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Web Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("web-development-companies", Country);
                     break;
 
                 default:
-                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + (Country == "globe" ? "" : Country);
-                    companyViewModel.Title = "Top Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers",Country);
                     break;
             }
