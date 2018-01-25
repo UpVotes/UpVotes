@@ -10,8 +10,7 @@
         companyName = companyName.replace(/ /g, "-");
         var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyName.toLowerCase()));
         window.open(baseAddress, '_blank')
-        return false
-        //window.location.assign(baseAddress)
+        return false;        
     }
 
     $(document).ready(function () {
@@ -20,6 +19,29 @@
                 $.GetCompanyListBasedOnCriteria(this);
             }
         });
+
+        $(".half-circle").click(function () {
+            compid = $(this).attr('compid');
+            calledPage = $(this).attr('calledPage');
+            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
+            if (userObj == null) {
+                $('#myModal').modal();
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: $.absoluteurl('/Login/VoteForCompany'),
+                    data: { companyID: compid },
+                    success: function (json) {
+                        alert(eval(json));
+                        window.location.reload();
+                    }
+
+                });
+            }
+        });
+
+        //$("#hdnCompanyNames")[0].value = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData)));
     });
 </script>
 <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
@@ -37,6 +59,7 @@
 
 @foreach (var company in Model.CompanyList)
 {
+    <input type="hidden" id="hdnCompanyNames" />
     <div class="main-card">
 
         <div class="block1" onclick="GetCompany('@company.CompanyName')">
@@ -69,7 +92,7 @@
                         <li><span class="ratedisabled" aria-hidden="true">★</span></li>
                     }
                 </ul>
-                
+
                 <span><span>@company.UserRating.0/5.0 - </span><span>@company.NoOfUsersRated users</span></span>
             </div>
         </div>

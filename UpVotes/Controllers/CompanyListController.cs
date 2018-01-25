@@ -110,7 +110,7 @@ namespace UpVotes.Controllers
             Country = Country.ToUpper() == "UNITED STATES" ? "USA" : Country;
             int year = DateTime.Now.Year;
 
-            string headLine = Country == "globe" ? "Top" : "Top 10+ ";
+            string headLine = Country == "globe" ? "Top " : "Top 10+ ";
 
             switch (urlFocusAreaName.Trim())
             {
@@ -238,5 +238,20 @@ namespace UpVotes.Controllers
                 return null;
             }
         }        
+
+        public ActionResult GetUserReviews()
+        {
+            string companyNames = Convert.ToString(Request.Params["companyNames"]);
+            if(companyNames != string.Empty)
+            {
+                CompanyViewModel companyViewModel = new CompanyService().GetUserReviews(companyNames);
+                if (companyViewModel != null)
+                {
+                    return PartialView("~/Views/Company/_CompanyReviews.cshtml", companyViewModel);
+                }
+            }
+
+            return PartialView("~/Views/Company/_CompanyReviews.cshtml", null);
+        }
     }    
 }

@@ -44,69 +44,8 @@
                 success: function (json) {//On Successful service call
                     window.location.href =$.absoluteurl(json);
                 }
-
             });
-
         });
-
-        //$(document).ready(function () {
-
-
-        $(".half-circle").click(function () {
-            compid = $(this).attr('compid');
-            calledPage = $(this).attr('calledPage');
-            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
-            if (userObj == null) {
-                $('#myModal').modal();
-            }
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: $.absoluteurl('/Login/VoteForCompany'),
-                    data: { companyID: compid },
-                    success: function (json) {
-                        alert(eval(json));
-                        window.location.reload();
-                    }
-
-                });
-            }
-        });
-
-        @*$(".companydetail").click(function () {
-            var location = '0';
-            var compid = 0;
-            var AvgminRate = '0';
-            var Avgmaxrate = '0';
-            var minEmp = '0';
-            var maxEmp = '0';
-            var sortby = 'Asc';            
-
-            if ($(this).attr('minEmployee') == undefined) {
-                AvgminRate = $(this).attr('minrate');
-                Avgmaxrate = $(this).attr('maxrate');
-            }
-
-            if ($(this).attr('minrate') == undefined) {
-                minEmp = $(this).attr('minEmployee');
-                maxEmp = $(this).attr('maxEmployee');
-            }
-
-            if (window.location.href.split('/').length == 5)
-            {
-                location = window.location.href.split('/')[4];
-            }
-
-            $.ajax({
-                type: "POST",   //GET or POST or PUT or DELETE verb
-                //url: $.absoluteurl('/CompanyList/CompanyList'),//?companyid='+compid,
-                url: $.absoluteurl('/' + jQuery.parseJSON('@Html.Raw(Json.Encode(Session["FocusAreaName"]))')),
-                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location },// Location of the service
-                success: function (json) {//On Successful service call
-                    $('#complist').html(json);
-                }
-            });
-        });*@
     });
 </script>
 

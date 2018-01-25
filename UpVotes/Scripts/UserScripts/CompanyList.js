@@ -33,7 +33,7 @@
                                 }
                             }))
                 }
-            })
+            });
         }
     }
 
@@ -63,8 +63,8 @@
         select: function (event, ui) {
             $.setData(ui, 2);
         }
-    });    
-    
+    });
+
     $("#txtCompanySearch").change(function () {
         $.GetCompanyListBasedOnCriteria(this);
     });
@@ -73,15 +73,15 @@
         $.GetCompanyListBasedOnCriteria(this);
     });
 
-    $("#ddlAvgHourlyRateSearch").change(function () {        
+    $("#ddlAvgHourlyRateSearch").change(function () {
         $.GetCompanyListBasedOnCriteria(this);
     });
 
-    $("#ddlEmployeesSearch").change(function () {        
+    $("#ddlEmployeesSearch").change(function () {
         $.GetCompanyListBasedOnCriteria(this);
     });
 
-    $.GetCompanyListBasedOnCriteria = function (e) {        
+    $.GetCompanyListBasedOnCriteria = function (e) {
         try {
             var location = $("#txtLocationSearch")[0].value == "" ? "0" : $("#txtLocationSearch")[0].value;
             var compid = $("#txtCompanySearch")[0].value == "" ? "0" : $("#txtCompanySearch")[0].value;
@@ -89,6 +89,7 @@
             var employeeCount = $("#ddlEmployeesSearch")[0].value;
             var sortby = 'Asc';
 
+            location = location == "0" ? (window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2] : location) : location;
             var hourlyRateArray = avgHourlyRate.split("-");
             var employeeArray = employeeCount.split("-");
 
@@ -100,7 +101,7 @@
             var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));//1;//parseInt($(this).attr('page'));            
             var PageSize = 10;
             var FirstPage = parseInt($('.FirstPageindex').attr('page'));
-            var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));            
+            var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
 
             $.ajax({
                 type: "POST",
@@ -118,4 +119,20 @@
         catch (e) { debugger; }
     }
 
+    //$(".userReviews").click(function () {
+    //    $('#accordian').show();
+    //    $('#accordian').accordion();
+    //    $.ajax({
+    //        url: $.absoluteurl('/CompanyList/GetUserReviews'),
+    //        mtype: "POST",
+    //        data:
+    //        {
+    //            companyNames: $("#hdnCompanyNames")[0].value
+    //        },
+    //        success: function (data) {
+    //            $('#userReviews').html(data);
+    //        },
+    //        error: function (a, b, c) { debugger; }
+    //    });
+    //});
 });
