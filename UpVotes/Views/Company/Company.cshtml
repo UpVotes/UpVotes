@@ -2,7 +2,7 @@
 @model UpVotes.Models.CompanyViewModel
 
 @{
-    ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings 2017 - Upvotes.co";
+    ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings "+ @DateTime.Now.Year +" - Upvotes.co";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
