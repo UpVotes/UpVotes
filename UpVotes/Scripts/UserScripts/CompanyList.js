@@ -89,7 +89,7 @@
             var employeeCount = $("#ddlEmployeesSearch")[0].value;
             var sortby = 'Asc';
 
-            location = location == "0" ? (window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2] : location) : location;
+            location = location == "0" ? (window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2].replace(/ /g, "-") : location) : location;
             var hourlyRateArray = avgHourlyRate.split("-");
             var employeeArray = employeeCount.split("-");
 

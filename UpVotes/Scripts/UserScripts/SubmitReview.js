@@ -153,9 +153,7 @@ $(document).ready(function () {
             var FeedBack = $('#txtFeedBackSummary')[0].value;
             var Rating = $('#hdnRating')[0].value;
             var PhoneNumber = $('#txtPhoneNumber')[0].value;
-            var Email = $('#txtEmail')[0].value;
-
-            debugger;
+            var Email = $('#txtEmail')[0].value;            
 
             var companyReviewModel = '{CompanyID:\'' + parseInt(CompanyID) + '\',FocusAreaID:\'' + parseInt(FocusAreaID) + '\',ReviewerCompanyName:\'' + ReviewerCompanyName + '\',Email:\'' + Email + '\',PhoneNumber:\'' + PhoneNumber + '\',Designation:\'' + Designation + '\',ProjectName:\'' + ProjectName + '\',FeedBack:\'' + FeedBack + '\', Rating:\'' + parseInt(Rating) + '\'}';
 

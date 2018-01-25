@@ -56,6 +56,14 @@ namespace UpVotes.Business
 
                 if (companyViewModel != null && companyViewModel.CompanyList.Count > 1)
                 {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (CompanyEntity company in companyViewModel.CompanyList)
+                    {
+                        sb.Append(company.CompanyName + ",");
+                    }
+
+                    companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
+
                     return companyViewModel;
                 }
                 else
@@ -204,6 +212,34 @@ namespace UpVotes.Business
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 List<string> myAutoCompleteList = JsonConvert.DeserializeObject<List<string>>(response);
                 return myAutoCompleteList;
+            }
+        }
+
+        internal CompanyViewModel GetUserReviews(string companyNames)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetUserReviews";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                CompanyEntity companyEntity = new CompanyEntity
+                {
+                    CompanyName = companyNames                    
+                };
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyEntity), Encoding.UTF8, "application/json");
+
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var message = response.Content.ReadAsStringAsync().Result;
+                    CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(message);
+                    return companyViewModel;
+                }
+
+                return null;
             }
         }
     }

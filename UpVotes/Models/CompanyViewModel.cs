@@ -11,9 +11,7 @@ namespace UpVotes.Models
 
         public int AverageUserRating { get; set; }
 
-        public int TotalNoOfUsers { get; set; }
-
-        public CompanyReviewsEntity CompanyReview { get; set; }
+        public int TotalNoOfUsers { get; set; }        
 
         public string WebBaseURL { get; set; }
 

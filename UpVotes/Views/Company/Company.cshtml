@@ -14,7 +14,7 @@
     <script type="text/javascript" lang="en">
         $(function () {            
             var companyFocusData = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData)))
-            $.getCompanyFocus(companyFocusData);
+            $.getCompanyFocus(companyFocusData);            
         });
     </script>
 </head>
@@ -96,7 +96,7 @@
         <div class="breadcrumbs company-profile-breadcrumbs">
             <div class="container">
                 <ul class="nav nav-tabs menu-breadcrumbs">
-                    <li class="activeuphold"><a href="#over-view-main">Overview</a></li>
+                    <li class="activeuphold"><a href="javascript:void(0);">Overview</a></li>
                     @if (company.CompanyFocus.Count > 0)
                 {
                         <li><a href="#Focus-main">Focus</a></li>

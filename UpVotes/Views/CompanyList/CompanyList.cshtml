@@ -9,7 +9,6 @@
 
 <script src="~/Scripts/UserScripts/CompanyList.js"></script>
 
-
 <h1 class="jumbotron-main">Top @Model.CategoryHeadLine @DateTime.Now.Year</h1>
 <div>
     <div class="container">
@@ -17,7 +16,7 @@
             <ul class="nav nav-tabs main-tabs-navi">
                 <li><a data-toggle="tab" href="#company-profile"><i class="view-compare"></i>View & Compare</a></li>
                 <li><a data-toggle="tab" href="#Custom-Quote"><i class="custom-quote"></i>Custom Quote</a></li>
-                <li><a data-toggle="tab" href="#Use-Reviews"><i class="user-reviews"></i>User Reviews</a></li>
+                <li><a data-toggle="tab" href="#userReviews" class="userReviews"><i class="user-reviews"></i>User Reviews</a></li>
                 <li><a data-toggle="tab" href="#Overview"><i class="overview"></i>Overview?</a></li>
             </ul>
         </div>
@@ -83,8 +82,22 @@
 
 
 
-      <div id="complist">
-          @Html.Partial("~/Views/CompanyList/_CompList.cshtml",Model)
-      </div>
+        <div id="complist">
+            @Html.Partial("~/Views/CompanyList/_CompList.cshtml", Model)
+        </div>
+    </div>
+
+    <div id="userReviews" class="container tab-pane fade in active">
+        <div id="accordian" style="display:none;">
+            @foreach (var item in Model.CompanyList)
+            {
+                <h3>@item.CompanyName</h3>
+                <div>
+                    @Html.Partial("~/Views/Company/_CompanyReviews.cshtml", Model)
+                </div>
+            }
+
+
+        </div>
     </div>
 </div>
