@@ -17,6 +17,9 @@
         $(".Pagenumber").click(function () {
             if (this.className.indexOf("disabled") == -1) {
                 $.GetCompanyListBasedOnCriteria(this);
+                $('html, body').animate({
+                    scrollTop: $("#complist").offset().top
+                }, 1000);
             }
         });
 
@@ -127,8 +130,8 @@
             {
                 if (i + 1 == 1)
                 {
-                    <li class="@(Model.PageIndex == 1 ? "disabled FirstPage Pagenumber" : "FirstPage Pagenumber")" page="@(i+1)" style="cursor:pointer;"><a href="javascript:void(0);"  onclick="goToByScroll('complist');" aria-label="First"><span aria-hidden="true"><i class="fa fa-step-backward" aria-hidden="true"></i></span></a></li>
-                    <li class="PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');"><span aria-hidden="true"><i class="fa fa-caret-left" aria-hidden="true"></i></span></a></li>
+                    <li class="@(Model.PageIndex == 1 ? "disabled FirstPage Pagenumber" : "FirstPage Pagenumber")" page="@(i+1)" style="cursor:pointer;"><a aria-label="First"><span aria-hidden="true"><i class="fa fa-step-backward" aria-hidden="true"></i></span></a></li>
+                    <li class="PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)" style="cursor:pointer;"><a><span aria-hidden="true"><i class="fa fa-caret-left" aria-hidden="true"></i></span></a></li>
                 }
 
                 if (i + 1 <= 5)
@@ -137,39 +140,39 @@
                     {
                         if (i + 1 == 1)
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                         else if (i + 1 == 5)
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                         else
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                     }
                     else
                     {
                         if (i + 1 == 1)
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber FirstPageindex" : "Pagenumber FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                         else if (i + 1 == Model.PageCount)
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber LastPageindex" : "Pagenumber LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                         else
                         {
-                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');">@(Model.PageIndex)</a></li>
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "active Pagenumber" : "Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a>@(Model.PageIndex)</a></li>
                         }
                     }
                 }
 
                 if (i + 1 == Model.PageCount)
                 {
-                    <li class="NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)" style="cursor:pointer;"><a href="javascript:void(0);" onclick="goToByScroll('complist');"><span aria-hidden="true"><i class="fa fa-caret-right" aria-hidden="true"></i></span></a></li>
+                    <li class="NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)" style="cursor:pointer;"><a><span aria-hidden="true"><i class="fa fa-caret-right" aria-hidden="true"></i></span></a></li>
 
-                    <li class="@(Model.PageNumber == Model.PageCount ? "disabled LastPage Pagenumber" : "LastPage Pagenumber")" page="@(Model.PageCount)" style="cursor:pointer;"><a aria-label="Last" href="javascript:void(0);" onclick="goToByScroll('complist');"><span aria-hidden="true"><i class="fa fa-step-forward" aria-hidden="true"></i></span></a></li>
+                    <li class="@(Model.PageNumber == Model.PageCount ? "disabled LastPage Pagenumber" : "LastPage Pagenumber")" page="@(Model.PageCount)" style="cursor:pointer;"><a aria-label="Last"><span aria-hidden="true"><i class="fa fa-step-forward" aria-hidden="true"></i></span></a></li>
                 }
                 Model.PageIndex = Model.PageIndex + 1;
             }
