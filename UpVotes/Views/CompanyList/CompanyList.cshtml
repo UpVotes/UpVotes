@@ -87,17 +87,12 @@
         </div>
     </div>
 
-    <div id="userReviews" class="container tab-pane fade in active">
-        <div id="accordian" style="display:none;">
-            @foreach (var item in Model.CompanyList)
-            {
-                <h3>@item.CompanyName</h3>
+    <div id="userReviews" class="container tab-pane fade in active">        
+            @*@foreach (var item in Model.CompanyList)
+            {                
                 <div>
                     @Html.Partial("~/Views/Company/_CompanyReviews.cshtml", Model)
                 </div>
-            }
-
-
-        </div>
+            }*@        
     </div>
 </div>

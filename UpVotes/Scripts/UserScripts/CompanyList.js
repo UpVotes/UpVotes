@@ -119,20 +119,20 @@
         catch (e) { debugger; }
     }
 
-    //$(".userReviews").click(function () {
-    //    $('#accordian').show();
-    //    $('#accordian').accordion();
-    //    $.ajax({
-    //        url: $.absoluteurl('/CompanyList/GetUserReviews'),
-    //        mtype: "POST",
-    //        data:
-    //        {
-    //            companyNames: $("#hdnCompanyNames")[0].value
-    //        },
-    //        success: function (data) {
-    //            $('#userReviews').html(data);
-    //        },
-    //        error: function (a, b, c) { debugger; }
-    //    });
-    //});
+    $(".userReviews").click(function () {
+        //$('#accordian').show();
+        //$('#accordian').accordion();
+        $.ajax({
+            url: $.absoluteurl('/CompanyList/GetUserReviews'),
+            mtype: "POST",
+            data:
+            {
+                companyNames: $("#hdnCompanyNames")[0].value
+            },
+            success: function (data) {
+                $('#userReviews').html(data);
+            },
+            error: function (a, b, c) { debugger; }
+        });
+    });
 });
