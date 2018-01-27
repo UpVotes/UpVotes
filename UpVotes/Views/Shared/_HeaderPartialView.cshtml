@@ -9,16 +9,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand Logo-main-page" href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()"></a>
-                <form class="navbar-left header-search">
+@using (Html.BeginForm("CustomSearch", "Search", FormMethod.Get, new { @class = "navbar-left header-search" }))
+{
+                
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" name="Query" id="txtSearch" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" id="btnsubmit" type="submit">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
                     </div>
-                </form>
+                
+}
                 @Html.Partial("~/Views/Login/_Login.cshtml")
 
             </div>
@@ -45,3 +48,40 @@
         </div>
     </nav>
 </header>
+<script>
+ $(document).ready(function () {    
+    BindControls();
+    });
+ 
+    function BindControls() {
+        $("#txtSearch").autocomplete({
+            source: function (request, response) {                
+                var val = request.term;
+                var url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyA3tJYNRSNnN0nn_3fpJXT0oDKvhFhMO3g&cx=012368038156981668892:5yuvduuxjvg&q=" + val + "&callback=?";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        debugger;
+                        response($.map(data.items, function (item) {                            
+                            return { label: $($.parseHTML(item.htmlTitle)).text(), value: $($.parseHTML(item.htmlTitle)).text() }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+
+            },            
+            minLength: 1   
+        });
+    }
+
+</script>
+<style>
+    .ui-widget.ui-widget-content {
+     width: auto !important;
+}
+</style>

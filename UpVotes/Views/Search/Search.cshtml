@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Search Results | UpVotes.co";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <script>
+
+                    (function () {
+                        window.__gcse = {
+                            callback: searchCallback
+                        };
+                        function searchCallback() {
+                            $('#gsc-i-id1').focus();
+                            $('#gsc-i-id1').val('@ViewBag.Query');
+                            $(".gsc-search-button").trigger('click');
+                        }
+    var cx = '012368038156981668892:5yuvduuxjvg';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+                </script>
+                <gcse:searchresults-only></gcse:searchresults-only>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
