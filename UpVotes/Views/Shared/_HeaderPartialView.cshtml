@@ -64,10 +64,11 @@
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
-                        
-                        response($.map(data.items, function (item) {                            
-                            return { label: $($.parseHTML(item.htmlTitle)).text(), value: $($.parseHTML(item.htmlTitle)).text() }
-                        }))
+                        if (data.items != undefined) {
+                            response($.map(data.items, function (item) {
+                                return { label: $($.parseHTML(item.htmlTitle)).text(), value: $($.parseHTML(item.htmlTitle)).text() }
+                            }))
+                        }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         alert(textStatus);
