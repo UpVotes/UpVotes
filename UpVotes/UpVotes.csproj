@@ -216,6 +216,7 @@
     <Compile Include="Business\UserService.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CompanyListController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -263,6 +264,7 @@
     <Content Include="images\2.png" />
     <Content Include="images\3.png" />
     <Content Include="images\4.png" />
+    <Content Include="images\404-ErrorPage.jpg" />
     <Content Include="images\brain.png" />
     <Content Include="images\comments.png" />
     <Content Include="images\CompanyListLogos\360DegreeTechnosoft.png" />
@@ -1097,6 +1099,7 @@
     <Content Include="Views\Company\CreateCompany.cshtml" />
     <Content Include="Views\Company\CompanyReviewBody.cshtml" />
     <Content Include="Views\CompanyList\_UsersReviewsList.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
