@@ -31,15 +31,6 @@ namespace UpVotes.Models
 
         public string Email { get; set; }
 
-        public DateTime ReviewDate { get; set; }
-
-        public List<KeyValue> FocusAreaList { get; set; }
-    }
-
-    public class KeyValue
-    {
-        public int Key { get; set; }
-
-        public string Value { get; set; }
-    }
+        public DateTime ReviewDate { get; set; }        
+    }    
 }

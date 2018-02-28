@@ -27,7 +27,7 @@
 
         <div class="meni-breadcrumbs main-sect">
             <div class="container">
-                <span><a href="https://upvotes.co" target="_self">Home</a></span>
+                <span><a href="@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString()" target="_self">Home</a></span>
                 <span>@company.CompanyName</span>
             </div>
         </div>
@@ -191,10 +191,11 @@
             </div>
         }
 
-        if (company.CompanyReviews.Count > 0)
+        if (company.CompanyReviews != null && company.CompanyReviews.Count > 0)
         {
             <div class="container">
-                @Html.Partial("_CompanyReviews")
+                <h3>Reviews:</h3>
+                @Html.Partial("_CompanyReviews", company.CompanyReviews)
             </div>
 
             <div class="load-more-buttons">

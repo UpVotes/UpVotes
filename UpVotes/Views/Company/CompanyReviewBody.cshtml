@@ -1,31 +1,6 @@
-﻿@model List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>
-<style type="text/css">
-    .morecontent span {
-        display: none;
-    }
+﻿@Model
 
-    .morelink {
-        display: block;
-    }
-
-    .fa {
-        float: right;
-    }
-
-    .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        transform: translate(0, 0);
-    }
-</style>
-<script src="~/Scripts/UserScripts/CompanyReviews.js"></script>
-
-<div class="user-reviews-card-wrapper" id="Reviews-main">
-    @foreach (var companyReview in Model)
+    @foreach (var companyReview in company.CompanyReviews)
     {
         <div class="user-reviews-card">
             <div class="fonder-profile">
@@ -68,6 +43,3 @@
             </div>
         </div>
     }
-</div>
-
-

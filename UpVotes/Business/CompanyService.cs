@@ -63,7 +63,7 @@ namespace UpVotes.Business
                     }
 
                     companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
-
+                    
                     return companyViewModel;
                 }
                 else
@@ -215,31 +215,17 @@ namespace UpVotes.Business
             }
         }
 
-        internal CompanyViewModel GetUserReviews(string companyNames)
+        internal CompanyViewModel GetUserReviews(string companyName)
         {
             using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetUserReviews";
-                string completeURL = WebAPIURL + apiMethod + '/';
+                string completeURL = WebAPIURL + apiMethod + '/' + companyName;
 
-                CompanyEntity companyEntity = new CompanyEntity
-                {
-                    CompanyName = companyNames                    
-                };
-
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyEntity), Encoding.UTF8, "application/json");
-
-
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var message = response.Content.ReadAsStringAsync().Result;
-                    CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(message);
-                    return companyViewModel;
-                }
-
-                return null;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+                return companyViewModel;
             }
         }
     }

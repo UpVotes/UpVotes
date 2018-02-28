@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     $.setData = function (ui, type) {
         if (type == 1) {
             $("#txtCompanySearch")[0].value = ui.item.value;
@@ -106,8 +105,10 @@
             $.ajax({
                 type: "POST",
                 url: $.absoluteurl('/CompanyList/CompanyList'),
+                cache: false,
+                async: false,
                 data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
-                success: function (json) {                    
+                success: function (json) {
                     $('#complist').html(json);
                     $('.lazy').lazy();
                 },
@@ -120,19 +121,44 @@
     }
 
     $(".userReviews").click(function () {
-        //$('#accordian').show();
-        //$('#accordian').accordion();
         $.ajax({
-            url: $.absoluteurl('/CompanyList/GetUserReviews'),
+            url: $.absoluteurl('/CompanyList/GetCompanyNames'),
             mtype: "POST",
-            data:
-            {
-                companyNames: $("#hdnCompanyNames")[0].value
-            },
+            cache: false,
             success: function (data) {
+                $('#userReviews').html("");
+                $('#userReviews').show();
                 $('#userReviews').html(data);
             },
             error: function (a, b, c) { debugger; }
         });
     });
+
+
+    $.GetCompanyReviews = function (companyName) {
+        $.ajax({
+            type: "POST",
+            url: $.absoluteurl('/CompanyList/GetUserReviews'),
+            cache: false,
+            async: false,
+            data: { companyName: companyName },// Location of the service
+            success: function (json) {
+                companyName = companyName.replace(/ /g, "");
+                $('#' + companyName + '1').html(json);
+                $('.lazy').lazy();
+            },
+            error: function (a, b, c) {
+                debugger;
+            }
+        });
+    };
+
+    $('.panel-title a').bind('click', function () {
+        $(this).find('i').toggleClass('fa-plus fa-minus')
+            .closest('panel').siblings('panel')
+            .find('i')
+            .removeClass('fa-minus').addClass('fa-plus');
+    });
+
+
 });

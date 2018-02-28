@@ -34,7 +34,7 @@ namespace UpVotes.Controllers
                 return RedirectToAction("HomePage", "Home");
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

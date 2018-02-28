@@ -1,0 +1,49 @@
+﻿@using System.Linq
+
+@{
+
+    List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity> companyReviewsList = new List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>();
+}
+
+<script type="text/javascript">    
+    $(document).ready(function () {        
+        $(".expand").on("click", function () {            
+            //$(this).next().slideToggle(200);
+            $expand = $(this).find(">:first-child");
+
+            if ($expand.text() == "+") {
+                $expand.text("-");
+                var companyName = $(this).attr("cName");
+                $.GetCompanyReviews(companyName);
+            } else {
+                $expand.text("+");
+            }
+        });
+    });
+</script>
+
+<div class="container">    
+    <div class="panel-group" id="accordion">
+        @if (Model != string.Empty)
+        {
+            foreach (var company in Model.Split(','))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: #edf7fe;">
+                        <h4 data-toggle="collapse" data-parent="#accordion" href="@("#" + @company.Replace(" ", ""))" class="panel-title expand" cName="@company">
+                            <div class="right-arrow pull-right">+</div>
+                            <a href="#">@company</a>
+                        </h4>
+                    </div>
+                    <div id="@(company.Replace(" ", ""))" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div id="@(company.Replace(" ", "") + 1)">
+                                @Html.Partial("~/Views/Company/_CompanyReviews.cshtml", companyReviewsList)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

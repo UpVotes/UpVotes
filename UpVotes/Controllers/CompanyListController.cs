@@ -20,7 +20,7 @@ namespace UpVotes.Controllers
             Session["calledPage"] = "L";
             string urlFocusAreaName = Convert.ToString(Request.Url.Segments[1]);
             int focusAreaID = 0;
-            if(Request.Url.Segments.Length >2)
+            if (Request.Url.Segments.Length > 2)
             {
                 urlFocusAreaName = urlFocusAreaName.Replace("/", "");
             }
@@ -33,7 +33,7 @@ namespace UpVotes.Controllers
 
 
             CompanyService companyService = new CompanyService();
-            if(string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 id = "0";
             }
@@ -52,8 +52,10 @@ namespace UpVotes.Controllers
             {
                 companyViewModel.AverageUserRating = 4;
                 companyViewModel.TotalNoOfUsers = 10;
-                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 10 - 1) / 10;                
+                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 10 - 1) / 10;
             }
+
+            Session["CompanyNames"] = companyViewModel.CompanyFocusData;
 
             return View(companyViewModel);
         }
@@ -62,8 +64,8 @@ namespace UpVotes.Controllers
         public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby, string location, int PageNo, int PageSize, int FirstPage, int LastPage)
         {
             CompanyService companyService = new CompanyService();
-            string urlFocusAreaName = Convert.ToString(Session["FocusAreaName"]);            
-            if(location != "0")
+            string urlFocusAreaName = Convert.ToString(Session["FocusAreaName"]);
+            if (location != "0")
             {
                 location = location.Replace("-", "space");
             }
@@ -72,9 +74,9 @@ namespace UpVotes.Controllers
             companyViewModel.WebBaseURL = _webBaseURL;
             companyViewModel.PageCount = 0;
             companyViewModel.PageNumber = PageNo;
-            companyViewModel.PageIndex = 1;            
+            companyViewModel.PageIndex = 1;
             if (companyViewModel.CompanyList.Count > 0)
-            {                
+            {
                 companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + PageSize - 1) / PageSize;
             }
             if ((PageNo == FirstPage || PageNo == LastPage) && LastPage >= 5)
@@ -85,17 +87,17 @@ namespace UpVotes.Controllers
                 }
                 else if (PageNo == LastPage)
                 {
-                    if(PageNo == companyViewModel.PageCount)
+                    if (PageNo == companyViewModel.PageCount)
                         companyViewModel.PageIndex = (PageNo - 5) + 1;
                     else
                         companyViewModel.PageIndex = FirstPage + 1;
                 }
             }
-            else if(PageNo > LastPage && LastPage >= 5)
+            else if (PageNo > LastPage && LastPage >= 5)
             {
-                companyViewModel.PageIndex = (PageNo-5) + 1;
+                companyViewModel.PageIndex = (PageNo - 5) + 1;
             }
-            
+            Session["CompanyNames"] = companyViewModel.CompanyFocusData;
             return PartialView("_CompList", companyViewModel);
         }
 
@@ -104,7 +106,7 @@ namespace UpVotes.Controllers
             return PartialView("_CompanyAddEdit");
         }
 
-        private void GetCategoryHeadLine(string urlFocusAreaName, CompanyViewModel companyViewModel,string Country)
+        private void GetCategoryHeadLine(string urlFocusAreaName, CompanyViewModel companyViewModel, string Country)
         {
             Country = Country == "0" ? "globe" : Country;
             Country = Country.ToUpper() == "UNITED STATES" ? "USA" : Country;
@@ -117,7 +119,7 @@ namespace UpVotes.Controllers
                 case "mobile-application-developers":
                     companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
                     companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
-                    companyViewModel.MetaTag=CategoryMetaTags("mobile-application-developers", Country);
+                    companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers", Country);
                     break;
 
                 case "seo-companies":
@@ -153,25 +155,25 @@ namespace UpVotes.Controllers
                 default:
                     companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
                     companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
-                    companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers",Country);
+                    companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers", Country);
                     break;
             }
         }
 
-        private string CategoryMetaTags(string category,string Country)
+        private string CategoryMetaTags(string category, string Country)
         {
             StringBuilder MetaStr = new StringBuilder();
             string CategoryName = string.Empty;
-            int year = DateTime.Now.Year;            
+            int year = DateTime.Now.Year;
             MetaStr.Append("<meta property='og:url' content='{WebsiteUrl}' />");
             MetaStr.Append("<meta property='og:type' content='website' />");
-            MetaStr.Append("<meta property='og:title' content='Top 10 {Category} Companies in {Country} - "+ year +"' />");            
+            MetaStr.Append("<meta property='og:title' content='Top 10 {Category} Companies in {Country} - " + year + "' />");
             MetaStr.Append("<meta property='og:image' content='' />");
             MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
             MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
             MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
             //MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
-            MetaStr.Append("<meta name='twitter:title' content='Top 10 {Category} Companies in {Country} - "+ year +"' />");
+            MetaStr.Append("<meta name='twitter:title' content='Top 10 {Category} Companies in {Country} - " + year + "' />");
             MetaStr.Append("<meta name='twitter:image' content='' />");
             MetaStr.Append("<link rel='canonical' href='{WebsiteUrl}' />");
             MetaStr.Append("<link rel='publisher' href='' />");
@@ -180,42 +182,42 @@ namespace UpVotes.Controllers
             {
                 case "mobile-application-developers":
                     CategoryName = "mobile app development companies";
-                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} companies in {Country} "+ year +" (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} companies in {Country} " + year + " (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} companies in {Country} " + year + " (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} companies in {Country} " + year + " (iOS and Android) with user votes. Select best mobile app developers from the {Country}.' />");
                     break;
                 case "seo-companies":
                     CategoryName = "SEO companies";
-                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
-                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a top 10 {Category} in {Country} "+ year +" with user votes. Select best SEO agencies from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} in {Country} " + year + " with user votes. Select best SEO agencies from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} in {Country} " + year + " with user votes. Select best SEO agencies from the {Country}.' />");
+                    MetaStr.Append("<meta name = 'twitter:description' content = 'Here is a top 10 {Category} in {Country} " + year + " with user votes. Select best SEO agencies from the {Country}.' />");
                     break;
                 case "digital-marketing-companies":
                     CategoryName = "digital marketing companies";
-                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} "+ year +" with user votes. Select best marketing firms from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} " + year + " with user votes. Select best marketing firms from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} " + year + " with user votes. Select best marketing firms from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} " + year + " with user votes. Select best marketing firms from the {Country}.' />");
                     break;
                 case "web-design-companies":
                     CategoryName = "web design companies";
-                    MetaStr.Append("<meta property='og:description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
-                    MetaStr.Append("<meta name='twitter:description' content='Find out top 10 {Category} in {Country} "+ year +" with user votes. Select best web designers from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Find out top 10 {Category} in {Country} " + year + " with user votes. Select best web designers from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Find out top 10 {Category} in {Country} " + year + " with user votes. Select best web designers from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Find out top 10 {Category} in {Country} " + year + " with user votes. Select best web designers from the {Country}.' />");
                     break;
-                case "software-development-companies":   
+                case "software-development-companies":
                     CategoryName = "software development companies";
-                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     break;
                 case "web-development-companies":
                     CategoryName = "web development Companies";
-                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
-                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
-                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies "+ year +" with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     break;
-            }       
-            return MetaStr.Replace("{Category}",CategoryName).Replace("{Country}", Country).Replace("{WebsiteUrl}",Request.Url.ToString()).ToString();
+            }
+            return MetaStr.Replace("{Category}", CategoryName).Replace("{Country}", Country).Replace("{WebsiteUrl}", Request.Url.ToString()).ToString();
         }
 
         public JsonResult GetDataForAutoComplete(int type)
@@ -233,25 +235,34 @@ namespace UpVotes.Controllers
                              };
                 return Json(jsonResult, JsonRequestBehavior.AllowGet);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
-        }        
+        }
 
         public ActionResult GetUserReviews()
         {
-            string companyNames = Convert.ToString(Request.Params["companyNames"]);
-            if(companyNames != string.Empty)
+            string companyNames = Convert.ToString(Request.Params["companyName"]);
+            if (companyNames != string.Empty)
             {
                 CompanyViewModel companyViewModel = new CompanyService().GetUserReviews(companyNames);
-                if (companyViewModel != null)
+                if (companyViewModel != null && companyViewModel.CompanyList[0].CompanyReviews.Count > 0)
                 {
-                    return PartialView("~/Views/Company/_CompanyReviews.cshtml", companyViewModel);
+                    return PartialView("~/Views/Company/_CompanyReviews.cshtml", companyViewModel.CompanyList[0].CompanyReviews);
+                }
+                else
+                {
+                    return Json("No reviews found.", JsonRequestBehavior.AllowGet);
                 }
             }
 
-            return PartialView("~/Views/Company/_CompanyReviews.cshtml", null);
+            return PartialView("~/Views/Company/_CompanyReviews.cshtml", new List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>());
         }
-    }    
+
+        public ActionResult GetCompanyNames()
+        {
+            return PartialView("_UsersReviewsList", Convert.ToString(Session["CompanyNames"]));
+        }
+    }
 }

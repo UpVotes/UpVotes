@@ -989,6 +989,8 @@
     <Content Include="Views\Login\_Login.cshtml" />
     <Content Include="Views\CompanyList\_CompList.cshtml" />
     <Content Include="Views\Company\CreateCompany.cshtml" />
+    <Content Include="Views\Company\CompanyReviewBody.cshtml" />
+    <Content Include="Views\CompanyList\_UsersReviewsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

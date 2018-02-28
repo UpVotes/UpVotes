@@ -10,7 +10,7 @@
         companyName = companyName.replace(/ /g, "-");
         var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyName.toLowerCase()));
         window.open(baseAddress, '_blank')
-        return false;        
+        return false;
     }
 
     $(document).ready(function () {
@@ -45,9 +45,11 @@
         });
 
         $("#hdnCompanyNames")[0].value = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData)));
+
     });
 </script>
 <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
+
 <div class="fixed-for">
 
     <div class="card-heading">
