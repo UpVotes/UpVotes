@@ -2705,3 +2705,261 @@ top: 110px;
 .ui-widget.ui-widget-content{
     width:150px !important;
 }
+
+.mob-app-overview-banner{
+  background: url(../images/Overview/digitalmarketing-banner.jpg);
+ height: 440px;
+     background-size: 100%;
+  background-repeat: no-repeat;
+}
+.mob-app-overview-seo{
+   background: url(../images/Overview/seo-banner.jpg);
+ height: 440px;
+     background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+
+.mob-app-overview-seo-res{
+   background-image: url(../images/Overview/mobile-developmentbanner.jpg);
+ height: 440px;
+     background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+
+
+.mobile-app-overview-inner-section h2,.mob-app-developement-banner-inner-section h2,.design-template-inner-section h2{
+  color: #60c1d9;
+}
+.mobile-app-overview-inner-section h3,.mob-app-developement-banner-inner-section h3,.design-template-inner-section h3{
+  color: #60c1d9;
+}
+
+.youlstyle{
+      background: #f5f5f7;
+    border-bottom: 5px solid #b5dfe9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 6px;
+}
+
+.mobile-app-overview-inner-section img{
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  
+}
+.mobile-app-overview-inner-section{
+  margin-bottom: 20px;
+}
+
+
+.wrapper-mob img,.wrapper-mob center{
+  display: inline-block;
+    width: 49%;
+  vertical-align: top;
+}
+.inner-wrap-mob{
+  display: inline-block;
+    width: 49%;
+  vertical-align: top;
+  margin-left: 1%;
+}
+@media (max-width: 767px){
+    
+  .mobile-app-overview-inner-section img{
+    width: 100%;
+  }
+  
+  
+  .wrapper-mob img,.wrapper-mob center{
+  display: inline-block;
+    width: 100%;
+  vertical-align: top;
+}
+.inner-wrap-mob{
+  display: inline-block;
+   width: 100%;
+  vertical-align: top;
+  margin-left: 1%;
+}
+}
+
+
+.side-image{
+  background-image: url(../images/Overview/icon1.png);
+    background-repeat: no-repeat;
+    height: 30px;
+    display: block;
+    width: 100%;
+    background-size: 35px;
+    padding-left: 44px;
+}
+
+.one{
+  background-image: url(../images/Overview/icon1.png);
+}
+
+.two{
+   background-image: url(../images/Overview/icon-iOS.png);
+  background-size: 45px;
+}
+
+.three{
+   background-image: url(../images/Overview/icon2.png);
+}
+
+.four{
+   background-image: url(../images/Overview/icon3.png);
+}
+.five{
+  background-image: url(../images/Overview/icon4.png);
+}
+
+.six{
+  background-image: url(../images/Overview/icon5.png);
+}
+.seven{
+  background-image: url(../images/Overview/icon6.png);
+}
+.eight{
+  background-image: url(../images/Overview/icon7.png);
+}
+.nine{
+  background-image: url(../images/Overview/icon9.png);
+}
+.ten{
+  background-image: url(../images/Overview/icon10.png);
+}
+
+.eleven{
+   background-image: url(../images/Overview/seo-icon1.png);
+  height: 36px;
+}
+.twele{
+   background-image: url(../images/Overview/seo-icon1.png);
+  height: 36px;
+}
+
+.buttons-nav-sec-below{
+  width: 100px;
+    height: 23PX;
+    DISPLAY: INLINE-BLOCK;
+    TEXT-ALIGN: CENTER;
+    BACKGROUND-COLOR: #60c1d9;
+    COLOR: WHITE;
+    BORDER-RADIUS: 5PX;
+}
+
+.a1{
+  background-image: url(../images/Overview/dada.png);
+  height: 36px;
+}
+.a2{
+   background-image: url(../images/Overview/df.png);
+  height: 36px;
+}
+.a3{
+   background-image: url(../images/Overview/qeq.png);
+  height: 36px;
+}
+
+.a4{
+   background-image: url(../images/Overview/wwefwf.png);
+  height: 36px;
+  
+}
+.a5{
+     background-image: url(../images/Overview/dffsf.png);
+  height: 36px;
+}
+.a6{
+   background-image: url(../images/Overview/jgg.png);
+  height: 36px;
+}
+.a7{
+     background-image: url(../images/Overview/add.png);
+  height: 36px;
+}
+.a8{
+   background-image: url(../images/Overview/qe.png);
+  height: 36px;
+}
+.a9{
+  background-image: url(../images/Overview/we.png);
+  height: 36px;
+}
+.a10{
+  background-image: url(../images/Overview/qqe.png);
+  height: 36px;
+}
+.a11{
+  background-image: url(../images/Overview/qedddq.png);
+  height: 36px;
+}
+.a12{
+  background-image: url(../images/Overview/ada.png);
+  height: 36px;
+}
+.a13{
+  background-image: url(../images/Overview/qeqfwef.png);
+  height: 36px;
+}
+.a14{
+  background-image: url(../images/Overview/qqdff.png);
+  height: 36px;
+}
+.a15{
+  background-image: url(../images/Overview/eq.png);
+  height: 36px;
+}
+.a16{
+  background-image: url(../images/Overview/eeweee.png);
+  height: 36px;
+}
+.a17{
+  background-image: url(../images/Overview/wws.png);
+  height: 36px;
+}
+.a18{
+  background-image: url(../images/Overview/sdgfakdjf.png);
+  height: 36px;
+}
+
+.a19{
+  background-image: url(../images/Overview/ssqwdd.png);
+  height: 36px;
+}
+.a20{
+  background-image: url(../images/Overview/dwqfc.png);
+  height: 36px;
+}
+.a21{
+  background-image: url(../images/Overview/dAASFE.png);
+  height: 36px;
+}
+.a22{
+  background-image: url(../images/Overview/dqeef.png);
+  height: 36px;
+}
+.a23{
+  background-image: url(../images/Overview/sdgfakdjf.png);
+  height: 36px;
+}
+
+
+.a24{
+  background-image: url(../images/Overview/development-icon1.jpg);
+  height: 36px;
+}
+
+.a25{
+  background-image: url(../images/Overview/development-icon2.jpg);
+  height: 36px;
+}
+
+.a26{
+  background-image: url(../images/Overview/development-icon3.jpg);
+  height: 36px;
+}

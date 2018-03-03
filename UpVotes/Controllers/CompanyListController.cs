@@ -264,5 +264,33 @@ namespace UpVotes.Controllers
         {
             return PartialView("_UsersReviewsList", Convert.ToString(Session["CompanyNames"]));
         }
+
+        public ActionResult GetOverViewPage()
+        {
+            string focusAreaname = Session["FocusAreaName"].ToString();
+            string url = "";
+            switch (focusAreaname)
+            {
+                case "mobile-application-developers":
+                    url = "~/Views/Overview/_mobileAppOverview.cshtml";
+                    break;
+                case "seo-companies":
+                    url = "~/Views/Overview/_seoOverview.cshtml";
+                    break;
+                case "digital-marketing-companies":
+                    url = "~/Views/Overview/_digitalMarketingOverview.cshtml";
+                    break;
+                case "web-design-companies":
+                    url = "~/Views/Overview/_webDesignOverview.cshtml";
+                    break;
+                case "software-development-companies":
+                    url = "~/Views/Overview/_softwareDevelopmentOverview.cshtml";
+                    break;
+                case "web-development-companies":
+                    url = "~/Views/Overview/_webDevelopmentOverview.cshtml";
+                    break;
+            }
+            return PartialView(url);
+        }
     }
 }
