@@ -1240,6 +1240,7 @@
     <Content Include="Views\Overview\_webDesignOverview.cshtml" />
     <Content Include="Views\Overview\_webDevelopmentOverview.cshtml" />
     <Content Include="Views\Overview\_softwareDevelopmentOverview.cshtml" />
+    <Content Include="Views\Overview\_uiUxOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

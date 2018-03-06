@@ -299,6 +299,9 @@ namespace UpVotes.Controllers
                 case "web-development-companies":
                     url = "~/Views/Overview/_webDevelopmentOverview.cshtml";
                     break;
+                case "ui-ux-agencies":
+                    url = "~/Views/Overview/_uiUxOverview.cshtml";
+                    break;
             }
             return PartialView(url);
         }
