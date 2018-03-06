@@ -151,7 +151,11 @@ namespace UpVotes.Controllers
                     companyViewModel.Title = headLine + "Web Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("web-development-companies", Country);
                     break;
-
+                case "ui-ux-agencies":
+                    companyViewModel.CategoryHeadLine = "UI/UX Design Companies in " + Country;
+                    companyViewModel.Title = headLine + "UI/UX Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("ui-ux-agencies", Country);
+                    break;
                 default:
                     companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
                     companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
@@ -212,6 +216,12 @@ namespace UpVotes.Controllers
                     break;
                 case "web-development-companies":
                     CategoryName = "web development Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "ui-ux-agencies":
+                    CategoryName = "UI/UX Design Companies";
                     MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");

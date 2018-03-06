@@ -58,7 +58,9 @@ namespace UpVotes.Business
                 case "web-development-companies":
                     focusAreaID = (int)FocusAreas.WebDevelopement;
                     break;
-
+                case "ui-ux-agencies":
+                    focusAreaID = (int)FocusAreas.UXUIDesign;
+                    break;
                 default:
                     focusAreaID = (int)FocusAreas.MobileAppDevelopement;
                     break;
