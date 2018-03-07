@@ -90,6 +90,6 @@
         @Html.Partial("~/Views/CompanyList/_UsersReviewsList.cshtml", "")
     </div>
     <div id="Overview" class="container tab-pane fade in active" style="display:none;">
-        
+        @{Html.RenderAction("GetOverViewPage", "CompanyList");}        
     </div>    
 </div>

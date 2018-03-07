@@ -61,6 +61,24 @@ namespace UpVotes.Business
                 case "ui-ux-agencies":
                     focusAreaID = (int)FocusAreas.UXUIDesign;
                     break;
+                case "wearable-application-developers":
+                    focusAreaID = (int)FocusAreas.WearableAppDevelopement;
+                    break;
+                case "ecommerce-developers":
+                    focusAreaID = (int)FocusAreas.EcommerceDevelopement;
+                    break;
+                case "social-media-marketing-companies":
+                    focusAreaID = (int)FocusAreas.SocialMediaMarketing;
+                    break;
+                case "ppc-companies":
+                    focusAreaID = (int)FocusAreas.PayPerClick;
+                    break;
+                case "content-marketing-companies":
+                    focusAreaID = (int)FocusAreas.ContentMarketing;
+                    break;
+                case "iot-application-developers":
+                    focusAreaID = (int)FocusAreas.ContentMarketing;
+                    break;
                 default:
                     focusAreaID = (int)FocusAreas.MobileAppDevelopement;
                     break;

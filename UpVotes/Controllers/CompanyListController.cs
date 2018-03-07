@@ -156,6 +156,36 @@ namespace UpVotes.Controllers
                     companyViewModel.Title = headLine + "UI/UX Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("ui-ux-agencies", Country);
                     break;
+                case "wearable-application-developers":
+                    companyViewModel.CategoryHeadLine = "Wearable Application Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Wearable Application Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("wearable-application-developers", Country);
+                    break;
+                case "ecommerce-developers":
+                    companyViewModel.CategoryHeadLine = "Ecommerce Development Companies in " + Country;
+                    companyViewModel.Title = headLine + "Ecommerce Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("ecommerce-developers", Country);
+                    break;
+                case "social-media-marketing-companies":
+                    companyViewModel.CategoryHeadLine = "Social Media Marketing Companies in " + Country;
+                    companyViewModel.Title = headLine + "Social Media Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("social-media-marketing-companies", Country);
+                    break;
+                case "ppc-companies":
+                    companyViewModel.CategoryHeadLine = "PPC Companies in " + Country;
+                    companyViewModel.Title = headLine + "Pay Per Click (PPC) Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("ppc-companies", Country);
+                    break;
+                case "content-marketing-companies":
+                    companyViewModel.CategoryHeadLine = "Content Marketing Companies in " + Country;
+                    companyViewModel.Title = headLine + "Content Marketing Companies Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("content-marketing-companies", Country);
+                    break;
+                case "iot-application-developers":
+                    companyViewModel.CategoryHeadLine = "IoT Companies in " + Country;
+                    companyViewModel.Title = headLine + "IOT Application Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.MetaTag = CategoryMetaTags("iot-application-developers", Country);
+                    break;
                 default:
                     companyViewModel.CategoryHeadLine = "Mobile App Development Companies in " + Country;
                     companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
@@ -225,6 +255,42 @@ namespace UpVotes.Controllers
                     MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "wearable-application-developers":
+                    CategoryName = "Wearable Application development companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "ecommerce-developers":
+                    CategoryName = "Ecommerce Development Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} and Agencies " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "social-media-marketing-companies":
+                    CategoryName = "Social Media Marketing Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "ppc-companies":
+                    CategoryName = "PPC Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "content-marketing-companies":
+                    CategoryName = "Content Marketing Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    break;
+                case "iot-application-developers":
+                    CategoryName = "IOT Application Development Companies";
+                    MetaStr.Append("<meta property='og:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
+                    MetaStr.Append("<meta name='twitter:description' content='Here is a top 10 {Category} " + year + " with user votes. Find best {Category} from the {Country}.' />");
                     break;
             }
             return MetaStr.Replace("{Category}", CategoryName).Replace("{Country}", Country).Replace("{WebsiteUrl}", Request.Url.ToString()).ToString();
@@ -301,6 +367,24 @@ namespace UpVotes.Controllers
                     break;
                 case "ui-ux-agencies":
                     url = "~/Views/Overview/_uiUxOverview.cshtml";
+                    break;
+                case "wearable-application-developers":
+                    url = "~/Views/Overview/_wearableApplicationOverview.cshtml";
+                    break;
+                case "ecommerce-developers":
+                    url = "~/Views/Overview/_ecommerceOverview.cshtml";
+                    break;
+                case "social-media-marketing-companies":
+                    url = "~/Views/Overview/_socialMediaMarketingOverview.cshtml";
+                    break;
+                case "ppc-companies":
+                    url = "~/Views/Overview/_ppcOverview.cshtml";
+                    break;
+                case "content-marketing-companies":
+                    url = "~/Views/Overview/_contentMarketingOverview.cshtml";
+                    break;
+                case "iot-application-developers":
+                    url = "~/Views/Overview/_iotApplicationOverview.cshtml";
                     break;
             }
             return PartialView(url);

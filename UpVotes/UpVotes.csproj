@@ -1241,6 +1241,12 @@
     <Content Include="Views\Overview\_webDevelopmentOverview.cshtml" />
     <Content Include="Views\Overview\_softwareDevelopmentOverview.cshtml" />
     <Content Include="Views\Overview\_uiUxOverview.cshtml" />
+    <Content Include="Views\Overview\_wearableApplicationOverview.cshtml" />
+    <Content Include="Views\Overview\_ecommerceOverview.cshtml" />
+    <Content Include="Views\Overview\_socialMediaMarketingOverview.cshtml" />
+    <Content Include="Views\Overview\_ppcOverview.cshtml" />
+    <Content Include="Views\Overview\_contentMarketingOverview.cshtml" />
+    <Content Include="Views\Overview\_iotApplicationOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
