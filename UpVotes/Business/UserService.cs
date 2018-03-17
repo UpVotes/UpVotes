@@ -17,7 +17,7 @@ namespace UpVotes.Business
         private string _apiMethod = string.Empty;
         private string _completeURL = string.Empty;
 
-        internal UserEntity AddOrUpdateUser(LinkedInLoginModel linkedInObj = null, TwitterLoginModel twitterObj = null)
+        internal UserEntity AddOrUpdateUser(TwitterLinkedInLoginModel linkedInObj = null)
         {
             UserEntity userObj = null;
             if (linkedInObj != null)
@@ -41,10 +41,10 @@ namespace UpVotes.Business
                     }
                 }
             }
-            else
-            {
-                userObj = TwitterUser(twitterObj);
-            }
+            //else
+            //{
+            //    userObj = TwitterUser(twitterObj);
+            //}
 
             return userObj;
         }
@@ -54,7 +54,7 @@ namespace UpVotes.Business
             throw new NotImplementedException();
         }
 
-        private UserEntity LinkedInUser(LinkedInLoginModel linkedInObj)
+        private UserEntity LinkedInUser(TwitterLinkedInLoginModel linkedInObj)
         {
             UserEntity userObj = new UserEntity();
             userObj.UserName = linkedInObj.firstName + "_" + linkedInObj.lastName + "_" + linkedInObj.id;

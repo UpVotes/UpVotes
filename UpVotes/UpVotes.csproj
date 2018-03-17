@@ -1011,6 +1011,7 @@
     <Content Include="images\main.jpg" />
     <Content Include="images\message-image-lates.jpg" />
     <Content Include="images\overview-mainicon.png" />
+    <Content Include="images\Overview\01-age-of-page-days-copy.jpg" />
     <Content Include="images\Overview\1.png" />
     <Content Include="images\Overview\2.png" />
     <Content Include="images\Overview\3.png" />
@@ -1018,6 +1019,9 @@
     <Content Include="images\Overview\ada.png" />
     <Content Include="images\Overview\add.png" />
     <Content Include="images\Overview\brain.png" />
+    <Content Include="images\Overview\brand-impact.png" />
+    <Content Include="images\Overview\categories-of-mobile-apps.png" />
+    <Content Include="images\Overview\choose-right-seo-company.png" />
     <Content Include="images\Overview\comments.png" />
     <Content Include="images\Overview\dAASFE.png" />
     <Content Include="images\Overview\dada.png" />
@@ -1059,6 +1063,12 @@
     <Content Include="images\Overview\icon7.png" />
     <Content Include="images\Overview\icon8.png" />
     <Content Include="images\Overview\icon9.png" />
+    <Content Include="images\Overview\image1-software.jpg" />
+    <Content Include="images\Overview\image2-software.jpg" />
+    <Content Include="images\Overview\image3-software.jpg" />
+    <Content Include="images\Overview\image4-software.jpg" />
+    <Content Include="images\Overview\image5-software.jpg" />
+    <Content Include="images\Overview\image6-software.jpg" />
     <Content Include="images\Overview\img1.jpg" />
     <Content Include="images\Overview\img2.jpg" />
     <Content Include="images\Overview\img3.jpg" />
@@ -1070,6 +1080,7 @@
     <Content Include="images\Overview\main-logo.png" />
     <Content Include="images\Overview\main.jpg" />
     <Content Include="images\Overview\message-image-lates.jpg" />
+    <Content Include="images\Overview\Mobile-Application-Development-Process.png" />
     <Content Include="images\Overview\mobile-developmentbanner.jpg" />
     <Content Include="images\Overview\pp.jpeg" />
     <Content Include="images\Overview\qe.png" />
@@ -1095,6 +1106,7 @@
     <Content Include="images\Overview\result-section9part.png" />
     <Content Include="images\Overview\sdgfakdjf.png" />
     <Content Include="images\Overview\seo-banner.jpg" />
+    <Content Include="images\Overview\SEO-campaign-KPIs.png" />
     <Content Include="images\Overview\seo-icon1.png" />
     <Content Include="images\Overview\seo-img1.jpg" />
     <Content Include="images\Overview\seo-img2.jpg" />
@@ -1103,8 +1115,11 @@
     <Content Include="images\Overview\seo-img5.jpg" />
     <Content Include="images\Overview\seo-img6.jpg" />
     <Content Include="images\Overview\seo-img7.jpg" />
+    <Content Include="images\Overview\SEO-KPIs.png" />
+    <Content Include="images\Overview\SEO-Metrics.png" />
     <Content Include="images\Overview\ssqwdd.png" />
     <Content Include="images\Overview\sublogo.png" />
+    <Content Include="images\Overview\UI-UX.jpg" />
     <Content Include="images\Overview\Untitled-1.jpg" />
     <Content Include="images\Overview\Untitled-11.png" />
     <Content Include="images\Overview\Untitled-12.jpg" />

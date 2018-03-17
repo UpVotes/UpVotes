@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
 
-    $.LoginWithLinkedIn = function (companyID, calledPage) {
+    $.LoginWithTwitterAndLinkedIn = function (companyID, calledPage, url) {
         $.ajax({
             type: "POST",   //GET or POST or PUT or DELETE verb
-            url: $.absoluteurl('/Login/LinkedINcall'),//?companyid='+compid,
+            url: $.absoluteurl(url),//?companyid='+compid,
             data: { companyid: companyID, calledPage: calledPage },// Location of the service
             success: function (json) {
                  //On Successful service call

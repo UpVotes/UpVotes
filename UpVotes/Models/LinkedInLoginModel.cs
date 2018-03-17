@@ -5,7 +5,7 @@ using System.Web;
 
 namespace UpVotes.Models
 {
-    public class LinkedInLoginModel
+    public class TwitterLinkedInLoginModel
     {
         public string firstName { get; set; }
 

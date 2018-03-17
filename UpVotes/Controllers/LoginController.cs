@@ -17,12 +17,12 @@ namespace UpVotes.Controllers
             return View();
         }
 
-        public ActionResult TwitterCallback(string oauth_token, string oauth_verifier)
+        public ActionResult TwitterCallback(string oauth_token, string oauth_verifier,string state)
         {
             var requesttoken = new OAuthRequestToken { Token = oauth_token };
             string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
             string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
-
+            string[] myArray = state.Split('-');
             try
             {
                 TwitterService service = new TwitterService(key, secret);
@@ -30,8 +30,52 @@ namespace UpVotes.Controllers
                 service.AuthenticateWith(accesstoken.Token, accesstoken.TokenSecret);
                 VerifyCredentialsOptions option = new VerifyCredentialsOptions();
                 TwitterUser user = service.VerifyCredentials(option);
+                TwitterLinkedInLoginModel obj = new TwitterLinkedInLoginModel();
+                if (user != null)
+                {
+                    string[] name = user.Name.Split(' ');
+                    if (name.Length > 1)
+                    {
+                        obj.firstName = name[0].ToString();
+                        obj.lastName = name[1].ToString();
+                    }
+                    else
+                    {
+                        obj.firstName = name[0].ToString();
+                        obj.lastName = "";
+                    }
 
-                return RedirectToAction("HomePage", "Home");
+                    obj.id = user.Id.ToString();
+                    obj.pictureUrl = user.ProfileImageUrlHttps;
+                    obj.publicProfileUrl = "https://twitter.com/" + user.ScreenName;
+                    obj.userType = 3;
+
+
+                    UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
+                    Session["UserObj"] = userObj;
+                    Session["UserID"] = userObj.UserID;
+                    string message = string.Empty;
+                    if (myArray[0] != "0")
+                    {
+                        message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
+                    }
+
+                    if (myArray[1] == "H")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
+                    }
+                    else if (myArray[1] == "L")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["FocusAreaName"]));
+                    }
+                    else if (myArray[1] == "C")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/" + Convert.ToString(Session["CompanyName"]));
+                    }
+                }
+                return null;
+
+                // return RedirectToAction("HomePage", "Home");
 
             }
             catch (Exception ex)
@@ -77,7 +121,7 @@ namespace UpVotes.Controllers
                 request = new RestRequest(Method.GET);
 
                 var response1 = client.Execute(request);
-                LinkedInLoginModel obj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<LinkedInLoginModel>(response1.Content.ToString());
+                TwitterLinkedInLoginModel obj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<TwitterLinkedInLoginModel>(response1.Content.ToString());
                 obj.userType = 2; //LinkedIn
                 UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
                 Session["UserObj"] = userObj;
@@ -134,13 +178,13 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult TwitterCall(int companyid)
+        public ActionResult TwitterCall(int companyid, char calledPage)
         {
             string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
             string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
 
             TwitterService service = new TwitterService(key, secret);
-            OAuthRequestToken requestToken = service.GetRequestToken(_baseURL + "Login/TwitterCallback?companyid=" + companyid);
+            OAuthRequestToken requestToken = service.GetRequestToken(_baseURL + "Login/TwitterCallback?state=" + companyid+ "-" + calledPage);
 
             Uri uri = service.GetAuthenticationUrl(requestToken);
             //string script = "<html><head><script type='text/javascript'> var popupWindow =window.open('" + uri.ToString() + "','_blank','directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200');</script></head></html>";
