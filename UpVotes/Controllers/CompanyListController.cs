@@ -210,7 +210,7 @@ namespace UpVotes.Controllers
             MetaStr.Append("<meta name='twitter:title' content='Top 10 {Category} Companies in {Country} - " + year + "' />");
             MetaStr.Append("<meta name='twitter:image' content='' />");
             MetaStr.Append("<link rel='canonical' href='{WebsiteUrl}' />");
-            MetaStr.Append("<link rel='publisher' href='' />");
+            MetaStr.Append("<link rel='publisher' href='#' />");
 
             switch (category)
             {
