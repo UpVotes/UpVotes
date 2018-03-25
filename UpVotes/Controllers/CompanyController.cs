@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using UpVotes.Business;
 using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
+using UpVotes.Utility;
 
 namespace UpVotes.Controllers
 {
@@ -24,12 +25,23 @@ namespace UpVotes.Controllers
             {
                 Session["calledPage"] = "C";
                 string companyName = Convert.ToString(Request.Url.Segments[2]).Trim();
-                if(companyName != string.Empty)
+                CompanyViewModel companyViewModel = null;
+                if (companyName != string.Empty)
                 {
                     Session["CompanyName"] = companyName;
                 }
-
-                CompanyViewModel companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0", Convert.ToInt32(Session["UserID"]));
+                if (CacheHandler.Exists(companyName))
+                {
+                    companyViewModel = new CompanyViewModel();
+                    CacheHandler.Get(companyName, out companyViewModel);
+                }
+                else
+                {
+                    companyViewModel = new CompanyViewModel();
+                    companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0", Convert.ToInt32(Session["UserID"]));
+                    CacheHandler.Add(companyViewModel, companyName);
+                }
+                
                 companyViewModel.WebBaseURL = _webBaseURL;
                 return View(companyViewModel);
             }
@@ -68,6 +80,16 @@ namespace UpVotes.Controllers
                     CompanyReviewViewModel companyReviewModel = jobj.ToObject<CompanyReviewViewModel>();
                     companyReviewModel.UserID = Convert.ToInt32(Session["UserID"]);
                     bool isSuccess = new CompanyService().AddReview(companyReviewModel);
+                    string compname = "";
+                    if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                    {
+                        compname = Session["CompanyName"].ToString();
+                    }
+                    if (CacheHandler.Exists(compname + "reviews"))
+                    {                        
+                        CacheHandler.Clear(compname + "reviews");
+                    }
+                    
                     return isSuccess;
                 }
                 else
@@ -86,6 +108,15 @@ namespace UpVotes.Controllers
             if (Convert.ToInt32(Session["UserID"]) != 0)
             {
                 return new CompanyService().VoteForCompany(companyID, Convert.ToInt32(Session["UserID"]));
+                string compname = "";
+                if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                {
+                    compname = Session["CompanyName"].ToString();
+                }
+                if (CacheHandler.Exists(compname))
+                {
+                    CacheHandler.Clear(compname);
+                }
             }
             else
             {

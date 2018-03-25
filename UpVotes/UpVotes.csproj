@@ -227,6 +227,7 @@
     <Compile Include="Models\LinkedInLoginModel.cs" />
     <Compile Include="Models\TwitterLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\CacheHandler.cs" />
     <Compile Include="Utility\ClientHelper.cs" />
     <Compile Include="Utility\Utility.cs" />
   </ItemGroup>

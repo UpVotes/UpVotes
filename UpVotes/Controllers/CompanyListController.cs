@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.Mvc;
 using UpVotes.Business;
 using UpVotes.Models;
+using UpVotes.Utility;
 
 namespace UpVotes.Controllers
 {
@@ -320,9 +321,20 @@ namespace UpVotes.Controllers
         public ActionResult GetUserReviews()
         {
             string companyNames = Convert.ToString(Request.Params["companyName"]);
+            CompanyViewModel companyViewModel = null;
             if (companyNames != string.Empty)
             {
-                CompanyViewModel companyViewModel = new CompanyService().GetUserReviews(companyNames);
+                if (CacheHandler.Exists(companyNames + "reviews"))
+                {
+                    companyViewModel = new CompanyViewModel();
+                    CacheHandler.Get(companyNames + "reviews",out companyViewModel);
+                }
+                else
+                {
+                    companyViewModel = new CompanyViewModel();
+                    companyViewModel = new CompanyService().GetUserReviews(companyNames);
+                    CacheHandler.Add(companyViewModel, companyNames + "reviews");
+                }
                 if (companyViewModel != null && companyViewModel.CompanyList[0].CompanyReviews.Count > 0)
                 {
                     return PartialView("~/Views/Company/_CompanyReviews.cshtml", companyViewModel.CompanyList[0].CompanyReviews);
