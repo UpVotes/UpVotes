@@ -9,7 +9,7 @@ namespace UpVotes.Utility
     {
         public static void Add<T>(T objInfo, string key)
         {
-            HttpContext.Current.Cache.Insert(key, objInfo, null, DateTime.Now.AddMinutes(60), System.Web.Caching.Cache.NoSlidingExpiration);
+            HttpContext.Current.Cache.Insert(key, objInfo, null, DateTime.Now.AddMinutes(1000), System.Web.Caching.Cache.NoSlidingExpiration);
         }
         public static void Clear(string key)
         {
