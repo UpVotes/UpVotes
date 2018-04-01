@@ -3,8 +3,8 @@
 @{
 
     ViewBag.MetaTag = Model.MetaTag;
-    ViewBag.Title = Model.Title;
-    Layout = "~/Views/Shared/_Layout.cshtml";    
+    ViewBag.Title = Model.Title.Replace("globe", "");
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script src="~/Scripts/UserScripts/CompanyList.js"></script>
@@ -15,7 +15,7 @@
         <div>
             <ul class="nav nav-tabs main-tabs-navi">
                 <li><a data-toggle="tab" href="#company-profile"><i class="view-compare"></i>View & Compare</a></li>
-                <li><a data-toggle="tab" href="#Custom-Quote"><i class="custom-quote"></i>Custom Quote</a></li>
+                <li><a data-toggle="tab" href="#CustomQuote" class="classquote"><i class="custom-quote"></i>Custom Quote</a></li>
                 <li><a data-toggle="tab" href="#userReviews" class="userReviews"><i class="user-reviews"></i>User Reviews</a></li>
                 <li><a data-toggle="tab" href="#Overview" class="Over-view"><i class="overview"></i>Overview?</a></li>
             </ul>
@@ -91,5 +91,5 @@
     </div>
     <div id="Overview" class="container tab-pane fade in active" style="display:none;">
         @{Html.RenderAction("GetOverViewPage", "CompanyList");}        
-    </div>    
+    </div>
 </div>

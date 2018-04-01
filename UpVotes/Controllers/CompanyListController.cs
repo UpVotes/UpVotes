@@ -119,47 +119,47 @@ namespace UpVotes.Controllers
             {
                 case "mobile-application-developers":
                     companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Mobile App Development Companies and Developers in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers", Country);
                     break;
 
                 case "seo-companies":
                     companyViewModel.CategoryHeadLine = "SEO COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "SEO Companies and Services in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.Title = headLine + "SEO Companies and Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("seo-companies", Country);
                     break;
 
                 case "digital-marketing-companies":
                     companyViewModel.CategoryHeadLine = "DIGITAL MARKETING COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "Digital Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.Title = headLine + "Digital Marketing Companies and Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("digital-marketing-companies", Country);
                     break;
 
                 case "web-design-companies":
                     companyViewModel.CategoryHeadLine = "WEB DESIGN COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "Web Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.Title = headLine + "Web Design Companies and Agencies in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("web-design-companies", Country);
                     break;
 
                 case "software-development-companies":
                     companyViewModel.CategoryHeadLine = "CUSTOM SOFTWARE DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "Software Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co ";
+                    companyViewModel.Title = headLine + "Custom Software Development Companies and Developers in " + Country + "- " + year + " | upvotes.co ";
                     companyViewModel.MetaTag = CategoryMetaTags("software-development-companies", Country);
                     break;
 
                 case "web-development-companies":
                     companyViewModel.CategoryHeadLine = "WEB DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "Web Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Web Development Companies and developers in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("web-development-companies", Country);
                     break;
                 case "ui-ux-agencies":
                     companyViewModel.CategoryHeadLine = "UI/UX DESIGN COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "UI/UX Design Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "UI/UX Design Companies and Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("ui-ux-agencies", Country);
                     break;
                 case "wearable-application-developers":
                     companyViewModel.CategoryHeadLine = "WEARABLE APPLICATION DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "Wearable Application Development Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Wearable Application Development Companies and Developers in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("wearable-application-developers", Country);
                     break;
                 case "ecommerce-developers":
@@ -169,27 +169,27 @@ namespace UpVotes.Controllers
                     break;
                 case "social-media-marketing-companies":
                     companyViewModel.CategoryHeadLine = "SOCIAL MEDIA MARKETING COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "Social Media Marketing Companies & Agencies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Social Media Marketing Companies and Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("social-media-marketing-companies", Country);
                     break;
                 case "ppc-companies":
                     companyViewModel.CategoryHeadLine = "PPC COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "Pay Per Click (PPC) Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "PPC Companies and Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("ppc-companies", Country);
                     break;
                 case "content-marketing-companies":
                     companyViewModel.CategoryHeadLine = "CONTENT MARKETING COMPANIES AND AGENCIES in " + Country;
-                    companyViewModel.Title = headLine + "Content Marketing Companies Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Content Marketing Companies and Agencies in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("content-marketing-companies", Country);
                     break;
                 case "iot-application-developers":
                     companyViewModel.CategoryHeadLine = "IOT APP DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "IOT Application Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "IOT App Development Companies and Developers in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("iot-application-developers", Country);
                     break;
                 default:
                     companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPMENT COMPANIES AND DEVELOPERS in " + Country;
-                    companyViewModel.Title = headLine + "Mobile App Development Companies in " + Country + "- " + year + " | upvotes.co";
+                    companyViewModel.Title = headLine + "Mobile App Development Companies and Developers in " + Country + "- " + year + " | upvotes.co";
                     companyViewModel.MetaTag = CategoryMetaTags("mobile-application-developers", Country);
                     break;
             }
@@ -400,6 +400,6 @@ namespace UpVotes.Controllers
                     break;
             }
             return PartialView(url);
-        }
+        }       
     }
 }
