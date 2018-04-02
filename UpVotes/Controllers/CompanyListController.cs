@@ -357,6 +357,11 @@ namespace UpVotes.Controllers
         {
             string focusAreaname = Session["FocusAreaName"].ToString();
             string url = "";
+            if (Request.Url.Segments.Length > 2)
+            {
+                focusAreaname = "NotFound";
+            }
+
             switch (focusAreaname)
             {
                 case "mobile-application-developers":
@@ -396,6 +401,9 @@ namespace UpVotes.Controllers
                     url = "~/Views/Overview/_contentMarketingOverview.cshtml";
                     break;
                 case "iot-application-developers":
+                    url = "~/Views/Overview/_iotApplicationOverview.cshtml";
+                    break;
+                default:
                     url = "~/Views/Overview/_iotApplicationOverview.cshtml";
                     break;
             }
