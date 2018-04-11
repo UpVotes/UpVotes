@@ -93,6 +93,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -211,6 +213,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\QuotationService.cs" />
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\FocusAreaService.cs" />
     <Compile Include="Business\UserService.cs" />
@@ -219,12 +222,15 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\QuotationController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyReviewViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\LinkedInLoginModel.cs" />
+    <Compile Include="Models\QuotationContract.cs" />
     <Compile Include="Models\TwitterLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\CacheHandler.cs" />
@@ -255,6 +261,7 @@
     <Content Include="Content\jQuery\jquery-ui.theme.min.css" />
     <Content Include="Content\jQuery\ui.jqgrid.css" />
     <Content Include="Content\StarRating.css" />
+    <Content Include="Content\Quotation.css" />
     <Content Include="Content\wvr-styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -354,6 +361,7 @@
     <Content Include="images\CompanyListLogos\CredencysSolutionsInc.png" />
     <Content Include="images\CompanyListLogos\CTP.png" />
     <Content Include="images\CompanyListLogos\DAGMARMarketing.png" />
+    <Content Include="images\CompanyListLogos\Debamedia.png" />
     <Content Include="images\CompanyListLogos\Definition6.png" />
     <Content Include="images\CompanyListLogos\DeloitteDigital.png" />
     <Content Include="images\CompanyListLogos\DetroitLabs.png" />
@@ -707,6 +715,7 @@
     <Content Include="images\CompanyLogos\CredencysSolutionsInc.png" />
     <Content Include="images\CompanyLogos\CTP.png" />
     <Content Include="images\CompanyLogos\DAGMARMarketing.png" />
+    <Content Include="images\CompanyLogos\Debamedia.png" />
     <Content Include="images\CompanyLogos\Definition6.png" />
     <Content Include="images\CompanyLogos\DeloitteDigital.png" />
     <Content Include="images\CompanyLogos\DetroitLabs.png" />
@@ -1006,7 +1015,9 @@
     <Content Include="images\Icons\ms-icon-150x150.png" />
     <Content Include="images\Icons\ms-icon-310x310.png" />
     <Content Include="images\Icons\ms-icon-70x70.png" />
+    <Content Include="images\images.png" />
     <Content Include="images\IMG_0617.PNG" />
+    <Content Include="images\loader.gif" />
     <Content Include="images\main-banner.png" />
     <Content Include="images\main-logo.png" />
     <Content Include="images\main.jpg" />
@@ -1162,6 +1173,7 @@
     <Content Include="images\Overview\yellow-line.png" />
     <Content Include="images\page_under_construction.jpg" />
     <Content Include="images\pp.jpeg" />
+    <Content Include="images\quotation_sprites.png" />
     <Content Include="images\quote-mainicon.png" />
     <Content Include="images\reviews-mainicon.png" />
     <Content Include="images\sublogo.png" />
@@ -1215,6 +1227,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\StarRating.js" />
+    <Content Include="Scripts\UserScripts\Quotation.js" />
     <Content Include="Scripts\UserScripts\Company.js" />
     <Content Include="Scripts\UserScripts\CompanyList.js" />
     <Content Include="Scripts\UserScripts\CompanyReviews.js" />
@@ -1263,6 +1276,9 @@
     <Content Include="Views\Overview\_ppcOverview.cshtml" />
     <Content Include="Views\Overview\_contentMarketingOverview.cshtml" />
     <Content Include="Views\Overview\_iotApplicationOverview.cshtml" />
+    <Content Include="Views\Quotation\_Quotation.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Quotation\_QuotationBreakdown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1274,6 +1290,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

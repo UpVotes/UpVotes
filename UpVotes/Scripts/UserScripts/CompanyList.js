@@ -133,21 +133,12 @@
             error: function (a, b, c) { debugger; }
         });
     });
-    $(".Over-view").click(function () {        
-        //$.ajax({
-        //    url: $.absoluteurl('/CompanyList/GetOverViewPage'),
-        //    mtype: "POST",
-        //    cache: false,
-        //    success: function (data) {
-        //        $('#Overview').html("");
-        //        $('#Overview').show();
-        //        $('#Overview').html(data);
-        //    },
-        //    error: function (a, b, c) { debugger; }
-        //});
+    $(".Over-view").click(function () {   
         $('#Overview').css("display", "")
     });
-
+    $(".classquote").click(function () {        
+        $('#CustomQuote').css("display", "");
+    });
     $.GetCompanyReviews = function (companyName) {
         $.ajax({
             type: "POST",

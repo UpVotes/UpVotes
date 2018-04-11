@@ -1,0 +1,592 @@
+ .platform-section{
+  text-align: center;
+  width: 75%;
+  background: #f4f4f4;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.platform-section h2{
+  font-weight: bold;}
+
+
+.platform-section h3{
+  font-weight: bold;
+  color: #727272;
+  padding-bottom: 30px;
+      font-size: 20px;
+}
+
+.os-types,.os-typesFeatures{
+ 
+  margin: 0 auto;
+}
+
+.os-section{
+  background: #ffffff;
+}
+
+.os-types ul,.os-typesFeatures ul{
+  list-style: none;
+  padding: 0;
+     display: inline-block;
+   width: 436px;
+ /* margin-bottom: 30px;*/
+}
+
+.os-types ul li,.os-typesFeatures ul li{
+ width: 218px;
+  float: left;
+  padding: 10px;
+  height: 43px;
+  border: 1px solid #f7f6f6;
+      font-weight: bold;
+    text-transform: capitalize;
+  /*color: #aaaaaa;*/
+  position: relative;
+}
+
+.os-types ul li:hover,.os-types ul li.active,.os-typesFeatures ul li:hover,.os-typesFeatures ul li.active{
+border-bottom: 2px solid #1acee2;
+cursor: pointer;
+}
+
+.os-types ul li:before,.os-typesFeatures ul li:before{
+        content: "";
+    margin-left: 12px;
+    width: 20px;
+    height: 30px;
+    background-size: 100%;
+    display: block;
+    position: absolute;
+    left: 10px;
+    background-repeat: no-repeat;
+}
+.os-types ul .os-android:before{
+      /*background-image: url(../images/quote-icon1.png);*/
+        background: url(../images/quotation_sprites.png) 5px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-android:hover:before,.os-types ul .os-android.active:before{
+      /*background-image: url(../images/quote-icon1-2.png);*/
+      
+    background: url(../images/quotation_sprites.png) -26px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+
+.os-types ul .os-ios:before{
+   /*background-image: url(../images/quote-icon2.png);*/
+   background: url(../images/quotation_sprites.png) -706px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+
+.os-types ul .os-ios:hover:before,.os-types ul .os-ios.active:before{
+   /*background-image: url(../images/quote-icon2-2.png);*/
+   background: url(../images/quotation_sprites.png) -737px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+
+.os-types ul .os-windows:before{
+  /*background-image: url(../images/quote-icon3.png);*/
+  background: url(../images/quotation_sprites.png) -1187px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-windows:hover:before,.os-types ul .os-windows.active:before{
+  /*background-image: url(../images/quote-icon3-2.png);*/
+  background: url(../images/quotation_sprites.png) -1218px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-hybrid:before{
+  background: url(../images/quotation_sprites.png) -1250px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-hybrid:hover:before,.os-types ul .os-hybrid.active:before{
+  background: url(../images/quotation_sprites.png) -1281px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-templateui:before{
+  background: url(../images/quotation_sprites.png) -1321px -0px no-repeat;
+    width: 40px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-templateui:hover:before,.os-types ul .os-templateui.active:before{
+  background: url(../images/quotation_sprites.png) -1370px -0px no-repeat;
+    width: 40px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-customui:before{
+  background: url(../images/quotation_sprites.png) -1419px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-customui:hover:before,.os-types ul .os-customui.active:before{
+  background: url(../images/quotation_sprites.png) -1453px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+
+.os-types ul .os-animatedui:before{
+  background: url(../images/quotation_sprites.png) -1484px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-animatedui:hover:before,.os-types ul .os-animatedui.active:before{
+  background: url(../images/quotation_sprites.png) -1522px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+
+.os-types ul .os-gameui:before{
+  background: url(../images/quotation_sprites.png) -1562px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-gameui:hover:before,.os-types ul .os-gameui.active:before{
+  background: url(../images/quotation_sprites.png) -1598px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-emailpwd:before{
+  background: url(../images/quotation_sprites.png) -1632px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 7px;
+}
+.os-types ul .os-emailpwd:hover:before,.os-types ul .os-emailpwd.active:before{
+  background: url(../images/quotation_sprites.png) -1664px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 7px;
+}
+.os-types ul .os-socialntw:before{
+  background: url(../images/quotation_sprites.png) -66px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-socialntw:hover:before,.os-types ul .os-socialntw.active:before{
+  background: url(../images/quotation_sprites.png) -98px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-authorization:before{
+  background: url(../images/quotation_sprites.png) -128px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-authorization:hover:before,.os-types ul .os-authorization.active:before{
+  background: url(../images/quotation_sprites.png) -160px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-nosignup:before{
+  background: url(../images/quotation_sprites.png) -195px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-nosignup:hover:before,.os-types ul .os-nosignup.active:before{
+  background: url(../images/quotation_sprites.png) -227px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-yes:before{
+  background: url(../images/quotation_sprites.png) -258px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1746px;
+    top: 2px;
+}
+.os-types ul .os-yes:hover:before,.os-types ul .os-yes.active:before{
+  background: url(../images/quotation_sprites.png) -290px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1746px;
+    top: 2px;
+}
+.os-types ul .os-no:before{
+  background: url(../images/quotation_sprites.png) -322px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1746px;
+    top: 5px;
+}
+.os-types ul .os-no:hover:before,.os-types ul .os-no.active:before{
+  background: url(../images/quotation_sprites.png) -349px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1746px;
+    top: 5px;
+}
+.os-types ul .os-dontknow:before{
+  background: url(../images/quotation_sprites.png) -367px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-dontknow:hover:before,.os-types ul .os-dontknow.active:before{
+  background: url(../images/quotation_sprites.png) -397px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-mvp:before{
+  background: url(../images/quotation_sprites.png) -435px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-mvp:hover:before,.os-types ul .os-mvp.active:before{
+  background: url(../images/quotation_sprites.png) -467px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-basic:before{
+  background: url(../images/quotation_sprites.png) -500px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-basic:hover:before,.os-types ul .os-basic.active:before{
+  background: url(../images/quotation_sprites.png) -532px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 2px;
+}
+.os-types ul .os-encrypted:before{
+  background: url(../images/quotation_sprites.png) -560px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 8px;
+}
+.os-types ul .os-encrypted:hover:before,.os-types ul .os-encrypted.active:before{
+  background: url(../images/quotation_sprites.png) -597px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 8px;
+}
+.os-types ul .os-completeprotection:before{
+  background: url(../images/quotation_sprites.png) -639px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 8px;
+}
+.os-types ul .os-completeprotection:hover:before,.os-types ul .os-completeprotection.active:before{
+  background: url(../images/quotation_sprites.png) -678px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 8px;
+}
+.os-types ul .os-media:before{
+  background: url(../images/quotation_sprites.png) -775px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-media:hover:before,.os-types ul .os-media.active:before{
+  background: url(../images/quotation_sprites.png) -811px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-location:before{
+  background: url(../images/quotation_sprites.png) -848px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-location:hover:before,.os-types ul .os-location.active:before{
+  background: url(../images/quotation_sprites.png) -882px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-ecommerce:before{
+  background: url(../images/quotation_sprites.png) -915px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-ecommerce:hover:before,.os-types ul .os-ecommerce.active:before{
+  background: url(../images/quotation_sprites.png) -953px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-newdatabase:before{
+  background: url(../images/quotation_sprites.png) -989px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 10px;
+}
+.os-types ul .os-newdatabase:hover:before,.os-types ul .os-newdatabase.active:before{
+  background: url(../images/quotation_sprites.png) -1021px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 10px;
+}
+.os-types ul .os-existingdatabase:before{
+  background: url(../images/quotation_sprites.png) -1057px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 6px;
+}
+.os-types ul .os-existingdatabase:hover:before,.os-types ul .os-existingdatabase.active:before{
+  background: url(../images/quotation_sprites.png) -1090px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 6px;
+}
+.os-types ul .os-clouddatabase:before{
+  background: url(../images/quotation_sprites.png) -1120px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 10px;
+}
+.os-types ul .os-clouddatabase:hover:before,.os-types ul .os-clouddatabase.active:before{
+  background: url(../images/quotation_sprites.png) -1157px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 10px;
+}
+.os-types ul .os-dontknowdb:before{
+  background: url(../images/quotation_sprites.png) -367px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-types ul .os-dontknowdb:hover:before,.os-types ul .os-dontknowdb.active:before{
+  background: url(../images/quotation_sprites.png) -397px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-typesFeatures ul .os-right:before{
+  background: url(../images/quotation_sprites.png) -249px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+.os-typesFeatures ul .os-right:hover:before,.os-typesFeatures ul .os-right.active:before{
+  background: url(../images/quotation_sprites.png) -281px -0px no-repeat;
+    width: 32px;
+    height: 34px;
+    background-size: 1693px;
+    top: 5px;
+}
+
+
+  .platform-section{
+  text-align: center;
+  width: 75%;
+  background: #f4f4f4;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.platform-section h2{
+  font-weight: bold;}
+
+
+.platform-section h3{
+  font-weight: bold;
+  color: #727272;
+  padding-bottom: 30px;
+      font-size: 20px;
+}
+
+.os-types,.os-typesFeatures{
+ 
+  margin: 0 auto;
+}
+
+.os-section{
+  background: #ffffff;
+}
+
+
+    .h2zone {
+        color: #00A4AD;
+        font-size: 28px;
+    }
+
+    .slideDown { display: none; }
+
+  .os-sectionbreakdown  li {
+    display: block;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    /*border: 1px #a2a2a2 solid;*/
+    text-align: center;
+    margin-left: -50px;
+    margin-top: 1px;
+}
+     .androidselected{      
+        background:url(../images/quotation_sprites.png) 5px -0px no-repeat #EAEAEA;    
+}
+    .iosselected {
+        background:url(../images/quotation_sprites.png) -1023px -0px no-repeat #EAEAEA;   
+    }
+     .windowsselected{
+        background:url(../images/quotation_sprites.png) -1719px -0px no-repeat #EAEAEA;   
+    }
+.hybridselected{
+        background:url(../images/quotation_sprites.png) -1808px -0px no-repeat #EAEAEA;   
+    }
+.templateselected{
+        background:url(../images/quotation_sprites.png) -1911px 5px no-repeat #EAEAEA;   
+    }
+.customselected{
+        background:url(../images/quotation_sprites.png) -2042px 4px no-repeat #EAEAEA;   
+    }
+.animatedselected{
+        background:url(../images/quotation_sprites.png) -2142px 4px no-repeat #EAEAEA;   
+    }
+.gameselected{
+        background:url(../images/quotation_sprites.png) -2250px 0px no-repeat #EAEAEA;   
+    }
+.emailselected{
+        background:url(../images/quotation_sprites.png) -2351px 9px no-repeat #EAEAEA;   
+    }
+.socialselected{
+        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
+    }
+.authorizationselected{
+        background:url(../images/quotation_sprites.png) -177px 5px no-repeat #EAEAEA;   
+    }
+.signupselected{
+        background:url(../images/quotation_sprites.png) -268px 5px no-repeat #EAEAEA;   
+    }
+.yesselected{
+        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
+    }
+.noselected{
+        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;   
+    }
+.dontselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }
+.mvpselected{
+        background:url(../images/quotation_sprites.png) -620px 5px no-repeat #EAEAEA;   
+    }
+.basicselected{
+        background:url(../images/quotation_sprites.png) -711px 5px no-repeat #EAEAEA;   
+    } 
+.encryptedselected{
+        background:url(../images/quotation_sprites.png) -807px 5px no-repeat #EAEAEA;   
+    } 
+.completeselected{
+        background:url(../images/quotation_sprites.png) -914px 2px no-repeat #EAEAEA;   
+    } 
+.reviewyesselected{
+        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
+    }
+.reviewnoselected{
+        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;      
+    }
+.reviewdontselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }
+.socialnetselected{
+        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
+    }
+.mediaselected{
+        background:url(../images/quotation_sprites.png) -1116px 5px no-repeat #EAEAEA;   
+    }
+.locationselected{
+        background:url(../images/quotation_sprites.png) -1218px 0px no-repeat #EAEAEA;   
+    }
+.ecommerceselected{
+        background:url(../images/quotation_sprites.png) -1320px 4px no-repeat #EAEAEA;   
+    }
+.newdatbaseselected{
+        background:url(../images/quotation_sprites.png) -1425px 4px no-repeat #EAEAEA;   
+    }
+.existingdatbaseselected{
+        background:url(../images/quotation_sprites.png) -1515px 4px no-repeat #EAEAEA;   
+    }
+.cloudselected{
+        background:url(../images/quotation_sprites.png) -1616px 4px no-repeat #EAEAEA;   
+    }
+.dontdatabaseselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }

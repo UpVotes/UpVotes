@@ -91,5 +91,8 @@
     </div>
     <div id="Overview" class="container tab-pane fade in active" style="display:none;">
         @{Html.RenderAction("GetOverViewPage", "CompanyList");}        
-    </div>
+    </div> 
+    <div id="CustomQuote" class="container tab-pane fade in active" style="display:none;">  
+        @{Html.RenderAction("GetQuotation", "Quotation");}       
+    </div>   
 </div>

@@ -1,0 +1,303 @@
+﻿@model UpVotes.Models.QuotationResponse
+@*<style>
+    .platform-section{
+  text-align: center;
+  width: 75%;
+  background: #f4f4f4;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.platform-section h2{
+  font-weight: bold;}
+
+
+.platform-section h3{
+  font-weight: bold;
+  color: #727272;
+  padding-bottom: 30px;
+      font-size: 20px;
+}
+
+.os-types,.os-typesFeatures{
+ 
+  margin: 0 auto;
+}
+
+.os-section{
+  background: #ffffff;
+}
+
+
+    .h2zone {
+        color: #00A4AD;
+        font-size: 28px;
+    }
+
+    .slideDown { display: none; }
+
+  .os-sectionbreakdown  li {
+    display: block;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    /*border: 1px #a2a2a2 solid;*/
+    text-align: center;
+    margin-left: -50px;
+    margin-top: 1px;
+}
+     .androidselected{      
+        background:url(../images/quotation_sprites.png) 5px -0px no-repeat #EAEAEA;    
+}
+    .iosselected {
+        background:url(../images/quotation_sprites.png) -1023px -0px no-repeat #EAEAEA;   
+    }
+     .windowsselected{
+        background:url(../images/quotation_sprites.png) -1719px -0px no-repeat #EAEAEA;   
+    }
+.hybridselected{
+        background:url(../images/quotation_sprites.png) -1808px -0px no-repeat #EAEAEA;   
+    }
+.templateselected{
+        background:url(../images/quotation_sprites.png) -1911px 5px no-repeat #EAEAEA;   
+    }
+.customselected{
+        background:url(../images/quotation_sprites.png) -2042px 4px no-repeat #EAEAEA;   
+    }
+.animatedselected{
+        background:url(../images/quotation_sprites.png) -2142px 4px no-repeat #EAEAEA;   
+    }
+.gameselected{
+        background:url(../images/quotation_sprites.png) -2250px 0px no-repeat #EAEAEA;   
+    }
+.emailselected{
+        background:url(../images/quotation_sprites.png) -2351px 9px no-repeat #EAEAEA;   
+    }
+.socialselected{
+        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
+    }
+.authorizationselected{
+        background:url(../images/quotation_sprites.png) -177px 5px no-repeat #EAEAEA;   
+    }
+.signupselected{
+        background:url(../images/quotation_sprites.png) -268px 5px no-repeat #EAEAEA;   
+    }
+.yesselected{
+        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
+    }
+.noselected{
+        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;   
+    }
+.dontselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }
+.mvpselected{
+        background:url(../images/quotation_sprites.png) -620px 5px no-repeat #EAEAEA;   
+    }
+.basicselected{
+        background:url(../images/quotation_sprites.png) -711px 5px no-repeat #EAEAEA;   
+    } 
+.encryptedselected{
+        background:url(../images/quotation_sprites.png) -807px 5px no-repeat #EAEAEA;   
+    } 
+.completeselected{
+        background:url(../images/quotation_sprites.png) -914px 2px no-repeat #EAEAEA;   
+    } 
+.reviewyesselected{
+        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
+    }
+.reviewnoselected{
+        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;      
+    }
+.reviewdontselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }
+.socialnetselected{
+        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
+    }
+.mediaselected{
+        background:url(../images/quotation_sprites.png) -1116px 5px no-repeat #EAEAEA;   
+    }
+.locationselected{
+        background:url(../images/quotation_sprites.png) -1218px 0px no-repeat #EAEAEA;   
+    }
+.ecommerceselected{
+        background:url(../images/quotation_sprites.png) -1320px 4px no-repeat #EAEAEA;   
+    }
+.newdatbaseselected{
+        background:url(../images/quotation_sprites.png) -1425px 4px no-repeat #EAEAEA;   
+    }
+.existingdatbaseselected{
+        background:url(../images/quotation_sprites.png) -1515px 4px no-repeat #EAEAEA;   
+    }
+.cloudselected{
+        background:url(../images/quotation_sprites.png) -1616px 4px no-repeat #EAEAEA;   
+    }
+.dontdatabaseselected{
+        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
+    }
+</style>*@
+@Styles.Render("~/Content/Quotationcss")
+@Scripts.Render("~/bundles/Quotation")
+    <div class="container">
+        <!--for carousel -->
+        <div class="well">            
+                <input type="image" id="liClose" src="../images/images.png" width="25" height="25" style="border-radius: 17px;cursor: pointer;float: right;margin-top: -38px;margin-right: -39px;border: 1px solid gray;">
+            <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+
+                <div class="carousel-inner">
+                    <div class="item active" id="first_carousel">
+                        <div class="platform-section" style="height: 343px;border-bottom:1px solid #D6D6D6">
+                            <h2><span style="font-size: 18px;color:#676767">Here's your Cost Estimate in Different Geographies! with Based on Current Industry:</span></h2>
+                            <br />
+                            
+                            <h2><span style="font-size: 37px;color:#00A4AD">Your app estimate</span></h2>
+                            
+                            <h2>
+                                <span style="font-size: 26px;display:block;" id="spnTotalAmountZone1" class="clsZone1">$@Convert.ToInt32(Model.TotalMinZone1).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone1).ToString("#,##0")</span>
+                                <span style="font-size: 26px;display:none;" id="spnTotalAmountZone2" class="clsZone2">$@Convert.ToInt32(Model.TotalMinZone2).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone2).ToString("#,##0")</span>
+                                <span style="font-size: 26px;display:none;" id="spnTotalAmountZone3" class="clsZone3">$@Convert.ToInt32(Model.TotalMinZone3).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone3).ToString("#,##0")</span>
+                            </h2>
+                            
+                            @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
+                            <div style="position: absolute;width: 100%;"><div class="block612 pull-right" style="margin-right: 56%;width: 18%;" id="btnShowBreakdown"><span><i aria-hidden="true"></i>SHOW BREAKDOWN</span></div>
+                        </div>
+                        </div>
+
+                    </div>
+                   
+                   
+                </div>
+                
+            </div>
+
+            <div id="divbreakdown" class="slideDown">
+    
+                        <div class="platform-section row" style="height: 230px;border-top:1px solid white">
+                            <div class="col-sm-4" style="text-align:center">
+                                <h2><span class="h2zone">Zone-1</span></h2>
+                                <p>(USA, Canada, Western Europe &amp; Australia)</p>
+                                <div style="position: absolute;width: 100%;">
+                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ1"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                </div>
+                                </div>
+                            <div class="col-sm-4" style="text-align:center">
+                                <h2><span class="h2zone">Zone-2</span></h2>
+                                <p>(Eastern Europe, Middle East, Central &amp; South America)</p>
+                                <div style="position: absolute;width: 100%;">
+                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ2"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" style="text-align:center">
+                                <h2><span class="h2zone">Zone-3</span></h2>
+                                <p>(South Asia, East Asia, South East Asia &amp; Africa)</p>
+                                <div style="position: absolute;width: 100%;">
+                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ3"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                </div>
+                            </div>
+                        </div>
+                <div class="platform-section" style="font-size: 20px;color:#00A4AD"><span id="spnbreakdownz1" class="clsZone1" style="display:block">Zone 1 - Breakdown</span><span id="spnbreakdownz2" style="display:none" class="clsZone2">Zone 2 - Breakdown</span><span id="spnbreakdown" style="display:none" class="clsZone3">Zone 3 - Breakdown</span></div>
+                <div class="platform-section" style="background:white;">
+@if (Model != null)
+{
+    string platformclassname = "";
+    foreach (var quotation in Model.QuotationData)
+    {
+        if (quotation.SubCategory != "Features")
+        {
+                    <div class="row" style="border-bottom:1px solid #EAEAEA;min-height:85px;">
+                        <div style="margin-top:12px;">
+                            <div class="col-sm-1" style="text-align:center;">
+                                <ul class="os-sectionbreakdown">
+                                    <li class="@quotation.Classname"></li>
+                                    @if (platformclassname == "")
+                                    {
+                                        platformclassname = quotation.Classname;
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-sm-8" style="text-align:left;">
+                                <div style="margin-top: 10px;">
+                                    <span style="font-size:15px;"><strong>@quotation.Question</strong></span>
+                                    <br><p>@quotation.Answer</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" style="text-align:left;">
+                                <div style="margin-top: 10px;">
+                                    <span style="font-size:15px;color:#00A4AD;display:block" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
+                                    <span style="font-size:15px;color:#00A4AD;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
+                                    <span style="font-size:15px;color:#00A4AD;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        }
+    }
+
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-sm-1" style="text-align:center;">
+            <ul class="os-sectionbreakdown">
+                <li class="@platformclassname"></li>
+            </ul>
+        </div>
+        <div class="col-sm-8" style="text-align:left;">
+            <div style="margin-top: 10px;">
+                <span style="font-size:15px;"><strong>Check all the features you want on your app?</strong></span>
+                <br />
+                <br />
+                @foreach (var quotation in Model.QuotationData)
+                {
+                    if (quotation.SubCategory == "Features")
+                    {
+
+                        <div class="row" style="margin-left:1px;">
+                            <div class="col-sm-7" style="height: 43px;border-top:1px solid #EAEAEA;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA">
+                                <span style="font-size:15px;margin-left:-13px;position: absolute;margin-top: 7px;"><strong>@quotation.Ctypes</strong></span>
+                            </div>
+                            <div class="col-sm-5" style="height: 43px;border-top:1px solid #EAEAEA;border-right:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA">
+                                <span style="font-size:15px;position: absolute;margin-top: 7px;" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
+                                <span style="font-size:15px;position: absolute;margin-top: 7px;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
+                                <span style="font-size:15px;position: absolute;margin-top: 7px;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
+                            </div>
+                        </div>                        
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+                    </div>
+                </div>
+
+        </div>
+        
+
+        
+    </div>
+    
+<script>
+    //$('#btnShowBreakdown').click(function (e) {
+    //    if ($('#divbreakdown').css('display') == 'none') {
+    //        $('.slideDown').slideToggle();
+    //    }
+    //});
+    //$('#btnEstimateZ1').click(function (e) {
+    //    $('.clsZone1').css('display', 'block');
+    //    $('.clsZone2').css('display', 'none')
+    //    $('.clsZone3').css('display', 'none')
+    //});
+    //$('#btnEstimateZ2').click(function (e) {
+    //    $('.clsZone1').css('display', 'none');
+    //    $('.clsZone2').css('display', 'block')
+    //    $('.clsZone3').css('display', 'none')
+    //});
+    //$('#btnEstimateZ3').click(function (e) {
+    //    $('.clsZone1').css('display', 'none');
+    //    $('.clsZone2').css('display', 'none')
+    //    $('.clsZone3').css('display', 'block')
+    //});
+</script>
+   
+
+
