@@ -37,9 +37,11 @@ namespace UpVotes.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 id = "0";
+                Session["Country"] = "";
             }
             else
             {
+                Session["Country"] =id;
                 id = id.Replace("-", "space");
             }
             CompanyViewModel companyViewModel = companyService.GetCompany("0", 0, 0, 0, 0, "ASC", focusAreaID, id, Convert.ToInt32(Session["UserID"]));
@@ -114,7 +116,7 @@ namespace UpVotes.Controllers
             int year = DateTime.Now.Year;
 
             string headLine = Country == "globe" ? "Top " : "Top 10+ ";
-
+            
             switch (urlFocusAreaName.Trim())
             {
                 case "mobile-application-developers":
@@ -356,16 +358,65 @@ namespace UpVotes.Controllers
         public ActionResult GetOverViewPage()
         {
             string focusAreaname = Session["FocusAreaName"].ToString();
-            string url = "";
+            string url = string.Empty;
+            string country = string.Empty;
             if (Request.Url.Segments.Length > 2)
             {
-                focusAreaname = "NotFound";
+                if (!string.IsNullOrEmpty(Session["Country"].ToString()) && focusAreaname == "mobile-application-developers")
+                {
+                    country = Session["Country"].ToString().ToLower();
+                }
+                else
+                {
+                    focusAreaname = "NotFound";
+                }
+                
             }
+            
 
             switch (focusAreaname)
             {
                 case "mobile-application-developers":
-                    url = "~/Views/Overview/_mobileAppOverview.cshtml";
+                    url = "~/Views/Overview/MobileAppOverview/_mobileAppOverview.cshtml";
+                    if (country != "")
+                    {
+                        switch(country)
+                        {
+                            case "austin":
+                                url = "~/Views/Overview/MobileAppOverview/_AustinmobilepageOverview.cshtml";
+                                break;
+                            case "boston":
+                                url = "~/Views/Overview/MobileAppOverview/_BostonmobilepageOverview.cshtml";
+                                break;
+                            case "chicago":
+                                url = "~/Views/Overview/MobileAppOverview/_ChicagomobilepageOverview.cshtml";
+                                break;
+                            case "florida":
+                                url = "~/Views/Overview/MobileAppOverview/_FloridamobilepageOverview.cshtml";
+                                break;
+                            case "illinois":
+                                url = "~/Views/Overview/MobileAppOverview/_IllinoismobilepageOverview.cshtml";
+                                break;
+                            case "india":
+                                url = "~/Views/Overview/MobileAppOverview/_IndiamobilepageOverview.cshtml";
+                                break;
+                            case "los-angeles":
+                                url = "~/Views/Overview/MobileAppOverview/_LosAngelesmobilepageOverview.cshtml";
+                                break;
+                            case "new-york":
+                                url = "~/Views/Overview/MobileAppOverview/_NewYorkmobilepageOverview.cshtml";
+                                break;
+                            case "seattle":
+                                url = "~/Views/Overview/MobileAppOverview/_SeattlemobilepageOverview.cshtml";
+                                break;
+                            case "washington":
+                                url = "~/Views/Overview/MobileAppOverview/_WashingtonmobilepageOverview.cshtml";
+                                break;
+                            default:
+                                url = "~/Views/Overview/_iotApplicationOverview.cshtml";
+                                break;
+                        }
+                    }                    
                     break;
                 case "seo-companies":
                     url = "~/Views/Overview/_seoOverview.cshtml";
