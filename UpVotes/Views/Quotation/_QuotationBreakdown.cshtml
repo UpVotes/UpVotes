@@ -1,148 +1,15 @@
 ﻿@model UpVotes.Models.QuotationResponse
-@*<style>
-    .platform-section{
-  text-align: center;
-  width: 75%;
-  background: #f4f4f4;
-  margin: 0 auto;
-  padding: 25px;
-}
-
-.platform-section h2{
-  font-weight: bold;}
-
-
-.platform-section h3{
-  font-weight: bold;
-  color: #727272;
-  padding-bottom: 30px;
-      font-size: 20px;
-}
-
-.os-types,.os-typesFeatures{
- 
-  margin: 0 auto;
-}
-
-.os-section{
-  background: #ffffff;
-}
-
-
-    .h2zone {
-        color: #00A4AD;
-        font-size: 28px;
-    }
-
-    .slideDown { display: none; }
-
-  .os-sectionbreakdown  li {
-    display: block;
-    width: 4vw;
-    height: 4vw;
-    border-radius: 50%;
-    /*border: 1px #a2a2a2 solid;*/
-    text-align: center;
-    margin-left: -50px;
-    margin-top: 1px;
-}
-     .androidselected{      
-        background:url(../images/quotation_sprites.png) 5px -0px no-repeat #EAEAEA;    
-}
-    .iosselected {
-        background:url(../images/quotation_sprites.png) -1023px -0px no-repeat #EAEAEA;   
-    }
-     .windowsselected{
-        background:url(../images/quotation_sprites.png) -1719px -0px no-repeat #EAEAEA;   
-    }
-.hybridselected{
-        background:url(../images/quotation_sprites.png) -1808px -0px no-repeat #EAEAEA;   
-    }
-.templateselected{
-        background:url(../images/quotation_sprites.png) -1911px 5px no-repeat #EAEAEA;   
-    }
-.customselected{
-        background:url(../images/quotation_sprites.png) -2042px 4px no-repeat #EAEAEA;   
-    }
-.animatedselected{
-        background:url(../images/quotation_sprites.png) -2142px 4px no-repeat #EAEAEA;   
-    }
-.gameselected{
-        background:url(../images/quotation_sprites.png) -2250px 0px no-repeat #EAEAEA;   
-    }
-.emailselected{
-        background:url(../images/quotation_sprites.png) -2351px 9px no-repeat #EAEAEA;   
-    }
-.socialselected{
-        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
-    }
-.authorizationselected{
-        background:url(../images/quotation_sprites.png) -177px 5px no-repeat #EAEAEA;   
-    }
-.signupselected{
-        background:url(../images/quotation_sprites.png) -268px 5px no-repeat #EAEAEA;   
-    }
-.yesselected{
-        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
-    }
-.noselected{
-        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;   
-    }
-.dontselected{
-        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
-    }
-.mvpselected{
-        background:url(../images/quotation_sprites.png) -620px 5px no-repeat #EAEAEA;   
-    }
-.basicselected{
-        background:url(../images/quotation_sprites.png) -711px 5px no-repeat #EAEAEA;   
-    } 
-.encryptedselected{
-        background:url(../images/quotation_sprites.png) -807px 5px no-repeat #EAEAEA;   
-    } 
-.completeselected{
-        background:url(../images/quotation_sprites.png) -914px 2px no-repeat #EAEAEA;   
-    } 
-.reviewyesselected{
-        background:url(../images/quotation_sprites.png) -360px 5px no-repeat #EAEAEA;   
-    }
-.reviewnoselected{
-        background:url(../images/quotation_sprites.png) -450px 9px no-repeat #EAEAEA;      
-    }
-.reviewdontselected{
-        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
-    }
-.socialnetselected{
-        background:url(../images/quotation_sprites.png) -87px 5px no-repeat #EAEAEA;   
-    }
-.mediaselected{
-        background:url(../images/quotation_sprites.png) -1116px 5px no-repeat #EAEAEA;   
-    }
-.locationselected{
-        background:url(../images/quotation_sprites.png) -1218px 0px no-repeat #EAEAEA;   
-    }
-.ecommerceselected{
-        background:url(../images/quotation_sprites.png) -1320px 4px no-repeat #EAEAEA;   
-    }
-.newdatbaseselected{
-        background:url(../images/quotation_sprites.png) -1425px 4px no-repeat #EAEAEA;   
-    }
-.existingdatbaseselected{
-        background:url(../images/quotation_sprites.png) -1515px 4px no-repeat #EAEAEA;   
-    }
-.cloudselected{
-        background:url(../images/quotation_sprites.png) -1616px 4px no-repeat #EAEAEA;   
-    }
-.dontdatabaseselected{
-        background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
-    }
-</style>*@
 @Styles.Render("~/Content/Quotationcss")
 @Scripts.Render("~/bundles/Quotation")
+
+@if (ViewBag.isPublicQuote)
+{
+    <div style="height: 75px;"></div>
+}
     <div class="container">
         <!--for carousel -->
         <div class="well">            
-                <input type="image" id="liClose" src="../images/images.png" width="25" height="25" style="border-radius: 17px;cursor: pointer;float: right;margin-top: -38px;margin-right: -39px;border: 1px solid gray;">
+                <input type="image" id="liClose" public=@(ViewBag.isPublicQuote ? "public" : "tab") src="../images/images.png" width="25" height="25" style="border-radius: 17px;cursor: pointer;float: right;margin-top: -38px;margin-right: -39px;border: 1px solid gray;">
             <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 
                 <div class="carousel-inner">
@@ -275,29 +142,7 @@
 
         
     </div>
-    
-<script>
-    //$('#btnShowBreakdown').click(function (e) {
-    //    if ($('#divbreakdown').css('display') == 'none') {
-    //        $('.slideDown').slideToggle();
-    //    }
-    //});
-    //$('#btnEstimateZ1').click(function (e) {
-    //    $('.clsZone1').css('display', 'block');
-    //    $('.clsZone2').css('display', 'none')
-    //    $('.clsZone3').css('display', 'none')
-    //});
-    //$('#btnEstimateZ2').click(function (e) {
-    //    $('.clsZone1').css('display', 'none');
-    //    $('.clsZone2').css('display', 'block')
-    //    $('.clsZone3').css('display', 'none')
-    //});
-    //$('#btnEstimateZ3').click(function (e) {
-    //    $('.clsZone1').css('display', 'none');
-    //    $('.clsZone2').css('display', 'none')
-    //    $('.clsZone3').css('display', 'block')
-    //});
-</script>
+   
    
 
 

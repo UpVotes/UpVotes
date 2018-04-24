@@ -1,864 +1,241 @@
-﻿
-@*<style>
-    .platform-section{
-  text-align: center;
-  width: 75%;
-  background: #f4f4f4;
-  margin: 0 auto;
-  padding: 25px;
+﻿@if (ViewBag.isPublicQuote)
+{  
+    <meta property='og:title' content="How Much Does it Cost to Make an Mobile App in @DateTime.Now.Year? | App Cost Calculator | Upvotes.co" />
+    <meta name='description' content="Find out how much does mobile app development cost for iOS or Android? We've created this handy mobile app cost calculator for make approximate cost." />
 }
+<div id="divPublic">
+    @Scripts.Render("~/bundles/Quotation")    
+    @Styles.Render("~/Content/Quotationcss")
+    @if (ViewBag.isPublicQuote)
+    {
+        <div style="height: 109px;"><h1 class="jumbotron-main"><span style="font-size:26px">How Much Does It Cost To Make An App for iOS and Android? By App Cost Calculator</span></h1></div>
+        <div style="text-align: justify;width: 81%;margin-left: 13em;">
+            <p class="head2p" style="font-size: 16px;width: 99%;">If you're serious about building a high quality app then expect to spend from $50,000. The cost of an app is relative to each feature included. The range can vary from high to low... almost like buying a car. Do you want a older beater to get you from point A to point B? or are you investing in the Benz? featured that bump on app price include user experience (UX) and integration that leverage existing enterprise capabilities.</p></div>
+            <div style="height:109px;"><h2 class="jumbotron-main" style="margin-top:-1em;"><span style="font-size:24px">Estimate the cost of your app idea by calculator.</span></h2></div>
+    }
+            <div class="container">
 
-.platform-section h2{
-  font-weight: bold;}
+                <!--for carousel -->
+                <div class="well" style="height:475px;">
 
+                    <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 
-.platform-section h3{
-  font-weight: bold;
-  color: #727272;
-  padding-bottom: 30px;
-      font-size: 20px;
-}
+                        <div class="carousel-inner">
+                            <div class="item active" id="first_carousel">
+                                <div class="platform-section" style="height: 288px;">
+                                    <h2>LOOKING TO BUILD AN APP?</h2>
+                                    <p class="head2p" style="font-size: 16px;">Find out how much we will cost in the different regions!</p>
+                                    <br />
 
-.os-types,.os-typesFeatures{
- 
-  margin: 0 auto;
-}
+                                    @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
+                                    <div style="position: absolute;width: 100%;"><div class="block612 pull-right" style="margin-right: 56%;width: 18%;" href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
+                                    </div>
+                                </div>
 
-.os-section{
-  background: #ffffff;
-}
+                            </div><!-- First Carousel -->
+                            <div class="item" id="second_carousel" >
 
-.os-types ul,.os-typesFeatures ul{
-  list-style: none;
-  padding: 0;
-     display: inline-block;
-   width: 436px;
- /* margin-bottom: 30px;*/
-}
+                                <div class="platform-section">
 
-.os-types ul li,.os-typesFeatures ul li{
- width: 218px;
-  float: left;
-  padding: 10px;
-  height: 43px;
-  border: 1px solid #f7f6f6;
-      font-weight: bold;
-    text-transform: capitalize;
-  /*color: #aaaaaa;*/
-  position: relative;
-}
+                                    <h2>Platform</h2>
+                                    <h3>Which type of app platform ur going to build?</h3>
+                                    <span style="display:none;color:#1acee2" id="spnAndroid">Please select atleast one Platform to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" id="ulplatform">
+                                            <li class="os-android">Android</li>
+                                            <li class="os-ios">IOS</li>
+                                            <li class="os-windows">Windows</li>
+                                            <li class="os-hybrid">Hybrid</li>
 
-.os-types ul li:hover,.os-types ul li.active,.os-typesFeatures ul li:hover,.os-typesFeatures ul li.active{
-border-bottom: 2px solid #1acee2;
-cursor: pointer;
-}
+                                        </ul>
+                                    </div>
 
-.os-types ul li:before,.os-typesFeatures ul li:before{
-        content: "";
-    margin-left: 12px;
-    width: 20px;
-    height: 30px;
-    background-size: 100%;
-    display: block;
-    position: absolute;
-    left: 10px;
-    background-repeat: no-repeat;
-}
-.os-types ul .os-android:before{
-      /*background-image: url(../images/quote-icon1.png);*/
-        background: url(../images/quotation_sprites.png) 5px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-android:hover:before,.os-types ul .os-android.active:before{
-      /*background-image: url(../images/quote-icon1-2.png);*/
-      
-    background: url(../images/quotation_sprites.png) -26px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-
-.os-types ul .os-ios:before{
-   /*background-image: url(../images/quote-icon2.png);*/
-   background: url(../images/quotation_sprites.png) -706px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-
-.os-types ul .os-ios:hover:before,.os-types ul .os-ios.active:before{
-   /*background-image: url(../images/quote-icon2-2.png);*/
-   background: url(../images/quotation_sprites.png) -737px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-
-.os-types ul .os-windows:before{
-  /*background-image: url(../images/quote-icon3.png);*/
-  background: url(../images/quotation_sprites.png) -1187px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-windows:hover:before,.os-types ul .os-windows.active:before{
-  /*background-image: url(../images/quote-icon3-2.png);*/
-  background: url(../images/quotation_sprites.png) -1218px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-hybrid:before{
-  background: url(../images/quotation_sprites.png) -1250px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-hybrid:hover:before,.os-types ul .os-hybrid.active:before{
-  background: url(../images/quotation_sprites.png) -1281px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-templateui:before{
-  background: url(../images/quotation_sprites.png) -1321px -0px no-repeat;
-    width: 40px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-templateui:hover:before,.os-types ul .os-templateui.active:before{
-  background: url(../images/quotation_sprites.png) -1370px -0px no-repeat;
-    width: 40px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-customui:before{
-  background: url(../images/quotation_sprites.png) -1419px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-customui:hover:before,.os-types ul .os-customui.active:before{
-  background: url(../images/quotation_sprites.png) -1453px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-
-.os-types ul .os-animatedui:before{
-  background: url(../images/quotation_sprites.png) -1484px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-animatedui:hover:before,.os-types ul .os-animatedui.active:before{
-  background: url(../images/quotation_sprites.png) -1522px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-
-.os-types ul .os-gameui:before{
-  background: url(../images/quotation_sprites.png) -1562px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-gameui:hover:before,.os-types ul .os-gameui.active:before{
-  background: url(../images/quotation_sprites.png) -1598px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-emailpwd:before{
-  background: url(../images/quotation_sprites.png) -1632px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 7px;
-}
-.os-types ul .os-emailpwd:hover:before,.os-types ul .os-emailpwd.active:before{
-  background: url(../images/quotation_sprites.png) -1664px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 7px;
-}
-.os-types ul .os-socialntw:before{
-  background: url(../images/quotation_sprites.png) -66px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-socialntw:hover:before,.os-types ul .os-socialntw.active:before{
-  background: url(../images/quotation_sprites.png) -98px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-authorization:before{
-  background: url(../images/quotation_sprites.png) -128px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-authorization:hover:before,.os-types ul .os-authorization.active:before{
-  background: url(../images/quotation_sprites.png) -160px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-nosignup:before{
-  background: url(../images/quotation_sprites.png) -195px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-nosignup:hover:before,.os-types ul .os-nosignup.active:before{
-  background: url(../images/quotation_sprites.png) -227px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-yes:before{
-  background: url(../images/quotation_sprites.png) -258px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1746px;
-    top: 2px;
-}
-.os-types ul .os-yes:hover:before,.os-types ul .os-yes.active:before{
-  background: url(../images/quotation_sprites.png) -290px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1746px;
-    top: 2px;
-}
-.os-types ul .os-no:before{
-  background: url(../images/quotation_sprites.png) -322px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1746px;
-    top: 5px;
-}
-.os-types ul .os-no:hover:before,.os-types ul .os-no.active:before{
-  background: url(../images/quotation_sprites.png) -349px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1746px;
-    top: 5px;
-}
-.os-types ul .os-dontknow:before{
-  background: url(../images/quotation_sprites.png) -367px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-dontknow:hover:before,.os-types ul .os-dontknow.active:before{
-  background: url(../images/quotation_sprites.png) -397px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-mvp:before{
-  background: url(../images/quotation_sprites.png) -435px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-mvp:hover:before,.os-types ul .os-mvp.active:before{
-  background: url(../images/quotation_sprites.png) -467px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-basic:before{
-  background: url(../images/quotation_sprites.png) -500px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-basic:hover:before,.os-types ul .os-basic.active:before{
-  background: url(../images/quotation_sprites.png) -532px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 2px;
-}
-.os-types ul .os-encrypted:before{
-  background: url(../images/quotation_sprites.png) -560px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 8px;
-}
-.os-types ul .os-encrypted:hover:before,.os-types ul .os-encrypted.active:before{
-  background: url(../images/quotation_sprites.png) -597px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 8px;
-}
-.os-types ul .os-completeprotection:before{
-  background: url(../images/quotation_sprites.png) -639px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 8px;
-}
-.os-types ul .os-completeprotection:hover:before,.os-types ul .os-completeprotection.active:before{
-  background: url(../images/quotation_sprites.png) -678px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 8px;
-}
-.os-types ul .os-media:before{
-  background: url(../images/quotation_sprites.png) -775px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-media:hover:before,.os-types ul .os-media.active:before{
-  background: url(../images/quotation_sprites.png) -811px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-location:before{
-  background: url(../images/quotation_sprites.png) -848px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-location:hover:before,.os-types ul .os-location.active:before{
-  background: url(../images/quotation_sprites.png) -882px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-ecommerce:before{
-  background: url(../images/quotation_sprites.png) -915px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-ecommerce:hover:before,.os-types ul .os-ecommerce.active:before{
-  background: url(../images/quotation_sprites.png) -953px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-newdatabase:before{
-  background: url(../images/quotation_sprites.png) -989px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 10px;
-}
-.os-types ul .os-newdatabase:hover:before,.os-types ul .os-newdatabase.active:before{
-  background: url(../images/quotation_sprites.png) -1021px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 10px;
-}
-.os-types ul .os-existingdatabase:before{
-  background: url(../images/quotation_sprites.png) -1057px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 6px;
-}
-.os-types ul .os-existingdatabase:hover:before,.os-types ul .os-existingdatabase.active:before{
-  background: url(../images/quotation_sprites.png) -1090px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 6px;
-}
-.os-types ul .os-clouddatabase:before{
-  background: url(../images/quotation_sprites.png) -1120px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 10px;
-}
-.os-types ul .os-clouddatabase:hover:before,.os-types ul .os-clouddatabase.active:before{
-  background: url(../images/quotation_sprites.png) -1157px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 10px;
-}
-.os-types ul .os-dontknowdb:before{
-  background: url(../images/quotation_sprites.png) -367px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-types ul .os-dontknowdb:hover:before,.os-types ul .os-dontknowdb.active:before{
-  background: url(../images/quotation_sprites.png) -397px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-typesFeatures ul .os-right:before{
-  background: url(../images/quotation_sprites.png) -249px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-.os-typesFeatures ul .os-right:hover:before,.os-typesFeatures ul .os-right.active:before{
-  background: url(../images/quotation_sprites.png) -281px -0px no-repeat;
-    width: 32px;
-    height: 34px;
-    background-size: 1693px;
-    top: 5px;
-}
-/*.platform-class >button{
-  background: #53a8af;
-  color: #ffffff;
-}*/
-
-</style>*@
-@Scripts.Render("~/bundles/Quotation")
-@Styles.Render("~/Content/Quotationcss")
-    <div class="container">
-        <!--for carousel -->
-        <div class="well" style="height:475px;">
-
-            <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-
-                <div class="carousel-inner">
-                    <div class="item active" id="first_carousel">
-                        <div class="platform-section" style="height: 288px;">
-                            <h2>LOOKING TO BUILD AN APP?</h2>
-                            <p class="head2p" style="font-size: 16px;">Find out how much we will cost in the different regions!</p>
-                            <br />
-
-                            @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
-                            <div style="position: absolute;width: 100%;"><div class="block612 pull-right" style="margin-right: 56%;width: 18%;" href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
-                        </div>
-                        </div>
-
-                    </div><!-- First Carousel -->
-                    <div class="item" id="second_carousel" >
-
-                        <div class="platform-section">
-
-                            <h2>Platform</h2>
-                            <h3>Which type of app platform ur going to build?</h3>
-                            <span style="display:none;color:#1acee2" id="spnAndroid">Please select atleast one Platform to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" id="ulplatform">
-                                    <li class="os-android">Android</li>
-                                    <li class="os-ios">IOS</li>
-                                    <li class="os-windows">Windows</li>
-                                    <li class="os-hybrid">Hybrid</li>
-
-                                </ul>
-                            </div>                          
-
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 41%;width:18%;" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="third_carousel">
-                        <div class="platform-section">
-
-                            <h2>Design</h2>
-                            <h3>What would your UI theme be?</h3>
-                            <span style="display:none;color:#1acee2" id="spnTheme">Please select atleast one Theme to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" id="ulTheme">
-                                    <li class="os-templateui">Template UI</li>
-                                    <li class="os-customui" style="padding-left: 36px;">Custom Branded UI</li>
-                                    <li class="os-animatedui">Animated UI</li>
-                                    <li class="os-gameui" style="padding-left: 36px;">Game Animations</li>
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 41%;width:18%;" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
                             </div>
+                            <div class="item" id="third_carousel">
+                                <div class="platform-section">
 
-                        </div>                        
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="fourth_carousel">
-                        <div class="platform-section">
+                                    <h2>Design</h2>
+                                    <h3>What would your UI theme be?</h3>
+                                    <span style="display:none;color:#1acee2" id="spnTheme">Please select atleast one Theme to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" id="ulTheme">
+                                            <li class="os-templateui">Template UI</li>
+                                            <li class="os-customui" style="padding-left: 36px;">Custom Branded UI</li>
+                                            <li class="os-animatedui">Animated UI</li>
+                                            <li class="os-gameui" style="padding-left: 36px;">Game Animations</li>
+                                        </ul>
+                                    </div>
 
-                            <h2>Security</h2>
-                            <h3>How will your users sign up and login into the app?</h3>
-                            <span style="display:none;color:#1acee2" id="spnLoginSecurity">please select atleast one Security to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" style="width: 570px;" id="ulLoginSecurity">
-                                    <li class="os-emailpwd" style="width: 285px;">Email ID and Password</li>
-                                    <li class="os-socialntw" style="width: 285px;">Via Social Networks</li>
-                                    <li class="os-authorization" style="width: 285px;">Using 2 Step Authorization</li>
-                                    <li class="os-nosignup" style="width: 285px;">No Sign Up Required</li>
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
                             </div>
+                            <div class="item" id="fourth_carousel">
+                                <div class="platform-section">
 
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="fifth_carousel">
-                        <div class="platform-section">
+                                    <h2>Security</h2>
+                                    <h3>How will your users sign up and login into the app?</h3>
+                                    <span style="display:none;color:#1acee2" id="spnLoginSecurity">please select atleast one Security to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" style="width: 570px;" id="ulLoginSecurity">
+                                            <li class="os-emailpwd" style="width: 285px;">Email ID and Password</li>
+                                            <li class="os-socialntw" style="width: 285px;">Via Social Networks</li>
+                                            <li class="os-authorization" style="width: 285px;">Using 2 Step Authorization</li>
+                                            <li class="os-nosignup" style="width: 285px;">No Sign Up Required</li>
+                                        </ul>
+                                    </div>
 
-                            <h2>Security</h2>
-                            <h3>Will you allow users to complete a profile?</h3>
-                            <span style="display:none;color:#1acee2" id="spnProfile">Please select atleast one to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" id="ulProfile">
-                                    <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
-                                    <li class="os-no"><span style="margin-left: -60px;">No</span></li>
-                                    <li class="os-dontknow">I don't know</li>                                    
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
                             </div>
+                            <div class="item" id="fifth_carousel">
+                                <div class="platform-section">
 
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="sixth_carousel">
-                        <div class="platform-section">
+                                    <h2>Security</h2>
+                                    <h3>Will you allow users to complete a profile?</h3>
+                                    <span style="display:none;color:#1acee2" id="spnProfile">Please select atleast one to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" id="ulProfile">
+                                            <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
+                                            <li class="os-no"><span style="margin-left: -60px;">No</span></li>
+                                            <li class="os-dontknow">I don't know</li>
+                                        </ul>
+                                    </div>
 
-                            <h2>How do you wish to secure your app?</h2>
-                            <br /><br /><br />
-                            <span style="display:none;color:#1acee2" id="spnSecurity">please select atleast one Security to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" id="ulSecurity">
-                                    <li class="os-mvp">MVP Versions</li>
-                                    <li class="os-basic">Basic Security</li>
-                                    <li class="os-encrypted" style="height:55px;padding-left:40px;"><span>Encrypted Options Communication</span></li>
-                                    <li class="os-completeprotection" style="height:55px;padding-left:55px;">Complete Protection</li>
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
                             </div>
+                            <div class="item" id="sixth_carousel">
+                                <div class="platform-section">
 
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="seventh_carousel">
-                        <div class="platform-section">
+                                    <h2>How do you wish to secure your app?</h2>
+                                    <br /><br /><br />
+                                    <span style="display:none;color:#1acee2" id="spnSecurity">please select atleast one Security to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" id="ulSecurity">
+                                            <li class="os-mvp">MVP Versions</li>
+                                            <li class="os-basic">Basic Security</li>
+                                            <li class="os-encrypted" style="height:55px;padding-left:40px;"><span>Encrypted Options Communication</span></li>
+                                            <li class="os-completeprotection" style="height:55px;padding-left:55px;">Complete Protection</li>
+                                        </ul>
+                                    </div>
 
-                            <h2>Do people rate or review things?</h2>
-                            <br /><br /><br />
-                            <span style="display:none;color:#1acee2" id="spnReviewRate">please select atleast one to proceed</span>
-                            <div class="os-types" style="height:113px;">
-                                <ul class="os-section" id="ulReviewRate">
-                                    <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
-                                    <li class="os-no"><span style="margin-left: -60px;">No</span></li>
-                                    <li class="os-dontknow">I don't know</li>                                    
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
                             </div>
+                            <div class="item" id="seventh_carousel">
+                                <div class="platform-section">
 
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="Eigth_carousel">
-                        <div class="platform-section">
+                                    <h2>Do people rate or review things?</h2>
+                                    <br /><br /><br />
+                                    <span style="display:none;color:#1acee2" id="spnReviewRate">please select atleast one to proceed</span>
+                                    <div class="os-types" style="height:113px;">
+                                        <ul class="os-section" id="ulReviewRate">
+                                            <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
+                                            <li class="os-no"><span style="margin-left: -60px;">No</span></li>
+                                            <li class="os-dontknow">I don't know</li>
+                                        </ul>
+                                    </div>
 
-                            <h2>Which 3rd party services do you need to integrate with?</h2>
-                            <br />
-                            <span style="display:none;color:#1acee2" id="spnService">please select atleast one Service to proceed</span>
-                            <div class="os-types" style="height: 118px;">
-                                <ul class="os-section" id="ulService">
-                                    <li class="os-socialntw"><span>Social Networks</span></li>
-                                    <li class="os-media"><span style="margin-left:-51px">Media</span></li>
-                                    <li class="os-location"><span style="margin-left:-42px">Location</span></li>
-                                    <li class="os-ecommerce">ecommerce <br /><span style="font-size: 11px;color: #545454;position: absolute;top: 25px;left: 66px;">(Existing Online Store)</span></li>
-                                </ul>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
+                            </div>
+                            <div class="item" id="Eigth_carousel">
+                                <div class="platform-section">
+
+                                    <h2>Which 3rd party services do you need to integrate with?</h2>
+                                    <br />
+                                    <span style="display:none;color:#1acee2" id="spnService">please select atleast one Service to proceed</span>
+                                    <div class="os-types" style="height: 118px;">
+                                        <ul class="os-section" id="ulService">
+                                            <li class="os-socialntw"><span>Social Networks</span></li>
+                                            <li class="os-media"><span style="margin-left:-51px">Media</span></li>
+                                            <li class="os-location"><span style="margin-left:-42px">Location</span></li>
+                                            <li class="os-ecommerce">ecommerce <br /><span style="font-size: 11px;color: #545454;position: absolute;top: 25px;left: 66px;">(Existing Online Store)</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
+                            </div>
+                            <div class="item" id="ninth_carousel">
+                                <div class="platform-section">
+
+                                    <h2>Where do you want to save your application data?</h2>
+                                    <br />
+                                    <br />
+                                    <span style="display:none;color:#1acee2" id="spnDatabase">please select atleast one Database to proceed</span>
+                                    <div class="os-types">
+                                        <ul class="os-section" style="width: 482px;" id="ulDatabase">
+                                            <li class="os-newdatabase" style="height:59px;width: 241px;"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
+                                            <li class="os-existingdatabase" style="height:59px;width: 241px;"><span>An Existing Database</span></li>
+                                            <li class="os-clouddatabase" style="height:59px;width: 241px;"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
+                                            <li class="os-dontknowdb" style="height:59px;width: 241px;"><span style="margin-left:-34px;">I don't know</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
+                            </div>
+                            <div class="item" id="tenth_carousel">
+                                <div class="platform-section">
+
+                                    <h2>Do people rate or review things?</h2>
+                                    <br />
+                                    <span style="display:none;color:#1acee2" id="spnFeatures">please select atleast one to proceed</span>
+                                    <div class="os-typesFeatures">
+                                        <ul class="os-section" style="width: 768px;" id="ulFeatures">
+                                            <li class="os-right" style="height:59px;width: 256px;"><span>User Management</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span>Content Management</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 32px;">Reporting and Analytics</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span>Notification Control</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Activity Feeds or User Walls</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Shopping Cart</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Search Option</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Referral System</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span>Chatting Function</span></li>
+                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Integration <span style="font-size:11px;color: #545454;">(CRM, Marketing)</span></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
+                            </div>
+                            <div class="item" id="eleventh_carousel">
+                                <div class="platform-section">
+
+                                    <h2>Almost Finished!</h2>
+                                    <p class="head2p" style="font-size: 16px;">Where should we send you the detailed estimate report?</p>
+                                    <br />
+                                    <br />
+                                    <div class="os-types" style="text-align: center;width: 51%;">
+                                        <input type="text" placeholder="My Name is*" class="form-control" id="txtName">
+                                        <br/>
+                                        <input type="text" placeholder="My Email Id is*" class="form-control" id="txtEmail">
+                                        <br />
+                                        <input type="text" placeholder="My Company Name is" class="form-control" id="txtCompanyName">
+                                        <br />
+                                        <br />
+                                        <img id="imgloader" style="display: none;margin-left: 13em;" src="/images/loader.gif">
+                                        <div class="block612 pull-right" style="margin-right: 52%;width:30%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                        <div class="block612 pull-right" style="margin-right: -64%;width:30%;" href="#carousel-generic" public=@(ViewBag.isPublicQuote ? "public" : "tab") id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
                     </div>
-                    <div class="item" id="ninth_carousel">
-                        <div class="platform-section">
+                </div> <!-- Well -->
 
-                            <h2>Where do you want to save your application data?</h2>
-                            <br />
-                            <br />
-                            <span style="display:none;color:#1acee2" id="spnDatabase">please select atleast one Database to proceed</span>
-                            <div class="os-types">
-                                <ul class="os-section" style="width: 482px;" id="ulDatabase">
-                                    <li class="os-newdatabase" style="height:59px;width: 241px;"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
-                                    <li class="os-existingdatabase" style="height:59px;width: 241px;"><span>An Existing Database</span></li>
-                                    <li class="os-clouddatabase" style="height:59px;width: 241px;"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
-                                    <li class="os-dontknowdb" style="height:59px;width: 241px;"><span style="margin-left:-34px;">I don't know</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="tenth_carousel">
-                        <div class="platform-section">
-
-                            <h2>Do people rate or review things?</h2>
-                            <br />
-                            <span style="display:none;color:#1acee2" id="spnFeatures">please select atleast one to proceed</span>
-                            <div class="os-typesFeatures">
-                                <ul class="os-section" style="width: 768px;" id="ulFeatures">
-                                    <li class="os-right" style="height:59px;width: 256px;"><span>User Management</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span>Content Management</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 32px;">Reporting and Analytics</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span>Notification Control</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Activity Feeds or User Walls</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Shopping Cart</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Search Option</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Referral System</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span>Chatting Function</span></li>
-                                    <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Integration <span style="font-size:11px;color: #545454;">(CRM, Marketing)</span></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                        <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
-                    </div>
-                    <div class="item" id="eleventh_carousel">
-                        <div class="platform-section">
-
-                            <h2>Almost Finished!</h2>
-                            <p class="head2p" style="font-size: 16px;">Where should we send you the detailed estimate report?</p>
-                            <br />
-                            <br />
-                            <div class="os-types" style="text-align: center;width: 51%;">
-                                <input type="text" placeholder="My Name is*" class="form-control" id="txtName">
-                                <br/>
-                                <input type="text" placeholder="My Email Id is*" class="form-control" id="txtEmail">
-                                <br />
-                                <input type="text" placeholder="My Company Name is" class="form-control" id="txtCompanyName">
-                                <br />
-                                <br />
-                                <img id="imgloader" style="display: none;margin-left: 13em;" src="/images/loader.gif">
-                                <div class="block612 pull-right" style="margin-right: 52%;width:30%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -64%;width:30%;" href="#carousel-generic" id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
-                                
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Well -->
-        
-    </div> <!-- Container -->
-    
-    <script>
-        @*var quotationObj = {};
-        var featuresObj = [];
-$(document).ready(function(event) {
-   
-    $('#btnplatform').click(function (e) {
-
-        if($('#ulplatform .active').length > 0)
-        {
-            quotationObj.platform= $('#ulplatform .active').text();
-            $('#spnAndroid').css('display','none');
-        }
-        else
-        {
-            $('#spnAndroid').css('display','block');
-            e.stopPropagation();
-        }
-    });
-
-    $('#btnTheme').click(function (e) {
-
-        if ($('#ulTheme .active').length > 0) {
-            quotationObj.Theme = $('#ulTheme .active').text();
-            $('#spnTheme').css('display','none');
-        }
-        else {
-            $('#spnTheme').css('display','block');
-            e.stopPropagation();
-        }
-    });
-    $('#btnLoginSecurity').click(function (e) {
-
-        if ($('#ulLoginSecurity .active').length > 0) {
-            quotationObj.LoginSecurity = $('#ulLoginSecurity .active').text();
-            $('#spnLoginSecurity').css('display','none');
-        }
-        else {
-            $('#spnLoginSecurity').css('display','block');
-            e.stopPropagation();
-        }
-    });
-    $('#btnProfile').click(function (e) {
-        if ($('#ulProfile .active').length > 0) {
-            quotationObj.Profile = $('#ulProfile .active').text();
-            $('#spnProfile').css('display','none');
-        }
-        else {
-            $('#spnProfile').css('display','block');
-            e.stopPropagation();
-        }
-    });
-    $('#btnSecurity').click(function (e) {
-        if ($('#ulSecurity .active').length > 0) {
-            quotationObj.Security = $('#ulSecurity .active').text();
-            $('#spnSecurity').css('display','none');
-        }
-        else {
-            $('#spnSecurity').css('display','block');            
-            e.stopPropagation();
-        }
-    });
-    $('#btnReviewRate').click(function (e) {
-        if ($('#ulReviewRate .active').length > 0) {
-            quotationObj.ReviewRate = $('#ulReviewRate .active').text();
-            $('#spnReviewRate').css('display','none');  
-        }
-        else {
-            $('#spnReviewRate').css('display','block');              
-            e.stopPropagation();
-        }
-    });
-    $('#btnService').click(function (e) {
-        if ($('#ulService .active').length > 0) {
-            quotationObj.Service = $('#ulService .active').text();
-            $('#spnService').css('display','none');  
-        }
-        else {            
-            $('#spnService').css('display','block');  
-            e.stopPropagation();
-        }
-    });
-    $('#btnDatabase').click(function (e) {
-
-        if ($('#ulDatabase .active').length > 0) {
-            quotationObj.Database = $('#ulDatabase .active').text();
-            $('#spnDatabase').css('display','none'); 
-        }
-        else {            
-            $('#spnDatabase').css('display','block'); 
-            e.stopPropagation();
-        }
-    });
-    $('#btnFeatures').click(function (e) {
-        
-        if ($('#ulFeatures .active').length > 0) {
-            var featurestr = '';
-            $('#ulFeatures .active').each(function (key, val) {                
-                featurestr = featurestr+$(this).text()+'|';
-            });
-            quotationObj.Features = featurestr;
-            $('#spnFeatures').css('display','none'); 
-        }
-        else {
-            $('#spnFeatures').css('display','block'); 
-            e.stopPropagation();
-        }
-    });
-
-    $(".os-types li").click(function () {
-        $(this).closest("li").addClass("active").siblings().removeClass("active");
-    });
-    $(".os-typesFeatures li").click(function () {
-        if ($(this).closest("li").hasClass('active')) {
-            $(this).closest("li").removeClass("active");
-        }
-        else
-        {
-            $(this).closest("li").addClass("active")
-        }
-    });
-
-    $('#btnReport').click(function (e) {
-
-        var emailid = $('#txtEmail').val();
-        var name = $('#txtName').val();
-        if(name.trim() == "")
-        {
-            $('#txtName').css('border','1px solid #1acee2');
-            return;
-        }
-        else
-        {
-            $('#txtName').css('border','');
-            quotationObj.Name = name.trim();
-        }
-
-        
-        if(emailid != "")
-        {
-            email_regex = /^[a-zA-Z0-9._-]+@("@")[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-            if(!email_regex.test(emailid))
-            {                
-                $('#txtEmail').css('border','1px solid #1acee2');
-                return;
-            }
-            else
-            {
-                $('#txtEmail').css('border','');
-                quotationObj.EmailId=emailid;
-            }
-        }
-        else{
-            $('#txtEmail').css('border','1px solid #1acee2');
-            return;
-        }
-        $('#imgloader').css('display','block');
-        quotationObj.CompanyName = $('#txtCompanyName').val().trim();
-
-        $.ajax({
-            url: $.absoluteurl('/Quotation/GetQuote'),            
-            data: {platform:quotationObj.platform,Theme:quotationObj.Theme,LoginSecurity:quotationObj.LoginSecurity,Profile:quotationObj.Profile,Security:quotationObj.Security,ReviewRate:quotationObj.ReviewRate,Service:quotationObj.Service,Database:quotationObj.Database,featuresstring:quotationObj.Features,EmailId:quotationObj.EmailId,Name:quotationObj.Name,CompanyName:quotationObj.CompanyName},
-            type: "POST",
-            success: function (response) {
-                $('#imgloader').css('display','none');
-                $('#CustomQuote').html("");
-                $('#CustomQuote').html(response);
-            }
-        });
-    });
-
-    
-});*@
-       
-    </script>
+            </div> <!-- Container -->
+        </div>
 
 
-   
 
 

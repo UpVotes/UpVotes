@@ -413,7 +413,7 @@ namespace UpVotes.Controllers
                                 url = "~/Views/Overview/MobileAppOverview/_WashingtonmobilepageOverview.cshtml";
                                 break;
                             default:
-                                url = "~/Views/Overview/_iotApplicationOverview.cshtml";
+                                url = "~/Views/UnderConstruction/_underConstruction.cshtml";
                                 break;
                         }
                     }                    
@@ -455,7 +455,7 @@ namespace UpVotes.Controllers
                     url = "~/Views/Overview/_iotApplicationOverview.cshtml";
                     break;
                 default:
-                    url = "~/Views/Overview/_iotApplicationOverview.cshtml";
+                    url = "~/Views/UnderConstruction/_underConstruction.cshtml";
                     break;
             }
             return PartialView(url);

@@ -115,7 +115,13 @@ $(document).ready(function (event) {
         }
     });
 
-    $('#btnReport').click(function (e) {        
+    $('#btnReport').click(function (e) {
+        var publicVar = $(this).attr('public');
+        var url = '/Quotation/GetQuote';
+        if (publicVar == "public") {
+            url = '/Resources/GetQuote';
+        }
+        
         var emailid = $('#txtEmail').val();
         var name = $('#txtName').val();
         if (name.trim() == "") {
@@ -146,15 +152,22 @@ $(document).ready(function (event) {
         }
         $('#imgloader').css('display', 'block');
         quotationObj.CompanyName = $('#txtCompanyName').val().trim();
-
+        
         $.ajax({
-            url: $.absoluteurl('/Quotation/GetQuote'),
+            url: $.absoluteurl(url),
             data: { platform: quotationObj.platform, Theme: quotationObj.Theme, LoginSecurity: quotationObj.LoginSecurity, Profile: quotationObj.Profile, Security: quotationObj.Security, ReviewRate: quotationObj.ReviewRate, Service: quotationObj.Service, Database: quotationObj.Database, featuresstring: quotationObj.Features, EmailId: quotationObj.EmailId, Name: quotationObj.Name, CompanyName: quotationObj.CompanyName },
             type: "POST",
             success: function (response) {
-                $('#imgloader').css('display', 'none');
-                $('#CustomQuote').html("");
-                $('#CustomQuote').html(response);
+                if (publicVar == "tab") {
+                    $('#imgloader').css('display', 'none');
+                    $('#CustomQuote').html("");
+                    $('#CustomQuote').html(response);
+                }
+                else {
+                    $('#imgloader').css('display', 'none');
+                    $('#divPublic').html("");
+                    $('#divPublic').html(response);
+                }
             }
         });
     });
@@ -180,13 +193,25 @@ $(document).ready(function (event) {
         $('.clsZone3').css('display', 'block')
     });
     $('#liClose').click(function (e) {
-        
+        var publicVar = $(this).attr('public');
+        var url = '/Quotation/GetQuotation';
+        if (publicVar == "public") {
+            url = '/Resources/GetQuotation';
+        }
         $.ajax({
-            url: $.absoluteurl('/Quotation/GetQuotation'),
+            url: $.absoluteurl(url),
             type: "POST",
-            success: function (response) {                
+            success: function (response) {
+                if (publicVar == "tab")
+                {
                 $('#CustomQuote').html("");
                 $('#CustomQuote').html(response);
+            }
+            else
+            {
+                $('#divPublic').html("");
+                $('#divPublic').html(response);
+            }
             }
         });
     });
