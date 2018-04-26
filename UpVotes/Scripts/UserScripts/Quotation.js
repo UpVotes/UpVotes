@@ -119,7 +119,7 @@ $(document).ready(function (event) {
         var publicVar = $(this).attr('public');
         var url = '/Quotation/GetQuote';
         if (publicVar == "public") {
-            url = '/Resources/GetQuote';
+            url = '/Blogs/GetQuote';
         }
         
         var emailid = $('#txtEmail').val();
@@ -196,7 +196,7 @@ $(document).ready(function (event) {
         var publicVar = $(this).attr('public');
         var url = '/Quotation/GetQuotation';
         if (publicVar == "public") {
-            url = '/Resources/GetQuotation';
+            url = '/Blogs/GetQuotation';
         }
         $.ajax({
             url: $.absoluteurl(url),

@@ -7,25 +7,41 @@ using UpVotes.Models;
 
 namespace UpVotes.Controllers
 {
-    public class ResourcesController : Controller
+    public class BlogsController : Controller
     {
-        // GET: Resouces
-        public ActionResult Resource()
+        
+        public ActionResult Blog(string id)
         {
-            return View("~/Views/UnderConstruction/_underConstruction.cshtml");
-        }
-        public ActionResult ResourceChild(string id)
-        {
+            Session["calledPage"] = "H";
             string url = "~/Views/UnderConstruction/_underConstruction.cshtml";
             ViewBag.isPublicQuote = false;
-            if (id == "how-much-cost-to-make-an-mobile-app")
+            if (!string.IsNullOrEmpty(id))
             {
-                url = "~/Views/Quotation/_Quotation.cshtml";
-                ViewBag.Title = "How Much Does it Cost to Make an Mobile App in " + DateTime.Now.Year +"?| App Cost Calculator | Upvotes.co";
-                ViewBag.isPublicQuote = true;
+                if(id.ToLower() == "how-much-cost-to-make-an-mobile-app")
+                {
+                    ViewBag.isPublicQuote = true;
+                    ViewBag.Title = "How Much Does it Cost to Make an Mobile App in " + DateTime.Now.Year + "?| App Cost Calculator | Upvotes.co";
+                    url = "~/Views/Quotation/_Quotation.cshtml";
+                }
+                else
+                {
+                    url="~/Views/Error/PageNotFound.cshtml";
+                }
             }
             return View(url);
         }
+        //public ActionResult ResourceChild(string id)
+        //{
+        //    string url = "~/Views/UnderConstruction/_underConstruction.cshtml";
+        //    ViewBag.isPublicQuote = false;
+        //    if (id == "how-much-cost-to-make-an-mobile-app")
+        //    {
+        //        url = "~/Views/Quotation/_Quotation.cshtml";
+        //        ViewBag.Title = "How Much Does it Cost to Make an Mobile App in " + DateTime.Now.Year +"?| App Cost Calculator | Upvotes.co";
+        //        ViewBag.isPublicQuote = true;
+        //    }
+        //    return View(url);
+        //}
         public ActionResult GetQuotation()
         {            
             ViewBag.isPublicQuote = true;
