@@ -492,8 +492,8 @@ cursor: pointer;
 
   .os-sectionbreakdown  li {
     display: block;
-    width: 4vw;
-    height: 4vw;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     /*border: 1px #a2a2a2 solid;*/
     text-align: center;
@@ -590,3 +590,120 @@ cursor: pointer;
 .dontdatabaseselected{
         background:url(../images/quotation_sprites.png) -530px 5px no-repeat #EAEAEA;   
     }
+
+
+.customquote{
+
+    width:100%;
+}
+
+
+.os-types ul li, .os-typesFeatures ul li{
+    font-size:12px;
+    height:52px;
+}
+
+.os-types ul li.os-encrypted,.os-typesFeatures ul li.os-right{
+    text-align:left;
+}
+
+.os-typesFeatures ul li.os-right > span,.os-types ul li.os-encrypted span{
+        padding-left: 64px;
+    display: inline-block;
+}
+
+.well .block612,.well .block613{
+    float:none;
+    display:inline-block;
+    width:19%;
+}
+.col-sm-4 .block612,.col-sm-4 .block613{
+    width:100% !important;
+}
+
+.center-align-button{
+        width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.quote-break{
+    width:30% !important;
+}
+.form-csutom-up{
+    width:50%;
+}
+
+.customquote .rt-pg-menu-desc:after{
+    left:40%;
+}
+
+ .review-page .rt-pg-menu-desc:after{
+    left:58%;
+}
+#Overview .rt-pg-menu-desc:after{
+    left:76%;
+}
+ #accordion{
+     float: left;
+    margin-top: 10px;
+    width: 100%;
+ }
+
+@media screen and (max-width: 991px) {
+    .os-types ul li, .os-typesFeatures ul li{
+    font-size:10px;
+    height:43px;
+}
+
+    .os-sectionbreakdown li{
+        margin-left: -60px;
+    }
+    .well .quote-break{
+        width:32%;
+    }
+    .well .block612, .well .block613{
+     width:32%;
+    }
+    .customquote .rt-pg-menu-desc:after {
+    left: 40%;
+    top: -24PX;
+}
+}
+
+
+@media screen and (max-width: 767px) {
+    .customquote .rt-pg-menu-desc:after {
+    left: 26%;
+    top: -24PX;
+}
+    .platform-section h2{
+        font-size:18px;
+    }
+     final-sec{
+         text-align:center;
+     }
+    .quote-break{
+    width:100% !important;
+}
+    .os-sectionbreakdown{
+        padding:0;
+    }
+    .os-sectionbreakdown li{
+        margin:0 auto;
+    }
+
+   .platform-section{
+        width:100%;
+        padding:0;
+    }
+   .os-types ul li, .os-typesFeatures ul li{
+       float:none;
+   }
+   .os-types ul, .os-typesFeatures ul{
+       width:auto;
+   }
+   .well .block612,.well .block613{
+       width:48%;
+   }
+}

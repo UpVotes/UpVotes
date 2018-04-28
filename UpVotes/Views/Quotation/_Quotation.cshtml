@@ -6,6 +6,8 @@
 <div id="divPublic">
     @Scripts.Render("~/bundles/Quotation")    
     @Styles.Render("~/Content/Quotationcss")
+    
+    
     @if (ViewBag.isPublicQuote)
     {
         <div style="height: 109px;"><h1 class="jumbotron-main"><span style="font-size:26px">How Much Does It Cost To Make An App for iOS and Android? By App Cost Calculator</span></h1></div>
@@ -13,10 +15,21 @@
             <p class="head2p" style="font-size: 16px;width: 99%;">If you're serious about building a high quality app then expect to spend from $50,000. The cost of an app is relative to each feature included. The range can vary from high to low... almost like buying a car. Do you want a older beater to get you from point A to point B? or are you investing in the Benz? featured that bump on app price include user experience (UX) and integration that leverage existing enterprise capabilities.</p></div>
             <div style="height:109px;"><h2 class="jumbotron-main" style="margin-top:-1em;"><span style="font-size:24px">Estimate the cost of your app idea by calculator.</span></h2></div>
     }
-            <div class="container">
+            <div class="@(ViewBag.isPublicQuote ? "container" : "container customquote")">
+        @if (!ViewBag.isPublicQuote)
+        {
+                <div class="rt-pg-menu-desc custom-quote-arrow">
+                    <div class="rt-pg-menu-desc-lbl">
+                      MOBILE APP CALCULATOR
+                    </div>
+                    <div class="rt-pg-menu-desc-filter">
+                       
+                    </div>
+                </div>
+        }
 
                 <!--for carousel -->
-                <div class="well" style="height:475px;">
+                <div class="well" style=@(ViewBag.isPublicQuote ? "" : "margin-top:60px;")>
 
                     <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 
@@ -28,7 +41,7 @@
                                     <br />
 
                                     @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
-                                    <div style="position: absolute;width: 100%;"><div class="block612 pull-right" style="margin-right: 56%;width: 18%;" href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
+                                    <div><div class="block612"  href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
                                     </div>
                                 </div>
 
@@ -51,8 +64,9 @@
                                     </div>
 
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 41%;width:18%;" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
+                                </div></div>
                             <div class="item" id="third_carousel">
                                 <div class="platform-section">
 
@@ -69,28 +83,35 @@
                                     </div>
 
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
+                                </div>
+</div>
                             <div class="item" id="fourth_carousel">
                                 <div class="platform-section">
 
                                     <h2>Security</h2>
                                     <h3>How will your users sign up and login into the app?</h3>
                                     <span style="display:none;color:#1acee2" id="spnLoginSecurity">please select atleast one Security to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" style="width: 570px;" id="ulLoginSecurity">
-                                            <li class="os-emailpwd" style="width: 285px;">Email ID and Password</li>
-                                            <li class="os-socialntw" style="width: 285px;">Via Social Networks</li>
-                                            <li class="os-authorization" style="width: 285px;">Using 2 Step Authorization</li>
-                                            <li class="os-nosignup" style="width: 285px;">No Sign Up Required</li>
-                                        </ul>
-                                    </div>
+                               
 
-                                </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+
+                                        <div class="os-types">
+                                            <ul class="os-section" id="ulLoginSecurity">
+                                                <li class="os-emailpwd">Email ID and Password</li>
+                                                <li class="os-socialntw">Via Social Networks</li>
+                                                <li class="os-authorization">Using 2 Step Authorization</li>
+                                                <li class="os-nosignup">No Sign Up Required</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
+                               </div>
+                                 </div>
                             <div class="item" id="fifth_carousel">
                                 <div class="platform-section">
 
@@ -99,16 +120,18 @@
                                     <span style="display:none;color:#1acee2" id="spnProfile">Please select atleast one to proceed</span>
                                     <div class="os-types">
                                         <ul class="os-section" id="ulProfile">
-                                            <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
-                                            <li class="os-no"><span style="margin-left: -60px;">No</span></li>
+                                            <li class="os-yes"><span>Yes</span></li>
+                                            <li class="os-no"><span>No</span></li>
                                             <li class="os-dontknow">I don't know</li>
                                         </ul>
                                     </div>
 
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
+                                </div>
+                                </div>
                             <div class="item" id="sixth_carousel">
                                 <div class="platform-section">
 
@@ -119,51 +142,61 @@
                                         <ul class="os-section" id="ulSecurity">
                                             <li class="os-mvp">MVP Versions</li>
                                             <li class="os-basic">Basic Security</li>
-                                            <li class="os-encrypted" style="height:55px;padding-left:40px;"><span>Encrypted Options Communication</span></li>
-                                            <li class="os-completeprotection" style="height:55px;padding-left:55px;">Complete Protection</li>
+                                            <li class="os-encrypted" ><span>Encrypted Options Communication</span></li>
+                                            <li class="os-completeprotection" >Complete Protection</li>
                                         </ul>
                                     </div>
 
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
+                               </div>
+                                
+                                 </div>
                             <div class="item" id="seventh_carousel">
                                 <div class="platform-section">
 
                                     <h2>Do people rate or review things?</h2>
                                     <br /><br /><br />
                                     <span style="display:none;color:#1acee2" id="spnReviewRate">please select atleast one to proceed</span>
-                                    <div class="os-types" style="height:113px;">
+                                    <div class="os-types">
                                         <ul class="os-section" id="ulReviewRate">
-                                            <li class="os-yes"><span style="margin-left: -60px;">Yes</span></li>
-                                            <li class="os-no"><span style="margin-left: -60px;">No</span></li>
+                                            <li class="os-yes"><span >Yes</span></li>
+                                            <li class="os-no"><span >No</span></li>
                                             <li class="os-dontknow">I don't know</li>
                                         </ul>
                                     </div>
 
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
+                               </div>
+                                
+                                 </div>
                             <div class="item" id="Eigth_carousel">
                                 <div class="platform-section">
 
                                     <h2>Which 3rd party services do you need to integrate with?</h2>
                                     <br />
                                     <span style="display:none;color:#1acee2" id="spnService">please select atleast one Service to proceed</span>
-                                    <div class="os-types" style="height: 118px;">
+                                    <div class="os-types" >
                                         <ul class="os-section" id="ulService">
                                             <li class="os-socialntw"><span>Social Networks</span></li>
-                                            <li class="os-media"><span style="margin-left:-51px">Media</span></li>
-                                            <li class="os-location"><span style="margin-left:-42px">Location</span></li>
-                                            <li class="os-ecommerce">ecommerce <br /><span style="font-size: 11px;color: #545454;position: absolute;top: 25px;left: 66px;">(Existing Online Store)</span></li>
+                                            <li class="os-media"><span>Media</span></li>
+                                            <li class="os-location"><span>Location</span></li>
+                                            <li class="os-ecommerce">ecommerce <br /><span>(Existing Online Store)</span></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
+                               </div>
+                                
+                                 </div>
                             <div class="item" id="ninth_carousel">
                                 <div class="platform-section">
 
@@ -172,17 +205,20 @@
                                     <br />
                                     <span style="display:none;color:#1acee2" id="spnDatabase">please select atleast one Database to proceed</span>
                                     <div class="os-types">
-                                        <ul class="os-section" style="width: 482px;" id="ulDatabase">
-                                            <li class="os-newdatabase" style="height:59px;width: 241px;"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
-                                            <li class="os-existingdatabase" style="height:59px;width: 241px;"><span>An Existing Database</span></li>
-                                            <li class="os-clouddatabase" style="height:59px;width: 241px;"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
-                                            <li class="os-dontknowdb" style="height:59px;width: 241px;"><span style="margin-left:-34px;">I don't know</span></li>
+                                        <ul class="os-section"  id="ulDatabase">
+                                            <li class="os-newdatabase"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
+                                            <li class="os-existingdatabase"><span>An Existing Database</span></li>
+                                            <li class="os-clouddatabase"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
+                                            <li class="os-dontknowdb"><span>I don't know</span></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
+                               </div>
+                                
+                                 </div>
                             <div class="item" id="tenth_carousel">
                                 <div class="platform-section">
 
@@ -190,31 +226,34 @@
                                     <br />
                                     <span style="display:none;color:#1acee2" id="spnFeatures">please select atleast one to proceed</span>
                                     <div class="os-typesFeatures">
-                                        <ul class="os-section" style="width: 768px;" id="ulFeatures">
-                                            <li class="os-right" style="height:59px;width: 256px;"><span>User Management</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span>Content Management</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 32px;">Reporting and Analytics</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span>Notification Control</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Activity Feeds or User Walls</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Shopping Cart</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Search Option</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: -32px;">Referral System</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span>Chatting Function</span></li>
-                                            <li class="os-right" style="height:59px;width: 256px;"><span style="margin-left: 40px;">Integration <span style="font-size:11px;color: #545454;">(CRM, Marketing)</span></span></li>
+                                        <ul class="os-section" id="ulFeatures">
+                                            <li class="os-right"><span>User Management</span></li>
+                                            <li class="os-right"><span>Content Management</span></li>
+                                            <li class="os-right"><span>Reporting and Analytics</span></li>
+                                            <li class="os-right"><span>Notification Control</span></li>
+                                            <li class="os-right"><span >Activity Feeds or User Walls</span></li>
+                                            <li class="os-right"><span >Shopping Cart</span></li>
+                                            <li class="os-right"><span >Search Option</span></li>
+                                            <li class="os-right"><span >Referral System</span></li>
+                                            <li class="os-right" ><span>Chatting Function</span></li>
+                                            <li class="os-right"><span>Integration <span >(CRM, Marketing)</span></span></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="block612 pull-right" style="margin-right: 50%;width:14%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                <div class="block612 pull-right" style="margin-right: -30%;width:14%;" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
-                            </div>
+                                <div class="center-align-button">
+                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
+                                </div>
+                                
+                                </div>
                             <div class="item" id="eleventh_carousel">
-                                <div class="platform-section">
+                                <div class="platform-section form-csutom-up">
 
                                     <h2>Almost Finished!</h2>
                                     <p class="head2p" style="font-size: 16px;">Where should we send you the detailed estimate report?</p>
                                     <br />
                                     <br />
-                                    <div class="os-types" style="text-align: center;width: 51%;">
+                                    <div class="os-types">
                                         <input type="text" placeholder="My Name is*" class="form-control" id="txtName">
                                         <br/>
                                         <input type="text" placeholder="My Email Id is*" class="form-control" id="txtEmail">
@@ -223,10 +262,11 @@
                                         <br />
                                         <br />
                                         <img id="imgloader" style="display: none;margin-left: 13em;" src="/images/loader.gif">
-                                        <div class="block612 pull-right" style="margin-right: 52%;width:30%;" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                        <div class="block612 pull-right" style="margin-right: -64%;width:30%;" href="#carousel-generic" public=@(ViewBag.isPublicQuote ? "public" : "tab") id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
-
-                                    </div>
+                                        <div class="center-align-button">
+                                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                                            <div class="block612" href="#carousel-generic" public=@(ViewBag.isPublicQuote ? "public" : "tab") id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>

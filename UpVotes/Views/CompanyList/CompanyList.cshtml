@@ -86,13 +86,23 @@
         </div>
     </div>
 
-    <div id="userReviews" class="container tab-pane fade in active" style="display:none;">
+    <div id="userReviews" class="container tab-pane fade" >
         @Html.Partial("~/Views/CompanyList/_UsersReviewsList.cshtml", "")
     </div>
-    <div id="Overview" class="container tab-pane fade in active" style="display:none;">
-        @{Html.RenderAction("GetOverViewPage", "CompanyList");}        
+    <div id="Overview" class="container tab-pane fade">
+        <div class="rt-pg-menu-desc">
+            <div class="rt-pg-menu-desc-lbl">
+                <span>OVERVIEW</span>
+            </div>
+            <div class="rt-pg-menu-desc-filter">
+
+            </div>
+        </div>
+        <div  style="margin-top:80px;">
+            @{Html.RenderAction("GetOverViewPage", "CompanyList");}
+        </div>    
     </div> 
-    <div id="CustomQuote" class="container tab-pane fade in active" style="display:none;">  
+    <div id="CustomQuote" class="container tab-pane fade">  
         @{Html.RenderAction("GetQuotation", "Quotation");}       
     </div>   
 </div>

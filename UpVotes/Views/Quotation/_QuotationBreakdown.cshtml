@@ -14,20 +14,20 @@
 
                 <div class="carousel-inner">
                     <div class="item active" id="first_carousel">
-                        <div class="platform-section" style="height: 343px;border-bottom:1px solid #D6D6D6">
-                            <h2><span style="font-size: 18px;color:#676767">Here's your Cost Estimate in Different Geographies! with Based on Current Industry:</span></h2>
+                        <div class="platform-section">
+                            <h2><span>Here's your Cost Estimate in Different Geographies! with Based on Current Industry:</span></h2>
                             <br />
                             
-                            <h2><span style="font-size: 37px;color:#00A4AD">Your app estimate</span></h2>
+                            <h2><span>Your app estimate</span></h2>
                             
                             <h2>
-                                <span style="font-size: 26px;display:block;" id="spnTotalAmountZone1" class="clsZone1">$@Convert.ToInt32(Model.TotalMinZone1).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone1).ToString("#,##0")</span>
-                                <span style="font-size: 26px;display:none;" id="spnTotalAmountZone2" class="clsZone2">$@Convert.ToInt32(Model.TotalMinZone2).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone2).ToString("#,##0")</span>
-                                <span style="font-size: 26px;display:none;" id="spnTotalAmountZone3" class="clsZone3">$@Convert.ToInt32(Model.TotalMinZone3).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone3).ToString("#,##0")</span>
+                                <span  id="spnTotalAmountZone1" style="display:block;" class="clsZone1">$@Convert.ToInt32(Model.TotalMinZone1).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone1).ToString("#,##0")</span>
+                                <span  id="spnTotalAmountZone2" class="clsZone2" style="display:none;">$@Convert.ToInt32(Model.TotalMinZone2).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone2).ToString("#,##0")</span>
+                                <span  id="spnTotalAmountZone3" class="clsZone3" style="display:none;">$@Convert.ToInt32(Model.TotalMinZone3).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone3).ToString("#,##0")</span>
                             </h2>
                             
                             @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
-                            <div style="position: absolute;width: 100%;"><div class="block612 pull-right" style="margin-right: 56%;width: 18%;" id="btnShowBreakdown"><span><i aria-hidden="true"></i>SHOW BREAKDOWN</span></div>
+                            <div class="center-align-button" ><div class="block612 quote-break"  id="btnShowBreakdown"><span><i aria-hidden="true"></i>SHOW BREAKDOWN</span></div>
                         </div>
                         </div>
 
@@ -40,26 +40,26 @@
 
             <div id="divbreakdown" class="slideDown">
     
-                        <div class="platform-section row" style="height: 230px;border-top:1px solid white">
+                        <div class="platform-section row">
                             <div class="col-sm-4" style="text-align:center">
                                 <h2><span class="h2zone">Zone-1</span></h2>
                                 <p>(USA, Canada, Western Europe &amp; Australia)</p>
-                                <div style="position: absolute;width: 100%;">
-                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ1"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                <div>
+                                    <div class="block612"  id="btnEstimateZ1"><span><i aria-hidden="true"></i>Estimate</span></div>
                                 </div>
                                 </div>
                             <div class="col-sm-4" style="text-align:center">
                                 <h2><span class="h2zone">Zone-2</span></h2>
                                 <p>(Eastern Europe, Middle East, Central &amp; South America)</p>
-                                <div style="position: absolute;width: 100%;">
-                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ2"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                <div>
+                                    <div class="block612"  id="btnEstimateZ2"><span><i aria-hidden="true"></i>Estimate</span></div>
                                 </div>
                             </div>
                             <div class="col-sm-4" style="text-align:center">
                                 <h2><span class="h2zone">Zone-3</span></h2>
                                 <p>(South Asia, East Asia, South East Asia &amp; Africa)</p>
-                                <div style="position: absolute;width: 100%;">
-                                    <div class="block612" style="margin-left: 23%;" id="btnEstimateZ3"><span><i aria-hidden="true"></i>Estimate</span></div>
+                                <div>
+                                    <div class="block612"  id="btnEstimateZ3"><span><i aria-hidden="true"></i>Estimate</span></div>
                                 </div>
                             </div>
                         </div>
@@ -83,13 +83,13 @@
                                     }
                                 </ul>
                             </div>
-                            <div class="col-sm-8" style="text-align:left;">
+                            <div class="col-sm-8 final-sec">
                                 <div style="margin-top: 10px;">
                                     <span style="font-size:15px;"><strong>@quotation.Question</strong></span>
                                     <br><p>@quotation.Answer</p>
                                 </div>
                             </div>
-                            <div class="col-sm-3" style="text-align:left;">
+                            <div class="col-sm-3  final-sec">
                                 <div style="margin-top: 10px;">
                                     <span style="font-size:15px;color:#00A4AD;display:block" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
                                     <span style="font-size:15px;color:#00A4AD;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
@@ -123,9 +123,9 @@
                                 <span style="font-size:15px;margin-left:-13px;position: absolute;margin-top: 7px;"><strong>@quotation.Ctypes</strong></span>
                             </div>
                             <div class="col-sm-5" style="height: 43px;border-top:1px solid #EAEAEA;border-right:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA">
-                                <span style="font-size:15px;position: absolute;margin-top: 7px;" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
-                                <span style="font-size:15px;position: absolute;margin-top: 7px;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
-                                <span style="font-size:15px;position: absolute;margin-top: 7px;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
+                                <span style="font-size:15px;margin-top: 7px;" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
+                                <span style="font-size:15px;margin-top: 7px;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
+                                <span style="font-size:15px;margin-top: 7px;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
                             </div>
                         </div>                        
                     }

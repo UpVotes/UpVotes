@@ -133,11 +133,16 @@
             error: function (a, b, c) { debugger; }
         });
     });
+    $(".userReviews").click(function () {
+        $('#userReviews').css("display", "")
+    });
     $(".Over-view").click(function () {   
         $('#Overview').css("display", "")
+        $('#userReviews').css("display", "none")
     });
     $(".classquote").click(function () {        
         $('#CustomQuote').css("display", "");
+        $('#userReviews').css("display", "none")
     });
     $.GetCompanyReviews = function (companyName) {
         $.ajax({
