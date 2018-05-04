@@ -135,5 +135,15 @@ namespace UpVotes.Controllers
                 return "Please login to provide thanks note.";
             }
         }
+
+        public void RemoveCompanyCache(string id)
+        {
+            if (CacheHandler.Exists(id))
+            {
+                CacheHandler.Clear(id);
+            }
+
+        }
+
     }
 }
