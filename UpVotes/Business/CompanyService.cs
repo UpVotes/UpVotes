@@ -70,25 +70,46 @@ namespace UpVotes.Business
                 {
                     foreach (CompanyEntity company in companyViewModel.CompanyList)
                     {
-                        if (companyName != "0" && company.CompanyFocus != null && company.CompanyFocus.Count > 0)
+                        if (companyName != "0" )
                         {
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append("[");
-                            int p = 0;
-                            foreach (var item in company.CompanyFocus)
+                            if(company.CompanyFocus != null && company.CompanyFocus.Count > 0)
                             {
-                                p = p + 1;
-                                if (p < company.CompanyFocus.Count)
-                                {
-                                    sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + "},");
-                                }
-                                else
-                                {
-                                    sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + ", sliced: true, selected: true },");                                    
-                                }
+                                companyViewModel.PrimaryCompanyFocus = company.CompanyFocus;
                             }
-                                                        
-                            companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' }) + "]";
+
+                            if (company.IndustialCompanyFocus != null && company.IndustialCompanyFocus.Count > 0)
+                            {
+                                companyViewModel.IndustialCompanyFocus = company.IndustialCompanyFocus;
+                            }
+
+                            if (company.CompanyClientFocus != null && company.CompanyClientFocus.Count > 0)
+                            {
+                                companyViewModel.CompanyClientFocus = company.CompanyClientFocus;
+                            }
+
+                            if (company.SubfocusNames != null && company.SubfocusNames.Count > 0)
+                            {
+                                companyViewModel.SubfocusNames = company.SubfocusNames;
+                                companyViewModel.CompanySubFocus = company.CompanySubFocus;
+                            }
+
+                            //StringBuilder sb = new StringBuilder();
+                            //sb.Append("[");
+                            //int p = 0;
+                            //foreach (var item in company.CompanyFocus)
+                            //{
+                            //    p = p + 1;
+                            //    if (p < company.CompanyFocus.Count)
+                            //    {
+                            //        sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + "},");
+                            //    }
+                            //    else
+                            //    {
+                            //        sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + ", sliced: true, selected: true },");                                    
+                            //    }
+                            //}
+
+                            //companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' }) + "]";
                         }
                     }
 

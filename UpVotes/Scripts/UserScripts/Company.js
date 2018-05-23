@@ -1,56 +1,128 @@
 ﻿$(document).ready(function () {
 
     //Method to display focus areas in horizontal bar.
-    $.getCompanyFocus = function (companyFocusData) {
-        // Radialize the colors
-        Highcharts.setOptions({
-            colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
-                return {
-                    radialGradient: {
-                        cx: 0.5,
-                        cy: 0.3,
-                        r: 0.7
-                    },
-                    stops: [
-                        [0, color],
-                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-                    ]
-                };
-            })
-        });
-
-        // Build the chart
-        Highcharts.chart('container', {
+    $.getCompanyFocus = function (companyFocusData, Focusdivid) {
+        var focusareas = new Array();
+        for (i = 0; i < companyFocusData.length; i++) { focusareas.push({ 'name': companyFocusData[i].FocusAreaName, 'data': [companyFocusData[i].FocusAreaPercentage] }); }
+        
+        Highcharts.chart(Focusdivid, {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'bar'
             },
             title: {
-                text: ''
+                text: ''//'<span style="font-weight: bold;font-family: OpenSans-Bold;">' + FocusName + '</span>',
+                //align:'left'
             },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            xAxis: {
+                alignTicks:true,
+                categories: ['']
             },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        },
-                        connectorColor: 'silver'
+            yAxis: {
+
+                gridLineColor: 'transparent',
+                //height:50,
+                min: 0,
+                max: 100,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                layout: 'horizontal',//change to horizontal
+                align: 'center',//removed alignment
+                //itemDistance:40,
+                itemWidth:250,
+                alignColumns:false,
+                verticalAlign: 'bottom',
+                maxHeight: 60,//this was the key property to make my legend paginated
+                //y: 5,//remove position
+                navigation: {
+                    activeColor: '#3E576F',
+                    animation: true,
+                    arrowSize: 12,
+                    inactiveColor: '#CCC',
+                    
+                    style: {
+                        fontWeight: 'bold',
+                        color: '#333',
+                        fontSize: '12px'
                     }
                 }
-            },            
-            series: [{
-                name: 'Focus',
-                data: eval(companyFocusData)
-            }]
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal',
+                    pointWidth: 40
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}<br>Focus: <b>{point.percentage:.1f}%</b>'
+            },
+            series: focusareas
+        });
+    };
+
+    $.getSubCompanyFocus = function (subfocusareas, subfocusdivid) {
+        Highcharts.chart(subfocusdivid, {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'bar'
+            },
+            title: {
+                text: ''//'<span style="font-weight: bold;font-family: OpenSans-Bold;">' + FocusName + '</span>',
+                //align:'left'
+            },
+            xAxis: {
+                alignTicks: true,
+                categories: ['']
+            },
+            yAxis: {
+
+                gridLineColor: 'transparent',
+                //height:50,
+                min: 0,
+                max: 100,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                layout: 'horizontal',//change to horizontal
+                align: 'center',//removed alignment
+                //itemDistance:40,
+                itemWidth: 250,
+                alignColumns: false,
+                verticalAlign: 'bottom',
+                maxHeight: 60,//this was the key property to make my legend paginated
+                //y: 5,//remove position
+                navigation: {
+                    activeColor: '#3E576F',
+                    animation: true,
+                    arrowSize: 12,
+                    inactiveColor: '#CCC',
+
+                    style: {
+                        fontWeight: 'bold',
+                        color: '#333',
+                        fontSize: '12px'
+                    }
+                }
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal',
+                    pointWidth: 40
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}<br>Focus: <b>{point.percentage:.1f}%</b>'
+            },
+            series: subfocusareas
         });
     };
 

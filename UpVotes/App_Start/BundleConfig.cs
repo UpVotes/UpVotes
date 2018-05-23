@@ -36,6 +36,11 @@ namespace UpVotes
                       "~/Content/wvr-styles.css"));            
             bundles.Add(new StyleBundle("~/Content/Homecss").Include("~/Content/home-design.css"));
             bundles.Add(new StyleBundle("~/Content/Quotationcss").Include("~/Content/Quotation.css"));
+            bundles.Add(new StyleBundle("~/Content/Companycss").Include("~/Content/Company.css"));
+            bundles.Add(new ScriptBundle("~/bundles/CompanyProfile").Include(
+                      "~/Scripts/highcharts.js",
+                      "~/Scripts/UserScripts/Company.js",
+                      "~/Scripts/UserScripts/CompanyVote.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/media.js"));

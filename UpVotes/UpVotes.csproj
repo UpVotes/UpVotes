@@ -261,6 +261,7 @@
     <Content Include="Content\jQuery\jquery-ui.structure.min.css" />
     <Content Include="Content\jQuery\jquery-ui.theme.min.css" />
     <Content Include="Content\jQuery\ui.jqgrid.css" />
+    <Content Include="Content\Company.css" />
     <Content Include="Content\StarRating.css" />
     <Content Include="Content\Quotation.css" />
     <Content Include="Content\wvr-styles.css" />
@@ -393,6 +394,7 @@
     <Content Include="images\CompanyListLogos\efellecreative.png" />
     <Content Include="images\CompanyListLogos\EightBitStudios.png" />
     <Content Include="images\CompanyListLogos\Eldarion.png" />
+    <Content Include="images\CompanyListLogos\EmergentSoftware.png" />
     <Content Include="images\CompanyListLogos\Endeavour.png" />
     <Content Include="images\CompanyListLogos\ePageCity.png" />
     <Content Include="images\CompanyListLogos\EspressoDigital.png" />
@@ -589,6 +591,7 @@
     <Content Include="images\CompanyListLogos\TanzaniteInfotech.png" />
     <Content Include="images\CompanyListLogos\TaotiCreative.png" />
     <Content Include="images\CompanyListLogos\TechAhead.png" />
+    <Content Include="images\CompanyListLogos\TechnoBrains.png" />
     <Content Include="images\CompanyListLogos\Techugo.png" />
     <Content Include="images\CompanyListLogos\TekshapersSoftware.png" />
     <Content Include="images\CompanyListLogos\TheBHWGroup.png" />
@@ -748,6 +751,7 @@
     <Content Include="images\CompanyLogos\efellecreative.png" />
     <Content Include="images\CompanyLogos\EightBitStudios.png" />
     <Content Include="images\CompanyLogos\Eldarion.png" />
+    <Content Include="images\CompanyLogos\EmergentSoftware.png" />
     <Content Include="images\CompanyLogos\Endeavour.png" />
     <Content Include="images\CompanyLogos\ePageCity.png" />
     <Content Include="images\CompanyLogos\EspressoDigital.png" />
@@ -947,6 +951,7 @@
     <Content Include="images\CompanyLogos\TanzaniteInfotech.png" />
     <Content Include="images\CompanyLogos\TaotiCreative.png" />
     <Content Include="images\CompanyLogos\TechAhead.png" />
+    <Content Include="images\CompanyLogos\TechnoBrains.png" />
     <Content Include="images\CompanyLogos\Techugo.png" />
     <Content Include="images\CompanyLogos\TekshapersSoftware.png" />
     <Content Include="images\CompanyLogos\TheBHWGroup.png" />

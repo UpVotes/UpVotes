@@ -1,0 +1,48 @@
+ .platform-section{
+  
+  width: 75%;
+  margin: 0 auto;
+  
+  float:left;
+}
+
+ .nextPrev {
+    width: 3%;
+    height: 35px;
+    float: left;
+    margin: 10px;
+    border: 1px solid #1acee2;
+    font-family: OpenSans-Semibold;
+    font-size: 13px;
+    background: #1acee2;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+ .carousel-control.left {
+    right: 35px;
+}
+ .carousel-control {
+    position: absolute;
+    width: 15%;
+    font-size: 14px;
+    text-align: center;   
+    opacity: 1;
+    top: 30px;
+}
+
+
+@media screen and (max-width: 991px) {
+
+}
+
+
+@media screen and (max-width: 767px) {
+    
+   .platform-section{
+        width:100%;
+        padding:0;
+    }
+   
+}
