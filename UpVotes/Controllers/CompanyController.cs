@@ -107,7 +107,6 @@ namespace UpVotes.Controllers
         {
             if (Convert.ToInt32(Session["UserID"]) != 0)
             {
-                return new CompanyService().VoteForCompany(companyID, Convert.ToInt32(Session["UserID"]));
                 string compname = "";
                 if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
                 {
@@ -117,6 +116,7 @@ namespace UpVotes.Controllers
                 {
                     CacheHandler.Clear(compname);
                 }
+                return new CompanyService().VoteForCompany(companyID, Convert.ToInt32(Session["UserID"]));
             }
             else
             {

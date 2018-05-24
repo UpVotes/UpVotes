@@ -11,8 +11,8 @@
     @Styles.Render("~/Content/Companycss")
     <script type="text/javascript" lang="en">
         $(function () {
-            
-            var companyFocusData = @Html.Raw(Json.Encode(Model.PrimaryCompanyFocus));            
+
+            var companyFocusData = @Html.Raw(Json.Encode(Model.PrimaryCompanyFocus));
             if(companyFocusData!=null && companyFocusData.length > 0)
             {
                 $.getCompanyFocus(companyFocusData,'dvPrimaryFocus');
@@ -21,7 +21,7 @@
             var IndustrialFocusData = @Html.Raw(Json.Encode(Model.IndustialCompanyFocus));
             if(IndustrialFocusData!=null && IndustrialFocusData.length > 0)
             {
-                $.getCompanyFocus(IndustrialFocusData,'dvIndustrialFocus');                
+                $.getCompanyFocus(IndustrialFocusData,'dvIndustrialFocus');
             }
 
             var ClientFocusData = @Html.Raw(Json.Encode(Model.CompanyClientFocus));
@@ -33,13 +33,16 @@
             var subFocusnames = @Html.Raw(Json.Encode(Model.SubfocusNames));
             var subFocusData = @Html.Raw(Json.Encode(Model.CompanySubFocus));
             if(subFocusnames!=null && subFocusnames.length > 0)
-            {                
+            {
                 $.each(subFocusnames, function( index, value ) {
-                    
+
                     var subfocusareas = new Array();
                     for(i=0;i<subFocusData.length;i++)
                     {
+                    if(subFocusData[i].FocusAreaName == value)
+                    {
                         subfocusareas.push({ 'name': subFocusData[i].SubFocusAreaName, 'data': [subFocusData[i].SubFocusAreaPercentage] });
+                    }
                     }
                     var subfocusdivid = value.replace(/ /g, '');
                     $.getSubCompanyFocus(subfocusareas,subfocusdivid);
@@ -47,7 +50,7 @@
                 $('#carousel-generic').carousel({
                     interval: 3000,
                     cycle: true
-                }); 
+                });
             }
 
         });
@@ -221,7 +224,7 @@
                             <div class="row">
                                 <div class="col-md-7"></div>
                                 <div class="col-md-2">
-                                    <div style="position:absolute;z-index:1;">
+                                    <div style="position:absolute;z-index:1;right:0px">
                                         <button style="float: right;width: 36px;height: 30px;" data-slide="next" href="#carousel-generic" class="btn btn-default header-buttons">
                                             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                             <span class="sr-only">Next</span>
