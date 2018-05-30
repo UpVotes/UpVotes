@@ -412,6 +412,9 @@ namespace UpVotes.Controllers
                             case "washington":
                                 url = "~/Views/Overview/MobileAppOverview/_WashingtonmobilepageOverview.cshtml";
                                 break;
+                            case "bangalore":
+                                url = "~/Views/Overview/MobileAppOverview/_BangaloremobilepageOverview.cshtml";
+                                break;
                             default:
                                 url = "~/Views/UnderConstruction/_underConstruction.cshtml";
                                 break;
