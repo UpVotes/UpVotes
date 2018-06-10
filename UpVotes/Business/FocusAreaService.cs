@@ -77,7 +77,37 @@ namespace UpVotes.Business
                     focusAreaID = (int)FocusAreas.ContentMarketing;
                     break;
                 case "iot-application-developers":
-                    focusAreaID = (int)FocusAreas.ContentMarketing;
+                    focusAreaID = (int)FocusAreas.IOTDevelopement;
+                    break;
+                case "mobile-app-marketing-agencies":
+                    focusAreaID = (int)FocusAreas.MobileAppMarketingAgencies;
+                    break;
+                case "email-marketing-agencies":
+                    focusAreaID = (int)FocusAreas.EmailMarketingAgencies;
+                    break;
+                case "sem-agencies":
+                    focusAreaID = (int)FocusAreas.SEMAgencies;
+                    break;
+                case "branding-agencies":
+                    focusAreaID = (int)FocusAreas.BrandingAgencies;
+                    break;
+                case "pr-agencies":
+                    focusAreaID = (int)FocusAreas.PRAgencies;
+                    break;
+                case "digital-strategy-agencies":
+                    focusAreaID = (int)FocusAreas.DigitalStrategyAgencies;
+                    break;
+                case "video-production-agencies":
+                    focusAreaID = (int)FocusAreas.VideoProductionAgencies;
+                    break;
+                case "chatbot-development":
+                    focusAreaID = (int)FocusAreas.ChatbotDevelopment;
+                    break;
+                case "ar-vr-application-development":
+                    focusAreaID = (int)FocusAreas.ARVRApplicationDevelopment;
+                    break;
+                case "graphic-designers":
+                    focusAreaID = (int)FocusAreas.GraphicDesigners;
                     break;
                 default:
                     focusAreaID = (int)FocusAreas.MobileAppDevelopement;
@@ -102,9 +132,18 @@ namespace UpVotes.Business
         MobileAppDevelopement,
         EcommerceDevelopement,
         WearableAppDevelopement,
-        ARVRDevelopment,
+        ARVRApplicationDevelopment,
         SocialMediaMarketing,
         PayPerClick,
         ContentMarketing,
+        GraphicDesigners,
+        ChatbotDevelopment,
+        MobileAppMarketingAgencies,
+        EmailMarketingAgencies,
+        SEMAgencies,
+        BrandingAgencies,
+        PRAgencies,
+        DigitalStrategyAgencies,
+        VideoProductionAgencies
     }
 }

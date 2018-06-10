@@ -38,7 +38,7 @@ namespace UpVotes.Controllers
                 else
                 {
                     companyViewModel = new CompanyViewModel();
-                    companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0", Convert.ToInt32(Session["UserID"]));
+                    companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0","0", Convert.ToInt32(Session["UserID"]));
                     CacheHandler.Add(companyViewModel, companyName);
                 }
                 

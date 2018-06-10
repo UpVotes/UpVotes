@@ -80,7 +80,8 @@
         </div>
 
 
-
+        <input id="hdnSubFocusArea" type="hidden" value="@Model.SubFocusArea"/>
+        <input id="hdnLocation" type="hidden" value="@Model.Location" />
         <div id="complist">
             @Html.Partial("~/Views/CompanyList/_CompList.cshtml", Model)
         </div>

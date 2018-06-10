@@ -32,5 +32,16 @@ namespace UpVotes.Models
         public int PageIndex { get; set; }
 
         public int TotalNoOfCompanies { get; set; }
+        public string SubFocusArea { get; set; }
+        public string Location { get; set; }
+    }
+    public class CategoryMetaTagsDetails
+    {
+        public int CategoryBasedMetaTagsID { get; set; }
+        public string FocusAreaName { get; set; }
+        public string SubFocusAreaName { get; set; }
+        public string Title { get; set; }
+        public string TwitterTitle { get; set; }
+        public string Descriptions { get; set; }
     }
 }

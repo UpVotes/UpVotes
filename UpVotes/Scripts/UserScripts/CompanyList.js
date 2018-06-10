@@ -82,13 +82,15 @@
 
     $.GetCompanyListBasedOnCriteria = function (e) {
         try {
+            
             var location = $("#txtLocationSearch")[0].value == "" ? "0" : $("#txtLocationSearch")[0].value;
             var compid = $("#txtCompanySearch")[0].value == "" ? "0" : $("#txtCompanySearch")[0].value;
             var avgHourlyRate = $("#ddlAvgHourlyRateSearch")[0].value;
             var employeeCount = $("#ddlEmployeesSearch")[0].value;
             var sortby = 'Asc';
-
-            location = location == "0" ? (window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2].replace(/ /g, "-") : location) : location;
+            var subFocusArea = $('#hdnSubFocusArea').val();
+            location = location == "0" ? $('#hdnLocation').val() : location;
+            //(window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2].replace(/ /g, "-") : location)
             var hourlyRateArray = avgHourlyRate.split("-");
             var employeeArray = employeeCount.split("-");
 
@@ -107,7 +109,7 @@
                 url: $.absoluteurl('/CompanyList/CompanyList'),
                 cache: false,
                 async: false,
-                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
+                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, subFocusArea: subFocusArea, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
                 success: function (json) {
                     $('#complist').html(json);
                     $('.lazy').lazy();

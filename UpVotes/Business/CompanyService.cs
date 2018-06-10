@@ -41,7 +41,7 @@ namespace UpVotes.Business
         //        return companyViewModel;
         //    }
         //}
-        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, string location = "0", int userID = 0, int PageNo = 1, int PageSize = 10)
+        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, string location = "0", string SubFocusArea = "0", int userID = 0, int PageNo = 1, int PageSize = 10)
         {
             using (_httpClient = new HttpClient())
             {
@@ -49,7 +49,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetCompany";
                 if (string.IsNullOrEmpty(sortby))
                     sortby = "asc";
-                string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + location + "/" + userID + "/" + PageNo + "/" + PageSize;
+                string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + location + "/" + SubFocusArea + "/"+ userID + "/" + PageNo + "/" + PageSize;
                 string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
@@ -138,6 +138,22 @@ namespace UpVotes.Business
                     return false;
                 }
             }
+        }
+
+        public CategoryMetaTagsDetails GetCategoryMetaTags(string FocusAreaName, string SubFocusAreaName)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetCategoryMetaTags";
+                if (string.IsNullOrEmpty(SubFocusAreaName))
+                    SubFocusAreaName = "0";
+                string apiParameter = FocusAreaName + "/" + SubFocusAreaName;
+                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                CategoryMetaTagsDetails metaTagsTitle = JsonConvert.DeserializeObject<CategoryMetaTagsDetails>(response);
+                return metaTagsTitle;
+            }  
         }
 
         public bool AddReview(CompanyReviewViewModel companyReviewModel)
