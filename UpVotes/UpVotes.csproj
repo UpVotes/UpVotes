@@ -308,6 +308,7 @@
     <Content Include="images\CompanyListLogos\ArtDriver.png" />
     <Content Include="images\CompanyListLogos\AtomicObject.png" />
     <Content Include="images\CompanyListLogos\Aumcore.png" />
+    <Content Include="images\CompanyListLogos\Auxano.png" />
     <Content Include="images\CompanyListLogos\AvalaunchMedia.png" />
     <Content Include="images\CompanyListLogos\AvexDesigns.png" />
     <Content Include="images\CompanyListLogos\BarefootSolutions.png" />
@@ -472,6 +473,7 @@
     <Content Include="images\CompanyListLogos\Macadamian.png" />
     <Content Include="images\CompanyListLogos\MagespiderInfowebPvt.png" />
     <Content Include="images\CompanyListLogos\MagespiderInfowebPvtltd.png" />
+    <Content Include="images\CompanyListLogos\Magneto.png" />
     <Content Include="images\CompanyListLogos\Majestyk.png" />
     <Content Include="images\CompanyListLogos\MannixMarketing.png" />
     <Content Include="images\CompanyListLogos\MassTechnology.png" />
@@ -666,6 +668,7 @@
     <Content Include="images\CompanyLogos\ArtDriver.png" />
     <Content Include="images\CompanyLogos\AtomicObject.png" />
     <Content Include="images\CompanyLogos\Aumcore.png" />
+    <Content Include="images\CompanyLogos\Auxano.png" />
     <Content Include="images\CompanyLogos\AvalaunchMedia.png" />
     <Content Include="images\CompanyLogos\AvexDesigns.png" />
     <Content Include="images\CompanyLogos\BarefootSolutions.png" />
@@ -830,6 +833,7 @@
     <Content Include="images\CompanyLogos\Macadamian.png" />
     <Content Include="images\CompanyLogos\MagespiderInfowebPvt.png" />
     <Content Include="images\CompanyLogos\MagespiderInfowebPvtltd.png" />
+    <Content Include="images\CompanyLogos\Magneto.png" />
     <Content Include="images\CompanyLogos\Majestyk.png" />
     <Content Include="images\CompanyLogos\MannixMarketing.png" />
     <Content Include="images\CompanyLogos\MassTechnology.png" />
@@ -1273,8 +1277,8 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Overview\_digitalMarketingOverview.cshtml" />
     <Content Include="Views\Overview\MobileAppOverview\_mobileAppOverview.cshtml" />
-    <Content Include="Views\Overview\_seoOverview.cshtml" />
-    <Content Include="Views\Overview\_webDesignOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_seoOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_webDesignOverview.cshtml" />
     <Content Include="Views\Overview\_webDevelopmentOverview.cshtml" />
     <Content Include="Views\Overview\_softwareDevelopmentOverview.cshtml" />
     <Content Include="Views\Overview\_uiUxOverview.cshtml" />
@@ -1299,6 +1303,33 @@
     <Content Include="Views\Overview\MobileAppOverview\_WashingtonmobilepageOverview.cshtml" />
     <Content Include="Views\UnderConstruction\_underConstruction.cshtml" />
     <Content Include="Views\Overview\MobileAppOverview\_BangaloremobilepageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_AtlantawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_BostonwebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_CaliforniawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_ChicagowebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_FloridawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_GeorgiawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_IllinoiswebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_IndiawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_LosangeleswebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_MassachusettswebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_MinneapoliswebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_MinnesotawebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_NewyorkwebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_SanDiegowebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_SeattlewebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_texaswebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\WebDesignOverview\_WashingtonwebdesignpageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_BostonseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_CaliforniaseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_ChicagoseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_FloridaseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_IllinoisseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_JacksonvilleseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_LosAngelesseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_NewYorkseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_SanDiegoseopageOverview.cshtml" />
+    <Content Include="Views\Overview\SEOOverview\_WashingtonseopageOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
