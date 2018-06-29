@@ -442,7 +442,7 @@ namespace UpVotes.Controllers
             string country = string.Empty;
             if (Request.Url.Segments.Length > 2)
             {
-                if (!string.IsNullOrEmpty(Session["Country"].ToString()) && focusAreaname == "mobile-application-developers")
+                if (!string.IsNullOrEmpty(Session["Country"].ToString()) && (focusAreaname == "mobile-application-developers" || focusAreaname == "web-design-companies" || focusAreaname == "seo-companies"))
                 {
                     country = Session["Country"].ToString().ToLower();
                 }
@@ -507,13 +507,113 @@ namespace UpVotes.Controllers
                     }                    
                     break;
                 case "seo-companies":
-                    url = "~/Views/Overview/_seoOverview.cshtml";
+                    url = "~/Views/Overview/SEOOverview/_seoOverview.cshtml";
+                    if (country != "")
+                    {
+                        switch (country)
+                        {
+                            case "boston":
+                                url = "~/Views/Overview/SEOOverview/_BostonseopageOverview.cshtml";
+                                break;
+                            case "california":
+                                url = "~/Views/Overview/SEOOverview/_CaliforniaseopageOverview.cshtml";
+                                break;
+                            case "chicago":
+                                url = "~/Views/Overview/SEOOverview/_ChicagoseopageOverview.cshtml";
+                                break;
+                            case "florida":
+                                url = "~/Views/Overview/SEOOverview/_FloridaseopageOverview.cshtml";
+                                break;
+                            case "illinois":
+                                url = "~/Views/Overview/SEOOverview/_IllinoisseopageOverview.cshtml";
+                                break;
+                            case "jacksonville":
+                                url = "~/Views/Overview/SEOOverview/_JacksonvilleseopageOverview.cshtml";
+                                break;
+                            case "los-angeles":
+                                url = "~/Views/Overview/SEOOverview/_LosAngelesseopageOverview.cshtml";
+                                break;
+                            case "new-york":
+                                url = "~/Views/Overview/SEOOverview/_NewYorkseopageOverview.cshtml";
+                                break;
+                            case "san-diego":
+                                url = "~/Views/Overview/SEOOverview/_SanDiegoseopageOverview.cshtml";
+                                break;
+                            case "washington":
+                                url = "~/Views/Overview/SEOOverview/_WashingtonseopageOverview.cshtml";
+                                break;
+                            default:
+                                url = "~/Views/UnderConstruction/_underConstruction.cshtml";
+                                break;
+                        }
+                    }
+
                     break;
                 case "digital-marketing-companies":
                     url = "~/Views/Overview/_digitalMarketingOverview.cshtml";
                     break;
                 case "web-design-companies":
-                    url = "~/Views/Overview/_webDesignOverview.cshtml";
+                    url = "~/Views/Overview/WebDesignOverview/_webDesignOverview.cshtml";
+                    if (country != "")
+                    {
+                        switch (country)
+                        {
+                            case "atlanta":
+                                url = "~/Views/Overview/WebDesignOverview/_AtlantawebdesignpageOverview.cshtml";
+                                break;
+                            case "boston":
+                                url = "~/Views/Overview/WebDesignOverview/_BostonwebdesignpageOverview.cshtml";
+                                break;
+                            case "california":
+                                url = "~/Views/Overview/WebDesignOverview/_CaliforniawebdesignpageOverview.cshtml";
+                                break;
+                            case "chicago":
+                                url = "~/Views/Overview/WebDesignOverview/_ChicagowebdesignpageOverview.cshtml";
+                                break;
+                            case "florida":
+                                url = "~/Views/Overview/WebDesignOverview/_FloridawebdesignpageOverview.cshtml";
+                                break;
+                            case "georgia":
+                                url = "~/Views/Overview/WebDesignOverview/_GeorgiawebdesignpageOverview.cshtml";
+                                break;
+                            case "illinois":
+                                url = "~/Views/Overview/WebDesignOverview/_IllinoiswebdesignpageOverview.cshtml";
+                                break;
+                            case "india":
+                                url = "~/Views/Overview/WebDesignOverview/_IndiawebdesignpageOverview.cshtml";
+                                break;
+                            case "los-angeles":
+                                url = "~/Views/Overview/WebDesignOverview/_LosangeleswebdesignpageOverview.cshtml";
+                                break;
+                            case "massachusetts":
+                                url = "~/Views/Overview/WebDesignOverview/_MassachusettswebdesignpageOverview.cshtml";
+                                break;
+                            case "minneapolis":
+                                url = "~/Views/Overview/WebDesignOverview/_MinneapoliswebdesignpageOverview.cshtml";
+                                break;
+                            case "minnesota":
+                                url = "~/Views/Overview/WebDesignOverview/_MinnesotawebdesignpageOverview.cshtml";
+                                break;
+                            case "new-york":
+                                url = "~/Views/Overview/WebDesignOverview/_NewyorkwebdesignpageOverview.cshtml";
+                                break;
+                            case "san-diego":
+                                url = "~/Views/Overview/WebDesignOverview/_SanDiegowebdesignpageOverview.cshtml";
+                                break;
+                            case "seattle":
+                                url = "~/Views/Overview/WebDesignOverview/_SeattlewebdesignpageOverview.cshtml";
+                                break;
+                            case "texas":
+                                url = "~/Views/Overview/WebDesignOverview/_texaswebdesignpageOverview.cshtml";
+                                break;
+                            case "washington":
+                                url = "~/Views/Overview/WebDesignOverview/_WashingtonwebdesignpageOverview.cshtml";
+                                break;
+                            default:
+                                url = "~/Views/UnderConstruction/_underConstruction.cshtml";
+                                break;
+                        }
+                    }
                     break;
                 case "software-development-companies":
                     url = "~/Views/Overview/_softwareDevelopmentOverview.cshtml";
