@@ -4,277 +4,371 @@
     <meta name='description' content="Find out how much does mobile app development cost for iOS or Android? We've created this handy mobile app cost calculator for make approximate cost." />
 }
 <div id="divPublic">
-    @Scripts.Render("~/bundles/Quotation")    
+    @Scripts.Render("~/bundles/Quotation")
     @Styles.Render("~/Content/Quotationcss")
-    
-    
+
+
     @if (ViewBag.isPublicQuote)
     {
         <div style="height: 109px;"><h1 class="jumbotron-main"><span style="font-size:26px">How Much Does It Cost To Make An App for iOS and Android? By App Cost Calculator</span></h1></div>
         <div style="text-align: justify;width: 81%;margin-left: 13em;">
-            <p class="head2p" style="font-size: 16px;width: 99%;">If you're serious about building a high quality app then expect to spend from $50,000. The cost of an app is relative to each feature included. The range can vary from high to low... almost like buying a car. Do you want a older beater to get you from point A to point B? or are you investing in the Benz? featured that bump on app price include user experience (UX) and integration that leverage existing enterprise capabilities.</p></div>
+            <p class="head2p" style="font-size: 16px;width: 99%;">If you're serious about building a high quality app then expect to spend from $50,000. The cost of an app is relative to each feature included. The range can vary from high to low... almost like buying a car. Do you want a older beater to get you from point A to point B? or are you investing in the Benz? featured that bump on app price include user experience (UX) and integration that leverage existing enterprise capabilities.</p>
+        </div>
             <div style="height:109px;"><h2 class="jumbotron-main" style="margin-top:-1em;"><span style="font-size:24px">Estimate the cost of your app idea by calculator.</span></h2></div>
     }
-            <div class="@(ViewBag.isPublicQuote ? "container" : "container customquote")">
+    <div class="@(ViewBag.isPublicQuote ? "container" : "container customquote")">
         @if (!ViewBag.isPublicQuote)
         {
-                <div class="rt-pg-menu-desc custom-quote-arrow">
-                    <div class="rt-pg-menu-desc-lbl">
-                      MOBILE APP CALCULATOR
-                    </div>
-                    <div class="rt-pg-menu-desc-filter">
-                       
-                    </div>
+            <div class="rt-pg-menu-desc custom-quote-arrow">
+                <div class="rt-pg-menu-desc-lbl">
+                    MOBILE APP CALCULATOR
                 </div>
+                <div class="rt-pg-menu-desc-filter">
+
+                </div>
+            </div>
         }
 
-                <!--for carousel -->
-                <div class="well" style=@(ViewBag.isPublicQuote ? "" : "margin-top:60px;")>
+        <!--for carousel -->
+        <div class="well" style=@(ViewBag.isPublicQuote ? "" : "margin-top:60px;")>
 
-                    <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+            <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
 
-                        <div class="carousel-inner">
-                            <div class="item active" id="first_carousel">
-                                <div class="platform-section" style="height: 288px;">
-                                    <h2>LOOKING TO BUILD AN APP?</h2>
-                                    <p class="head2p" style="font-size: 16px;">Find out how much we will cost in the different regions!</p>
-                                    <br />
+                <div class="carousel-inner">
+                    <div class="item active" id="first_carousel">
+                        <div class="platform-section" style="height: 288px;">
+                            <h2>LOOKING TO BUILD AN APP?</h2>
+                            <p class="head2p" style="font-size: 16px;">Find out how much we will cost in the different regions!</p>
+                            <br />
 
-                                    @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
-                                    <div><div class="block612"  href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
-                                    </div>
-                                </div>
+                            @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
+                            <div>
+                                <div class="block612" href="#carousel-generic" data-slide="next" id="next_carousel"><span><i aria-hidden="true"></i>Get an Estimate</span></div>
+                            </div>
+                        </div>
 
-                            </div><!-- First Carousel -->
-                            <div class="item" id="second_carousel" >
+                    </div><!-- First Carousel -->
+                    <div class="item" id="second_carousel">
 
-                                <div class="platform-section">
+                        <div class="platform-section">
 
-                                    <h2>Platform</h2>
-                                    <h3>Which type of app platform ur going to build?</h3>
-                                    <span style="display:none;color:#1acee2" id="spnAndroid">Please select atleast one Platform to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" id="ulplatform">
-                                            <li class="os-android">Android</li>
-                                            <li class="os-ios">IOS</li>
-                                            <li class="os-windows">Windows</li>
-                                            <li class="os-hybrid">Hybrid</li>
+                            <h2>Platform</h2>
+                            <h3>Which type of app platform ur going to build?</h3>
+                            <span style="display:none;color:#1acee2" id="spnAndroid">Please select atleast one Platform to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulplatform">
+                                    <li class="os-android">Android</li>
+                                    <li class="os-ios">IOS</li>
+                                    <li class="os-windows">Windows</li>
+                                    <li class="os-hybrid">Hybrid</li>
 
-                                        </ul>
-                                    </div>
+                                </ul>
+                            </div>
 
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
-                                </div></div>
-                            <div class="item" id="third_carousel">
-                                <div class="platform-section">
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnplatform"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+                    </div>
+                    <div class="item" id="third_carousel">
+                        <div class="platform-section">
 
-                                    <h2>Design</h2>
-                                    <h3>What would your UI theme be?</h3>
-                                    <span style="display:none;color:#1acee2" id="spnTheme">Please select atleast one Theme to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" id="ulTheme">
-                                            <li class="os-templateui">Template UI</li>
-                                            <li class="os-customui" style="padding-left: 36px;">Custom Branded UI</li>
-                                            <li class="os-animatedui">Animated UI</li>
-                                            <li class="os-gameui" style="padding-left: 36px;">Game Animations</li>
-                                        </ul>
-                                    </div>
+                            <h2>Design</h2>
+                            <h3>What would your UI theme be?</h3>
+                            <span style="display:none;color:#1acee2" id="spnTheme">Please select atleast one Theme to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulTheme">
+                                    <li class="os-templateui">Template UI</li>
+                                    <li class="os-customui" style="padding-left: 36px;">Custom Branded UI</li>
+                                    <li class="os-animatedui">Animated UI</li>
+                                    <li class="os-gameui" style="padding-left: 36px;">Game Animations</li>
+                                </ul>
+                            </div>
 
-                                </div>
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+                    </div>
+                    <div class="item" id="fourth_carousel">
+                        <div class="platform-section">
+
+                            <h2>Security</h2>
+                            <h3>How will your users sign up and login into the app?</h3>
+                            <span style="display:none;color:#1acee2" id="spnLoginSecurity">please select atleast one Security to proceed</span>
+
+
+
+                            <div class="os-types">
+                                <ul class="os-section" id="ulLoginSecurity">
+                                    <li class="os-emailpwd">Email ID and Password</li>
+                                    <li class="os-socialntw">Via Social Networks</li>
+                                    <li class="os-authorization">Using 2 Step Authorization</li>
+                                    <li class="os-nosignup">No Sign Up Required</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+                    </div>
+                    <div class="item" id="fifth_carousel">
+                        <div class="platform-section">
+
+                            <h2>Security</h2>
+                            <h3>Will you allow users to complete a profile?</h3>
+                            <span style="display:none;color:#1acee2" id="spnProfile">Please select atleast one to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulProfile">
+                                    <li class="os-yes"><span>Yes</span></li>
+                                    <li class="os-no"><span>No</span></li>
+                                    <li class="os-dontknow">I don't know</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+                    </div>
+                    <div class="item" id="sixth_carousel">
+                        <div class="platform-section">
+
+                            <h2>How do you wish to secure your app?</h2>
+                            <br /><br /><br />
+                            <span style="display:none;color:#1acee2" id="spnSecurity">please select atleast one Security to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulSecurity">
+                                    <li class="os-mvp">MVP Versions</li>
+                                    <li class="os-basic">Basic Security</li>
+                                    <li class="os-encrypted"><span>Encrypted Options Communication</span></li>
+                                    <li class="os-completeprotection">Complete Protection</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+
+                    </div>
+                    <div class="item" id="seventh_carousel">
+                        <div class="platform-section">
+
+                            <h2>Do people rate or review things?</h2>
+                            <br /><br /><br />
+                            <span style="display:none;color:#1acee2" id="spnReviewRate">please select atleast one to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulReviewRate">
+                                    <li class="os-yes"><span>Yes</span></li>
+                                    <li class="os-no"><span>No</span></li>
+                                    <li class="os-dontknow">I don't know</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+
+                    </div>
+                    <div class="item" id="Eigth_carousel">
+                        <div class="platform-section">
+
+                            <h2>Which 3rd party services do you need to integrate with?</h2>
+                            <br />
+                            <span style="display:none;color:#1acee2" id="spnService">please select atleast one Service to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulService">
+                                    <li class="os-socialntw"><span>Social Networks</span></li>
+                                    <li class="os-media"><span>Media</span></li>
+                                    <li class="os-location"><span>Location</span></li>
+                                    <li class="os-ecommerce">ecommerce <br /><span>(Existing Online Store)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+
+                    </div>
+                    <div class="item" id="ninth_carousel">
+                        <div class="platform-section">
+
+                            <h2>Where do you want to save your application data?</h2>
+                            <br />
+                            <br />
+                            <span style="display:none;color:#1acee2" id="spnDatabase">please select atleast one Database to proceed</span>
+                            <div class="os-types">
+                                <ul class="os-section" id="ulDatabase">
+                                    <li class="os-newdatabase"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
+                                    <li class="os-existingdatabase"><span>An Existing Database</span></li>
+                                    <li class="os-clouddatabase"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
+                                    <li class="os-dontknowdb"><span>I don't know</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+
+                    </div>
+                    <div class="item" id="tenth_carousel">
+                        <div class="platform-section">
+
+                            <h2>Do people rate or review things?</h2>
+                            <br />
+                            <span style="display:none;color:#1acee2" id="spnFeatures">please select atleast one to proceed</span>
+                            <div class="os-typesFeatures">
+                                <ul class="os-section" id="ulFeatures">
+                                    <li class="os-right"><span>User Management</span></li>
+                                    <li class="os-right"><span>Content Management</span></li>
+                                    <li class="os-right"><span>Reporting and Analytics</span></li>
+                                    <li class="os-right"><span>Notification Control</span></li>
+                                    <li class="os-right"><span>Activity Feeds or User Walls</span></li>
+                                    <li class="os-right"><span>Shopping Cart</span></li>
+                                    <li class="os-right"><span>Search Option</span></li>
+                                    <li class="os-right"><span>Referral System</span></li>
+                                    <li class="os-right"><span>Chatting Function</span></li>
+                                    <li class="os-right"><span>Integration <span>(CRM, Marketing)</span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="center-align-button">
+                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
+                            <div class="block612" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
+                        </div>
+
+                    </div>
+                    <div class="item" id="eleventh_carousel">
+                        <div class="platform-section form-csutom-up">
+
+                            <h2>Almost Finished!</h2>
+                            <p class="head2p" style="font-size: 16px;">Where should we send you the detailed estimate report?</p>
+                            <br />
+                            <br />
+                            <div class="os-types">
+                                <input type="text" placeholder="My Name is*" class="form-control" id="txtName">
+                                <br />
+                                <input type="text" placeholder="My Email Id is*" class="form-control" id="txtEmail">
+                                <br />
+                                <input type="text" placeholder="My Company Name is" class="form-control" id="txtCompanyName">
+                                <br />
+                                <br />
+                                <img id="imgloader" style="display: none;margin-left: 13em;" src="/images/loader.gif">
                                 <div class="center-align-button">
                                     <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnTheme"><span><i aria-hidden="true"></i>Next</span></div>
-                                </div>
-</div>
-                            <div class="item" id="fourth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Security</h2>
-                                    <h3>How will your users sign up and login into the app?</h3>
-                                    <span style="display:none;color:#1acee2" id="spnLoginSecurity">please select atleast one Security to proceed</span>
-                               
-
-
-                                        <div class="os-types">
-                                            <ul class="os-section" id="ulLoginSecurity">
-                                                <li class="os-emailpwd">Email ID and Password</li>
-                                                <li class="os-socialntw">Via Social Networks</li>
-                                                <li class="os-authorization">Using 2 Step Authorization</li>
-                                                <li class="os-nosignup">No Sign Up Required</li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnLoginSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                               </div>
-                                 </div>
-                            <div class="item" id="fifth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Security</h2>
-                                    <h3>Will you allow users to complete a profile?</h3>
-                                    <span style="display:none;color:#1acee2" id="spnProfile">Please select atleast one to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" id="ulProfile">
-                                            <li class="os-yes"><span>Yes</span></li>
-                                            <li class="os-no"><span>No</span></li>
-                                            <li class="os-dontknow">I don't know</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnProfile"><span><i aria-hidden="true"></i>Next</span></div>
-                                </div>
-                                </div>
-                            <div class="item" id="sixth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>How do you wish to secure your app?</h2>
-                                    <br /><br /><br />
-                                    <span style="display:none;color:#1acee2" id="spnSecurity">please select atleast one Security to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" id="ulSecurity">
-                                            <li class="os-mvp">MVP Versions</li>
-                                            <li class="os-basic">Basic Security</li>
-                                            <li class="os-encrypted" ><span>Encrypted Options Communication</span></li>
-                                            <li class="os-completeprotection" >Complete Protection</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnSecurity"><span><i aria-hidden="true"></i>Next</span></div>
-                               </div>
-                                
-                                 </div>
-                            <div class="item" id="seventh_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Do people rate or review things?</h2>
-                                    <br /><br /><br />
-                                    <span style="display:none;color:#1acee2" id="spnReviewRate">please select atleast one to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section" id="ulReviewRate">
-                                            <li class="os-yes"><span >Yes</span></li>
-                                            <li class="os-no"><span >No</span></li>
-                                            <li class="os-dontknow">I don't know</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnReviewRate"><span><i aria-hidden="true"></i>Next</span></div>
-                               </div>
-                                
-                                 </div>
-                            <div class="item" id="Eigth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Which 3rd party services do you need to integrate with?</h2>
-                                    <br />
-                                    <span style="display:none;color:#1acee2" id="spnService">please select atleast one Service to proceed</span>
-                                    <div class="os-types" >
-                                        <ul class="os-section" id="ulService">
-                                            <li class="os-socialntw"><span>Social Networks</span></li>
-                                            <li class="os-media"><span>Media</span></li>
-                                            <li class="os-location"><span>Location</span></li>
-                                            <li class="os-ecommerce">ecommerce <br /><span>(Existing Online Store)</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnService"><span><i aria-hidden="true"></i>Next</span></div>
-                               </div>
-                                
-                                 </div>
-                            <div class="item" id="ninth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Where do you want to save your application data?</h2>
-                                    <br />
-                                    <br />
-                                    <span style="display:none;color:#1acee2" id="spnDatabase">please select atleast one Database to proceed</span>
-                                    <div class="os-types">
-                                        <ul class="os-section"  id="ulDatabase">
-                                            <li class="os-newdatabase"><span>A New Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(mySQL, MongoDB etc)</span></li>
-                                            <li class="os-existingdatabase"><span>An Existing Database</span></li>
-                                            <li class="os-clouddatabase"><span>Cloud Database</span><br /><span style="font-size: 11px;color: #545454;top: 27px;margin-left: 10px;">(Fit for simpler MVPs)</span></li>
-                                            <li class="os-dontknowdb"><span>I don't know</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnDatabase"><span><i aria-hidden="true"></i>Next</span></div>
-                               </div>
-                                
-                                 </div>
-                            <div class="item" id="tenth_carousel">
-                                <div class="platform-section">
-
-                                    <h2>Do people rate or review things?</h2>
-                                    <br />
-                                    <span style="display:none;color:#1acee2" id="spnFeatures">please select atleast one to proceed</span>
-                                    <div class="os-typesFeatures">
-                                        <ul class="os-section" id="ulFeatures">
-                                            <li class="os-right"><span>User Management</span></li>
-                                            <li class="os-right"><span>Content Management</span></li>
-                                            <li class="os-right"><span>Reporting and Analytics</span></li>
-                                            <li class="os-right"><span>Notification Control</span></li>
-                                            <li class="os-right"><span >Activity Feeds or User Walls</span></li>
-                                            <li class="os-right"><span >Shopping Cart</span></li>
-                                            <li class="os-right"><span >Search Option</span></li>
-                                            <li class="os-right"><span >Referral System</span></li>
-                                            <li class="os-right" ><span>Chatting Function</span></li>
-                                            <li class="os-right"><span>Integration <span >(CRM, Marketing)</span></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="center-align-button">
-                                    <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                    <div class="block612" href="#carousel-generic" data-slide="next" id="btnFeatures"><span><i aria-hidden="true"></i>Next</span></div>
-                                </div>
-                                
-                                </div>
-                            <div class="item" id="eleventh_carousel">
-                                <div class="platform-section form-csutom-up">
-
-                                    <h2>Almost Finished!</h2>
-                                    <p class="head2p" style="font-size: 16px;">Where should we send you the detailed estimate report?</p>
-                                    <br />
-                                    <br />
-                                    <div class="os-types">
-                                        <input type="text" placeholder="My Name is*" class="form-control" id="txtName">
-                                        <br/>
-                                        <input type="text" placeholder="My Email Id is*" class="form-control" id="txtEmail">
-                                        <br />
-                                        <input type="text" placeholder="My Company Name is" class="form-control" id="txtCompanyName">
-                                        <br />
-                                        <br />
-                                        <img id="imgloader" style="display: none;margin-left: 13em;" src="/images/loader.gif">
-                                        <div class="center-align-button">
-                                            <div class="block612" href="#carousel-generic" data-slide="prev"><span><i aria-hidden="true"></i>Previous</span></div>
-                                            <div class="block612" href="#carousel-generic" public=@(ViewBag.isPublicQuote ? "public" : "tab") id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
-                                            </div>
-                                        </div>
+                                    <div class="block612" href="#carousel-generic" public=@(ViewBag.isPublicQuote ? "public" : "tab") id="btnReport"><span><i aria-hidden="true"></i>Proceed</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> <!-- Well -->
+                </div>
+            </div>
+        </div> <!-- Well -->
 
-            </div> <!-- Container -->
+    </div> <!-- Container -->
+
+    @if (ViewBag.isPublicQuote)
+    {
+        <div class="container">
+            <div class="entry-content">
+
+                <center><h2>How Much Does it Cost to Make an App in 2018 - App Cost Calculator</h2></center>
+                <br>
+                <center><h3>Mobile App Development Cost Estimate in India | USA | UK</h3></center>
+                <p>Mobile has become the new normal for staying connected in both our personal and professional lives. As a result, the app economy is booming and opportunity is everywhere. Last year, in 2017, we saw consumers download more than <a href="https://www.statista.com/statistics/271644/worldwide-free-and-paid-mobile-app-store-downloads/" target="_blank"><strong>175 billion mobile apps</strong></a> to their connected devices and by 2022, this figure is projected to grow to 258.2 billion app downloads.</p>
+                <img src="../images/mobile-app-downloads.png" alt="Consumers download more than 175 billion mobile apps">
+                <p style="text-align: center;"><strong>Source: <a href="https://www.statista.com/statistics/271644/worldwide-free-and-paid-mobile-app-store-downloads/" target="_blank" rel="nofollow">Statista.com</a></strong></p>
+                <p>Today, mobile applications have become an integral part of nearly every organization’s business strategy. With the right strategy, mobile applications can not only win new customers and revenue streams, but can also help in retaining existing customers and drive greater mobility adoption and penetration. Therefore, this is the best time to cash in on the opportunity.</p>
+                <p>If you are considering investing in a mobile app, you are definitely in the right direction. And the first question that must have crossed your mind is “how much does it cost to develop an app”. So, let’s answer this in detail to help you use this knowledge to your advantage.</p>
+                <p>Before you begin with an app, you must remember that not all apps are successful, but only those that offer value to the consumers. And for that you need an app that has utility has great design and is totally addictive. Understand the pain points of your prospective users so you become their “go-to” app for all their needs.</p>
+                <h3>Now, let’s look at what affects the cost of app development.</h3>
+                <br>
+                <h4><strong>Factors that affect the cost of developing an app:</strong></h4>
+                <p>According to different surveys the price range for developing apps may fall anywhere in the range of $100,000 to $300,000. The chart given below shows the median amount charged by mobile app development companies worldwide to develop applications for different platforms.</p>
+                <center><p><strong>Median cost of mobile application development in select regions worldwide in 2015, by platform (in U.S. dollars per hour).</strong></p></center>
+                <img src="../images/median-cost-mobile-application-development.png" alt="Median cost of mobile application development">
+                <p style="text-align: center;"><strong>Source: <a href="https://www.statista.com/statistics/628636/worldwide-mobile-app-development-costs-by-region-by-platform/" target="_blank" rel="nofollow">Statista.com</a></strong></p>
+                <p>We are now into 2018, where things have become even more complex. A basic app can cost you somewhere between $10,000 to $50,000 but an app with multiple features could come at a hefty price tag of $200,000 or more.</p>
+                <p>This still doesn’t give you a clear picture of how much an app is going to cost you. The first and foremost reason for that is there are various factors at play here. For example, if you take your project to a well-established app development firm in the US it would cost you more whereas if you take it to a similar company in another country like India it would cost you considerably less. Many other factors like these are going to affect the cost. Let’s analyze some of these vital factors below.</p>
+                <h4><strong>#1. Who is going to develop your app?</strong></h4>
+                <p><strong>Are you ready to hire In-house developers ?</strong></p>
+                <p>If you have the budget you can definitely consider hiring in-house developers, designers and product managers to develop your app. With an in-house development team you would have more control over the development of your app, and if you are planning to expand your app in future you can hire a few more developers. However, hiring a committed development team for an app can be costly. You have to think if it would be worth it to hire a full-time team for your MVP.</p>
+                <p><strong>Are you ready to go with  app development firms ?</strong></p>
+                <p> Hiring an app development agency is another solution.These development agencies provide you with ready - made teams.They have the right talent, all the necessary infrastructure in one place and a project manager to keep everything on track.They are also well trained in carrying out complex projects and can even go a step further in assisting you with launch and marketing.</p>
+                <p><strong> Note: While searching for the right partner you will come across two types of <a href="https://upvotes.co/profile/swiftkick-mobile" target="_blank"> mobile app development firms </a> -large and small.</strong></p>
+                <p><strong> Are you ready to go with small agencies ?</strong></p>
+                <p>Small app agencies would typically have a collection of 3-10 creatives focused on creating a specific class of app. Every member in this small team is meant to carry out specific tasks in the app creation process, allowing the agency to be a one-stop shop for all your development needs.</p>
+                <p>You will benefit tremendously from a small app agency that builds apps in a similar category to what you are looking for. As a whole, such agencies provide a very attractive middle ground on price, quality and consistency. </p>
+                <p>However, most often small agencies are unequipped with the resources to develop highly complex apps that require more time and experience.</p>
+                <p><strong>Are you ready to go with large agencies?</strong></p>
+                <p> Heaps of experience, bigger teams, and a brand name to think of are what you should look for if you want the best for your buck. These are often the top level app development companies that you can completely rely on.</p>
+                <p> If you are a company with no engineering sight, they can help you build an app right from scratch.They would even go an extra length to provide you with advance analytical solution to help you maintain good customer relations, improve services and market the app. </p>
+                <p> However, everything comes at a hefty cost.But, if you have the money, a large agency is an excellent option because they have the expertise to solve any problem that might come up during the development stages.These companies are usually very dedicated to upholding the reputation of their brand name, thus ensuring you will get quality work.</p>
+                <p><strong> Are you ready to go with freelancers?</strong></p>
+                <p> Partnering with a freelancer from your city or anywhere around the world is another popular option that you can opt for. Their services are not only highly affordable but also high in quality, delivering almost the same quality of work as an app development agency.Even then hiring a freelancer is a huge gamble unless you come across someone who has earned enough credibility in the app development circle.Many companies have criticized about a freelancers’ inability to coordinate, communicate and deliver projects on time.If you don’t have the budget and want to go for a freelancer, it’s best to hire someone who has earned enough credibility for developing quality mobile apps.This way you will know that you haven’t invested your money in the wrong place.</p>
+                <h4><strong>#2. What platform would you build for? iPhone, Android, Windows or Cross platform?</strong></h4>
+                <p>You can build an app that is accessible on many devices: iOS (iPhone and iPad), Android, Windows Phone, the Web or all together. Depending upon the platform you choose to develop your mobile app for, the price would vary. When it comes to developing native mobile apps, the typical options are usually Android or Apple. But, making the final choice is not easy as both these platforms are not only technically different but also have a different user base. So, if you have the money, go for both.</p>
+                <img src="../images/platform-priority-country.png" alt="Platform priority by country, for app developers">
+                <p style="text-align: center;"><strong>Source: <a href="https://buildfire.com/" target="_blank" rel="nofollow">Buildfire.com</a></strong></p>
+                <p><strong>Android Development</strong></p>
+                <p> Android users dominate the mobile app market. They have a wider market penetration and reach, especially in emerging markets. The cost per install for an Android app is far less than iOS app and there aren’t many updates as well.But, the downside is android users spend less as they are spoilt for choice and on the development side it takes more time to develop an android app.On an average, it has been reported that Android apps take 2 - 3 times longer to develop than the same app in iOS.</p>
+                <p><strong> Check out - <a href="https://upvotes.co/mobile-application-developers/android" target="_blank"> Best Android App Development Companies </a></strong></p>
+                <p> Features like screen size and resolution also play a part in the cost of developing an app and we all know that Android phones come in numerous screen sizes and resolutions.Optimizing the app for each of these screens would add up to the cost.</p>
+                <p><strong> iOS Development </strong></p>
+                <p> Many companies opt to launch their first mobile app on iOS.Do you know why ? As mentioned above developing an iOS app is much quicker and cheaper than Android app, which is why it’s a good idea to launch your app on iOS first and then expand it to Android if it’s successful on the App Store. It can also help you test the performance of your app in the actual market.It’s also good to know that Apple users are more engaged with their apps are often more likely to pay for an app than Android users.</p>
+                <p> The greatest downside to iOS apps is your app would need to be updated frequently, which can make a dent in your estimated budget.</p>
+                <p><strong> Check out - <a href="https://upvotes.co/mobile-application-developers/iphone" target="_blank"> Best iOS App Development Companies </a></strong></p>
+                <p><strong> Progressive web - apps Development </strong></p>
+                <p> One of the latest technology by Google is progressive web - app, which can be accessed through the browser.It has most of the features and the feel of the native app.Many of the companies add Lite to the lighter version of their original app.For example Flipkart Lite is a progressive web app that was developed to deliver fast and streamlined experience to mobile users combining the best of web and Flipkart’s native app.This technology however is not supported on iOS platform.</p>
+                <p><strong> Feeling confused ? iOS vs Android: Which one should you go for?</strong></p>
+                <p> Choosing the right platform is not easy when both platforms offer great accessibility.But, when it comes to making the choice there are two key things that you need to consider.a) The tradeoffs, b) Target users</p>
+                <p> Apple has a strict guideline for entering into the app store market, which means higher quality and more security for your app. For this you have to decide if the higher cost of maintenance is a good tradeoff for quality and security. </p>
+                <p> Android users spend less in app market but, there’s a wide user base that you can tap into.Your business model and goals for the app would help you determine which tradeoffs are acceptable and which are not.</p>
+                <p> The second most important factor that you need to consider is your user base.You would have to find out where your ideal user resides - on Android or iPhone.For example, if your primary target is teens in American then it makes sense to go with iOS as < a href = "https://upvotes.co/mobile-application-developers/iphone" target = "_blank" > 82 % percent of teenagers</ a > in the U.S.now use an iPhone.</p>
+                <p> However, if you decide to launch the app on both platforms simultaneously, you can expect to pay nearly double of what you would pay to develop on a single platform.</p>
+                <p><strong> What Kind of functionality ?</strong></p>
+                <p> The final cost of an app is determined by the features incorporated in the app. Depending upon the amount of work involved in developing mobile apps, they can be divided into four major categories.</p>
+                <p><strong> Simple </strong></p>
+                <p> It’s the simplest of app with no more than three to four screens serving one basic function.Such apps don’t store any data like a calculator or a timer.</p>
+                <p><strong>Database / API </strong></p>
+                <p> Apps that need to store data on the user’s device or on a remote server are slightly more complex.Functions like registering, signing in, syncing data between multiple devices, huge amount of content to browse through would require a complex development process.</p>
+                <p><strong> Enterprise platform </strong></p>
+                <p> Bespoke features like user interface design, alerts, notifications, integration with big data, handling storage of large amounts of complex data etc make an app highly complex.Such projects often incur huge development costs and take longer to be developed.</p>
+                <p><strong>Games platform</strong></p>
+                <p>Research has shown that it’s gaming apps that continue to break records and exceed expectations. And behind such apps lies a great deal of complexities and functionalities. A gaming app has storyboards, smooth and high quality user interface and a number of integrations to keep the user hooked.All these features add to the total cost.</p>
+                <p><strong>Overall Design</strong></p>
+                <p>When it comes to app development, the design is as important as the functionality. The design has two important pillars.</p>
+                <p><strong>Graphic Design</strong></p>
+                <p>It’s a well-known fact that customers buy with their eyes. The first time they lay their eyes on anything is the design. If it’s beautiful it makes them want to use the app. This is why it’s important for your app to have the visual appeal to allow users to pick you up in the vast jungle of app marketplace.</p>
+                <p><strong>Check out - <a href="https://upvotes.co/graphic-designers" target="_blank"> Best Graphic Designers</a></strong></p>
+                <p>And to do that your app would need a powerful icon that says all about the app visually, interface elements like tabs and buttons and many other design elements to enhance the visual appeal of the app.All this comes at a cost. If your intended users are design savvy, be prepared to shell out some serious cash to let the design work in your favor. And even if your intended market is information driven, it’s best to have a design that’s at par with the other apps in your market.</p>
+                <p><strong>UI & UX Design</strong></p>
+                <p>Next most important thing is the<a href="https://upvotes.co/graphic-designers" target="_blank"> User Interface (UI) and User Experience (UX)</a>. Visual appeal is important to guide the user to pick you up, but user experience is everything. No matter how beautiful the app looks, an app can stand out only if it provides an excellent user experience.</p>
+                <p><strong>Check out - <a href="https://upvotes.co/ui-ux-agencies" target="_blank">Best UI & UX Designers</a></strong></p>
+                <p>UX refers to the layout of the features in an app and how users interact with an app. From the time they open the app, what screen comes, where it takes the users, how good is the navigation, UX will determine if your app is able to meet its goals or not. An excellent app experience is what makes the users stick to your app for a longer time.</p>
+                <p>For this you would need an excellent design team, and these would naturally cost you more.</p>
+                <p>Oh, wait there’s more to it than just these costs. Aside from these you would also need to pay App Store and Google Play fees, server maintenance fees, backend support, cloud fees and further development costs.</p>
+                <h2>Summing it up…</h2>
+                <p>So, how much is it that your app is going to cost? The best answer to this is, it all varies. It totally depends on the factors that go into developing an app and what you have chosen. But, to put it in perspective, according to a recent survey by statista.com it’s been revealed that developing a mobile app can cost you anything in the range of $30,000 to $700,000. To build an MVP of an app as simple as Instagram the cost can be anywhere in between $100,000 to $250,000 whereas MVP for an app like Uber would require an investment of $1,000,000 or more.</p>
+                <p>Thinking of app development as a one-time cost would be a grave mistake as creating an app is just the tip of the iceberg. There are many other cost factors involved that you would incur once the app is developed so be careful of your investments.</p>
+
+
+            </div>
         </div>
+
+    }
+</div>
 
 
 

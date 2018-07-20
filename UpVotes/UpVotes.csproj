@@ -1033,7 +1033,9 @@
     <Content Include="images\main-banner.png" />
     <Content Include="images\main-logo.png" />
     <Content Include="images\main.jpg" />
+    <Content Include="images\median-cost-mobile-application-development.png" />
     <Content Include="images\message-image-lates.jpg" />
+    <Content Include="images\mobile-app-downloads.png" />
     <Content Include="images\overview-mainicon.png" />
     <Content Include="images\Overview\01-age-of-page-days-copy.jpg" />
     <Content Include="images\Overview\1.png" />
@@ -1184,6 +1186,7 @@
     <Content Include="images\Overview\wws.png" />
     <Content Include="images\Overview\yellow-line.png" />
     <Content Include="images\page_under_construction.jpg" />
+    <Content Include="images\platform-priority-country.png" />
     <Content Include="images\pp.jpeg" />
     <Content Include="images\quotation_sprites.png" />
     <Content Include="images\quote-mainicon.png" />
