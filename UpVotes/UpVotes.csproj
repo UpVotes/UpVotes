@@ -213,6 +213,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\EncryptQS.cs" />
     <Compile Include="Business\QuotationService.cs" />
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\FocusAreaService.cs" />
@@ -470,6 +471,7 @@
     <Content Include="images\CompanyListLogos\LogicSolutions.png" />
     <Content Include="images\CompanyListLogos\LoungeLizard.png" />
     <Content Include="images\CompanyListLogos\LunarMedia.png" />
+    <Content Include="images\CompanyListLogos\maan-softwares.png" />
     <Content Include="images\CompanyListLogos\Macadamian.png" />
     <Content Include="images\CompanyListLogos\MagespiderInfowebPvt.png" />
     <Content Include="images\CompanyListLogos\MagespiderInfowebPvtltd.png" />
@@ -830,6 +832,7 @@
     <Content Include="images\CompanyLogos\LogicSolutions.png" />
     <Content Include="images\CompanyLogos\LoungeLizard.png" />
     <Content Include="images\CompanyLogos\LunarMedia.png" />
+    <Content Include="images\CompanyLogos\maan-softwares.png" />
     <Content Include="images\CompanyLogos\Macadamian.png" />
     <Content Include="images\CompanyLogos\MagespiderInfowebPvt.png" />
     <Content Include="images\CompanyLogos\MagespiderInfowebPvtltd.png" />
@@ -1029,7 +1032,10 @@
     <Content Include="images\Icons\ms-icon-70x70.png" />
     <Content Include="images\images.png" />
     <Content Include="images\IMG_0617.PNG" />
+    <Content Include="images\linkedin-login.png" />
     <Content Include="images\loader.gif" />
+    <Content Include="images\login-bg.jpg" />
+    <Content Include="images\login-button.png" />
     <Content Include="images\main-banner.png" />
     <Content Include="images\main-logo.png" />
     <Content Include="images\main.jpg" />
@@ -1192,6 +1198,7 @@
     <Content Include="images\quote-mainicon.png" />
     <Content Include="images\reviews-mainicon.png" />
     <Content Include="images\sublogo.png" />
+    <Content Include="images\twitter-login.png" />
     <Content Include="images\Untitled-1.jpg" />
     <Content Include="images\Untitled-11.png" />
     <Content Include="images\Untitled-12.jpg" />
