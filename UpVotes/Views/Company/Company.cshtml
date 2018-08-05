@@ -73,7 +73,7 @@
         <div class="main-banner">
             <div class="container">
                 <div class="comapany-logi">
-                    <img title="@company.CompanyName" src="~/images/CompanyLogos/@company.LogoName" />
+                    <img title="@company.CompanyName" src="~/images/CompanyLogos/@company.LogoName" width="124" height="124"/>
                 </div>
 
                 <div class="company-name">
@@ -154,7 +154,8 @@
                 <div class="company-paragraphs">
                     @if (company.Summary != null && company.Summary != string.Empty)
                     {
-                        <p>@company.Summary</p>
+                        @*<p>@company.Summary</p>*@
+                        <p>@Html.Raw(company.Summary)</p>
                     }
 
                     @if (company.Summary1 != null && company.Summary1 != string.Empty)
@@ -175,7 +176,7 @@
                     @if (company.KeyClients != null && company.KeyClients != string.Empty)
                     {
                         <p>Our key clients are</p>
-                        <p>@company.KeyClients</p>
+                        <p>@Html.Raw(@company.KeyClients)</p>
                     }
                 </div>
 

@@ -226,6 +226,7 @@
     <Compile Include="Controllers\QuotationController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UserCompanyListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -244,6 +245,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\editor.css" />
     <Content Include="Content\home-design.css" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\jquery-te.png" />
@@ -276,6 +278,7 @@
     <Content Include="images\3.png" />
     <Content Include="images\4.png" />
     <Content Include="images\404-ErrorPage.jpg" />
+    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\brain.png" />
     <Content Include="images\comments.png" />
     <Content Include="images\CompanyListLogos\360DegreeTechnosoft.png" />
@@ -1212,6 +1215,8 @@
     <Content Include="images\Untitled-8.png" />
     <Content Include="images\Untitled-9.png" />
     <Content Include="images\upvotesicon.jpg" />
+    <Content Include="images\VerificationFailure.png" />
+    <Content Include="images\VerificationSuccess.png" />
     <Content Include="images\viewcompare.png" />
     <Content Include="images\yellow-line.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1226,10 +1231,12 @@
     <Content Include="fonts\Open_Sans\OpenSans-Regular.ttf" />
     <Content Include="fonts\Open_Sans\OpenSans-SemiBold.ttf" />
     <Content Include="Scripts\CompanyFocus.js" />
+    <Content Include="Scripts\editor.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="images\CompanyLogos\desktop.ini" />
     <Content Include="images\CompanyListLogos\desktop.ini" />
     <Content Include="manifest.json" />
+    <Content Include="bundleconfig.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-te-1.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -1249,13 +1256,42 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\StarRating.js" />
+    <Content Include="Scripts\UserScripts\Common.js" />
+    <Content Include="Scripts\UserScripts\Common.min.js">
+      <DependentUpon>Common.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\Company.min.js">
+      <DependentUpon>Company.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\CompanyList.min.js">
+      <DependentUpon>CompanyList.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\CompanyReviews.min.js">
+      <DependentUpon>CompanyReviews.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\CompanyVote.min.js">
+      <DependentUpon>CompanyVote.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\Login.min.js">
+      <DependentUpon>Login.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\UserScripts\Quotation.js" />
     <Content Include="Scripts\UserScripts\Company.js" />
     <Content Include="Scripts\UserScripts\CompanyList.js" />
     <Content Include="Scripts\UserScripts\CompanyReviews.js" />
     <Content Include="Scripts\UserScripts\CompanyVote.js" />
     <Content Include="Scripts\UserScripts\Login.js" />
+    <Content Include="Scripts\UserScripts\Quotation.min.js">
+      <DependentUpon>Quotation.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\UserScripts\SubmitReview.js" />
+    <Content Include="Scripts\UserScripts\SubmitReview.min.js">
+      <DependentUpon>SubmitReview.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\UserScripts\UserCompanyList.js" />
+    <Content Include="Scripts\UserScripts\UserCompanyList.min.js">
+      <DependentUpon>UserCompanyList.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1340,6 +1376,9 @@
     <Content Include="Views\Overview\SEOOverview\_NewYorkseopageOverview.cshtml" />
     <Content Include="Views\Overview\SEOOverview\_SanDiegoseopageOverview.cshtml" />
     <Content Include="Views\Overview\SEOOverview\_WashingtonseopageOverview.cshtml" />
+    <Content Include="Views\UserCompanyList\UserCompany.cshtml" />
+    <Content Include="Views\UserCompanyList\UserCompanyList.cshtml" />
+    <Content Include="Views\UserCompanyList\UserVerification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

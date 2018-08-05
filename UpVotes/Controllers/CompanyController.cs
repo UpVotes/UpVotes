@@ -37,10 +37,25 @@ namespace UpVotes.Controllers
                 }
                 else
                 {
-                    companyViewModel = new CompanyViewModel();
-                    companyViewModel = new CompanyService().GetCompany(companyName.Replace("-", " "), 0, 0, 0, 0, "ASC", 0, "0","0", Convert.ToInt32(Session["UserID"]));
+                    CompanyFilterEntity companyFilter = new CompanyFilterEntity
+                    {
+                        CompanyName = companyName.Replace("-", " "),
+                        MinRate = 0,
+                        MaxRate = 0,
+                        MinEmployee = 0,
+                        MaxEmployee = 0,
+                        SortBy = "ASC",
+                        FocusAreaID = 0,
+                        Location = "0",
+                        SubFocusArea = "0",
+                        UserID = Convert.ToInt32(Session["UserID"]),
+                        PageNo = 1,
+                        PageSize = 10,                        
+                    };
+
+                    companyViewModel = new CompanyService().GetCompany(companyFilter);
                     CacheHandler.Add(companyViewModel, companyName);
-                }
+                }                
                 
                 companyViewModel.WebBaseURL = _webBaseURL;
                 return View(companyViewModel);

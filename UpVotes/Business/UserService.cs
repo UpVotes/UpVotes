@@ -57,8 +57,6 @@ namespace UpVotes.Business
         private UserEntity LinkedInUser(TwitterLinkedInLoginModel linkedInObj)
         {
             UserEntity userObj = new UserEntity();
-            userObj.UserName = linkedInObj.firstName + "_" + linkedInObj.lastName + "_" + linkedInObj.id;
-            userObj.UserPassword = "upVotes@123";
             userObj.FirstName = linkedInObj.firstName;
             userObj.LastName = linkedInObj.lastName;
             userObj.ProfileID = linkedInObj.id;

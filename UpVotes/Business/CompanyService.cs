@@ -13,106 +13,81 @@ namespace UpVotes.Business
     {
         HttpClient _httpClient = null;
 
-        //public CompanyViewModel GetCompany(string companyName)
-        //{
-        //    using (_httpClient = new HttpClient())
-        //    {
-        //        string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-        //        string apiMethod = "GetCompany"; string apiParameter = companyName;
-        //        string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
-        //        var response = _httpClient.GetStringAsync(completeURL).Result;
-        //        CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+        internal CompanyViewModel GetUserCompanyies(int userID, string companyName)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                companyName = companyName == string.Empty ? "0" : companyName;
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetUserCompanies";
+                string completeURL = WebAPIURL + apiMethod + '/' + userID + '/' + companyName;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+                return companyViewModel;
+            }
+        }
 
-        //        foreach (CompanyEntity company in companyViewModel.CompanyList)
-        //        {
-        //            if (companyName.Length > 0 && company.CompanyFocus.Count > 0)
-        //            {
-        //                StringBuilder sb = new StringBuilder();
-        //                foreach (var item in company.CompanyFocus)
-        //                {
-        //                    sb.Append(item.FocusAreaName + ":");
-        //                    sb.Append(item.FocusAreaPercentage.ToString() + ",");
-        //                }
-
-        //                companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
-        //            }
-        //        }
-
-        //        return companyViewModel;
-        //    }
-        //}
-        public CompanyViewModel GetCompany(string companyName = "0", decimal minRate = 0, decimal maxRate = 0, int minEmployee = 0, int maxEmployee = 0, string sortby = "DESC", int focusAreaID = 0, string location = "0", string SubFocusArea = "0", int userID = 0, int PageNo = 1, int PageSize = 10)
+        internal CompanyViewModel GetCompany(CompanyFilterEntity companyFilter)
         {
             using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetCompany";
-                if (string.IsNullOrEmpty(sortby))
-                    sortby = "asc";
-                string apiParameter = companyName + "/" + minRate + "/" + maxRate + "/" + minEmployee + "/" + maxEmployee + "/" + sortby + "/" + focusAreaID + "/" + location + "/" + SubFocusArea + "/"+ userID + "/" + PageNo + "/" + PageSize;
-                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
-                var response = _httpClient.GetStringAsync(completeURL).Result;
-                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+                string completeURL = WebAPIURL + apiMethod + '/';
 
-                if (companyViewModel != null && companyViewModel.CompanyList.Count > 1)
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyFilter), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                CompanyViewModel companyViewModel = new CompanyViewModel();
+                if (response.IsSuccessStatusCode)
                 {
-                    StringBuilder sb = new StringBuilder();
-                    foreach (CompanyEntity company in companyViewModel.CompanyList)
+                    companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response.Content.ReadAsStringAsync().Result);
+                    if (companyViewModel != null && companyViewModel.CompanyList.Count > 1)
                     {
-                        sb.Append(company.CompanyName + ",");
-                    }
+                        StringBuilder sb = new StringBuilder();
+                        foreach (CompanyEntity company in companyViewModel.CompanyList)
+                        {
+                            sb.Append(company.CompanyName + ",");
+                        }
 
-                    companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
-                    
-                    return companyViewModel;
+                        companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' });
+
+                        return companyViewModel;
+                    }
+                    else
+                    {
+                        foreach (CompanyEntity company in companyViewModel.CompanyList)
+                        {
+                            if (companyFilter.CompanyName != "0")
+                            {
+                                if (company.CompanyFocus != null && company.CompanyFocus.Count > 0)
+                                {
+                                    companyViewModel.PrimaryCompanyFocus = company.CompanyFocus;
+                                }
+
+                                if (company.IndustialCompanyFocus != null && company.IndustialCompanyFocus.Count > 0)
+                                {
+                                    companyViewModel.IndustialCompanyFocus = company.IndustialCompanyFocus;
+                                }
+
+                                if (company.CompanyClientFocus != null && company.CompanyClientFocus.Count > 0)
+                                {
+                                    companyViewModel.CompanyClientFocus = company.CompanyClientFocus;
+                                }
+
+                                if (company.SubfocusNames != null && company.SubfocusNames.Count > 0)
+                                {
+                                    companyViewModel.SubfocusNames = company.SubfocusNames;
+                                    companyViewModel.CompanySubFocus = company.CompanySubFocus;
+                                }
+                            }
+                        }
+
+                        return companyViewModel;
+                    }
                 }
                 else
                 {
-                    foreach (CompanyEntity company in companyViewModel.CompanyList)
-                    {
-                        if (companyName != "0" )
-                        {
-                            if(company.CompanyFocus != null && company.CompanyFocus.Count > 0)
-                            {
-                                companyViewModel.PrimaryCompanyFocus = company.CompanyFocus;
-                            }
-
-                            if (company.IndustialCompanyFocus != null && company.IndustialCompanyFocus.Count > 0)
-                            {
-                                companyViewModel.IndustialCompanyFocus = company.IndustialCompanyFocus;
-                            }
-
-                            if (company.CompanyClientFocus != null && company.CompanyClientFocus.Count > 0)
-                            {
-                                companyViewModel.CompanyClientFocus = company.CompanyClientFocus;
-                            }
-
-                            if (company.SubfocusNames != null && company.SubfocusNames.Count > 0)
-                            {
-                                companyViewModel.SubfocusNames = company.SubfocusNames;
-                                companyViewModel.CompanySubFocus = company.CompanySubFocus;
-                            }
-
-                            //StringBuilder sb = new StringBuilder();
-                            //sb.Append("[");
-                            //int p = 0;
-                            //foreach (var item in company.CompanyFocus)
-                            //{
-                            //    p = p + 1;
-                            //    if (p < company.CompanyFocus.Count)
-                            //    {
-                            //        sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + "},");
-                            //    }
-                            //    else
-                            //    {
-                            //        sb.Append("{ name : '" + item.FocusAreaName + "', y:" + item.FocusAreaPercentage + ", sliced: true, selected: true },");                                    
-                            //    }
-                            //}
-
-                            //companyViewModel.CompanyFocusData = sb.ToString().TrimEnd(new char[] { ',' }) + "]";
-                        }
-                    }
-
                     return companyViewModel;
                 }
             }
@@ -140,7 +115,7 @@ namespace UpVotes.Business
             }
         }
 
-        public CategoryMetaTagsDetails GetCategoryMetaTags(string FocusAreaName, string SubFocusAreaName)
+        internal CategoryMetaTagsDetails GetCategoryMetaTags(string FocusAreaName, string SubFocusAreaName)
         {
             using (_httpClient = new HttpClient())
             {
@@ -156,7 +131,7 @@ namespace UpVotes.Business
             }  
         }
 
-        public bool AddReview(CompanyReviewViewModel companyReviewModel)
+        internal bool AddReview(CompanyReviewViewModel companyReviewModel)
         {
             CompanyReviewsEntity companyReviewEntity = new CompanyReviewsEntity();
             companyReviewEntity.CompanyID = companyReviewModel.CompanyID;
@@ -174,7 +149,7 @@ namespace UpVotes.Business
             return isSuccess;
         }
 
-        public string VoteForCompany(int companyID, int userID)
+        internal string VoteForCompany(int companyID, int userID)
         {
             using (_httpClient = new HttpClient())
             {
@@ -263,6 +238,91 @@ namespace UpVotes.Business
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
                 return companyViewModel;
+            }
+        }
+        internal int SaveCompany(CompanyEntity companyEntity)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "SaveCompany";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyEntity), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        internal List<CountryEntity> GetCountry()
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetCountry";
+                string completeURL = WebAPIURL + apiMethod;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<CountryEntity> countryList = JsonConvert.DeserializeObject<List<CountryEntity>>(response);
+                return countryList;
+            }
+        }
+
+        internal List<StateEntity> GetStates(int countryID)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetStates";
+                string completeURL = WebAPIURL + apiMethod + '/' + countryID;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<StateEntity> statesList = JsonConvert.DeserializeObject<List<StateEntity>>(response);
+                return statesList;
+            }
+        }
+
+        internal bool CompanyVerificationByUser(int uID, string cID, int compID)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "CompanyVerificationByUser";
+                string completeURL = WebAPIURL + apiMethod + '/' + uID + '/' + cID + '/' + compID;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                bool isUserVerifiedCompany = JsonConvert.DeserializeObject<bool>(response);
+                return isUserVerifiedCompany;
+            }
+        }
+
+        internal bool UpdateRejectionComments(CompanyRejectComments companyRejectComments)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "UpdateRejectionComments";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyRejectComments), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

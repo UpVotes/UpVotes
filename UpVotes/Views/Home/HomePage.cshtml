@@ -20,6 +20,23 @@
 }
 @Styles.Render("~/Content/Homecss")
 @*<link href="~/Content/home-design.css" rel="stylesheet" />*@
+
+<script type="text/javascript" lang="en-us">
+    $(document).ready(function () {
+        $(".half-circle").click(function () {            
+            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
+            if (userObj == null) {
+                $('#myModal').modal();
+            }
+            else {
+                window.location.href = "/UserCompanyList/UserCompanyList";
+            }
+        });
+    });
+</script>
+
+
+
 <div class="mark-home-banner lazy" data-src="images/Untitled-12.jpg">
     <h2>Explore Top Agencies and Choose The Most Suitable Partner for Next Big project</h2>
     <div>
@@ -88,10 +105,9 @@
         <span>we work hard, we play hard, we show the results.</span>
     </div>
     <div class="world-tiles">
-        <div class="w-tiles">
-            <img class="lazy" src="" data-src="images/Untitled-15.png">
-            <span class="w1-tile">create company profile</span>
-            <input type="button" id="btnCreateCompany" class="create-submit" value="create now" style="display:none;"/>
+        <div class="w-tiles half-circle">
+            <img class="lazy" src="" data-src="images/Untitled-15.png">            
+            <a class="w1-tile" href="/UserCompanyList/UserCompanyList">Get Listed</a>
         </div>
         <div class="w-tiles">
             <img class="lazy" src="" data-src="images/Untitled-16.png">
@@ -100,7 +116,7 @@
         <div class="w-tiles">
             <img class="lazy" src="" data-src="images/Untitled-17.png">
             <span class="w3-tile">submit your review</span>
-            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" style="display:none;"/>
+            <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" style="display:none;" />
         </div>
     </div>
 </div>

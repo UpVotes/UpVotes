@@ -8,6 +8,9 @@ namespace UpVotes.Models
         public string CompanyFocusData { get; set; }
 
         public List<CompanyEntity> CompanyList { get; set; }
+
+        public List<FocusAreaEntity> FocusAreaList { get; set; }
+
         public List<CompanyFocusEntity> PrimaryCompanyFocus { get; set; }
         public List<CompanyFocusEntity> IndustialCompanyFocus { get; set; }
         public List<CompanyFocusEntity> CompanyClientFocus { get; set; }
