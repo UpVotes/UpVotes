@@ -1,0 +1,498 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@using UpVotes.BusinessEntities.Entities
+@using System.Collections.Generic
+
+@{
+    ViewBag.Title = "User Company";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/UserScripts/UserCompanyList.js"></script>
+<script src="~/Scripts/editor.js"></script>
+<link href="~/Content/editor.css" rel="stylesheet" />
+<style type="text/css">
+    #divSubfocus div > h3 {
+        text-transform: capitalize;
+        padding-bottom: 6px;
+        margin-top: 35px;
+        border-bottom: 1px solid #f4f4f4;
+        font-family: OpenSans-Bold;
+        margin-bottom: 0;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ImgLoading').attr("src", $.absoluteurl('/images/ajax-loader.gif'));
+        $("#divRejectionComments").hide();
+        var focusAreaObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Model.FocusAreaList))');
+        $.GetFocusAreaObject(focusAreaObj);
+        $.LoadCountry();
+        $.GetCompanyData(eval('@Html.Raw(Json.Encode(Model.CompanyList[0].CompanyName))'));
+});
+</script>
+
+<div id="divCompanyTabs">
+
+    <ul>
+        <li><a href="#divCompanyProfile"><span> Profile </span></a></li>
+        <li><a href="#divCompanyFocus"><span> Focus Areas </span></a></li>
+        <li><a href="#divCompanyIndustryFocus"><span> Industry Focus </span></a></li>
+        <li><a href="#divCompanyClientFocus"><span> Client Focus </span></a></li>
+        <li><a href="#divCompanyLocations"><span> Our Locations </span></a></li>
+        @* <li><a href="#divCompanyPortfolio"><span> Our Portfolio </span></a></li>*@
+    </ul>
+    <div class="alert alert-danger" style="display:none;" id="divFailureMessage">
+        <strong>ERROR!!</strong>
+        <span style="padding-left:0%; padding-bottom:1%" id="spnMessage"></span>
+    </div>
+    <div class="alert alert-success" style="display:none;" id="divSuccessMessage">
+        <strong><span style="padding-left:0%; padding-bottom:1%" id="spnSuccessMessage"></span></strong>
+    </div>
+
+    <div id="divCompanyProfile" class="tab-pane fade in active">
+        <div class="company-profile">
+            <div class="container">
+                <div class="row company-form">
+                    <div class="col-md-12">
+                        <label for="txtCompanyName" style="color:black;">Company Name : </label><span style="color:red">*</span>
+                        <input type="text" class="form-control" id="txtCompanyName" value="@Model.CompanyList[0].CompanyName" />
+                        <input type="hidden" id="hdnUserCompanyID" value="@Model.CompanyList[0].CompanyID" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="uplLogo">Logo : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
+                        <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm">
+                            <input type="file" id="UplAttachment" class="form-control" name="postedFile" onchange="CheckForUploadedFile(this)" />
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtTagLine">Tagline : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtTagLine" value="@Model.CompanyList[0].TagLine" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtFoundedYear">Founded : </label><span style="color:red">*</span>
+                        <input type="text" class="form-control numericOnly" maxlength="4" id="txtFoundedYear" value="@Model.CompanyList[0].FoundedYear" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtWebsite">Website : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtWebsite" value="@Model.CompanyList[0].URL" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtWorkEmail">Work Email : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtWorkEmail" value="@Model.CompanyList[0].WorkEmail" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="ddlEmployees">Employees : </label><span style="color:red">*</span>
+                        <select class="form-control" id="ddlEmployees">
+                            <option value="0">--Select--</option>
+                            <option value="0-10">&lt; 10 </option>
+                            <option value="11-50">11 - 50</option>
+                            <option value="51-250">51 - 250</option>
+                            <option value="251-1000">251 - 1000</option>
+                            <option value="1001-5000">1001 - 5000</option>
+                            <option value="5001-10000">5001 - 10000</option>
+                            <option value="10000-0">10000+</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Avg.Hourly Rate (in US $) : </label><span style="color:red">*</span>
+                        <select class="form-control" id="ddlAvgHourlyRate">
+                            <option value="0">--Select--</option>
+                            <option value="0.00-25.00">&lt; $25.00 </option>
+                            <option value="26.00-50.00">$26.00 - $50.00</option>
+                            <option value="51.00-100.00">$51.00 - $100.00</option>
+                            <option value="101.00-150.00">$101.00 - $150.00</option>
+                            <option value="151.00-200.00">$151.00 - $200.00</option>
+                            <option value="201.00-300.00">$201.00 - $300.00</option>
+                            <option value="300.00-0.00">$300.00+</option>
+                        </select>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtWebsite">LinkedIn : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtLinkedInProfile" value="@Model.CompanyList[0].LinkedInProfileURL" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtTwitter">Twitter : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtTwitterProfile" value="@Model.CompanyList[0].TwitterProfileURL" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtFacebook">Facebook : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtFacebookProfile" value="@Model.CompanyList[0].FacebookProfileURL" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <label for="txtGooglePlus">Google+ : </label><span style="color:red">*</span>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <input type="text" class="form-control" id="txtGooglePlusProfile" value="@Model.CompanyList[0].GooglePlusProfileURL" />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <label for="txtCompanySummary">Company Summary : </label><span style="color:red">*</span>
+                        <textarea id="txtCompanySummary"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="txtKeyClients">Key Clients : </label>
+                        <textarea class="form-control" rows="5" id="txtKeyClients"></textarea>
+                    </div>
+                    <div class="col-md-12 col-sm-12" id="divRejectionComments">
+                        <label for="txtRejectComments">Rejection Comments : </label>
+                        <textarea class="form-control" rows="5" cols="50" id="txtRejectComments"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCompanyFocus" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <div class="row focus-fields">
+                    @{
+                        List<FocusAreaEntity> focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "P").ToList();
+                    }
+                    @if (focusAreaList.Any())
+                    {
+                        foreach (FocusAreaEntity focusArea in focusAreaList)
+                        {
+                            <div class="form-group col-md-3 no-padding ">
+                                <label for="txtFocus_@focusArea.FocusAreaID"><nobr>@focusArea.FocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                <div class="input-group col-md-5">
+                                    <div class="input text">
+                                        <input type="hidden" id="hdnCompanyFocusID_@focusArea.FocusAreaID" value="" />
+                                        <input type="text" class="form-control numericOnly" maxlength="3" id="txtFocus_@focusArea.FocusAreaID" onBlur="PercentageFormat(this, event);" controlid="divPrimaryFocus_@focusArea.FocusAreaID">
+                                    </div>
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div id="divSubfocus" class="SubFocus">
+                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                    {
+                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                        {
+                            <div id="divPrimaryFocus_@focusAreaObj.FocusAreaID" style="display:none;">
+                                <div class="focus-fields"></div>
+                                <fieldset>
+                                    <legend><b>@focusAreaObj.FocusAreaName Focus:</b></legend>
+                                    <div class="focus-fields"></div>
+                                    <div class="row">
+                                        @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                        {
+                                            <div class="form-group col-md-3 no-padding ">
+                                                <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                                <div class="input-group col-md-5">
+                                                    <div class="input text">
+                                                        <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                        <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                    </div>
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </fieldset>
+                            </div>
+                        }
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="divCompanyIndustryFocus" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <div id="divIndustryfocus">
+
+                    @{
+                        focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "I").ToList();
+                    }
+
+                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                    {
+                        <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
+                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                        {
+                            <div id="divIndustryFocus">
+                                <div class="focus-fields"></div>
+                                <div class="focus-fields"></div>
+                                <div class="row">
+                                    @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                    {
+                                        <div class="form-group col-md-3 no-padding ">
+                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                            <div class="input-group col-md-5">
+                                                <div class="input text">
+                                                    <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                    <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                </div>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCompanyClientFocus" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <div id="divClientfocus">
+
+                    @{
+                        focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "C").ToList();
+                    }
+
+                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                    {
+                        <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
+                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                        {
+                            <div id="divClientFocus">
+                                <div class="focus-fields"></div>
+                                <div class="focus-fields"></div>
+                                <div class="row">
+                                    @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                    {
+                                        <div class="form-group col-md-3 no-padding ">
+                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                            <div class="input-group col-md-5">
+                                                <div class="input text">
+                                                    <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                    <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                </div>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="divCompanyLocations" class="tab-pane fade in ">
+        <div class="company-profile">
+            <div class="container">
+                <div id="dvLocationBranch">
+                    @foreach (var companyBranch in Model.CompanyList[0].CompanyBranches)
+                    {
+                        <div id="dvLocationBranches_0" class="locations-section">
+                            <div class="col-md-12 mini-heading">
+                                Branch : 1
+                            </div>
+                            <div class="row company-form company-locations">
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="txtstreet_0">Branch Name:</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtBranch_0" class="form-control">
+                                    <input type="hidden" id="hdnBranchID_0" value="@companyBranch.BranchID" />
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="txtstreet_0">Street:</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtstreet_0" class="form-control" value="@companyBranch.Address">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="txtcity_0">City:</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtcity_0" class="form-control" value="@companyBranch.City">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="ddlCountry_0">Country:</label><span style="color:red;">*</span>
+                                    <select class="form-control" id="ddlCountry_0">
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="ddlStates_0">State/Province:</label><span style="color:red;">*</span>
+                                    <select class="form-control" id="ddlStates_0">
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="txtpostal_0">Postal Code:</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtpostal_0" class="form-control" value="@companyBranch.PostalCode">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="txtphone_0">Phone Number</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtphone_0" class="form-control" value="@companyBranch.PhoneNumber">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="txtphone_rNum">Email</label><span style="color:red;">*</span>
+                                    <input type="text" id="txtEmail_0" class="form-control" value="@companyBranch.Email">
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <label for="ChkIsHeadQuarters_0">Is HeadQuarters</label>
+                                </div>
+                                <input type="checkbox" id="ChkIsHeadQuarters_0" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" style="width:500px;" value="@companyBranch.IsHeadQuarters">
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <button class="btn btn-info prim-save-location" id="btnAddBranch">Add another Branch</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dvLocationBranches_rNum" class="locations-section" style="display:none;">
+        <div class="col-md-12 mini-heading">
+            Branch : <span id="locationnumber"></span>
+        </div>
+        <div class="row company-form company-locations">
+            <i title="Remove Branch" class="fa fa-minus-square removeBranch" style="right:0;top:0;" aria-hidden="true"></i>
+            <div class="col-md-12 col-sm-12">
+                <label for="txtBranch_rNum">Branch Name:</label><span style="color:red;">*</span>
+                <input type="text" id="txtBranch_rNum" class="form-control">
+                <input type="hidden" id="hdnBranchID_rNum" />
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="txtstreet_rNum">Street:</label><span style="color:red;">*</span>
+                <input type="text" id="txtstreet_rNum" class="form-control">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="txtcity_rNum">City:</label><span style="color:red;">*</span>
+                <input type="text" id="txtcity_rNum" class="form-control">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="ddlCountry_rNum">Country:</label><span style="color:red;">*</span>
+                <select class="form-control" id="ddlCountry_rNum">
+                    <option value="0">--Select--</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="ddlStates_rNum">State/Province:</label><span style="color:red;">*</span>
+                <select class="form-control" id="ddlStates_rNum">
+                    <option value="0">--Select--</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="txtpostal_rNum">Postal Code:</label><span style="color:red;">*</span>
+                <input type="text" id="txtpostal_rNum" class="form-control">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="txtphone_rNum">Phone Number</label><span style="color:red;">*</span>
+                <input type="text" id="txtphone_rNum" class="form-control">
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <label for="txtEmail_rNum">Email</label><span style="color:red;">*</span>
+                <input type="text" id="txtEmail_rNum" class="form-control">
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label for="ChkIsHeadQuarters_rNum">Is HeadQuarters</label>
+                <input type="checkbox" id="ChkIsHeadQuarters_rNum" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" style="width:500px;">
+            </div>
+        </div>
+    </div>
+
+    <div id="divCompanyPortfolio" class="tab-pane fade in " style="display:none;">
+        <div class="company-profile">
+            <div class="container">
+                <h3>company portfolio:</h3>
+                <span>last step! we just need your contact information to verify that you are who you are.</span>
+                <div class="row company-form">
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Title:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <label for="usr">Company Profile:*</label>
+                        <div class="input-group">
+                            <input class="form-control" aria-label="Text input with segmented button dropdown">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-4 col-xs-8">
+                        <label for="usr">Image:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-4  browse-buttonfor">
+                        <label for="usr">&nbsp;</label>
+                        <button>browse</button>
+                    </div>
+                    <div class="col-md-5 col-sm-4 col-xs-8">
+                        <label for="usr">Video:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-4  browse-buttonfor">
+                        <label for="usr">&nbsp;</label>
+                        <button>browse</button>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="usr">Description*</label>
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-4 col-sm-4">
+        <input type="button" class="btn btn-info prim-save" style="padding:10px 30px 10px 30px;" id="btnCompanySave" value="Save" />
+    </div>
+
+    <div class="col-md-4 col-sm-4">
+        <input type="button" class="btn btn-info prim-save Cancel" style="padding:10px 30px 10px 30px;" id="btnCompanyCancel" value="Cancel" />
+    </div>
+
+    <div id="divLoading" style="display: none; align-self:center; border:0px solid #dddddd; background:#e9e9e9;">
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 100%; text-align: center; vertical-align: middle">
+                    <img id="ImgLoading" src="~/images/ajax-loader.gif" class="img-responsive" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

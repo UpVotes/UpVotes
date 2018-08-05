@@ -1,0 +1,56 @@
+[
+  {
+    "outputFileName": "Scripts/UserScripts/Company.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/Company.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/CompanyList.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/CompanyList.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/CompanyReviews.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/CompanyReviews.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/CompanyVote.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/CompanyVote.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/Login.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/Login.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/SubmitReview.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/SubmitReview.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/UserCompanyList.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/UserCompanyList.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/Common.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/Common.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserScripts/Quotation.min.js",
+    "inputFiles": [
+      "Scripts/UserScripts/Quotation.js"
+    ]
+  }
+]

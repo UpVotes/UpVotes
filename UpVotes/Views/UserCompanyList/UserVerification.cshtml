@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "UserVerification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isUserVerified = @Model;    
+}
+
+<div id="divUserVerification" style="align-content:center">
+    @if (isUserVerified)
+    {        
+        <img id="imgUserVerificationSuccess" src="~/images/VerificationSuccess.png" style="width:916px; height:415px;padding:25px 0px 0px 100px;" />
+    }
+    else
+    {        
+        <img id="imgUserVerificationSuccess" src="~/images/VerificationFailure.png" style="width:815px; height:415px; padding:25px 0px 0px 100px;" />
+    }
+</div>
+
+
+
