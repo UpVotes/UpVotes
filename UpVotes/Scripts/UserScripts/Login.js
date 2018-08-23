@@ -12,4 +12,126 @@
 
         });
     }
+
+    $.LoginWithRegisteredUser = function (companyID, WorkEmail, Password, url) {
+        $("#ajax_loader").show();
+        $("#dvforgotpwd").hide();
+        $.ajax({
+            type: "POST",   //GET or POST or PUT or DELETE verb
+            url: $.absoluteurl(url),//?companyid='+compid,
+            data: { companyid: companyID, workemail: WorkEmail, password: Password },// Location of the service
+            success: function (json) {
+                if (json != "") {
+                    $('#your-modal-id').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('body').css("padding-right", "");
+                    $('.modal-backdrop').remove();
+                    //$("#divLogin").html('');
+                    $("#divLogin").html(json);
+                    $("#ajax_loader").hide();
+                }
+                else {
+                    $('#errValidWorkEmail').show();
+                    $("#ajax_loader").hide();
+                }
+
+            }
+
+        });
+    }
+
+    $.ForgotPassword = function (WorkEmail) {
+        $("#ajax_loader").show();
+        $.ajax({
+            type: "POST", 
+            url: $.absoluteurl('/Login/ForgotPassword'),
+            data: { workemail: WorkEmail },
+            success: function (json) {
+                if (json != "") {
+                    $("#dvforgotpwd").show();
+                    $('#errValidWorkEmail').hide();
+                    $('#errValidWorkEmail1').hide();
+                    $("#ajax_loader").hide();
+                }
+                else {
+                    $("#dvforgotpwd").hide();
+                    $('#errValidWorkEmail1').show();
+                    $("#ajax_loader").hide();
+                }
+
+            }
+
+        });
+    }
+
+    $.checkPassword = function (pwd)
+    {
+        // at least one number, one special character
+        var re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
+        return re.test(pwd);
+    }
+
+    $.ValidateChangePassword = function()
+    {
+        $('#errValidChangepwd').text('');
+        if ($('#txtCurrPassword').val() == "") {
+            $('#errValidChangepwd').text('Error: Current Password cannot be blank!');
+            return false;
+        }
+        if ($('#txtNewPassword').val() != "" && $('#txtNewPassword').val() == $('#txtConNewPassword').val()) {
+            if (!$.checkPassword($('#txtNewPassword').val())) {
+                $('#errValidChangepwd').text('Error: The password should contain atleast 6 character with one number, one special character');
+                return false;
+            }
+        } else {
+            $('#errValidChangepwd').text("Error: Please check that you've entered and confirmed your password!");
+            return false;
+        }
+        return true;
+    }
+
+    $.ChangePassword = function(currpwd, newpwd)
+    {
+        $('#dvchangepwd').hide();
+        $("#ajax_loaderchng").show();
+        $.ajax({
+            type: "POST",
+            url: $.absoluteurl('/Login/ChangePassword'),
+            data: { CurrentPassword: currpwd,NewPassword: newpwd },
+            success: function (json) {
+                if (json != "") {
+                    $('#MsgChangePwd').text(json);
+                    $('#dvchangepwd').show();
+                    $("#ajax_loaderchng").hide();
+                }
+                else {
+                    $('#dvchangepwd').hide();
+                    $('#errValidChangepwd').text("Error: Current Password is incorrect!");
+                    $("#ajax_loaderchng").hide();
+                }
+
+            }
+
+        });
+    }
+
+    $.ValidateEmail = function (sEmail) {
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            if (filter.test(sEmail)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $.ValidateWorkEmailID = function (sEmail) {
+            var reg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!abc.com)(?!xyz.com)(?!pqr.com)(?!rediffmail.com)(?!live.com)(?!outlook.com)(?!me.com)(?!msn.com)(?!ymail.com)([\w-]+\.)+[\w-]{2,4})?$/;
+            if (reg.test(sEmail)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 });

@@ -19,7 +19,7 @@ namespace UpVotes.Controllers
         /// <returns>Returns view along with the attached model if any</returns>
         public ActionResult UserCompanyList()
         {
-            int userID = Convert.ToInt32(Session["UserID"]) == 0 ? 1 : Convert.ToInt32(Session["UserID"]);
+            int userID = Convert.ToInt32(Session["UserID"]);
             CompanyViewModel companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
             Session["CompanyViewModel"] = companyViewModel;
             return View(companyViewModel);
@@ -32,7 +32,7 @@ namespace UpVotes.Controllers
         /// <returns>Returns view along with the empty company model.</returns>
         public ActionResult UserCompany(string companyName = "")
         {
-            int userID = Convert.ToInt32(Session["UserID"]) == 0 ? 1 : Convert.ToInt32(Session["UserID"]);
+            int userID = Convert.ToInt32(Session["UserID"]);
             CompanyViewModel companyViewModel = null;
             if (Session["CompanyViewModel"] != null)
             {

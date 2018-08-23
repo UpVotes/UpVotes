@@ -72,25 +72,25 @@ $(document).ready(function () {
         });
     }
 
-    $.ValidateEmail = function (sEmail) {
-        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if (filter.test(sEmail)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    //$.ValidateEmail = function (sEmail) {
+    //    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    //    if (filter.test(sEmail)) {
+    //        return true;
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
 
-    $.ValidateWorkEmailID = function (sEmail) {
-        var reg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!abc.com)(?!xyz.com)(?!pqr.com)(?!rediffmail.com)(?!live.com)(?!outlook.com)(?!me.com)(?!msn.com)(?!ymail.com)([\w-]+\.)+[\w-]{2,4})?$/;
-        if (reg.test(sEmail)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    //$.ValidateWorkEmailID = function (sEmail) {
+    //    var reg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!abc.com)(?!xyz.com)(?!pqr.com)(?!rediffmail.com)(?!live.com)(?!outlook.com)(?!me.com)(?!msn.com)(?!ymail.com)([\w-]+\.)+[\w-]{2,4})?$/;
+    //    if (reg.test(sEmail)) {
+    //        return true;
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
 
     var focusAreaObject = '';
     var actualFocusAreaArray = [];

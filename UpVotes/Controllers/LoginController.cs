@@ -100,6 +100,47 @@ namespace UpVotes.Controllers
             return Redirect("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=lkjlkxcxcx66&scope=r_basicprofile");
         }
 
+        public ActionResult LoginRegisteredUser(int companyid,string workemail, string password)
+        {
+            RegisteredUser registeredUserObj = new RegisteredUser();
+            registeredUserObj.WorkEmailID = workemail;
+            registeredUserObj.Password = password;
+            UserEntity userObj = new Business.UserService().LoginRegisteredUser(registeredUserObj);
+            if (userObj!=null && userObj.UserID > 0)
+            {
+                Session["UserObj"] = userObj;
+                Session["UserID"] = userObj.UserID;
+                return PartialView("~/Views/Login/_Login.cshtml", userObj);
+            }            
+            return null;
+        }
+
+        public string ForgotPassword(string workemail)
+        {
+            string message = "";
+            RegisteredUser ForgetObj = new RegisteredUser();
+            ForgetObj.WorkEmailID = workemail;
+            UserEntity userObj = new Business.UserService().ForgotPassword(ForgetObj);
+            if(userObj != null && userObj.UserID > 0)
+            {
+                message = "Your new password has been emailed to you.";
+            }
+            return message;
+        }
+        public string ChangePassword(string CurrentPassword, string NewPassword)
+        {
+            string message = "";
+            ChangePassword ChangeObj = new ChangePassword();
+            ChangeObj.Password = CurrentPassword;
+            ChangeObj.NewPassword = NewPassword;
+            ChangeObj.UserID = Convert.ToInt32(Session["UserID"]);
+            UserEntity userObj = new Business.UserService().ChangePassword(ChangeObj);
+            if(userObj != null && userObj.UserID > 0)
+            {
+                message = "Success! Your Password has been changed!";
+            }
+            return message;
+        }
         public ActionResult LinkedINAuth(string code, string state)
         {
             //This method path is your return URL

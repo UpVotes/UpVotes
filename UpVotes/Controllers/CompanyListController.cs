@@ -385,6 +385,21 @@ namespace UpVotes.Controllers
                             case "bangalore":
                                 url = "~/Views/Overview/MobileAppOverview/_BangaloremobilepageOverview.cshtml";
                                 break;
+                            case "ahmedabad":
+                                url = "~/Views/Overview/MobileAppOverview/_AhmedabadmobilepageOverview.cshtml";
+                                break;
+                            case "california":
+                                url = "~/Views/Overview/MobileAppOverview/_CaliforniamobilepageOverview.cshtml";
+                                break;
+                            case "massachusetts":
+                                url = "~/Views/Overview/MobileAppOverview/_MassachusettsmobilepageOverview.cshtml";
+                                break;
+                            case "noida":
+                                url = "~/Views/Overview/MobileAppOverview/_NoidamobilepageOverview.cshtml";
+                                break;
+                            case "texas":
+                                url = "~/Views/Overview/MobileAppOverview/_TexasmobilepageOverview.cshtml";
+                                break;
                             default:
                                 url = "~/Views/UnderConstruction/_underConstruction.cshtml";
                                 break;

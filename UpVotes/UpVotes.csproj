@@ -1379,6 +1379,11 @@
     <Content Include="Views\UserCompanyList\UserCompany.cshtml" />
     <Content Include="Views\UserCompanyList\UserCompanyList.cshtml" />
     <Content Include="Views\UserCompanyList\UserVerification.cshtml" />
+    <Content Include="Views\Overview\MobileAppOverview\_AhmedabadmobilepageOverview.cshtml" />
+    <Content Include="Views\Overview\MobileAppOverview\_CaliforniamobilepageOverview.cshtml" />
+    <Content Include="Views\Overview\MobileAppOverview\_MassachusettsmobilepageOverview.cshtml" />
+    <Content Include="Views\Overview\MobileAppOverview\_NoidamobilepageOverview.cshtml" />
+    <Content Include="Views\Overview\MobileAppOverview\_TexasmobilepageOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,4 +19,11 @@ namespace UpVotes.Models
 
         public int userType { get; set; }
     }
+
+    public class RegisteredUser
+    {
+        public string WorkEmailID { get; set; }
+        public string Password { get; set; }        
+    }
+    
 }

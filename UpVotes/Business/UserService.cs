@@ -48,6 +48,87 @@ namespace UpVotes.Business
 
             return userObj;
         }
+        internal UserEntity LoginRegisteredUser(RegisteredUser RegisteredUserObj = null)
+        {
+            UserEntity userObj = new UserEntity();
+            if (RegisteredUserObj != null)
+            {
+                userObj.UserName = RegisteredUserObj.WorkEmailID;
+                userObj.UserPassword = RegisteredUserObj.Password;
+
+                using (_httpClient = new HttpClient())
+                {
+                    _apiMethod = "LoginRegisteredUser";
+                    _completeURL = _baseURL + _apiMethod + "/";
+                    StringContent httpContent = new StringContent(JsonConvert.SerializeObject(userObj), Encoding.UTF8, "application/json");
+                    var response = _httpClient.PostAsync(_completeURL, httpContent).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        userObj = new UserEntity();
+                        userObj = JsonConvert.DeserializeObject<UserEntity>(response.Content.ReadAsStringAsync().Result);
+                    }
+                    else
+                    {
+                        userObj = null;
+                    }
+                }
+            }
+            
+            return userObj;
+        }
+        internal UserEntity ForgotPassword(RegisteredUser RegisteredUserObj = null)
+        {
+            UserEntity userObj = new UserEntity();
+            if (RegisteredUserObj != null)
+            {
+                userObj.UserName = RegisteredUserObj.WorkEmailID;
+                
+                using (_httpClient = new HttpClient())
+                {
+                    _apiMethod = "ForgotPassword";
+                    _completeURL = _baseURL + _apiMethod + "/";
+                    StringContent httpContent = new StringContent(JsonConvert.SerializeObject(userObj), Encoding.UTF8, "application/json");
+                    var response = _httpClient.PostAsync(_completeURL, httpContent).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        userObj = new UserEntity();
+                        userObj = JsonConvert.DeserializeObject<UserEntity>(response.Content.ReadAsStringAsync().Result);
+                    }
+                    else
+                    {
+                        userObj = null;
+                    }
+                }
+            }
+
+            return userObj;
+        }
+
+        internal UserEntity ChangePassword(ChangePassword ChangePwdObj = null)
+        {
+            UserEntity userObj = new UserEntity();
+            if (ChangePwdObj != null && ChangePwdObj.UserID > 0)
+            {                
+                using (_httpClient = new HttpClient())
+                {
+                    _apiMethod = "ChangePassword";
+                    _completeURL = _baseURL + _apiMethod + "/";
+                    StringContent httpContent = new StringContent(JsonConvert.SerializeObject(ChangePwdObj), Encoding.UTF8, "application/json");
+                    var response = _httpClient.PostAsync(_completeURL, httpContent).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        userObj = new UserEntity();
+                        userObj = JsonConvert.DeserializeObject<UserEntity>(response.Content.ReadAsStringAsync().Result);
+                    }
+                    else
+                    {
+                        userObj = null;
+                    }
+                }
+            }
+
+            return userObj;
+        }
 
         private UserEntity TwitterUser(TwitterLoginModel twitterObj)
         {
