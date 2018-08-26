@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/UserScripts/UserCompanyList.js"></script>
+<script src="~/Scripts/UserScripts/UserCompanyList.min.js"></script>
 <script src="~/Scripts/editor.js"></script>
 <link href="~/Content/editor.css" rel="stylesheet" />
 <style type="text/css">
@@ -284,25 +284,24 @@
                         <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
                         if (focusAreaObj.SubFocusAreaEntity.Any())
                         {
-                            <div id="divClientFocus">
-                                <div class="focus-fields"></div>
-                                <div class="focus-fields"></div>
+                        <div id="divClientFocus">
+                            <div class="focus-fields"></div>
+                            @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                            {
                                 <div class="row">
-                                    @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
-                                    {
-                                        <div class="form-group col-md-3 no-padding ">
-                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
-                                            <div class="input-group col-md-5">
-                                                <div class="input text">
-                                                    <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
-                                                    <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
-                                                </div>
-                                                <span class="input-group-addon">%</span>
+                                    <div class="form-group col-md-8 no-padding ">
+                                        <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID">@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></label>
+                                        <div class="input-group col-md-2">
+                                            <div class="input text">
+                                                <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
                                             </div>
+                                            <span class="input-group-addon">%</span>
                                         </div>
-                                    }
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                        </div>
                         }
                     }
                 </div>
@@ -423,15 +422,15 @@
         </div>
     </div>
 
-    <div id="divCompanyPortfolio" class="tab-pane fade in " style="display:none;">
+    @*<div id="divCompanyPortfolio" class="tab-pane fade in " style="display:none;">
         <div class="company-profile">
             <div class="container">
                 <h3>company portfolio:</h3>
                 <span>last step! we just need your contact information to verify that you are who you are.</span>
                 <div class="row company-form">
                     <div class="col-md-6 col-sm-6">
-                        <label for="usr">Title:</label>
-                        <input type="text" class="form-control" id="usr">
+                        <label for="txtTitle">Title:</label>
+                        <input type="text" class="form-control" id="txtTitle">
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <label for="usr">Company Profile:*</label>
@@ -473,7 +472,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="clearfix"></div>
 

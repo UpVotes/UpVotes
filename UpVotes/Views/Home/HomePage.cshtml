@@ -23,9 +23,12 @@
 
 <script type="text/javascript" lang="en-us">
     $(document).ready(function () {
-        $(".half-circle").click(function () {            
+        $(".myLoginPopUp").click(function () {            
             var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
             if (userObj == null) {
+                @{
+                    Session["calledPage"] = "U";
+                }
                 $('#myModal').modal();
             }
             else {
@@ -67,32 +70,32 @@
         <div class="reserch-categoy-tiles">
             <div class="r-tile">
                 <div> <img src="" class="lazy" data-src="images/Untitled-6.png"></div>
-                <p><a href="/mobile-application-developers" >Mobile App Development</a></p>
+                <p><a href="/mobile-application-developers">Mobile App Development</a></p>
                 <p>Searching for the best Mobile App Development for your business? Start choosing from the very best in the industry that deliver end-end app development services.</p>
             </div>
             <div class="r-tile">
                 <div><img src="" class="lazy" data-src="images/Untitled-7.png"></div>
-                <p><a href="/digital-marketing-companies" >Digital Marketing</a></p>
+                <p><a href="/digital-marketing-companies">Digital Marketing</a></p>
                 <p>Searching for a brilliant digital marketing agency to take your digital marketing strategy to the next level? Choose from the list of the best-in-class agencies with shower of votes and awesome reviews from clients.</p>
             </div>
             <div class="r-tile">
                 <div><img src="" class="lazy" data-src="images/Untitled-8.png"></div>
-                <p><a href="/web-design-companies" >Web Design</a></p>
+                <p><a href="/web-design-companies">Web Design</a></p>
                 <p>Searching for the most creative Web design Agency to build a world class website for you? Choose from the most proficient ones with remarkable votes and reviews and who can deliver full cycle of web designs.</p>
             </div>
             <div class="r-tile">
                 <div><img src="" class="lazy" data-src="images/Untitled-9.png"></div>
-                <p><a href="/web-development-companies" >Web Developement</a></p>
+                <p><a href="/web-development-companies">Web Developement</a></p>
                 <p>Searching for the most tech-savvy web development partner to develop your website? Start choosing from the list of the top in the game players in the industry with rave reviews and votes from clients.</p>
             </div>
             <div class="r-tile">
                 <div><img src="" class="lazy" data-src="images/Untitled-11.png"></div>
-                <p><a href="/seo-companies" >Search Engine Optimization</a></p>
+                <p><a href="/seo-companies">Search Engine Optimization</a></p>
                 <p>Searching for a strategy oriented best-in-class SEO partner to stay at the top of the search engine game? Choose from the finest ones who deliver full pack of SEO solutions and have gained the trust of prestigious clients who have given them wonderful reviews and votes for the awesome work.</p>
             </div>
             <div class="r-tile">
                 <div><img src="" class="lazy" data-src="images/Untitled-13.png"></div>
-                <p><a href="/software-development-companies" >Software Developement</a></p>
+                <p><a href="/software-development-companies">Software Developement</a></p>
                 <p>Searching for the perfect software development partner for your business? Start choosing from the list of the best-in-class software developers that deliver end to end custom software development services.</p>
             </div>
             <span class="chord"></span>
@@ -105,9 +108,9 @@
         <span>we work hard, we play hard, we show the results.</span>
     </div>
     <div class="world-tiles">
-        <div class="w-tiles">
-            <img class="lazy" src="" data-src="images/Untitled-15.png">            
-            <a class="w1-tile" href="/UserCompanyList/UserCompanyList">Get Listed</a>
+        <div class="w-tiles myLoginPopUp">
+            <img class="lazy" src="" data-src="images/Untitled-15.png">
+            <a class="w1-tile">Get Listed</a>
         </div>
         <div class="w-tiles">
             <img class="lazy" src="" data-src="images/Untitled-16.png">

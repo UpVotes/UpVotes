@@ -9,7 +9,7 @@
         }
        
     </style>
-    <script src="~/Scripts/UserScripts/Login.js"></script>
+    <script src="~/Scripts/UserScripts/Login.min.js"></script>
     <script>
         function closeSession() {
             //IN.User.logout();
@@ -35,6 +35,7 @@
             var calledPage = '';
 
             $("#btnlinkedin").click(function () {
+                debugger;
                 if ('@Session["calledPage"].ToString()' == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }

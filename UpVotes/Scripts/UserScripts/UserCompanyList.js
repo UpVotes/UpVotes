@@ -72,25 +72,25 @@ $(document).ready(function () {
         });
     }
 
-    //$.ValidateEmail = function (sEmail) {
-    //    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    //    if (filter.test(sEmail)) {
-    //        return true;
-    //    }
-    //    else {
-    //        return false;
-    //    }
-    //}
+    $.ValidateEmail = function (sEmail) {
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (filter.test(sEmail)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
-    //$.ValidateWorkEmailID = function (sEmail) {
-    //    var reg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!abc.com)(?!xyz.com)(?!pqr.com)(?!rediffmail.com)(?!live.com)(?!outlook.com)(?!me.com)(?!msn.com)(?!ymail.com)([\w-]+\.)+[\w-]{2,4})?$/;
-    //    if (reg.test(sEmail)) {
-    //        return true;
-    //    }
-    //    else {
-    //        return false;
-    //    }
-    //}
+    $.ValidateWorkEmailID = function (sEmail) {
+        var reg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!abc.com)(?!xyz.com)(?!pqr.com)(?!rediffmail.com)(?!live.com)(?!outlook.com)(?!me.com)(?!msn.com)(?!ymail.com)([\w-]+\.)+[\w-]{2,4})?$/;
+        if (reg.test(sEmail)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     var focusAreaObject = '';
     var actualFocusAreaArray = [];
@@ -144,7 +144,7 @@ $(document).ready(function () {
             else {
                 var isValidWorkEmail = $.ValidateEmail($("#txtWorkEmail")[0].value);
                 if (isValidWorkEmail) {
-                    var isBusinessEmail = true;// $.ValidateWorkEmailID($("#txtWorkEmail")[0].value);
+                    var isBusinessEmail = $.ValidateWorkEmailID($("#txtWorkEmail")[0].value);
                     if (!isBusinessEmail) {
                         $.DisplayMessage(true, "Please enter correct work email id.");
                         return false;
@@ -405,6 +405,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (response) {
+                    debugger;
                     $('#divLoading').dialog('close'); $(".ui-dialog-titlebar-close").show();
                     if (response.IsSuccess) {
                         $("#divSuccessMessage").show();

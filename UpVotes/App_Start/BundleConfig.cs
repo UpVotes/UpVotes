@@ -24,7 +24,7 @@ namespace UpVotes
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
-                      "~/Scripts/UserScripts/Quotation.js"));
+                      "~/Scripts/UserScripts/Quotation.min.js"));
             //bundles.Add(new StyleBundle("~/Content/css").Include(
             //          "~/Content/bootstrap.css",
             //          "~/Content/bootstrap-theme.min.css",
@@ -39,8 +39,8 @@ namespace UpVotes
             bundles.Add(new StyleBundle("~/Content/Companycss").Include("~/Content/Company.css"));
             bundles.Add(new ScriptBundle("~/bundles/CompanyProfile").Include(
                       "~/Scripts/highcharts.js",
-                      "~/Scripts/UserScripts/Company.js",
-                      "~/Scripts/UserScripts/CompanyVote.js"));
+                      "~/Scripts/UserScripts/Company.min.js",
+                      "~/Scripts/UserScripts/CompanyVote.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/media.js"));

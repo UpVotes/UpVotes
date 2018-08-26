@@ -22,6 +22,7 @@ namespace UpVotes.Controllers
             int userID = Convert.ToInt32(Session["UserID"]);
             CompanyViewModel companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
             Session["CompanyViewModel"] = companyViewModel;
+            Session["calledPage"] = "U";
             return View(companyViewModel);
         }
 
