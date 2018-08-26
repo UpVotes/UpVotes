@@ -34,8 +34,7 @@
             var compid = 0;
             var calledPage = '';
 
-            $("#btnlinkedin").click(function () {
-                debugger;
+            $("#btnlinkedin").click(function () {                
                 if ('@Session["calledPage"].ToString()' == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }
@@ -119,7 +118,7 @@
                 {<span class="fa fa-user-circle sign-use"></span>}
                 else
                 {
-                        <img class="img-circle" src="@userObj.ProfilePictureURL.ToString()">
+                        <img id="loginimg" class="img-circle" src="@userObj.ProfilePictureURL.ToString()">
                     }
                 </a>
             </li>

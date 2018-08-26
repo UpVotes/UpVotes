@@ -23,9 +23,9 @@
 
 <script type="text/javascript" lang="en-us">
     $(document).ready(function () {
-        $(".myLoginPopUp").click(function () {            
-            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
-            if (userObj == null) {
+        $(".myLoginPopUp").click(function () {
+            
+            if ($('#loginimg').length == 0) {
                 @{
                     Session["calledPage"] = "U";
                 }
