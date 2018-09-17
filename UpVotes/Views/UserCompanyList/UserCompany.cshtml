@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/UserScripts/UserCompanyList.min.js"></script>
+<script src="~/Scripts/UserScripts/UserCompanyList.js"></script>
 <script src="~/Scripts/editor.js"></script>
 <link href="~/Content/editor.css" rel="stylesheet" />
 <style type="text/css">
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="uplLogo">Logo : </label><span style="color:red">*</span>
+                        <label for="uplLogo">Logo : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
                         <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="txtTagLine">Tagline : </label><span style="color:red">*</span>
+                        <label for="txtTagLine">Tagline : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="txtTagLine" value="@Model.CompanyList[0].TagLine" />
                     </div>
@@ -126,13 +126,13 @@
                     <div class="clearfix"></div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="txtWebsite">LinkedIn : </label><span style="color:red">*</span>
+                        <label for="txtWebsite">LinkedIn : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="txtLinkedInProfile" value="@Model.CompanyList[0].LinkedInProfileURL" />
                     </div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="txtTwitter">Twitter : </label><span style="color:red">*</span>
+                        <label for="txtTwitter">Twitter : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="txtTwitterProfile" value="@Model.CompanyList[0].TwitterProfileURL" />
                     </div>
@@ -140,13 +140,13 @@
                     <div class="clearfix"></div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="txtFacebook">Facebook : </label><span style="color:red">*</span>
+                        <label for="txtFacebook">Facebook : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="txtFacebookProfile" value="@Model.CompanyList[0].FacebookProfileURL" />
                     </div>
 
                     <div class="col-md-6 col-sm-6">
-                        <label for="txtGooglePlus">Google+ : </label><span style="color:red">*</span>
+                        <label for="txtGooglePlus">Google+ : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="txtGooglePlusProfile" value="@Model.CompanyList[0].GooglePlusProfileURL" />
                     </div>
@@ -173,6 +173,10 @@
     <div id="divCompanyFocus" class="tab-pane fade in ">
         <div class="company-profile">
             <div class="container">
+                <div class="row">
+                    <p>Indicate service lines that your company offers. For the service line(s) you choose, provide the percentage focus. The percentage of the chosen service lines must add up to 100.</p>
+                    <p style="color:red;">Service focus total = 100%</p>
+                </div>
                 <div class="row focus-fields">
                     @{
                         List<FocusAreaEntity> focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "P").ToList();
@@ -182,7 +186,7 @@
                         foreach (FocusAreaEntity focusArea in focusAreaList)
                         {
                             <div class="form-group col-md-3 no-padding ">
-                                <label for="txtFocus_@focusArea.FocusAreaID"><nobr>@focusArea.FocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                <label for="txtFocus_@focusArea.FocusAreaID"><nobr>@focusArea.FocusAreaName:</nobr></label>
                                 <div class="input-group col-md-5">
                                     <div class="input text">
                                         <input type="hidden" id="hdnCompanyFocusID_@focusArea.FocusAreaID" value="" />
@@ -209,7 +213,7 @@
                                         @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
                                         {
                                             <div class="form-group col-md-3 no-padding ">
-                                                <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                                <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:</nobr></label>
                                                 <div class="input-group col-md-5">
                                                     <div class="input text">
                                                         <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
@@ -233,6 +237,10 @@
     <div id="divCompanyIndustryFocus" class="tab-pane fade in ">
         <div class="company-profile">
             <div class="container">
+                <div class="row">
+                    <p>Indicate industry focus that your company offers. For the industry focus you choose, provide the percentage focus. The percentage of the chosen industry focus must add up to 100.</p>
+                    <p style="color:red;">Industry focus total = 100%</p>
+                </div>
                 <div id="divIndustryfocus">
 
                     @{
@@ -251,7 +259,7 @@
                                     @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
                                     {
                                         <div class="form-group col-md-3 no-padding ">
-                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></nobr></label>
+                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID"><nobr>@subFocusAreaObj.SubFocusAreaName:</nobr></label>
                                             <div class="input-group col-md-5">
                                                 <div class="input text">
                                                     <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
@@ -273,6 +281,10 @@
     <div id="divCompanyClientFocus" class="tab-pane fade in ">
         <div class="company-profile">
             <div class="container">
+                <div class="row">
+                    <p>Indicate client focus that your company offers. For the client focus you choose, provide the percentage focus. The percentage of the chosen client focus must add up to 100.</p>
+                    <p style="color:red;">Client focus total = 100%</p>
+                </div>
                 <div id="divClientfocus">
 
                     @{
@@ -284,24 +296,24 @@
                         <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
                         if (focusAreaObj.SubFocusAreaEntity.Any())
                         {
-                        <div id="divClientFocus">
-                            <div class="focus-fields"></div>
-                            @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
-                            {
-                                <div class="row">
-                                    <div class="form-group col-md-8 no-padding ">
-                                        <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID">@subFocusAreaObj.SubFocusAreaName:<span style="color:red;">*</span></label>
-                                        <div class="input-group col-md-2">
-                                            <div class="input text">
-                                                <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
-                                                <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                            <div id="divClientFocus">
+                                <div class="focus-fields"></div>
+                                @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                {
+                                    <div class="row">
+                                        <div class="form-group col-md-8 no-padding ">
+                                            <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID">@subFocusAreaObj.SubFocusAreaName:</label>
+                                            <div class="input-group col-md-2">
+                                                <div class="input text">
+                                                    <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                    <input type="text" class="form-control numericOnly" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                </div>
+                                                <span class="input-group-addon">%</span>
                                             </div>
-                                            <span class="input-group-addon">%</span>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
+                                }
+                            </div>
                         }
                     }
                 </div>
@@ -318,7 +330,7 @@
                     {
                         <div id="dvLocationBranches_0" class="locations-section">
                             <div class="col-md-12 mini-heading">
-                                Branch : 1
+                                Company Address 1
                             </div>
                             <div class="row company-form company-locations">
                                 <div class="col-md-12 col-sm-12">
@@ -355,13 +367,13 @@
                                     <input type="text" id="txtphone_0" class="form-control" value="@companyBranch.PhoneNumber">
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <label for="txtphone_rNum">Email</label><span style="color:red;">*</span>
+                                    <label for="txtEmail_0">Email</label><span style="color:red;">*</span>
                                     <input type="text" id="txtEmail_0" class="form-control" value="@companyBranch.Email">
                                 </div>
-                                <div class="col-md-2 col-sm-2">
-                                    <label for="ChkIsHeadQuarters_0">Is HeadQuarters</label>
-                                </div>
-                                <input type="checkbox" id="ChkIsHeadQuarters_0" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" style="width:500px;" value="@companyBranch.IsHeadQuarters">
+                                <div class="col-md-6 col-sm-6">
+                                    <label for="ChkIsHeadQuarters_0">Is HeadQuarters</label><br />
+                                    <input type="checkbox" id="ChkIsHeadQuarters_0" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" value="@companyBranch.IsHeadQuarters" />
+                                </div>                                
                             </div>
                         </div>
                     }
@@ -374,7 +386,7 @@
 
     <div id="dvLocationBranches_rNum" class="locations-section" style="display:none;">
         <div class="col-md-12 mini-heading">
-            Branch : <span id="locationnumber"></span>
+            Company Address : <span id="locationnumber"></span>
         </div>
         <div class="row company-form company-locations">
             <i title="Remove Branch" class="fa fa-minus-square removeBranch" style="right:0;top:0;" aria-hidden="true"></i>
@@ -415,9 +427,9 @@
                 <label for="txtEmail_rNum">Email</label><span style="color:red;">*</span>
                 <input type="text" id="txtEmail_rNum" class="form-control">
             </div>
-            <div class="col-md-2 col-sm-2">
-                <label for="ChkIsHeadQuarters_rNum">Is HeadQuarters</label>
-                <input type="checkbox" id="ChkIsHeadQuarters_rNum" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" style="width:500px;">
+            <div class="col-md-6 col-sm-6">
+                <label for="ChkIsHeadQuarters_rNum">Is HeadQuarters</label><br />
+                <input type="checkbox" id="ChkIsHeadQuarters_rNum" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" />
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@
     }
 </style>
 
-<script src="~/Scripts/UserScripts/UserCompanyList.min.js"></script>
+<script src="~/Scripts/UserScripts/UserCompanyList.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -25,24 +25,25 @@
 <script src="~/Scripts/editor.js"></script>
 <link href="~/Content/editor.css" rel="stylesheet" />
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div style="padding:5px 0px 0px 100px;">
+    <div>
+        <div style="width:1700px;">
             <h4>My Company List</h4>
             <div class="table-responsive">
                 @*<button type="button" class="btn btn-info create-company-button" id="btnCreateCompany">Create Company</button>*@
                 <a href="/UserCompanyList/UserCompany" class="btn btn-info create-company-button">Create Company</a>
                 <table id="mytable" class="table table-bordred table-striped">
                     <thead>
-                    <th>Company ID</th>
-                    <th>Company Name</th>
-                    <th>Founded Year</th>
-                    <th>Url</th>
-                    <th>Is User Verified?</th>
-                    <th>User Verified Date</th>
-                    <th>Is Admin Approved?</th>
-                    <th>Admin Approved Date</th>
-                    <th>Admin Remarks</th>
+                    <th><nobr>Company ID</nobr></th>
+                    <th><nobr>Company Name</nobr></th>
+                    <th><nobr>Founded Year</nobr></th>
+                    <th><nobr>Url</nobr></th>
+                    <th><nobr>Is User Verified?</nobr></th>
+                    <th><nobr>User Verified Date</nobr></th>
+                    <th><nobr>Is Admin Approved?</nobr></th>
+                    <th><nobr>Admin Approved Date</nobr></th>
+                    <th><nobr>Remarks</nobr></th>
+                    <th>&nbsp;</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     </thead>
@@ -55,12 +56,13 @@
                                 <td><input type="hidden" id="hdn_@company.CompanyID" value="@company.CompanyID" />@company.CompanyID</td>
                                 <td>@company.CompanyName</td>
                                 <td>@company.FoundedYear</td>
-                                <td>@company.URL</td>
+                                <td><a href="@company.URL" target="_blank" style="cursor:pointer;">@company.URL</a></td>
                                 <td>@company.IsUserVerified</td>
                                 <td>@company.UserVerifiedDate</td>
                                 <td>@company.IsAdminApproved</td>
                                 <td>@company.AdminApprovedDate</td>
                                 <td>@company.Remarks</td>
+                                <td><a href="/profile/@company.CompanyName.Replace(" ","-")" target="_blank" style="cursor:pointer;" title="click here to view @company.CompanyName">View</a></td>
                                 <td><p data-placement="top" data-toggle="tooltip" title="Edit"><a class="btn btn-primary btn-xs" data-title="Edit" href="/UserCompanyList/UserCompany?companyName=@company.CompanyName"><span class="glyphicon glyphicon-pencil"></span></a></p></td>
                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                             </tr>

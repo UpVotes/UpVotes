@@ -7,9 +7,8 @@
             margin-top: -5px;
             margin-right: -20px;
         }
-       
     </style>
-    <script src="~/Scripts/UserScripts/Login.min.js"></script>
+    <script src="~/Scripts/UserScripts/Login.js"></script>
     <script>
         function closeSession() {
             //IN.User.logout();
@@ -34,7 +33,7 @@
             var compid = 0;
             var calledPage = '';
 
-            $("#btnlinkedin").click(function () {                
+            $("#btnlinkedin").click(function () {
                 if ('@Session["calledPage"].ToString()' == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }
@@ -69,15 +68,15 @@
                 {
                     $('#errValidWorkEmail').hide();
                     $('#errValidWorkEmail1').show();
-                }                
+                }
             });
 
             $("#btnChangePwd").click(function () {
                 if ($.ValidateChangePassword())
                 {
                     $.ChangePassword($('#txtCurrPassword').val(),$('#txtNewPassword').val());
-                }                
-            });            
+                }
+            });
 
             $("#btnTwitter").click(function () {
                 if ('@Session["calledPage"].ToString()' == 'C') {
@@ -93,7 +92,7 @@
                 //    }
                 //});
             });
-            
+
         });
     </script>
 
@@ -115,91 +114,98 @@
             <li>
                 <a href="#">
                     @if (userObj == null)
-                {<span class="fa fa-user-circle sign-use"></span>}
-                else
-                {
+                    {
+                        <span class="fa fa-user-circle sign-use"></span>
+                    }
+                    else
+                    {
                         <img id="loginimg" class="img-circle" src="@userObj.ProfilePictureURL.ToString()">
                     }
                 </a>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;width: 182px;">Hi, @userObj.FirstName.ToString() &nbsp;@userObj.LastName.ToString() <span class="head-caret caret"></span></a>
-                <ul class="dropdown-menu">                    
-                    <li><a href="@userObj.ProfileURL" target="_blank" style="cursor:pointer;">My Profile</a></li>
-                    @if (userObj.UserType == 1)
-                    {
-                        <li><a data-toggle="modal" onclick="clearControls()"  data-target="#myModalChangePwd" style="cursor:pointer;">Change Password</a></li>
-                    }
-                    <li><a onclick="closeSession()" style="cursor:pointer;">LogOut</a></li>
-                </ul>
-            </li>
+
+            @if (userObj != null)
+            {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;width: 182px;">Hi, @userObj.FirstName.ToString() &nbsp;@userObj.LastName.ToString() <span class="head-caret caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@userObj.ProfileURL" target="_blank" style="cursor:pointer;">My Profile</a></li>
+                        @if (userObj.UserType == 1 || userObj.UserType == 4)
+                        {
+                            <li><a data-toggle="modal" onclick="clearControls()" data-target="#myModalChangePwd" style="cursor:pointer;">Change Password</a></li>
+                        }
+                        <li><a href="/UserCompanyList/UserCompanyList" style="cursor:pointer;">Company Profile</a></li>
+                        <li><a onclick="closeSession()" style="cursor:pointer;">LogOut</a></li>
+                    </ul>
+                </li>
+            }
         </ul>
-        if (userObj != null && userObj.UserType == 1)
+        if (userObj != null && (userObj.UserType == 1 || userObj.UserType == 4))
         {
-        <div class="modal fade" id="myModalChangePwd" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content modaldia">
+            <div class="modal fade" id="myModalChangePwd" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content modaldia">
 
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-6" style="text-align: left;padding: 21px;">
-                                    <h1><span style="font-weight: bold;color:black;">Change Password</span></h1>
-                                    <br />
-                                    <br />
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6" style="text-align: left;padding: 21px;">
+                                        <h1><span style="font-weight: bold;color:black;">Change Password</span></h1>
+                                        <br />
+                                        <br />
 
-                                    <div class="row">
-                                        <div class="col-xs-7">
-                                            <input type="Password" placeholder="Current Password" class="form-control" id="txtCurrPassword">
-                                            <br />
-                                            <input type="Password" placeholder="New Password" class="form-control" id="txtNewPassword">
-                                            <br />
-                                            <input type="Password" placeholder="Confirm New Password" class="form-control" id="txtConNewPassword">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-7" style="top:12px;">
-                                            <span id="errValidChangepwd" style="color: red;">                                  
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-7" id="dvchangepwd" style="top:12px;display:none;height: 21px;background-color: #dff0d8;">
-                                            <span id="MsgChangePwd" style="color: #4e8f64;">
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div>
-                                                <div class="block612" id="btnChangePwd" style="margin-left: 71%;"><span><i aria-hidden="true"></i>Submit</span></div>
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <input type="Password" placeholder="Current Password" class="form-control" id="txtCurrPassword">
+                                                <br />
+                                                <input type="Password" placeholder="New Password" class="form-control" id="txtNewPassword">
+                                                <br />
+                                                <input type="Password" placeholder="Confirm New Password" class="form-control" id="txtConNewPassword">
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-xs-7" style="top:12px;">
+                                                <span id="errValidChangepwd" style="color: red;">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-7" id="dvchangepwd" style="top:12px;display:none;height: 21px;background-color: #dff0d8;">
+                                                <span id="MsgChangePwd" style="color: #4e8f64;">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div>
+                                                    <div class="block612" id="btnChangePwd" style="margin-left: 71%;"><span><i aria-hidden="true"></i>Submit</span></div>
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2" style="text-align: right;">
+                                        <h1><span style="font-weight: bold;">Welcome Back.</span></h1>
+                                        <br />
+                                        <p>
+                                            Upvotes.co is the B2B community to help you find the top most Mobile App Development, Web Development & eCommerce Development, Digital Marketing Agencies, SEO Companies across the globe.
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-xs-2" style="text-align: right;">
-                                    <h1><span style="font-weight: bold;">Welcome Back.</span></h1>
-                                    <br />
-                                    <p>
-                                        Upvotes.co is the B2B community to help you find the top most Mobile App Development, Web Development & eCommerce Development, Digital Marketing Agencies, SEO Companies across the globe.
-                                    </p>
-                                </div>
+                            </div>
+                            <div id="ajax_loaderchng" style="left: 0;top: 50%;width: 100%;height:100%;top:0;padding: 0;margin: 0;background: rgba(0, 0, 0, 0.2);display:none; position: fixed;z-index:100;background-image: url('/images/loader.gif');background-repeat: no-repeat;background-position: center;">
+
                             </div>
                         </div>
-                        <div id="ajax_loaderchng" style="left: 0;top: 50%;width: 100%;height:100%;top:0;padding: 0;margin: 0;background: rgba(0, 0, 0, 0.2);display:none; position: fixed;z-index:100;background-image: url('/images/loader.gif');background-repeat: no-repeat;background-position: center;">
 
-                        </div>
                     </div>
-
                 </div>
-            </div>
 
-        </div>
-            }
+            </div>
         }
+    }
 
     @*<div class="modal fade" id="myModallog" role="dialog">
         <div class="modal-dialog">
@@ -338,7 +344,7 @@
 
             </div>
         </div>
-        
+
     </div>
-    
+
 </div>

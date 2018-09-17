@@ -101,17 +101,7 @@ namespace UpVotes.Controllers
 
                     if (companyID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
                     {                        
-                        string SMP = Server.MapPath(AppPath + "/images/CompanyLogos");
-                        string fullPath = SMP + "/" + company.CompanyName.Replace(" ", "") + extension;
-                        if (System.IO.Directory.Exists(SMP))
-                        {
-                            Request.Files[0].SaveAs(fullPath);
-                        }
-                        else
-                        {
-                            System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(SMP);
-                            Request.Files[0].SaveAs(fullPath);
-                        }
+                        bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);                        
                     }
 
                     UpVotes.Utility.CacheHandler.Clear(company.CompanyName);
