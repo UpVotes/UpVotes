@@ -72,6 +72,10 @@ namespace UpVotes.Controllers
                     {
                         return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/" + Convert.ToString(Session["CompanyName"]));
                     }
+                    else if (myArray[1] == "U")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-profile");
+                    }
                 }
                 return null;
 
@@ -192,7 +196,7 @@ namespace UpVotes.Controllers
             }
             else if (myArray[1] == "U")
             {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "UserCompanyList/UserCompanyList");
+                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-profile");
             }
 
             return null;

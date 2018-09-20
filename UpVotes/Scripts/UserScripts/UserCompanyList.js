@@ -401,7 +401,7 @@ $(document).ready(function () {
                         $('#spnSuccessMessage').css('display', 'block');
                         if (isAdmin) {
                             //replace localhost with actial published URL.
-                            window.location.href = window.location.origin + '/UserCompanyList/UserCompanyList';
+                            window.location.href = window.location.origin + '/company/my-profile';
                         }
                         else {
                             if (CompanyID == 0) {
@@ -443,7 +443,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (response) {
                 //replace localhost with actial published URL.
-                window.location.href = window.location.origin + '/UserCompanyList/UserCompanyList';
+                window.location.href = window.location.origin + '/company/my-profile';
             },
             error: function (e) {
                 $.DisplayMessage(true, "Some error occured");
