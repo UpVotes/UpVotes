@@ -100,8 +100,19 @@ namespace UpVotes.Controllers
                     int companyID = new CompanyService().SaveCompany(company);
 
                     if (companyID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
-                    {                        
-                        bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);                        
+                    {
+                        //bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);
+                        string SMP = Server.MapPath(AppPath + "/images/CompanyLogos");
+                        string fullPath = SMP + "/" + company.CompanyName.Replace(" ", "") + extension;
+                        if (System.IO.Directory.Exists(SMP))
+                        {
+                            Request.Files[0].SaveAs(fullPath);
+                        }
+                        else
+                        {
+                            System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(SMP);
+                            Request.Files[0].SaveAs(fullPath);
+                        }
                     }
 
                     UpVotes.Utility.CacheHandler.Clear(company.CompanyName);
