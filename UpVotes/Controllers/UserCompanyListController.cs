@@ -115,7 +115,7 @@ namespace UpVotes.Controllers
                         }
                     }
 
-                    UpVotes.Utility.CacheHandler.Clear(company.CompanyName);
+                    UpVotes.Utility.CacheHandler.Clear(company.CompanyName.Trim().ToLower().Replace(" ", "-"));
 
 
                     jsonData = new
