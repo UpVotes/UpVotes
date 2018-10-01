@@ -151,6 +151,42 @@ namespace UpVotes.Controllers
             }
         }
 
+        public string ClaimListing(int companyID,string Email,string Domain)
+        {
+            int UserID = 0;
+            string message = string.Empty;
+            string compname = string.Empty;
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {
+                UserID = Convert.ToInt32(Session["UserID"]);
+            }
+            if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+            {
+                compname = Session["CompanyName"].ToString();
+            }
+            
+            try
+            {
+                var claimListingRequest = new ClaimApproveRejectListingRequest
+                {
+                    ClaimListingID=0,
+                    companyID = companyID,
+                    CompanyName = compname,
+                    IsUserVerify = false,
+                    Email = Email,
+                    Domain = Domain,
+                    userID = UserID
+                };
+
+                message = new CompanyService().ClaimListing(claimListingRequest);
+            }
+            catch (Exception ex)
+            {
+            }
+            return message;
+
+        }
+
         public void RemoveCompanyCache(string id)
         {
             if (CacheHandler.Exists(id))

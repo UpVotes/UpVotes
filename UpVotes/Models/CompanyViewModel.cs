@@ -37,6 +37,7 @@ namespace UpVotes.Models
         public int TotalNoOfCompanies { get; set; }
         public string SubFocusArea { get; set; }
         public string Location { get; set; }
+        public List<ClaimInfoDetail> ClaimList { get; set; }
     }
     public class CategoryMetaTagsDetails
     {

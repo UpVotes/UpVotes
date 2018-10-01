@@ -5,7 +5,7 @@ $(document).ready(function () {
     var isAddMode = true;
     var isAdmin = false;
     var countryList = '';
-
+    $("#divmylist").tabs();
     $("#divCompanyTabs").tabs();
     $("#txtCompanySummary").Editor();
     $("#txtKeyClients").Editor();
@@ -64,8 +64,7 @@ $(document).ready(function () {
                 $.ClearDropdown($('#ddlStates_' + branchNum));
                 $('#ddlStates_' + branchNum).LoadOptions(response.statesList, 'StateName', 'StateID');
             },
-            error: function (e) {
-                debugger;
+            error: function (e) {                
                 $('#spnMessage').css('display', 'block');
                 $('#spnMessage').html("Some error has occured. Unable to get the states. Please contact admin.");
             }
@@ -219,7 +218,7 @@ $(document).ready(function () {
                 //Sub-Focus Area Section
                 var subFocusPercentageTotal = 0; var industryFocusPercentageTotal = 0; var clientFocusPercentageTotal = 0; var subFocusCount = 0;                
                 for (var k = 0; k < actualFocusAreaArray.length; k++) {
-                    debugger;                    
+                                        
                     if (actualFocusAreaArray[k].SubFocusAreaEntity.length > 0) {
                         if (actualFocusAreaArray[k].FocusAreaPercentage > 0) {
                             subFocusCount = subFocusCount + 1;
@@ -253,7 +252,7 @@ $(document).ready(function () {
                     }
                 }
 
-                debugger;
+                
                 if (subFocusPercentageTotal != 100 * subFocusCount) {
                     $.DisplayMessage(true, "Sub-focus percentage must be equal to 100%");
                     return false;
@@ -326,7 +325,7 @@ $(document).ready(function () {
                 return true;
             }
         } catch (e) {
-            debugger;
+            
         }
     }
 
@@ -595,8 +594,7 @@ $(document).ready(function () {
                         $('#divLoading').dialog('close'); $(".ui-dialog-titlebar-close").show();
                     }
                 },
-                error: function (e) {
-                    debugger
+                error: function (e) {                    
                     $('#divLoading').dialog('close'); $(".ui-dialog-titlebar-close").show();
                 }
             });
@@ -605,6 +603,75 @@ $(document).ready(function () {
             $('#divLoading').dialog('close'); $(".ui-dialog-titlebar-close").show();
         }
     }
+
+    $(".ClaimApprove").click(function () {
+        if (confirm('Are you sure want to approve this company?'))
+        {
+            var claimlistingid = $(this).attr('claimlistingID');
+            var companyid = $(this).attr('companyID');
+            var email = $(this).attr('email');
+            var compName = $(this).attr('companyName');
+            $('#ajax_loaderApproveReject').show();
+            $.ajax({
+                url: $.absoluteurl('/UserCompanyList/AdminClaimApprove'),
+                data: { claimlistingID: claimlistingid, companyID: companyid, Rejectioncomment: "", Email: email, CompanyName: compName },
+                type: 'POST',
+                success: function (response) {                    
+                    if(response == "claimed")
+                    {
+                        $('#ajax_loaderApproveReject').hide();
+                        $('#trclaimListing_' + claimlistingid).remove();
+                    }
+                    else
+                    {
+                        $('#ajax_loaderApproveReject').hide();
+                        alert('error occured while approving company');
+                    }
+                },
+                error: function (e) {
+                    $('#ajax_loaderApproveReject').hide();
+                    alert('error occured while approving company');
+                }
+            });
+        }
+    });
+
+    $(".claimReject").click(function () {
+        if (confirm('Are you sure want to reject this company?')) {
+            var claimlistingid = $(this).attr('claimlistingID');
+            var companyid = $(this).attr('companyID');
+            var rejectioncomment = $('#txtRejectionComment_' + claimlistingid).val();
+            var email = $(this).attr('email');
+            var compName = $(this).attr('companyName');
+            $('#txtRejectionComment_' + claimlistingid).css('border', '');
+            if (rejectioncomment.trim() != "") {
+                $('#ajax_loaderApproveReject').show();
+                $.ajax({
+                    url: $.absoluteurl('/UserCompanyList/AdminClaimReject'),
+                    data: { claimlistingID: claimlistingid, companyID: companyid, Rejectioncomment: rejectioncomment, Email: email, CompanyName: compName },
+                    type: 'POST',
+                    success: function (response) {                        
+                        if (response == "Rejected") {
+                            $('#ajax_loaderApproveReject').hide();
+                            $('#trclaimListing_' + claimlistingid).remove();
+                        }
+                        else {
+                            $('#ajax_loaderApproveReject').hide();
+                            alert('error occured while approving company');
+                        }
+                    },
+                    error: function (e) {
+                        $('#ajax_loaderApproveReject').hide();
+                        alert('error occured while rejecting company');
+                    }
+                });
+            }
+            else
+            {
+                $('#txtRejectionComment_' + claimlistingid).css('border', '1px solid red');
+            }
+        }
+    });
 });
 
 function EditCompany(companyName) {
@@ -615,8 +682,7 @@ function EditCompany(companyName) {
             datatype: 'json',
             content: "application/json; charset=utf-8",
             type: 'POST',
-            success: function (data) {
-                debugger
+            success: function (data) {                
                 if (data != null) {
                     $("#hdnUserCompanyID")[0].value = data.CompanyID;
                     $('#txtCompanyName').val(data.CompanyName);
@@ -639,7 +705,7 @@ function EditCompany(companyName) {
                 }
             },
             error: function (e) {
-                debugger
+                
             }
         });
     }

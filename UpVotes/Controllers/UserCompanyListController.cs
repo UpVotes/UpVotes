@@ -370,6 +370,32 @@ namespace UpVotes.Controllers
             return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
         }
 
+        [ValidateInput(false)]
+        public ActionResult CompanyClaimVerificationByUser(string CID, string WID, string KID)
+        {            
+            int cID = Convert.ToString(Request.Params["CID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt(Request.Params["CID"]));
+            string wID = Request.Params["WID"] == string.Empty ? "XX" : EncryptionAndDecryption.Decrypt(Request.Params["WID"]);
+            int compID = Convert.ToString(Request.Params["KID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt((Request.Params["KID"])));
+            var claimListingRequest = new ClaimApproveRejectListingRequest
+            {
+                ClaimListingID = cID,
+                companyID = compID,                
+                IsUserVerify = true,
+                Email = wID
+            };
+            bool isUserVerified = true;
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "H";
+            }
+            string message = new CompanyService().ClaimListing(claimListingRequest);
+            if(message != "Successfully Claimed")
+            {
+                isUserVerified = false;
+            }
+            return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
+        }
+
         public ActionResult UpdateRejectionComments()
         {
             if (Request.Params["companyRejectComments"] != null)
@@ -383,6 +409,23 @@ namespace UpVotes.Controllers
             }
 
             return null;
+        }
+
+        public string AdminClaimApprove(int claimlistingID, int companyID,string Rejectioncomment,string Email,string CompanyName)
+        {
+            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, true, Rejectioncomment, Email, CompanyName);
+            if (Utility.CacheHandler.Exists(CompanyName.ToLower().Replace(" ","-")))
+            {
+                Utility.CacheHandler.Clear(CompanyName.ToLower().Replace(" ", "-"));
+            }
+            return message;
+        }
+
+        public string AdminClaimReject(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName)
+        {
+            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, false, Rejectioncomment, Email, CompanyName);
+
+            return message;
         }
     }
 }

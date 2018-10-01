@@ -3042,3 +3042,25 @@ top: 110px;
 #btnLogin:active {
     background-size: 105px;
 }
+
+.CalimParentDiv { top: 4px; text-align: center; display: table; }
+.CalimTextDiv { display: table-cell; vertical-align: middle; }
+.claimContent { border-radius:11px; }
+.claimBody { height: 142px; }
+.claim-dialog { width:499px; }
+.claimHeader { height:45px;background-color:#EEEEEE;border-radius:11px;}
+.claimspan {float: left;color:black;font-size:17px;}
+.spnDomain {color: black;float: left;font-weight: bold;}
+#btnclaimSubmit {float: left;width: 122px;height: 30px;}
+#btnClaimListing{float: right;width: 122px;height: 30px;}
+.wrapper { position: relative;}
+.wrapper span { position: absolute;right: 0px;top:0px;width:auto;padding:10px;}
+.spncompanydomain { color: black; font-weight: bold; }
+.headerclaim-buttons {
+        background: #00afed;
+        border: 1px solid #00afed;
+        color: white;
+        width: 77px;
+        height: 33px;
+        margin-right: 20px;
+    }

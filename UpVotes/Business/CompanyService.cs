@@ -325,5 +325,70 @@ namespace UpVotes.Business
                 }
             }
         }
+
+        internal string ClaimListing(ClaimApproveRejectListingRequest claimlistingrequest)
+        {
+            
+            using (_httpClient = new HttpClient())
+            {
+                string message = string.Empty;
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "InsertVerifyClaimListing";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(claimlistingrequest), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    message = "Successfully Claimed";
+                }
+                else
+                {
+                    message = "Something error occured while claiming. Please contact support.";
+                }
+                return message;
+            }
+        }
+        public string AdminApproveRejectForClaim(int userID, int claimlistingID, int companyID, bool isAdminApproved, string Rejectioncomment, string Email, string CompanyName)
+        {
+            string message = "";
+            ClaimApproveRejectListingRequest claimRequestobj = new ClaimApproveRejectListingRequest();
+            claimRequestobj.ClaimListingID = claimlistingID;
+            claimRequestobj.userID = userID;
+            claimRequestobj.companyID = companyID;
+            claimRequestobj.IsAdminApproved = isAdminApproved;
+            claimRequestobj.RejectionComment = Rejectioncomment;
+            claimRequestobj.Email = Email;
+            claimRequestobj.CompanyName = CompanyName;
+
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "AdminApproveRejectForClaim";
+                string completeURL = WebAPIURL + apiMethod + '/';
+                
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(claimRequestobj), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    message = response.Content.ReadAsStringAsync().Result;
+                    if (message.Contains("claimed"))
+                        message = "claimed";
+                    else if (message.Contains("Rejected"))
+                        message = "Rejected";
+                    else
+                        message = "error";
+                }
+                else
+                {
+                    message = "error";
+                }
+            }
+            return message;
+        }
+
     }
 }

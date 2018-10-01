@@ -144,5 +144,42 @@
             }
         });
     });
+    $('#btnClaimListing').click(function () {
+        $('#spnerrordomain').text('');
+        $('#spnerrordomain').hide();
+        $('#txtClaimListing').val('');
+    });
 
+    $('#btnclaimSubmit').click(function () {        
+        if ($('#txtClaimListing').val() != "") {
+            var email = $('#txtClaimListing').val()
+            if (email.indexOf("@") == -1) {
+                $('#ajax_loaderClaim').show();
+                $('#spnerrordomain').text('');
+                $('#spnerrordomain').hide();
+                var companyID = $('#hdnCompanyID')[0].value;
+                var domain = $('#hdnCompanyDomain')[0].value;
+                $.ajax({
+                    url: $.absoluteurl('/Company/ClaimListing'),                    
+                    data: { companyID: companyID, Email: email, Domain: domain },
+                    type: 'POST',
+                    success: function (response) {
+                        $('#spnerrordomain').text(response);
+                        $('#spnerrordomain').show();
+                        $('#ajax_loaderClaim').hide();
+                    }
+                });
+            }
+            else {
+                $('#spnerrordomain').text('Domain is not required');
+                $('#spnerrordomain').show();
+            }
+        }
+        else {
+            $('#spnerrordomain').text('Work email is required without domain');
+            $('#spnerrordomain').show();
+        }
+
+
+    });
 });
