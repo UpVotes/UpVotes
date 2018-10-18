@@ -15,5 +15,14 @@ namespace UpVotes.Controllers
             Session["calledPage"] = "H";
             return View();
         }
+
+        public ActionResult PrivatePolicy()
+        {
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "P";
+            }
+            return View("~/Views/Policy/_PrivatePolicy.cshtml");
+        }
     }
 }

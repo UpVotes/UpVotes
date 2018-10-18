@@ -21,25 +21,6 @@
 @Styles.Render("~/Content/Homecss")
 @*<link href="~/Content/home-design.css" rel="stylesheet" />*@
 
-<script type="text/javascript" lang="en-us">
-    $(document).ready(function () {
-        $(".myLoginPopUp").click(function () {
-            
-            if ($('#loginimg').length == 0) {
-                @{
-                    Session["calledPage"] = "U";
-                }
-                $('#myModal').modal();
-            }
-            else {
-                window.location.href = "/company/my-profile";
-            }
-        });
-    });
-</script>
-
-
-
 <div class="mark-home-banner lazy" data-src="images/Untitled-12.jpg">
     <h2>Explore Top Agencies and Choose The Most Suitable Partner for Next Big project</h2>
     <div>

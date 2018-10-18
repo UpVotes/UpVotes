@@ -92,7 +92,17 @@
                 //    }
                 //});
             });
-
+            $(".myLoginPopUp").click(function () {
+                if ($('#loginimg').length == 0) {
+                    @{
+                        Session["calledPage"] = "U";
+                    }
+                    $('#myModal').modal();
+                }
+                else {
+                    window.location.href = "/company/my-profile";
+                }
+            });
         });
     </script>
 
