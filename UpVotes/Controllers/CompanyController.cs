@@ -30,10 +30,10 @@ namespace UpVotes.Controllers
                 {
                     Session["CompanyName"] = companyName;
                 }
-                if (CacheHandler.Exists(companyName))
+                if (CacheHandler.Exists(companyName.ToLower()))
                 {
                     companyViewModel = new CompanyViewModel();
-                    CacheHandler.Get(companyName, out companyViewModel);
+                    CacheHandler.Get(companyName.ToLower(), out companyViewModel);
                 }
                 else
                 {
