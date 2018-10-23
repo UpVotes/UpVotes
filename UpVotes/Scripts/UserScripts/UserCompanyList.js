@@ -99,7 +99,7 @@ $(document).ready(function () {
         focusAreaObject = obj;
     }
 
-    $.DisplayMessage = function (isError, displayText) {
+    $.DisplayMessage = function (isError, displayText,tabIndex) {
         if (isError) {
             $("#divFailureMessage").show();
             $('#spnMessage').css('display', 'block');
@@ -108,6 +108,8 @@ $(document).ready(function () {
             $("#divSuccessMessage").hide();
             $('#spnSuccessMessage').css('display', 'none');
             $('#spnSuccessMessage').html("");
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            $("#divCompanyTabs").tabs("option", "active", tabIndex);
         }
         else {
             $("#divFailureMessage").hide();
@@ -141,12 +143,12 @@ $(document).ready(function () {
                 if (isValidWorkEmail) {
                     var isBusinessEmail = $.ValidateWorkEmailID($("#txtWorkEmail")[0].value);
                     if (!isBusinessEmail) {
-                        $.DisplayMessage(true, "Please enter correct work email id.");
+                        $.DisplayMessage(true, "Please enter correct work email id.",0);
                         return false;
                     }
                 }
                 else {
-                    $.DisplayMessage(true, "Email is not valid.");
+                    $.DisplayMessage(true, "Email is not valid.",0);
                     return false;
                 }
             }
@@ -206,12 +208,12 @@ $(document).ready(function () {
                 }
 
                 if (primaryFocusPercentageTotal != 100) {
-                    $.DisplayMessage(true, "Company focus percentage must be equal to 100%");
+                    $.DisplayMessage(true, "Company focus percentage must be equal to 100%",1);
                     actualFocusAreaArray = [];
                     return false;
                 }
                 else {
-                    $.DisplayMessage(false, "");
+                    $.DisplayMessage(false, "",-1);
                 }
                 //
 
@@ -254,19 +256,19 @@ $(document).ready(function () {
 
                 
                 if (subFocusPercentageTotal != 100 * subFocusCount) {
-                    $.DisplayMessage(true, "Sub-focus percentage must be equal to 100%");
+                    $.DisplayMessage(true, "Sub-focus percentage must be equal to 100%",1);
                     return false;
                 }
                 else if (industryFocusPercentageTotal != 100) {
-                    $.DisplayMessage(true, "Industry focus percentage must be equal to 100%");
+                    $.DisplayMessage(true, "Industry focus percentage must be equal to 100%",2);
                     return false;
                 }
                 else if (clientFocusPercentageTotal != 100) {
-                    $.DisplayMessage(true, "Client focus percentage must be equal to 100%");
+                    $.DisplayMessage(true, "Client focus percentage must be equal to 100%",3);
                     return false;
                 }
                 else {
-                    $.DisplayMessage(false, "");
+                    $.DisplayMessage(false, "",-1);
                 }
                 //
 
@@ -274,7 +276,7 @@ $(document).ready(function () {
                 companyBranchArray = []; var isHeadQuartersSelected = false;
                 $('#dvLocationBranch [id*=dvLocationBranches_]').each(function (index, value) {
                     if ($('#txtBranch_' + index).val() == '' || $('#ddlCountry_' + index).val() == '0' || $('#ddlStates_' + index).val() == '0' || $('#txtstreet_' + index).val() == '' || $('#txtcity_' + index).val() == '' || $('#txtpostal_' + index).val() == '' || $('#txtphone_' + index).val() == '' || $('#txtEmail_' + index).val() == '') {
-                        status = 1;
+                        status = 2;
                         return;
                     }
                     else {
@@ -284,7 +286,7 @@ $(document).ready(function () {
                         }
 
                         if (!$.ValidateEmail($('#txtEmail_' + index).val())) {
-                            $.DisplayMessage(true, "Email is not valid.");
+                            $.DisplayMessage(true, "Email is not valid.",4);
                             return false;
                         }
 
@@ -307,21 +309,25 @@ $(document).ready(function () {
             }
 
             if (status == 1) {
-                $.DisplayMessage(true, "Fields marked with * are mandatory.");
+                $.DisplayMessage(true, "Fields marked with * are mandatory.",0);
                 return false;
-            } else if (fileMessage != '') {
-                $.DisplayMessage(true, fileMessage);
+            } else if (status == 2) {
+                $.DisplayMessage(true, "Fields marked with * are mandatory.", 4);
+                return false;
+            }
+            else if (fileMessage != '') {
+                $.DisplayMessage(true, fileMessage,0);
                 return false;
             } else if (actualFocusAreaArray.length == 0) {
-                $.DisplayMessage(true, "Please fill the focus section.");
+                $.DisplayMessage(true, "Please fill the focus section.",1);
                 return false;
             }
             else if (!isHeadQuartersSelected) {
-                $.DisplayMessage(true, "Head Quarters is missing in the branch section.");
+                $.DisplayMessage(true, "Head Quarters is missing in the branch section.",4);
                 return false;
             }
             else {
-                $.DisplayMessage(false, "");
+                $.DisplayMessage(false, "",-1);
                 return true;
             }
         } catch (e) {
@@ -330,7 +336,7 @@ $(document).ready(function () {
     }
 
     $("#btnCompanySave").click(function () {
-        $.DisplayMessage(false, "");
+        $.DisplayMessage(false, "",-1);
         $('#divLoading').dialog({ modal: true, title: '', width: '115', height: '115', open: function () { $('.ui-widget-overlay').addClass('custom-overlay'); $(".ui-dialog-titlebar-close").hide(); $(".ui-widget-header").hide(); }, close: function () { $('.ui-widget-overlay').removeClass('custom-overlay'); $(".ui-dialog-titlebar-close").show(); $(".ui-widget-header").show(); } });
         if ($.SaveModeValidations()) {
             CompanyID = isAddMode == true ? 0 : (($("#hdnUserCompanyID")[0].value == "" || $("#hdnUserCompanyID")[0].value == undefined) ? 0 : $("#hdnUserCompanyID")[0].value);
@@ -411,12 +417,12 @@ $(document).ready(function () {
                             }
                         }
                     } else {
-                        $.DisplayMessage(true, "Failed to save.");
+                        $.DisplayMessage(true, "Failed to save.",0);
                     }
                 },
                 error: function (e) {
                     $('#spnMessage').css('display', 'block');
-                    $.DisplayMessage(true, "Some error has occured. Failed to save. Please contact admin.");
+                    $.DisplayMessage(true, "Some error has occured. Failed to save. Please contact admin.",0);
                     $('#divLoading').dialog('close'); $(".ui-dialog-titlebar-close").show();
                 }
             });
@@ -445,14 +451,14 @@ $(document).ready(function () {
                 window.location.href = window.location.origin + '/company/my-profile';
             },
             error: function (e) {
-                $.DisplayMessage(true, "Some error occured");
+                $.DisplayMessage(true, "Some error occured",0);
             }
         });
     }
 
     $("#btnCompanyCancel").click(function () {
         if (isAdmin && ($("#txtRejectComments")[0].value == "" || $("#txtRejectComments")[0].value == undefined)) {
-            $.DisplayMessage(true, "Please fill comment for rejection in profile section.")
+            $.DisplayMessage(true, "Please fill comment for rejection in profile section.",0)
         }
         else if (isAdmin && $("#txtRejectComments")[0].value != "" && $("#txtRejectComments")[0].value != undefined) {
             $.UpdateRejectionComments(CompanyID);
