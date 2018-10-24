@@ -19,6 +19,15 @@
         font-family: OpenSans-Bold;
         margin-bottom: 0;
     }
+    .btn-bs-file input[type="file"] {
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    outline: none;
+    cursor: inherit;
+}
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -53,7 +62,7 @@
         <div class="company-profile">
             <div class="container">
                 <div class="row company-form">
-                    <div class="col-md-12">
+                    <div class="col-md-6 col-sm-6">
                         <label for="txtCompanyName" style="color:black;">Company Name : </label><span style="color:red">*</span>
                         <input type="text" class="form-control" id="txtCompanyName" value="@Model.CompanyList[0].CompanyName" />
                         <input type="hidden" id="hdnUserCompanyID" value="@Model.CompanyList[0].CompanyID" />
@@ -63,8 +72,17 @@
                         <label for="uplLogo">Logo : </label>
                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                         <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
-                        <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm">
-                            <input type="file" id="UplAttachment" class="form-control" name="postedFile" onchange="CheckForUploadedFile(this)" />
+                        <form class="md-form" action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" style="border: 1px solid #ccc;" enctype="multipart/form-data" id="myForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="btn-bs-file btn btn-primary" style="margin:10px;">
+                                        Choose Logo
+                                        <input type="file" id="UplAttachment" class="form-control" name="postedFile" style="border:none;" onchange="CheckForUploadedFile(this)" />
+                                    </label>                                    
+                                    </div>
+                                <div class="col-md-7"><input type="text" id="txtLogoName" disabled="disabled" style="border: 0;outline: 0;background: transparent;border-bottom: 2px solid #ccc;width: 125%;margin-top: 18px;" /></div>
+                                </div>
+                            <img id="imgpreview" style="display:none; margin: 4px 11px 5px; border: 1px solid #ccc;max-height:130px;" src="#" title="Your Logo" />
                         </form>
                     </div>
 
@@ -74,7 +92,7 @@
                         <input type="text" class="form-control" id="txtTagLine" value="@Model.CompanyList[0].TagLine" />
                     </div>
 
-                    <div class="clearfix"></div>
+                    @*<div class="clearfix"></div>*@
 
                     <div class="col-md-6 col-sm-6">
                         <label for="txtFoundedYear">Founded : </label><span style="color:red">*</span>

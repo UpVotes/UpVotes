@@ -557,7 +557,11 @@ $(document).ready(function () {
                         document.getElementById('ddlAvgHourlyRate').value = data.companyData.AveragHourlyRate;
                         $("#txtCompanySummary").Editor("setText", (data.companyData.Summary));
                         $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));
-
+                        if (data.companyData.LogoName != "") {
+                            $('#txtLogoName').val(data.companyData.LogoName);
+                            $('#imgpreview').show();
+                            $('#imgpreview').attr('src', '../images/CompanyLogos/' + data.companyData.LogoName);
+                        }
                         for (var i = 0; i < data.companyData.CompanyFocus.length; i++) {
                             $("#hdnCompanyFocusID_" + data.companyData.CompanyFocus[i].FocusAreaID)[0].value = data.companyData.CompanyFocus[i].CompanyFocusID;
                             $("#txtFocus_" + data.companyData.CompanyFocus[i].FocusAreaID)[0].value = data.companyData.CompanyFocus[i].FocusAreaPercentage;
@@ -719,6 +723,17 @@ function EditCompany(companyName) {
 
 function CheckForUploadedFile(obj) {
     uploadedCompanyLogo = obj.files[0];
+    if (obj.files && obj.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imgpreview').attr('src', e.target.result);
+            $('#imgpreview').show();
+            $('#txtLogoName').val(uploadedCompanyLogo.name);
+        }
+
+        reader.readAsDataURL(obj.files[0]);
+    }
 }
 
 
