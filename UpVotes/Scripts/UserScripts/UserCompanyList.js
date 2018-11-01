@@ -411,9 +411,11 @@ $(document).ready(function () {
                         else {
                             if (CompanyID == 0) {
                                 $('#spnSuccessMessage').html("Thanks for creating a company at upvotes.co. Please verify your company by clicking on the link provided in your work email received from upvotes.co!!");
+                                $('html, body').animate({ scrollTop: 0 }, 'slow');
                             }
                             else {
                                 $('#spnSuccessMessage').html("Saved Successfully & pending for Admin Approval!!");
+                                $('html, body').animate({ scrollTop: 0 }, 'slow');
                             }
                         }
                     } else {
