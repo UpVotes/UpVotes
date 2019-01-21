@@ -30,13 +30,19 @@
 }
 </style>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function ()
+    {        
         $('#ImgLoading').attr("src", $.absoluteurl('/images/ajax-loader.gif'));
         $("#divRejectionComments").hide();
         var focusAreaObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Model.FocusAreaList))');
         $.GetFocusAreaObject(focusAreaObj);
         $.LoadCountry();
         $.GetCompanyData(eval('@Html.Raw(Json.Encode(Model.CompanyList[0].CompanyName))'));
+        var companyOwnedByObj = new Object();
+        companyOwnedByObj.CreatedBy = eval('@Html.Raw(Json.Encode(Model.CompanyList[0].CreatedBy))');
+        companyOwnedByObj.IsAdminUser = eval('@Html.Raw(Json.Encode(Model.CompanyList[0].IsAdminUser))');
+        companyOwnedByObj.LoggedInUser = eval('@Html.Raw(Json.Encode(Session["UserID"]))');
+        $.GetCompanyOwnedDetails(companyOwnedByObj);
 });
 </script>
 
@@ -78,10 +84,10 @@
                                     <label class="btn-bs-file btn btn-primary" style="margin:10px;">
                                         Choose Logo
                                         <input type="file" id="UplAttachment" class="form-control" name="postedFile" style="border:none;" onchange="CheckForUploadedFile(this)" />
-                                    </label>                                    
-                                    </div>
-                                <div class="col-md-7"><input type="text" id="txtLogoName" disabled="disabled" style="border: 0;outline: 0;background: transparent;border-bottom: 2px solid #ccc;width: 125%;margin-top: 18px;" /></div>
+                                    </label>
                                 </div>
+                                <div class="col-md-7"><input type="text" id="txtLogoName" disabled="disabled" style="border: 0;outline: 0;background: transparent;border-bottom: 2px solid #ccc;width: 125%;margin-top: 18px;" /></div>
+                            </div>
                             <img id="imgpreview" style="display:none; margin: 4px 11px 5px; border: 1px solid #ccc;max-height:130px;" src="#" title="Your Logo" />
                         </form>
                     </div>
@@ -105,11 +111,22 @@
                         <input type="text" class="form-control" id="txtWebsite" value="@Model.CompanyList[0].URL" />
                     </div>
 
-                    <div class="col-md-6 col-sm-6">
-                        <label for="txtWorkEmail">Work Email : </label><span style="color:red">*</span>
-                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                        <input type="text" class="form-control" id="txtWorkEmail" value="@Model.CompanyList[0].WorkEmail" />
-                    </div>
+                    @if (Model.CompanyList[0].IsAdminUser && (Model.CompanyList[0].CreatedBy == Convert.ToInt32(Session["UserID"])))
+                    {
+                        <div class="col-md-6 col-sm-6">
+                            <label for="txtCompanyDomain">Company Domain : </label><span style="color:red">*</span>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            <input type="text" class="form-control" id="txtCompanyDomain" value="@Model.CompanyList[0].CompanyDomain" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 col-sm-6">
+                            <label for="txtWorkEmail">Work Email : </label><span style="color:red">*</span>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            <input type="text" class="form-control" id="txtWorkEmail" value="@Model.CompanyList[0].WorkEmail" />
+                        </div>
+                    }
 
                     <div class="clearfix"></div>
 

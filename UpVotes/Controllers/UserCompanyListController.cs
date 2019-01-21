@@ -37,29 +37,30 @@ namespace UpVotes.Controllers
             CompanyViewModel companyViewModel = null;
             if (Session["CompanyViewModel"] != null)
             {
-                companyViewModel = (CompanyViewModel)Session["CompanyViewModel"];
+                companyViewModel = (CompanyViewModel)Session["CompanyViewModel"];                              
             }
             else
             {
                 companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
             }
-
-            if (companyViewModel.CompanyList.Count > 0)
-            {
-                companyViewModel.CompanyList = new List<CompanyEntity>();
-                //companyViewModel.CompanyList.RemoveAt(0);
-            }
-
+            
             CompanyEntity newCompany = new CompanyEntity
             {
                 CompanyName = companyName,
                 TotalEmployees = "0",
                 AveragHourlyRate = "0",
+                CreatedBy = companyName != string.Empty ? companyViewModel.CompanyList.Where(a=>a.CompanyName.Trim().ToUpper() == companyName.Trim().ToUpper()).Select(a=>a.CreatedBy).FirstOrDefault() : Convert.ToInt32(Session["UserID"]),
+                IsAdminUser = (Session["UserObj"] as UserEntity).UserType == 4 ? true : false,
                 CompanyBranches = new List<CompanyBranchEntity>
             {
                 new CompanyBranchEntity()
             }
             };
+
+            if (companyViewModel.CompanyList.Count > 0)
+            {
+                companyViewModel.CompanyList = new List<CompanyEntity>();
+            }
 
             companyViewModel.CompanyList.Add(newCompany);
 
@@ -80,7 +81,8 @@ namespace UpVotes.Controllers
                 {
                     string AppPath = string.Empty; string fileName = string.Empty; string extension = string.Empty;
                     CompanyEntity company = JObject.Parse(Request.Params["ProfileData"].ToString()).ToObject<CompanyEntity>();
-                    company.UserID = Convert.ToInt32(Session["UserID"]);
+                    company.LoggedInUser = Convert.ToInt32(Session["UserID"]);
+                    company.CreatedBy = company.CompanyID == 0 ? company.LoggedInUser : company.CreatedBy;
                     if (Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
                     {
                         fileName = Request.Files[0].FileName;
@@ -372,14 +374,14 @@ namespace UpVotes.Controllers
 
         [ValidateInput(false)]
         public ActionResult CompanyClaimVerificationByUser(string CID, string WID, string KID)
-        {            
+        {
             int cID = Convert.ToString(Request.Params["CID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt(Request.Params["CID"]));
             string wID = Request.Params["WID"] == string.Empty ? "XX" : EncryptionAndDecryption.Decrypt(Request.Params["WID"]);
             int compID = Convert.ToString(Request.Params["KID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt((Request.Params["KID"])));
             var claimListingRequest = new ClaimApproveRejectListingRequest
             {
                 ClaimListingID = cID,
-                companyID = compID,                
+                companyID = compID,
                 IsUserVerify = true,
                 Email = wID
             };
@@ -389,7 +391,7 @@ namespace UpVotes.Controllers
                 Session["calledPage"] = "H";
             }
             string message = new CompanyService().ClaimListing(claimListingRequest);
-            if(message != "Successfully Claimed")
+            if (message != "Successfully Claimed")
             {
                 isUserVerified = false;
             }
@@ -411,10 +413,10 @@ namespace UpVotes.Controllers
             return null;
         }
 
-        public string AdminClaimApprove(int claimlistingID, int companyID,string Rejectioncomment,string Email,string CompanyName)
+        public string AdminClaimApprove(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName)
         {
             string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, true, Rejectioncomment, Email, CompanyName);
-            if (Utility.CacheHandler.Exists(CompanyName.ToLower().Replace(" ","-")))
+            if (Utility.CacheHandler.Exists(CompanyName.ToLower().Replace(" ", "-")))
             {
                 Utility.CacheHandler.Clear(CompanyName.ToLower().Replace(" ", "-"));
             }
