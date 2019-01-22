@@ -22,8 +22,7 @@ $(document).ready(function ()
     });
 
     $.GetCompanyOwnedDetails = function (obj)
-    {
-        debugger;
+    {        
         companyOwnedByObj.CreatedBy = obj.CreatedBy;
         companyOwnedByObj.IsAdminUser = obj.IsAdminUser;
         companyOwnedByObj.LoggedInUser = obj.LoggedInUser;
@@ -190,21 +189,21 @@ $(document).ready(function ()
                 }
                 else
                 {
-                    //var isValidWorkEmail = $.ValidateEmail($("#txtWorkEmail")[0].value);
-                    //if (isValidWorkEmail)
-                    //{
-                    //    var isBusinessEmail = $.ValidateWorkEmailID($("#txtWorkEmail")[0].value);
-                    //    if (!isBusinessEmail)
-                    //    {
-                    //        $.DisplayMessage(true, "Please enter correct work email id.", 0);
-                    //        return false;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    $.DisplayMessage(true, "Email is not valid.", 0);
-                    //    return false;
-                    //}
+                    var isValidWorkEmail = $.ValidateEmail($("#txtWorkEmail")[0].value);
+                    if (isValidWorkEmail)
+                    {
+                        var isBusinessEmail = $.ValidateWorkEmailID($("#txtWorkEmail")[0].value);
+                        if (!isBusinessEmail)
+                        {
+                            $.DisplayMessage(true, "Please enter correct work email id.", 0);
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        $.DisplayMessage(true, "Email is not valid.", 0);
+                        return false;
+                    }
                 }
             }
 
@@ -426,8 +425,7 @@ $(document).ready(function ()
     }
 
     $("#btnCompanySave").click(function ()
-    {
-        debugger;
+    {        
         $.DisplayMessage(false, "", -1);
         $('#divLoading').dialog({ modal: true, title: '', width: '115', height: '115', open: function () { $('.ui-widget-overlay').addClass('custom-overlay'); $(".ui-dialog-titlebar-close").hide(); $(".ui-widget-header").hide(); }, close: function () { $('.ui-widget-overlay').removeClass('custom-overlay'); $(".ui-dialog-titlebar-close").show(); $(".ui-widget-header").show(); } });
         if ($.SaveModeValidations())
