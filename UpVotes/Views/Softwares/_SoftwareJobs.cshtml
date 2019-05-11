@@ -1,0 +1,35 @@
+﻿@model UpVotes.Models.SoftwareViewModel
+
+@foreach (var software in Model.SoftwareList)
+{
+    <div class="row jobs-wrap">
+        @for (int i = 0; i < 5; i++)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-6 job-list">
+                <div class="job-data">
+                    <div class="job-logo">
+                        <img title="@software.SoftwareName" class="lazy" data-src="/images/SoftwareLogos/@software.LogoName">
+                    </div>
+                    <div class="job-info">
+                        <div class="title">
+                            @software.SoftwareName
+                            <span>Senior Growth Analyst</span>
+                        </div>
+                        <div class="group">
+                            <span class="locality">Atlanta, GA, USA.</span>
+                            <span class="type"><span>Category:</span> Marketing</span>
+                        </div>
+                        <div class="btn-group banner-action align-left">
+                            <button type="submit" class="btn btn-sm btn-blue">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-12">
+            <div class="col text-right view-more">
+                <span class="btn btn-link btn-sm">View more jobs</span>
+            </div>
+        </div>
+    </div>
+}

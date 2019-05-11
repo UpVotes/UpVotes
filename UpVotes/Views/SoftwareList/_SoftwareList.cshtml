@@ -1,0 +1,229 @@
+﻿@model UpVotes.Models.SoftwareViewModel
+
+@{
+    ViewBag.MetaTag = @Model.MetaTag; 
+    ViewBag.Title = Model.Title;
+}
+
+<script>
+    function GetSoftware(softwareName) {
+        softwareName = softwareName.replace(/ /g, "-");
+        var baseAddress = $.absoluteurl(window.location.origin + '/software/' + encodeURI(softwareName.toLowerCase()));
+        window.open(baseAddress, '_blank')
+        return false;
+    }
+    $(document).ready(function () {
+        $(".Pagenumber").click(function () {
+            if (this.className.indexOf("disabled") == -1) {
+                $.GetSoftwareListBasedOnCriteria(this);
+                $('html, body').animate({
+                    scrollTop: $("#softwarelist").offset().top
+                }, 1000);
+            }
+        });
+        //Get Container width
+        var conWidth = $('.content-wrap .container').width();
+
+        //Sticky header on scroll
+        var stickyOffset = $('.sticky-title').offset().top;
+        $(window).scroll(function () {
+            var sticky = $('.sticky-title'),
+                scroll = $(window).scrollTop();
+
+            if (scroll >= stickyOffset) {
+                sticky.addClass('fixed');
+                $('.list-head').css('width', conWidth);
+            }
+            else {
+                sticky.removeClass('fixed');
+            }
+        });
+        //Vote click animation
+        $(".curve").click(function () {
+            $(this).find('.vote').addClass('heartBeat animated');
+            setTimeout(function () {
+                $(".curve .vote").removeClass('heartBeat animated');
+            }, 1000);
+        });
+        $(".softwareVote").click(function () {
+            softid = $(this).attr('softid');
+            var userObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Session["UserObj"]))');
+            if (userObj == null) {
+                $('#myModal').modal();
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: $.absoluteurl('/Login/VoteForSoftware'),
+                    data: { softwareID: softid },
+                    success: function (json) {
+                        alert(eval(json));
+                        window.location.reload();
+                    }
+
+                });
+            }
+        });
+    });
+</script>
+
+<div class="sticky-title">
+    <div class="list-head">
+        <div class="head head1">Software Name</div>
+        <div class="head head2">Price range</div>
+        <div class="head head3">Software Version</div>
+        <div class="head head4">Review</div>
+        <div class="head head5">Founded year</div>
+        <div class="head head6">Contacts</div>
+    </div>
+</div>
+<div class="list-detail v1">
+    @foreach (var software in Model.SoftwareList)
+    {
+    <!-- List Data -->
+    <div class="list-data">
+        <div class="ribbon"><span>@software.Ranks</span></div>
+        <div class="curve softwareVote" softid="@software.SoftwareID">
+            <div class="vote"><i class="fa fa-arrow-up"></i><span>@software.NoOfVotes</span></div>
+        </div>
+        <div class="business" onclick="GetSoftware('@software.SoftwareName')">
+            <div class="logo">
+                <img class="lazy" src="" data-src="/images/SoftwareLogos/@software.LogoName">
+            </div>
+            <div class="name">@software.SoftwareName</div>
+        </div>
+        <div class="details">
+            <div class="data hour align-middle">
+                <div class="parent">
+                    <div class="child">
+                        <div class="truncate">
+                            <small class="mobile-label">Price range</small>
+                            @software.PriceRange
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data employee">
+                <div class="parent">
+                    <div class="child">
+                        <div class="truncate">
+                            <small class="mobile-label">Software Version</small>
+                            @software.SoftwareTrail
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data ratings">
+                <div class="parent">
+                    <div class="child">
+                        <!-- class="rating-1" for one star rating -->
+                        <!-- class="rating-2" for two star rating design handled in css -->
+                        <ul class="star-rate rating-@software.UserRating">
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                        </ul>
+                        <span class="rating-label">@software.UserRating.0/5.0 <a>@software.NoOfUsersRated users</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="data location">
+                <div class="parent">
+                    <div class="child">
+                        <div class="truncate">
+                            <small class="mobile-label">Founded year</small>
+                            @software.FoundedYear
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explore">
+            <div class="data website">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-flat" onclick="GetSoftware('@software.SoftwareName')">
+                        <i class="fa fa-search"></i> Explore
+                    </a>
+                    <a href="@(software.WebSiteURL+"?utm_medium=referral&utm_source=upvotes.co")" target="_blank" rel="nofollow" class="btn btn-primary">
+                        <i class="fa fa-external-link-alt"></i> Website
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    <!-- Pagenation -->
+    <div class="page-nav">
+        <ul class="pagination">
+            @for (int i = 0; i < Model.PageCount; i++)
+            {
+                if (i + 1 == 1)
+                {
+                    <li class="@(Model.PageIndex == 1 ? "page-item first disabled FirstPage Pagenumber" : "page-item first FirstPage Pagenumber")" page="@(i+1)">
+                        <a class="page-link" href="#" aria-label="First">
+                            <span aria-hidden="true"><i class="fa fa-step-backward"></i></span>
+                            <span class="sr-only">First</span>
+                        </a>
+                    </li>
+                    <li class="page-item first PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true"><i class="fa fa-caret-left"></i></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+                if (i + 1 <= 5)
+                {
+                    if (Model.PageCount >= 5)
+                    {
+                        if (i + 1 == 1)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber FirstPageindex" : "page-item Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                        else if (i + 1 == 5)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber LastPageindex" : "page-item Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                        else
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber" : "page-item Pagenumber")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                    }
+                    else
+                    {
+                        if (i + 1 == 1)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber FirstPageindex" : "page-item Pagenumber FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                        else if (i + 1 == Model.PageCount)
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber LastPageindex" : "page-item Pagenumber LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                        else
+                        {
+                            <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber" : "page-item Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                        }
+                    }
+                }
+                if (i + 1 == Model.PageCount)
+                {
+                    <li class="page-item last NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true"><i class="fa fa-caret-right"></i></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    <li class="@(Model.PageNumber == Model.PageCount ? "page-item last disabled LastPage Pagenumber" : "page-item last LastPage Pagenumber")" page="@(Model.PageCount)">
+                        <a class="page-link" href="#" aria-label="Last">
+                            <span aria-hidden="true"><i class="fa fa-step-forward"></i></span>
+                            <span class="sr-only">Last</span>
+                        </a>
+                    </li>
+                }
+                Model.PageIndex = Model.PageIndex + 1;
+            }
+        </ul>
+    </div>
+</div>

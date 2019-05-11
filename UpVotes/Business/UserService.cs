@@ -146,5 +146,29 @@ namespace UpVotes.Business
             userObj.UserType = linkedInObj.userType;
             return userObj;
         }
+
+        internal DashboardViewModel UserDashboardInfo(UserEntity userEntityObj)
+        {
+            DashboardViewModel userDashboardObj = new DashboardViewModel();
+            
+                using (_httpClient = new HttpClient())
+                {
+                    _apiMethod = "UserDashboardInfo";
+                    _completeURL = _baseURL + _apiMethod;
+                    StringContent httpContent = new StringContent(JsonConvert.SerializeObject(userEntityObj), Encoding.UTF8, "application/json");
+                    var response = _httpClient.PostAsync(_completeURL, httpContent).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        userDashboardObj = new DashboardViewModel();
+                        userDashboardObj = JsonConvert.DeserializeObject<DashboardViewModel>(response.Content.ReadAsStringAsync().Result);
+                    }
+                    else
+                    {
+                        userDashboardObj = null;
+                    }
+                }           
+
+            return userDashboardObj;
+        }
     }
 }

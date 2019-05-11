@@ -1,0 +1,251 @@
+/*Top Banner*/
+.banner-image {
+    position: relative;
+    height: 600px;
+    object-fit: cover;
+}
+.banner-image img {
+  width: 100%;
+  max-width: 100%;
+}
+.banner-content {
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    width: 480px;
+    padding: 30px;
+    right: -200px;
+}
+.banner-content .title-xlarge {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.topVotedimg{
+    width:100px;
+    cursor:pointer;
+}
+
+/* Featured List */
+.feature-list ul {
+  padding: 0;
+}
+.feature-list li {
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 0 rgba(0,0,0,0.08);
+    border-radius: 20px;
+    width: 45%;
+    max-width: 300px;
+    height: 230px;
+    padding: 30px;
+}
+.feature-list li i {
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    background: #19a7ad;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 26px;
+    text-align: center;
+}
+.feature-list li .title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+}
+.feature-list li p {
+  line-height: normal;
+  color: #333;
+}
+.feature-list li.active {
+    background:#015876;
+    color: #fff;
+}
+.feature-list li.active p {
+  color: #fff;
+}
+.feature-list li:nth-child(odd) {
+    margin: 0 30px 30px 0;
+}
+.feature-list li:nth-child(even) {
+    margin: 30px 0 30px 0;
+}
+.feature-list li:nth-child(2) {
+    margin-bottom: 0;
+}
+.feature .content {
+  padding-left: 50px;
+}
+.feature .content p {
+    margin: 30px 0;
+}
+
+
+/* Featured Agencies */
+.brand-grid ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.brand-grid li {
+    flex: 1 0 20%;
+    list-style-type: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Home slider */
+.owl-carousel.home-slide .owl-nav button {
+    position: absolute;
+    top: -70px;
+    font-size: 16px;
+    padding: 10px 0!important;
+    color: #666;
+    outline: 0;
+    font-weight: 500;
+}
+.owl-carousel.home-slide .owl-nav button:hover {
+  color: #5272e7;
+}
+.home-slide .owl-nav i {
+    padding: 0 10px;
+}
+.home-slide .owl-nav .owl-prev {
+    left: 0;
+}
+.home-slide .owl-nav .owl-next {
+  right: 0;
+}
+.home-slide .owl-dots {
+    text-align: center;
+    margin: 10px 0;
+}
+.home-slide .owl-dots .owl-dot span {
+    background: none repeat scroll 0 0 #999;
+    border-radius: 20px;
+    display: block;
+    height: 8px;
+    margin: 5px;
+    opacity: 0.5;
+    width: 8px;
+}
+.home-slide .owl-dots .owl-dot.active span {
+    background: none repeat scroll 0 0 #333;
+}
+
+
+
+/* Media Screen */
+@media (max-width: 1300px) {
+
+
+}
+
+@media (max-width: 1140px) {
+  .banner-content {
+      width: 100%;
+      right: 0;
+      padding: 0 0 30px 0;
+  }
+  .banner-image {
+    height: auto;
+  }
+  .feature {
+    padding-bottom: 0;
+  } 
+  .feature-list ul {
+    padding: 0;
+    display: flex;
+  }
+  .feature-list li:nth-child(odd),
+  .feature-list li:nth-child(even),
+  .feature-list li:nth-child(2) {
+    margin: 0 1% 1% 0;
+    padding: 25px;
+  }
+  .feature-list li {
+    flex: 1 0 25%;
+  }
+  .feature .content {
+    padding: 0 0 30px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+  }
+  .feature .feature-list {
+      margin-bottom: 50px;
+  }
+  .category {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+
+}
+
+@media (max-width: 1023px) {
+  
+
+}
+
+@media (max-width: 960px) { 
+  .feature-list ul {
+    flex-wrap: wrap;
+  }
+  .feature-list li {
+      flex: 1 0 49%;
+      max-width: 100%;
+      height: 200px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .home-slide {
+      margin-top: 15px;
+  }
+
+  .brand-grid li {
+     flex: 1 0 33.33%;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .feature-list ul {
+    margin-bottom: 0;
+  }
+  .feature-list li {
+      flex: 1 0 100%;
+      height: auto;
+      padding: 15px;
+  }
+  .feature-list li i {
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+      font-size: 16px;
+  }
+  .feature-list li:nth-child(odd),
+  .feature-list li:nth-child(even),
+  .feature-list li:nth-child(2) {
+      margin: 0 0 10px 0;
+  }
+  .feature .content p {
+      margin: 15px 0;
+  }
+  .feature-list li .title {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .banner-content p,
+  .feature .content p,
+  .feature-list li p {
+    font-size: 14px;
+  }
+  .feature-list li p {
+    margin-bottom: 0;
+  }
+
+}

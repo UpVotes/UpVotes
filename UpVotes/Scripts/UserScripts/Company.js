@@ -125,8 +125,46 @@
             series: subfocusareas
         });
     };
+    $('#btnSubmitReview').click(function () {
+        var companyID = $('#hdnCompanyID')[0].value;
+        var companyName = $('#hdnCompanyName')[0].value;
+        $.ajax({
+            url: $.absoluteurl('/Company/SubmitReview'),
+            cache: false,
+            async: false,
+            datatype: 'json',
+            data: { companyID: companyID, companyName: companyName },
+            type: 'POST',
+            success: function (response) {
+                if (response != "Please login to submit the review.") {
+                    window.open(window.location.origin+response, "_blank");
+                }
+                else {
+                    alert(response);
+                }
+            }
+        });
+    });
 
-    $('#btnThankNote').click(function () {
+    $('#btnAddNews').click(function () {        
+        $.ajax({
+            url: $.absoluteurl('/Company/AddNews'),
+            cache: false,
+            async: false,
+            datatype: 'json',            
+            type: 'POST',
+            success: function (response) {
+                if (response != "Please login to add the news.") {
+                    window.open(window.location.origin+response, "_self");
+                }
+                else {
+                    alert(response);
+                }
+            }
+        });
+    });
+
+    $('.btnThankNote').click(function () {
         var companyReviewID = $(this).attr('CompanyReviewID');
         var companyID = $('#hdnCompanyID')[0].value;
 
@@ -137,8 +175,7 @@
             datatype: 'json',
             data: { companyID: companyID, companyReviewID: companyReviewID },
             type: 'POST',
-            success: function (response) {
-                response = eval(response);
+            success: function (response) {               
                 alert(response);
                 window.location.reload();
             }
@@ -182,4 +219,143 @@
 
 
     });
+    
+    //Get Container width
+    var conWidth = $('.content-wrap .container').width();
+
+    //Sticky header on scroll
+    var stickyOffset = $('.sticky-title').offset().top;
+
+    $(window).scroll(function () {
+        var sticky = $('.sticky-title'),
+            scroll = $(window).scrollTop();
+
+        if (scroll >= stickyOffset) {
+            sticky.addClass('fixed');
+            $('.list-head').css('width', conWidth);
+        }
+        else {
+            sticky.removeClass('fixed');
+        }
+    });
+    //Scroll to top
+    $(window).scroll(function () {
+        if ($(this).scrollTop()) {
+            $('.scroll-top').show();
+        } else {
+            $('.scroll-top').hide();
+        }
+    });
+
+    $(document).ready(function () {
+        $(".scroll-top").click(function () {
+            $("html, body").scrollTop(0);
+        });
+    });
 });
+
+let modalId = $('#image-gallery');
+
+$(document)
+  .ready(function () {
+
+      loadGallery(true, 'a.thumbnail');
+
+      //This function disables buttons when needed
+      function disableButtons(counter_max, counter_current) {
+          $('#show-previous-image, #show-next-image')
+            .show();
+          if (counter_max === counter_current) {
+              $('#show-next-image')
+                .hide();
+          } else if (counter_current === 1) {
+              $('#show-previous-image')
+                .hide();
+          }
+      }
+
+      function loadGallery(setIDs, setClickAttr) {
+          let current_image,
+            selector,
+            counter = 0;
+
+          $('#show-next-image, #show-previous-image')
+            .click(function () {
+                if ($(this)
+                  .attr('id') === 'show-previous-image') {
+                    current_image--;
+                } else {
+                    current_image++;
+                }
+
+                selector = $('[data-image-id="' + current_image + '"]');
+                updateGallery(selector);
+            });
+
+          function updateGallery(selector) {
+              let $sel = selector;
+              current_image = $sel.data('image-id');
+              $('#image-gallery-title')
+                .text($sel.data('title'));
+              $('#image-gallery-caption')
+                .text($sel.data('caption'));
+              $('#image-gallery-image')
+                .attr('src', $sel.data('image'));
+              disableButtons(counter, $sel.data('image-id'));
+          }
+
+          if (setIDs == true) {
+              $('[data-image-id]')
+                .each(function () {
+                    counter++;
+                    $(this)
+                      .attr('data-image-id', counter);
+                });
+          }
+          $(setClickAttr)
+            .on('click', function () {
+                updateGallery($(this));
+            });
+      }
+  });
+
+  // build key actions
+  $(document)
+    .keydown(function (e) {
+        switch (e.which) {
+            case 37: // left
+                if ((modalId.data('bs.modal') || {})._isShown && $('#show-previous-image').is(":visible")) {
+                    $('#show-previous-image')
+                      .click();
+                }
+                break;
+
+            case 39: // right
+                if ((modalId.data('bs.modal') || {})._isShown && $('#show-next-image').is(":visible")) {
+                    $('#show-next-image')
+                      .click();
+                }
+                break;
+
+            default:
+                return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+
+  function GetNews(title) {
+      var baseAddress = $.absoluteurl(window.location.origin + '/news/' + encodeURI(title));
+      window.open(baseAddress, '_blank')
+  }
+  function getAllNews(companyname) {
+      var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyname)+'/news');
+      window.open(baseAddress, '_blank')
+  }
+  function getAllReviews(companyname) {
+      var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyname) + '/reviews');
+      window.open(baseAddress, '_blank')
+  }
+  function getAllPortFolio(companyname) {
+      var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyname) + '/portfolio');
+      window.open(baseAddress, '_blank');
+  }

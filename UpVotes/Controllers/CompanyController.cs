@@ -66,6 +66,58 @@ namespace UpVotes.Controllers
             }
         }
 
+        public ActionResult CompanyAllPortfolioByName(string id)
+        {
+            Session["calledPage"] = "P";
+            CompanyViewModel companyViewModel = null;
+            CompanyFilterEntity companyreviewsFilter = new CompanyFilterEntity
+            {
+                CompanyName = id.Replace("-", " "),
+                Rows = 0
+            };
+            companyViewModel = new CompanyService().GetCompanyPortfolio(companyreviewsFilter);
+            if (companyViewModel != null && (companyViewModel.CompanyList != null && companyViewModel.CompanyList.Count > 0))
+            {
+                companyViewModel.WebBaseURL = _webBaseURL;
+                return View("~/Views/AllListPages/AllPortFolioList.cshtml", companyViewModel);
+            }
+            else
+            {
+                return View("~/Views/Error/PageNotFound.cshtml");
+            }
+        }
+
+        public ActionResult CompanyAllReviewsByName(string id)
+        {
+            try
+            {
+                Session["calledPage"] = "R";
+                
+                CompanyViewModel companyViewModel = null;
+               
+                CompanyFilterEntity companyreviewsFilter = new CompanyFilterEntity
+                {
+                    CompanyName = id.Replace("-", " "),
+                    Rows = 0                        
+                };
+
+                companyViewModel = new CompanyService().GetUserReviews(companyreviewsFilter);
+                if (companyViewModel != null && (companyViewModel.CompanyList != null && companyViewModel.CompanyList.Count > 0))
+                {
+                    companyViewModel.WebBaseURL = _webBaseURL;                    
+                    return View("~/Views/AllListPages/AllCompanyReviewsList.cshtml", companyViewModel);
+                }
+                else
+                {
+                    return View("~/Views/Error/PageNotFound.cshtml");
+                }                
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public JsonResult GetFocusArea()
         {
             var jsonResult = default(dynamic);
@@ -85,38 +137,7 @@ namespace UpVotes.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        public bool AddReview()
-        {
-            try
-            {
-                if (Request.Params["companyReviewModel"] != null)
-                {
-                    JObject jobj = JObject.Parse(Request.Params["companyReviewModel"]);
-                    CompanyReviewViewModel companyReviewModel = jobj.ToObject<CompanyReviewViewModel>();
-                    companyReviewModel.UserID = Convert.ToInt32(Session["UserID"]);
-                    bool isSuccess = new CompanyService().AddReview(companyReviewModel);
-                    string compname = "";
-                    if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
-                    {
-                        compname = Session["CompanyName"].ToString();
-                    }
-                    if (CacheHandler.Exists(compname + "reviews"))
-                    {                        
-                        CacheHandler.Clear(compname + "reviews");
-                    }
-                    
-                    return isSuccess;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
+        
 
         public string VoteForCompany(int companyID)
         {
@@ -131,6 +152,10 @@ namespace UpVotes.Controllers
                 {
                     CacheHandler.Clear(compname);
                 }
+                if(CacheHandler.Exists("TopVoteCompaniesList"))
+                {
+                    CacheHandler.Clear("TopVoteCompaniesList");
+                }
                 return new CompanyService().VoteForCompany(companyID, Convert.ToInt32(Session["UserID"]));
             }
             else
@@ -143,13 +168,54 @@ namespace UpVotes.Controllers
         {
             if (Convert.ToInt32(Session["UserID"]) != 0)
             {
-                return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+                string compname = "";
+                if (Session["CompanyName"] != null)
+                {
+                    compname = Session["CompanyName"].ToString();
+                }
+                if (CacheHandler.Exists(compname))
+                {
+                    CacheHandler.Clear(compname);
+                }
+                string message =  new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+                return message;
             }
             else
             {
                 return "Please login to provide thanks note.";
             }
         }
+        public ActionResult SubmitReview(int companyID, string companyName)
+        {
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {                
+                TempData["SubmitReviewInformation"] = new SubmitReviewViewModel() { SoftwareOrCompanyId = companyID, SoftwareOrCompanyName = companyName, TabIndex = 0 };  
+                return Json("/submit/submit-review", JsonRequestBehavior.AllowGet);
+                //return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+            }
+            else
+            {
+                return Json("Please login to submit the review.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddNews()
+        {
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {                
+                return Json("/company/my-dashboard?section=news", JsonRequestBehavior.AllowGet);                
+            }
+            else
+            {
+                return Json("Please login to add the news.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //public ActionResult CompanyReview(string id)
+        //{   
+        //    return Json("Please login to submit the review.", JsonRequestBehavior.AllowGet);
+
+        //}
 
         public string ClaimListing(int companyID,string Email,string Domain)
         {

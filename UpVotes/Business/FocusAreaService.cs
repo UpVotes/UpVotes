@@ -116,6 +116,93 @@ namespace UpVotes.Business
 
             return focusAreaID;
         }        
+
+        public int GetSoftwareCategoryID(string urlCategoryName)
+        {
+            return GetSoftwareCategoryIDByEnum(urlCategoryName);
+        }
+
+        private int GetSoftwareCategoryIDByEnum(string urlCategoryName)
+        {
+            int softwareCategoryID = 0;
+            switch (urlCategoryName.Trim())
+            {
+                case "mobile-app-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.MobileAppSoftwares;
+                    break;
+                case "seo-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.SeoSoftwares;
+                    break;
+                case "social-media-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.SocialMediaSoftwares;
+                    break;
+                case "content-marketing-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.ContentMarketingSoftwares;
+                    break;
+                case "app-design-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.AppDesignSoftwares;
+                    break;
+                case "ecommerce-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.ECommerceSoftwares;
+                    break;
+                case "marketing-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.MarketingSoftwares;
+                    break;
+                case "cms-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.CMSSoftwares;
+                    break;
+                case "email-marketing-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.EmailMarketingSoftwares;
+                    break;
+                case "game-development-softwares-":
+                    softwareCategoryID = (int)SoftwareCategories.GameDevelopmentSoftwares;
+                    break;
+                case "graphic-design-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.GraphicDesignSoftwares;
+                    break;
+                case "iot-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.IotSoftwares;
+                    break;
+                case "artificial-intelligence-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.ArtificialIntelligenceSoftwares;
+                    break;
+                case "data-visualization-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.DataVisualizationSoftwares;
+                    break;
+                case "inventory-management-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.InventoryManagementSoftwares;
+                    break;
+                case "accounting-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.AccountingSoftwares;
+                    break;
+                case "workflow-management-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.WorkflowManagementSoftwares;
+                    break;
+                case "crm-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.CRMSoftwares;
+                    break;
+                case "business-intelligence-softwares-":
+                    softwareCategoryID = (int)SoftwareCategories.BusinessIntelligenceSoftwares;
+                    break;
+                case "machine-learning-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.MachineLearningSoftwares;
+                    break;
+                case "product-management-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.ProductManagementSoftwares;
+                    break;
+                case "erp-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.ERPSoftwares;
+                    break;
+                case "human-resource-softwares":
+                    softwareCategoryID = (int)SoftwareCategories.HumanResourceSoftwares;
+                    break;
+                default:
+                    softwareCategoryID = (int)SoftwareCategories.MobileAppSoftwares;
+                    break;
+            }
+
+            return softwareCategoryID;
+        }
     }
 
     public enum FocusAreas
@@ -145,5 +232,31 @@ namespace UpVotes.Business
         PRAgencies,
         DigitalStrategyAgencies,
         VideoProductionAgencies
+    }
+    public enum SoftwareCategories
+    {
+        MobileAppSoftwares=1,
+        SeoSoftwares,
+        SocialMediaSoftwares,
+        ContentMarketingSoftwares,
+        AppDesignSoftwares,
+        ECommerceSoftwares,
+        MarketingSoftwares,
+        CMSSoftwares,
+        EmailMarketingSoftwares,
+        GameDevelopmentSoftwares,
+        GraphicDesignSoftwares,
+        IotSoftwares,
+        ArtificialIntelligenceSoftwares,
+        DataVisualizationSoftwares,
+        InventoryManagementSoftwares,
+        AccountingSoftwares,
+        WorkflowManagementSoftwares,
+        CRMSoftwares,
+        BusinessIntelligenceSoftwares,
+        MachineLearningSoftwares,
+        ProductManagementSoftwares,
+        ERPSoftwares,
+        HumanResourceSoftwares
     }
 }

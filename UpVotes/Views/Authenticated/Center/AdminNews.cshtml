@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "News";
+}
+@Styles.Render("~/Content/Anews")
+@Scripts.Render("~/bundles/Anews")    
+<script>$.LoadCountry();</script>
+    <div class="alert alert-danger hide" id="divErrorMsg">
+        <strong>ERROR!!</strong>
+        <span>Fields marked with * are mandatory.</span>
+    </div>
+
+    <div class="main-inner">
+
+        <!-- add service profile section -->
+                <!-- Add news section -->
+        <div class="row" id="addNewsSection">
+            <div class="col-xl-12">
+                <div class="post-wrap">
+                    <div class="title-wrap">
+                        <h2 class="title-small">Add news</h2>
+                    </div>
+                    <nav>
+                        <div class="add-post">
+                            <div class="add-form">                                
+                                    <div class="form-group row">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">Select providers<small class="manditory">*</small></label>
+                                        <div class="col-xl-8 col-md-8 col-sm-12">
+                                            <select class="form-control" id="ddlProvider">
+                                                <option value="1">Service providers</option>
+                                                <option value="2">Software providers</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-xl-12 col-md-12 col-sm-12 col-form-label input-lbl">
+                                            Which page you want to insert this news?<small class="manditory">*</small>
+                                        </label>
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <select class="form-control" id="ddlServiceCategory">
+                                                <option value="0">Select Category</option>
+                                                <option value="1">Digital Marketing</option>
+                                                <option value="2">Web Design</option>
+                                                <option value="3">Software Developement</option>
+                                                <option value="4">IOT Developement</option>
+                                                <option value="5">Web Developement</option>
+                                                <option value="6">Custom Software Developemt</option>
+                                                <option value="7">Search Engine Optimization</option>
+                                                <option value="8">UX/UI Design</option>
+                                                <option value="9">Mobile App Developement</option>
+                                                <option value="10">Ecommerce Developement</option>
+                                                <option value="11">Wearable App Developement</option>
+                                                <option value="12">AR VR Application Development</option>
+                                                <option value="13">Social Media Marketing</option>
+                                                <option value="14">Pay Per Click</option>
+                                                <option value="15">Content Marketing</option>
+                                                <option value="16">Graphic Designers</option>
+                                                <option value="17">Chatbot Development</option>
+                                                <option value="18">Mobile App Marketing Agencies</option>
+                                                <option value="19">Email Marketing Agencies</option>
+                                                <option value="20">SEM Agencies</option>
+                                                <option value="21">Branding Agencies</option>
+                                                <option value="22">PR Agencies</option>
+                                                <option value="23">Digital Strategy Agencies</option>
+                                                <option value="24">Video Production Agencies</option>
+                                            </select>
+                                            <select class="form-control hide" id="ddlSoftwareCategory">
+                                                <option value="0">Select Category</option>
+                                                <option value="1">Mobile App Softwares</option>
+                                                <option value="2">Seo Softwares</option>
+                                                <option value="3">Social Media Softwares</option>
+                                                <option value="4">Content Marketing Softwares</option>
+                                                <option value="5">App Design Softwares</option>
+                                                <option value="6">ECommerce Softwares</option>
+                                                <option value="7">Marketing Softwares</option>
+                                                <option value="8">CMS Softwares</option>
+                                                <option value="9">Email Marketing Softwares</option>
+                                                <option value="10">Game Development Softwares </option>
+                                                <option value="11">Graphic Design Softwares</option>
+                                                <option value="12">Iot Softwares</option>
+                                                <option value="13">Artificial Intelligence Softwares</option>
+                                                <option value="14">Data Visualization Softwares</option>
+                                                <option value="15">Inventory Management Softwares</option>
+                                                <option value="16">Accounting Softwares</option>
+                                                <option value="17">Workflow Management Softwares</option>
+                                                <option value="18">CRM Softwares</option>
+                                                <option value="19">Business Intelligence Softwares </option>
+                                                <option value="20">Machine Learning Softwares</option>
+                                                <option value="21">Product Management Softwares</option>
+                                                <option value="22">ERP Softwares</option>
+                                                <option value="23">Human Resource Softwares</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <select class="form-control" id="ddlSubCategory">
+                                                <option value="0">Select Sub Category</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="divLocation" class="row">
+                                        <label class="col-xl-12 col-md-12 col-sm-12 col-form-label input-lbl">
+                                            Select Location
+                                        </label>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <select class="form-control" id="ddlCountry">
+                                                <option value="0">Select Country</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <select class="form-control" id="ddlState">
+                                                <option value="0">Select State</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <input type="text" class="form-control" id="txtCity" placeholder="Enter City">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">Select company</label>
+                                        <div class="col-xl-8 col-md-8 col-sm-12">
+                                            <input type="text" class="form-control" id="txtCompanySoftware" placeholder="">
+                                            <input type="hidden" class="form-control" value="0" id="hdnCompanySoftwareID">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">
+                                            Add website url<small class="manditory">*</small>
+                                            <div class="avail-status">
+                                                <span id="spnAvailURL" class="avail hide"><i class="fa fa-check"></i>Available</span>
+                                                <span id="spnNotAvailURL" class="not-avail hide"><i class="fa fa-times"></i>Not Available</span>
+                                            </div>
+                                        </label>
+                                        <div class="col-xl-8 col-md-8 col-sm-12">
+                                            <input type="text" class="form-control" id="txtWebsiteURL" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">
+                                            Add news title<small class="manditory">*</small>
+                                            <div class="avail-status">
+                                                <span id="spnAvailTitle" class="avail hide"><i class="fa fa-check"></i>Available</span>
+                                                <span id="spnNotAvailTitle" class="not-avail hide"><i class="fa fa-times"></i>Not Available</span>
+                                            </div>
+                                        </label>
+                                        <div class="col-xl-8 col-md-8 col-sm-12">
+                                            <input type="text" class="form-control" id="txtTitle" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row custom-editor">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">Add description<small class="manditory">*</small></label>
+                                        <div class="col-xl-11 col-md-11 col-sm-12">
+                                            <textarea id="txtDescription"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-8 col-md-8 col-sm-12 col-form-label input-lbl">Upload image (or) Youtube video</label>
+                                        <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
+                                        <div class="col-xl-5 col-md-6 col-sm-12">
+                                            <div class="input-group">
+                                                <form target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="UplAttachment" onchange="CheckForUploadedFile(this)" aria-describedby="inputGroupFileAddon01">
+                                                        <label class="custom-file-label" id="txtImageName" for="inputGroupFile01">Select Image</label>
+                                                    </div>
+                                                    </form>
+</div>
+                                        </div>
+                                        <div class="col-xl-1 col-md-1 col-sm-12 text-center">
+                                            <label class="col-form-label">OR</label>
+                                        </div>
+                                        <div class="col-xl-5 col-md-6 col-sm-12">
+                                            <input type="text" class="form-control" id="txtYoutubeUrl" placeholder="Enter youtube url">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-xl-6 col-md-6 col-sm-12 action">
+                                            <input type="button" id="btnSavePost" class="btn btn-primary" value="Submit Your post"/>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>

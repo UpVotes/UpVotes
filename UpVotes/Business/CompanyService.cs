@@ -27,6 +27,19 @@ namespace UpVotes.Business
             }
         }
 
+        internal CompanyViewModel GetClaimListingsForApproval(int userID)
+        {
+            using (_httpClient = new HttpClient())
+            {                
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetClaimListingsForApproval";
+                string completeURL = WebAPIURL + apiMethod + '/' + userID;
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
+                return companyViewModel;
+            }
+        }
+
         internal CompanyViewModel GetCompany(CompanyFilterEntity companyFilter)
         {
             using (_httpClient = new HttpClient())
@@ -91,29 +104,7 @@ namespace UpVotes.Business
                     return companyViewModel;
                 }
             }
-        }
-
-        private bool AddCompanyReview(CompanyReviewsEntity companyReviewsEntity)
-        {
-            using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "SaveCompanyReview";
-                string completeURL = WebAPIURL + apiMethod + '/';
-
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsEntity), Encoding.UTF8, "application/json");
-
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
+        }        
 
         internal CategoryMetaTagsDetails GetCategoryMetaTags(string FocusAreaName, string SubFocusAreaName)
         {
@@ -129,25 +120,7 @@ namespace UpVotes.Business
                 CategoryMetaTagsDetails metaTagsTitle = JsonConvert.DeserializeObject<CategoryMetaTagsDetails>(response);
                 return metaTagsTitle;
             }  
-        }
-
-        internal bool AddReview(CompanyReviewViewModel companyReviewModel)
-        {
-            CompanyReviewsEntity companyReviewEntity = new CompanyReviewsEntity();
-            companyReviewEntity.CompanyID = companyReviewModel.CompanyID;
-            companyReviewEntity.FocusAreaID = companyReviewModel.FocusAreaID;
-            companyReviewEntity.UserID = companyReviewModel.UserID;
-            companyReviewEntity.ReviewerCompanyName = companyReviewModel.ReviewerCompanyName;
-            companyReviewEntity.ReviewerDesignation = companyReviewModel.Designation;
-            companyReviewEntity.ReviewerProjectName = companyReviewModel.ProjectName;
-            companyReviewEntity.FeedBack = companyReviewModel.FeedBack;
-            companyReviewEntity.Rating = companyReviewModel.Rating;
-            companyReviewEntity.Email = companyReviewModel.Email;
-            companyReviewEntity.Phone = companyReviewModel.PhoneNumber;
-
-            bool isSuccess = AddCompanyReview(companyReviewEntity);
-            return isSuccess;
-        }
+        }        
 
         internal string VoteForCompany(int companyID, int userID)
         {
@@ -226,18 +199,74 @@ namespace UpVotes.Business
                 return myAutoCompleteList;
             }
         }
+        
+        internal CompanyViewModel GetCompanyPortfolio(CompanyFilterEntity companyReviewsFilter)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetAllCompanyPortfolio";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsFilter), Encoding.UTF8, "application/json");
 
-        internal CompanyViewModel GetUserReviews(string companyName)
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                CompanyViewModel companyReviewsViewModel = new Models.CompanyViewModel();
+                if (response.IsSuccessStatusCode)
+                {
+                    companyReviewsViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response.Content.ReadAsStringAsync().Result);
+                    return companyReviewsViewModel;
+                }
+                else
+                {
+                    return companyReviewsViewModel;
+                }
+
+            }
+        }
+        internal CompanyViewModel GetUserReviews(CompanyFilterEntity companyReviewsFilter)
         {
             using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetUserReviews";
-                string completeURL = WebAPIURL + apiMethod + '/' + companyName;
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
-                CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
-                return companyViewModel;
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                CompanyViewModel companyReviewsViewModel = new Models.CompanyViewModel();
+                if (response.IsSuccessStatusCode)
+                {
+                    companyReviewsViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response.Content.ReadAsStringAsync().Result);
+                    return companyReviewsViewModel;
+                }
+                else
+                {
+                    return companyReviewsViewModel;
+                }                
+                
+            }
+        }
+        internal CompanySoftwareUserReviews GetUserReviewsForCompanyListingPage(CompanyFilterEntity UserReviewObj)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetCompanyReviewsForListingPage";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(UserReviewObj), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                CompanySoftwareUserReviews companyReviews = new CompanySoftwareUserReviews();
+                if (response.IsSuccessStatusCode)
+                {
+                    companyReviews = JsonConvert.DeserializeObject<CompanySoftwareUserReviews>(response.Content.ReadAsStringAsync().Result);
+                    return companyReviews;
+                }
+                else
+                {
+                    return companyReviews;
+                }
+                
             }
         }
         internal int SaveCompany(CompanyEntity companyEntity)
@@ -276,6 +305,20 @@ namespace UpVotes.Business
             }
         }
 
+        internal List<CompanyEntity> GetTopVoteCompanies()
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetTopVoteCompanies";
+                string completeURL = WebAPIURL + apiMethod;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<CompanyEntity> TopVotedCompanyList = JsonConvert.DeserializeObject<List<CompanyEntity>>(response);
+                return TopVotedCompanyList;
+            }
+        }
+
         internal List<StateEntity> GetStates(int countryID)
         {
             using (_httpClient = new HttpClient())
@@ -287,6 +330,20 @@ namespace UpVotes.Business
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 List<StateEntity> statesList = JsonConvert.DeserializeObject<List<StateEntity>>(response);
                 return statesList;
+            }
+        }
+
+        internal List<SubFocusAreaEntity> GetSubFocusAreaByFocusID(int focusAreaID)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetSubFocusAreaByFocusID";
+                string completeURL = WebAPIURL + apiMethod + '/' + focusAreaID;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<SubFocusAreaEntity> subfocusList = JsonConvert.DeserializeObject<List<SubFocusAreaEntity>>(response);
+                return subfocusList;
             }
         }
 
@@ -350,7 +407,7 @@ namespace UpVotes.Business
                 return message;
             }
         }
-        public string AdminApproveRejectForClaim(int userID, int claimlistingID, int companyID, bool isAdminApproved, string Rejectioncomment, string Email, string CompanyName)
+        public string AdminApproveRejectForClaim(int userID, int claimlistingID, int companyID, bool isAdminApproved, string Rejectioncomment, string Email, string CompanyName, string Type)
         {
             string message = "";
             ClaimApproveRejectListingRequest claimRequestobj = new ClaimApproveRejectListingRequest();
@@ -361,6 +418,7 @@ namespace UpVotes.Business
             claimRequestobj.RejectionComment = Rejectioncomment;
             claimRequestobj.Email = Email;
             claimRequestobj.CompanyName = CompanyName;
+            claimRequestobj.Type = Type;
 
             using (_httpClient = new HttpClient())
             {

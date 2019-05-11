@@ -2,58 +2,13 @@
 @model UpVotes.Models.CompanyViewModel
 
 @{
-    ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings "+ @DateTime.Now.Year + " - Upvotes.co";
+    ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings " + @DateTime.Now.Year + " - Upvotes.co";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
-    @Scripts.Render("~/bundles/CompanyProfile")
-    @Styles.Render("~/Content/Companycss")
-    <script type="text/javascript" lang="en">
-        $(function () {
-
-            var companyFocusData = @Html.Raw(Json.Encode(Model.PrimaryCompanyFocus));
-            if(companyFocusData!=null && companyFocusData.length > 0)
-            {
-                $.getCompanyFocus(companyFocusData,'dvPrimaryFocus');
-            }
-
-            var IndustrialFocusData = @Html.Raw(Json.Encode(Model.IndustialCompanyFocus));
-            if(IndustrialFocusData!=null && IndustrialFocusData.length > 0)
-            {
-                $.getCompanyFocus(IndustrialFocusData,'dvIndustrialFocus');
-            }
-
-            var ClientFocusData = @Html.Raw(Json.Encode(Model.CompanyClientFocus));
-            if(ClientFocusData!=null && ClientFocusData.length > 0)
-            {
-                $.getCompanyFocus(ClientFocusData,'dvClientFocus');
-            }
-
-            var subFocusnames = @Html.Raw(Json.Encode(Model.SubfocusNames));
-            var subFocusData = @Html.Raw(Json.Encode(Model.CompanySubFocus));
-            if(subFocusnames!=null && subFocusnames.length > 0)
-            {
-                $.each(subFocusnames, function( index, value ) {
-
-                    var subfocusareas = new Array();
-                    for(i=0;i<subFocusData.length;i++)
-                    {
-                        if(subFocusData[i].FocusAreaName == value)
-                        {
-                            subfocusareas.push({ 'name': subFocusData[i].SubFocusAreaName, 'data': [subFocusData[i].SubFocusAreaPercentage] });
-                        }
-                    }
-                    var subfocusdivid = value.replace(/ /g, '');
-                    $.getSubCompanyFocus(subfocusareas,subfocusdivid);
-                });
-                $('#carousel-generic').carousel({
-                    interval: 3000,
-                    cycle: true
-                });
-            }
-        });
-    </script>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/CompanyProfiles")
 </head>
 
 <div>
@@ -62,306 +17,393 @@
         <input type="hidden" value="@company.CompanyID" id="hdnCompanyID" />
         <input type="hidden" value="@company.CompanyName" id="hdnCompanyName" />
         <input type="hidden" value="@company.CompanyDomain" id="hdnCompanyDomain" />
-        <div class="container">
-            <div class="col-md-5">
-                <div class="meni-breadcrumbs main-sect">
-                    <span><a href="@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString()" target="_self">Home</a></span>
-                    <span>@company.CompanyName</span>
-                </div>
-            </div>
-            @if (!company.IsClaim)
-                {
-            <div class="col-md-6 CalimParentDiv">
-                <div class="CalimTextDiv"><span><strong>Do you confirm that the profile belongs to your company?</strong></span></div>
-                <button id="btnClaimListing" data-toggle="modal" data-target="#ClaimModal" class="btn btn-default header-buttons">
-                    <span class="" aria-hidden="true">CLAIM LISTING</span>
-                </button>
-            </div>
-            }
-        </div>
-        <div class="main-banner">
-            <div class="container">
-                <div class="comapany-logi">
-                    <img title="@company.CompanyName" src="~/images/CompanyLogos/@company.LogoName" width="124" height="124" />
-                </div>
 
-                <div class="company-name">
-                    <h1>@company.CompanyName</h1>
-                    <ul class="ratings">
-                        @for (int i = 0; i < company.UserRating; i++)
-                        {
-                            <li><span class="rate" aria-hidden="true">★</span></li>
-                        }
-                        @for (int i = company.UserRating; i < 5; i++)
-                        {
-                            <li><span class="ratedisabled" aria-hidden="true">★</span></li>
-                        }
-                    </ul>
-
-                    <span><span>@company.UserRating.0/5.0</span><span>-&nbsp;@company.NoOfUsersRated users</span></span>
-                    <p class="location-company"><i class="fa fa-map-marker" aria-hidden="true"></i>@company.City, @company.CountryName</p>
-                    <ul class="social-media-icons-header">
-                        @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
-                        {
-                            <li><a target="_blank" rel="nofollow" href="@company.LinkedInProfileURL"><i class="linked-header" aria-hidden="true"></i></a></li>
-                        }
-                        @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
-                        {
-                            <li><a target="_blank" rel="nofollow" href="@company.FacebookProfileURL"><i class="fb-header" aria-hidden="true"></i></a></li>
-                        }
-                        @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
-                        {
-                            <li><a target="_blank" rel="nofollow" href="@company.TwitterProfileURL"><i class="twitter-header" aria-hidden="true"></i></a></li>
-                        }
-                        @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
-                        {
-                            <li><a target="_blank" rel="nofollow" href="@company.GooglePlusProfileURL"><i class="google-header" aria-hidden="true"></i></a></li>
-                        }
-                    </ul>
-
-                    <ul class="header-contact firstrow">
-                        <li><a><i class="fa fa-clock-o font-awesome-styling" aria-hidden="true"></i>@company.AveragHourlyRate</a></li>
-                        <li><a><i class="fa fa-user font-awesome-styling" aria-hidden="true"></i>@company.TotalEmployees</a></li>
-                        <li><a><i class="fa fa-flag-o font-awesome-styling" aria-hidden="true"></i>Founded:@company.FoundedYear</a></li>
-                    </ul>
-
-                    <ul class="header-contact secondrow">
-                        <li><a href="@(company.URL+"?utm_medium=referral&utm_source=upvotes.co")" target="_blank"><i class="fa fa-external-link font-awesome-styling" aria-hidden="true"></i>@company.URL</a></li>
-                        <li><a href="tel:@company.PhoneNumber"><i class="fa fa-phone-square font-awesome-styling" aria-hidden="true"></i>@company.PhoneNumber</a></li>
-                        <li><a href="mailto:@company.Email"><i class="fa fa-envelope-o font-awesome-styling" aria-hidden="true"></i>@company.Email</a></li>
-                    </ul>
-                </div>
-
-                <div class="header-buttons-main-nav">
-                    <button class="btn btn-default header-buttons" id="btnVote" compid="@company.CompanyID" calledPage="L"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i><span class="header-count">@company.NoOfVotes</span></button>
-                    <button class="btn btn-default header-buttons-two" id="btnSubmitReview">Submit Review</button>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="breadcrumbs company-profile-breadcrumbs">
-            <div class="container">
-                <ul class="nav nav-tabs menu-breadcrumbs">
-                    <li class="activeuphold"><a href="javascript:void(0);">Overview</a></li>
-                    @if (company.CompanyFocus.Count > 0)
-                {
-                        <li><a class="smooth-scroll" href="#Focus-main">Focus</a></li>
-                    }
-
-                    @if (company.CompanyReviews.Count > 0)
-                {
-                        <li><a class="smooth-scroll" href="#Reviews-main">Reviews</a></li>
-                    }
-
-                    @if (company.CompanyPortFolio.Count > 0)
-                {
-                        <li><a class="smooth-scroll" href="#portfolio-main">Portfolio</a></li>
-                    }
-                </ul>
-
-                <div class="company-paragraphs">
-                    @if (company.Summary != null && company.Summary != string.Empty)
-                    {
-                        @*<p>@company.Summary</p>*@
-                        <p>@Html.Raw(company.Summary)</p>
-                    }
-
-                    @if (company.Summary1 != null && company.Summary1 != string.Empty)
-                    {
-                        <p>@company.Summary1</p>
-                    }
-
-                    @if (company.Summary2 != null && company.Summary2 != string.Empty)
-                    {
-                        <p>@company.Summary2</p>
-                    }
-
-                    @if (company.Summary3 != null && company.Summary3 != string.Empty)
-                    {
-                        <p>@company.Summary3</p>
-                    }
-
-                    @if (company.KeyClients != null && company.KeyClients != string.Empty)
-                    {
-                        <p>Our key clients are</p>
-                        <p>@Html.Raw(@company.KeyClients)</p>
-                    }
-                </div>
-
-                @if (company.CompanyBranches.Count > 0)
-                {
-                    <div class="company-multiple-branches">
-                        <h3>Address</h3>
-                        <div class="wrapper-for-lists">
-                            @foreach (var address in company.CompanyBranches)
-                    {
-                                <ul class="company-multiple-branches-lists">
-                                    <li>@address.BranchName</li>
-                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>@address.Address</li>
-                                    <li>@address.City , @address.PostalCode</li>
-                                    <li>@address.StateName, @address.CountryName</li>
-                                    <li><i class="fa fa-phone" aria-hidden="true"></i>@address.PhoneNumber</li>
-                                </ul>
-                            }
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        if (company.CompanyFocus != null && company.CompanyFocus.Count > 0)
-        {
-            <div class="container">
-                <div class="focus-section" id="Focus-main">
-                    <h3>Focus:</h3>
-                    <div class="row">
-                        <span style="float:left;font-weight: bold;font-size: 17px;font-family: OpenSans-Bold;">Primary Service Focus</span>
-                    </div>
-                    @*<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>*@
-                    <div id="dvPrimaryFocus" style="width:808px;float:left; height:180px; margin: 0 auto"></div>
-                </div>
-            </div>
-        }
-
-        if (company.SubfocusNames != null && company.SubfocusNames.Count > 0)
-        {
-            <div class="container">
-                <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-
-                    @if (company.SubfocusNames.Count > 1)
-                    {
-                        <div class="row">
-                            <div class="col-md-7"></div>
-                            <div class="col-md-2">
-                                <div style="position:absolute;z-index:1;right:0px">
-                                    <button style="float: right;width: 36px;height: 30px;" data-slide="next" href="#carousel-generic" class="btn btn-default header-buttons">
-                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </button>
-                                    <button style="float: right;width: 36px;height: 30px;" data-slide="prev" href="#carousel-generic" class="btn btn-default header-buttons">
-                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                        <span class="sr-only">Left</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                    <div class="carousel-inner" role="listbox">
-
-                        @for (int i = 0; i < company.SubfocusNames.Count; i++)
-                        {
-                            <div class="@(i==0 ? "item active":"item")">
-                                <div class="platform-section" style="background-color:white;">
-                                    <div class="focus-section" id="Focus-main">
-                                        <div>
-                                            <span style="float:left;font-weight: bold;font-size: 17px;font-family: OpenSans-Bold;">@company.SubfocusNames[i].ToString()</span>
+        <div class="detail-wrap">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Main banner begins -->
+                    <div class="main-banner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString()" target="_self">Home</a></li>
+                                            <li class="breadcrumb-item current" aria-current="page">@company.CompanyName</li>
+                                        </ol>
+                                    </nav>
+                                    <div class="banner-info">
+                                        <div class="brand-logo">
+                                            <img title="@company.CompanyName" src="~/images/CompanyLogos/@company.LogoName" />
                                         </div>
+                                        <div class="brand-detail">
+                                            <h1 class="name">@company.CompanyName</h1>
+                                            <div class="rating-wrap">
+                                                <ul class="star-rate rating-@company.UserRating">
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                </ul>
+                                                <span class="rating-label"><span>@company.UserRating.0/5.0</span>-<span>@company.NoOfUsersRated users</span></span>
+                                            </div>
+                                            <div class="locality"><i class="fas fa-map-marker-alt"></i> @company.City, @company.CountryName</div>
+                                            <ul class="brand-data">
+                                                <li>
+                                                    <a href="@(company.URL + "?utm_medium=referral&utm_source=upvotes.co")" rel="nofollow" target="_blank">
+                                                        <i class="fa fa-external-link"></i>
+                                                        Visit website
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        @company.AveragHourlyRate
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tel:@company.PhoneNumber">
+                                                        <i class="fa fa-phone-square"></i>
+                                                        @company.PhoneNumber
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i class="fa fa-user-o"></i>
+                                                        @company.TotalEmployees
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="mailto:@company.Email">
+                                                        <i class="fa fa-envelope-o"></i>
+                                                        @company.Email
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i class="fa fa-flag-o"></i>
+                                                        Founded: @company.FoundedYear
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <ul class="social-wrap">
+                                                @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@company.LinkedInProfileURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@company.FacebookProfileURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@company.TwitterProfileURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@company.GooglePlusProfileURL"><i class="fa fa-google-plus bg-light-maroon" aria-hidden="true"></i></a></li>
+                                                }
 
-                                        <div id="@company.SubfocusNames[i].Replace(" ","").ToString()" style="width:808px;float:left; height:180px; margin: 0 auto;margin-top:8px;"></div>
+                                            </ul>
+                                            <div class="btn-group banner-action align-right">
+                                                <button class="btn btn-md btn-blue" id="btnVote" compid="@company.CompanyID" calledPage="L"><i class="fa fa-arrow-up"></i>@company.NoOfVotes</button>
+                                                @*@Ajax.ActionLink("Submit Review", "submit-review", "submit", new { companyID = company.CompanyID, companyName= company.CompanyName }, new AjaxOptions { HttpMethod="POST"},new { @target="_blank", @class="btn btn-md btn-blue", @id="btnSubmitReview" })*@
+                                                <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
-
-        if (company.IndustialCompanyFocus != null && company.IndustialCompanyFocus.Count > 0)
-        {
-            <div class="container">
-                <div class="focus-section" id="Focus-main">
-                    <div class="row">
-                        <span style="float:left;font-weight: bold;font-size: 17px;font-family: OpenSans-Bold;">Industrial Focus</span>
-                    </div>
-                    @*<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>*@
-                    <div id="dvIndustrialFocus" style="width:808px;float:left; height:180px; margin: 0 auto"></div>
-                </div>
-            </div>
-        }
-
-        if (company.CompanyClientFocus != null && company.CompanyClientFocus.Count > 0)
-        {
-            <div class="container">
-                <div class="focus-section" id="Focus-main">
-                    <div class="row">
-                        <span style="float:left;font-weight: bold;font-size: 17px;font-family: OpenSans-Bold;">Client Focus</span>
-                    </div>
-                    @*<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>*@
-                    <div id="dvClientFocus" style="width:808px;float:left; height:180px; margin: 0 auto"></div>
-                </div>
-            </div>
-        }
-
-        if (company.CompanyPortFolio.Count > 0)
-        {
-            <div class="container">
-                <div class="focus-section portfolio-pic-section-main" id="portfolio-main">
-                    <h3>Portfolio:</h3>
-                    @foreach (var portFolio in company.CompanyPortFolio)
+                    <!-- Main banner ends -->
+                    <!-- Claim strip -->
+                    @if (!company.IsClaim)
                     {
-                        <div class="portfolio-pic-section">
-                            <img src="@portFolio.ImageURL">
-                            <p>@portFolio.Title</p>
-                            <p>@portFolio.Description</p>
+                        <div class="container claim-strip text-center">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <span>Do you confirm that the profile belongs to your company</span>
+                                    <button id="btnClaimListing" data-toggle="modal" data-target="#ClaimModal" class="btn btn-lg btn-blue">Claim listing</button>
+                                </div>
+                            </div>
                         </div>
                     }
+                    <!-- Claim strip -->
+                    <!-- Scrollspy menu -->
+                    <nav class="navbar navbar-expand-sm content-nav col-xl-12 sticky-title">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="#navOverview">overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navFocus">focus</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navPortfolio">portfolio</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navReviews">reviews</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navTeam">team</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navJobs">jobs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navNews">news</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- Scrollspy menu -->
+                    <div class="container content-wrap">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <section id="navOverview">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">About @company.CompanyName</h2>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-8 col-md-8">
+                                                <div class="about">
+                                                    @if (company.Summary != null && company.Summary != string.Empty)
+                                                    {
+
+                                                        <p>@Html.Raw(company.Summary)</p>
+                                                    }
+
+                                                    @if (company.Summary1 != null && company.Summary1 != string.Empty)
+                                                    {
+                                                        <p>@company.Summary1</p>
+                                                    }
+
+                                                    @if (company.Summary2 != null && company.Summary2 != string.Empty)
+                                                    {
+                                                        <p>@company.Summary2</p>
+                                                    }
+
+                                                    @if (company.Summary3 != null && company.Summary3 != string.Empty)
+                                                    {
+                                                        <p>@company.Summary3</p>
+                                                    }
+
+                                                    @if (company.KeyClients != null && company.KeyClients != string.Empty)
+                                                    {
+                                                        <b>Our key clients are</b>
+                                                        <p>@Html.Raw(@company.KeyClients)</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            @if (company.CompanyBranches.Count > 0)
+                                            {
+                                                <div class="col-xl-4 col-md-4">
+                                                    <address class="address-wrap">
+                                                        <h3 class="title-small">Address</h3>
+
+                                                        @foreach (var address in company.CompanyBranches)
+                                                        {
+                                                            <ul class="branch-wrap">
+                                                                <li>@address.BranchName</li>
+                                                                <li><i class="fa fa-map-marker"></i>@address.Address</li>
+                                                                <li>@address.City, @address.PostalCode</li>
+                                                                <li>@address.StateName, @address.CountryName</li>
+                                                                <li><i class="fa fa-phone"></i>@address.PhoneNumber</li>
+                                                            </ul>
+                                                        }
+                                                        <span class="view-more" href="#">Show Other Branches</span>
+                                                    </address>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </section>
+                                @Html.Partial("_CompanyFocus", Model)
+
+
+                                <section id="navPortfolio">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@company.CompanyName Portfolios</h2>
+                                        </div>
+                                        @if (company.CompanyPortFolio.Count > 0)
+                                        {
+                                            <div class="row portfolio">                                                
+                                                    @Html.Partial("_CompanyPortFolio", company.CompanyPortFolio)
+                                                <div class="col-lg-12">
+                                                    <div class="col text-center load-more">
+                                                        <button type="submit" onclick="getAllPortFolio('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                            View more portfolio...
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Portfolios Found</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+
+
+                                <section id="navReviews">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@company.CompanyName Reviews</h2>
+                                        </div>
+                                        @if (company.CompanyReviews.Count > 0)
+                                        {
+                                            <div class="row review-wrap">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("_CompanyReviews", company.CompanyReviews)
+                                                    <div class="col text-center load-more">
+                                                        <button type="submit" onclick="getAllReviews('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                            View more reviews...
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Reviews Found</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </section>
+
+                                <section id="navTeam">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@company.CompanyName Team</h2>
+                                            <button class="btn btn-sm btn-add f-right hide">Add Member</button>
+                                        </div>
+                                        @if (1 != 1)
+                                        {
+                                            @Html.Partial("_CompanyMembers")
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Team Members Found</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+
+                                <section id="navJobs">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@company.CompanyName Jobs</h2>
+                                            <button class="btn btn-sm btn-add f-right hide">Add Jobs</button>
+                                        </div>
+                                        @if (1 != 1)
+                                        {
+                                            @Html.Partial("_CompanyJobs", Model)
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Jobs Added</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+
+                                <section id="navNews">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@company.CompanyName News</h2>
+                                            <button class="btn btn-sm btn-add f-right" id="btnAddNews">Add News</button>
+                                        </div>
+                                        @if (company.OverviewNewsData != null && company.OverviewNewsData.Count > 0)
+                                        {
+                                            <div class="row news-wrap">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("_CompanyNews", company.OverviewNewsData)
+                                                    <div class="col text-center load-more">
+                                                        <button type="submit" onclick="getAllNews('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                            View more news...
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No News Added</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </section>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
-
             </div>
-        }
-
-        if (company.CompanyReviews != null && company.CompanyReviews.Count > 0)
-        {
-            <div class="container">
-                <h3>Reviews:</h3>
-                @Html.Partial("_CompanyReviews", company.CompanyReviews)
-            </div>
-
-            <div class="load-more-buttons">
-                <button type="button" class="btn btn-default">Load more reviews...</button>
-            </div>
-        }
-
-        <div id="dialog" style="display: none">
-            @Html.Partial("_SubmitReview")
         </div>
         if (!company.IsClaim)
-            {
-
-        <div class="modal fade" id="ClaimModal" role="dialog">
-            <div class="modal-dialog claim-dialog">
-                <div class="modal-content claimContent">
-                    <div class="modal-header claimHeader">
-                        <span class="claimspan"><strong>Claim Listing</strong></span>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
-                    </div>
-                    <div class="modal-body claimBody">
-                        <span class="spnDomain">Domain Email:</span>
-                        <br>
-                        <div class="wrapper">
-                            <input type="text" placeholder="Enter work email without domain" class="form-control" id="txtClaimListing" style="margin-top:7px;">
-                            <span class="input-group-addon spncompanydomain" >@company.CompanyDomain</span>
-                            </div>
-                        <br>
-                        <button id="btnclaimSubmit" class="btn btn-default header-buttons">
-                             <span class="" aria-hidden="true">Submit</span>
+        {
+            <div class="modal fade claim-modal" id="ClaimModal" tabindex="-1" role="dialog" aria-labelledby="ClaimModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <!-- Card Loader -->
+                        <div id="ajax_loaderClaim" class="card-loader"></div><!-- If add "show" class loader will appear -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
-                        <span style="color: red;display:none;" id="spnerrordomain"></span>
+                        <div class="bg-banner"></div>
+                        <div class="modal-body">
+                            <div class="form-wrap">
+                                <h4 class="title-small">Claim Listing</h4>
+                                <div class="cliam-wrap">
+                                    <label>Login with your assigned work e-mail address.</label>
+                                    <div class="form-group input-medium">
+                                        <input type="text" class="form-control input-txt" id="txtClaimListing" aria-describedby="emailHelp" placeholder="Enter work email without domain">
+                                        <span>@company.CompanyDomain</span>
+                                    </div>
+                                    <div><span id="spnerrordomain" class="error-text"></span></div>
+                                    <div class="action float-left">
+                                        <button id="btnclaimSubmit" type="submit" class="btn btn-lg btn-blue btn-login float-right">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="ajax_loaderClaim" style="left: 0;top: 50%;width: 100%;height:100%;top:0;padding: 0;margin: 0;background: rgba(0, 0, 0, 0.2);display:none; position: fixed;z-index:100;background-image: url('/images/loader.gif');background-repeat: no-repeat;background-position: center;">
-
-                    </div> 
                 </div>
-
             </div>
-            </div>            
-            }
-            }
-        </div>
+        }
+    }
 
-@Html.Partial("_CompanyFooter")
+</div>
 
-
+<div class="scroll-top"><i class="fa fa-chevron-circle-up"></i></div>

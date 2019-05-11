@@ -1,0 +1,37 @@
+﻿@model UpVotes.Models.CompanySoftwareUserReviews
+
+@Scripts.Render("~/bundles/AllListing")
+ @{  var id = 0; }
+@if (Model.SoftwareNamesList != null)
+{
+foreach (var item in Model.SoftwareNamesList)
+{
+    id = id + 1;
+
+<div class="accordion show-review" id="review-given">
+    <div class="card strip-bar">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@("softrev" + id)" aria-expanded="false">
+                    @item.ToString()
+                </button>
+            </h5>
+        </div>
+        <div id="@("softrev" + id)" class="collapse" aria-labelledby="headingOne" data-parent="#review-given">
+            <div class="card-body">                
+                <div class="row review-wrap">
+                    <div class="col-lg-12">
+                                @Html.Partial("_SoftwareReviewsList", Model.SoftwareReviewsList.Where(i => i.SoftwareName == item.ToString()).ToList())
+                        <div class="col text-center load-more">
+                            <button type="submit" onclick="getAllReviews('@item.Replace(" ", "-").ToLower()',0);" class="btn btn-sm flat-gray">
+                                View more reviews...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+}

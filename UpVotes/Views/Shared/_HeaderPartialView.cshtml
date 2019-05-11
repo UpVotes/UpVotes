@@ -1,71 +1,120 @@
 ﻿@using System.Configuration
-<header>
-    <style>       .dropdown-menu>li>a {
-            color:#333 !important;
-        }
-    </style>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand Logo-main-page" href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()"></a>
-@using (Html.BeginForm("CustomSearch", "Search", FormMethod.Get, new { @class = "navbar-left header-search" }))
-{
-                
-                    <div class="input-group">
-                        <input type="text" name="Query" id="txtSearch" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" id="btnsubmit" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                
-}
-                @Html.Partial("~/Views/Login/_Login.cshtml")
 
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-green megamenu">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="logo">
+                <a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()" class="navbar-brand">
+                    Upvotes
+                    <img src="~/images/upvotes-logo.png" alt="Upvotes" title="Upvotes">
+                </a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;">APP DEVELOPERS<span class="head-caret caret"></span></a>
-                        <ul class="dropdown-menu header-pop-down">
-                            <li class=""><a href="/mobile-application-developers">Mobile App Developers</a></li>
-                            <li><a href="/wearable-application-developers">Wearable App Developers</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;">WEB DEVELOPERS<span class="head-caret caret"></span></a>
-                        <ul class="dropdown-menu header-pop-down">
-                            <li><a href="/web-design-companies">Web Designers</a></li>
-                            <li><a href="/ui-ux-agencies">UI/UX Designers</a></li>
-                            <li><a href="/web-development-companies">Web Developers</a></li>
-                            <li><a href="/ecommerce-developers">Ecommerce Developers</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;">MARKETING AGENCIES<span class="head-caret caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/digital-marketing-companies">Digital Agencies</a></li>
-                            <li><a href="/seo-companies">SEO Agencies</a></li>
-                            <li><a href="/social-media-marketing-companies">Social Media Agencies</a></li>
-                            <li><a href="/ppc-companies">PPC Agencies</a></li>
-                            <li><a href="/content-marketing-companies">Content Marketing Agencies</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer;">SOFTWARE DEVELOPERS<span class="head-caret caret"></span></a>
-                        <ul class="dropdown-menu header-pop-down">
-                            <li><a href="/software-development-companies">Custom Software Developers</a></li>
-                            <li><a href="/iot-application-developers">IOT App Developers</a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <button id="open-menu" class="navbar-toggler open-menu" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <a href="#" class="btn-close"><i class="fas fa-times"></i></a>
+                <div class="nav-inner">
+                    <ul class="navbar-nav mr-auto menu menu-bottom">
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false">For Service category <span class="caret"></span></a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-12 menu-banner bg-teal">
+                                            <h4 class="title">For Service category</h4>
+                                            <p class="caption">
+                                                Explore top services providers across industries to find the right agencies for your business.
+                                            </p>
+                                            <a href="#" class="btn flat-white">Browse All Categories</a>
+                                        </div>
+                                        <div class="col-lg-9 col-sm-12 menu-list">
+                                            <ul>
+                                                <li><a href="/mobile-application-developers">Mobile App Developement </a></li>
+                                                <li><a href="/web-development-companies">Web Developers</a></li>
+                                                <li><a href="/web-design-companies">Web Designers </a></li>
+                                                <li><a href="/digital-marketing-companies">Digital Marketing Agencies</a></li>
+                                                <li><a href="/seo-companies">SEO Agencies</a></li>
+                                                <li><a href="/software-development-companies">Custom Software Developers</a></li>
+                                                <li><a href="/ui-ux-agencies">UI/UX Designers</a></li>
+                                                <li><a href="/wearable-application-developers">Wearable App Developers</a></li>
+                                                <li><a href="/ecommerce-developers">Ecommerce Developers</a></li>
+                                                <li><a href="/social-media-marketing-companies">Social Media Agencies</a></li>
+                                                <li><a href="/ppc-companies">PPC Agencies</a></li>
+                                                <li><a href="/content-marketing-companies">Content Marketing Agencies</a></li>
+                                                <li><a href="/iot-application-developers">IOT App Developers</a></li>
+                                                <li><a href="/mobile-app-marketing-agencies">Mobile App Marketing Agencies</a></li>
+                                                <li><a href="/email-marketing-agencies">Email Marketing Agencies</a></li>
+                                                <li><a href="/sem-agencies">Sem Agencies</a></li>
+                                                <li><a href="/branding-agencies">Branding Agencies</a></li>
+                                                <li><a href="/pr-agencies">PR Agencies</a></li>
+                                                <li><a href="/digital-strategy-agencies">Digital Strategy Agencies</a></li>
+                                                <li><a href="/video-production-agencies">Video Production Agencies</a></li>
+                                                <li><a href="/chatbot-development">Chatbot Development</a></li>
+                                                <li><a href="/ar-vr-application-development">AR VR Application Developers</a></li>
+                                                <li><a href="/graphic-designers">Graphic Designers</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false">For Software Category <span class="caret"></span></a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-3 menu-banner bg-teal">
+                                            <h4 class="title">For Software category</h4>
+                                            <p class="caption">
+                                                Explore top software providers across industries to find the right software for your business.
+                                            </p>
+                                            <a href="#" class="btn flat-white">Browse All Categories</a>
+                                        </div>
+                                        <div class="col-sm-9 menu-list">
+                                            <ul>
+                                                <li><a href="/mobile-app-softwares">Mobile App Softwares</a></li>
+                                                <li><a href="/marketing-softwares">Marketing Softwares</a></li>
+                                                <li><a href="/seo-softwares">SEO Softwares</a></li>
+                                                <li><a href="/social-media-softwares">Social Media Softwares</a></li>
+                                                <li><a href="/content-marketing-softwares">Content Marketing Softwares</a></li>
+                                                <li><a href="/app-design-softwares">App Design Softwares</a></li>
+                                                <li><a href="/cms-softwares">CMS Softwares</a></li>
+                                                <li><a href="/ecommerce-softwares">Ecommerce Software</a></li>
+                                                <li><a href="/email-marketing-softwares">Email Marketing Softwares</a></li>
+                                                <li><a href="/game-development-softwares ">Game Development Softwares </a></li>
+                                                <li><a href="/graphic-design-softwares">Graphic Design Softwares</a></li>
+                                                <li><a href="/iot-softwares">Iot Softwares</a></li>
+                                                <li><a href="/artificial-intelligence-softwares">Artificial Intelligence Softwares</a></li>
+                                                <li><a href="/data-visualization-softwares">Data Visualization Softwares</a></li>
+                                                <li><a href="/inventory-management-softwares">Inventory Management Softwares</a></li>
+                                                <li><a href="/accounting-softwares">Accounting Softwares</a></li>
+                                                <li><a href="/workflow-management-softwares">Workflow Management Softwares</a></li>
+                                                <li><a href="/crm-softwares">CRM Softwares</a></li>
+                                                <li><a href="/business-intelligence-softwares ">Business Intelligence Softwares </a></li>
+                                                <li><a href="/erp-softwares">ERP Softwares</a></li>
+                                                <li><a href="/human-resource-softwares">Human Resource Softwares</a></li>
+                                                <li><a href="/machine-learning-softwares">Machine Learning Softwares</a></li>
+                                                <li><a href="/product-management-softwares">Product Management Softwares</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link" href="#">Jobs Board</a></li>
+                        <li><a class="nav-link" href="#">Resources</a></li>
+                    </ul>
+                    @using (Html.BeginForm("CustomSearch", "Search", FormMethod.Get, new { @class = "form-inline mt-2 mt-md-0 head-search" }))
+                    {                    
+                        <input class="form-control mr-sm-2 search" name="Query" id="txtSearch" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn mr-sm-2 btn-search" id="btnsubmit" type="submit"><i class="fa fa-search"></i></button>                    
+                    }
+                    @Html.Partial("~/Views/Login/_Login.cshtml")
+                </div>
             </div>
         </div>
     </nav>
@@ -96,15 +145,9 @@
                         alert(textStatus);
                     }
                 });
-
             },            
             minLength: 1   
         });
     }
 
 </script>
-<style>
-    .ui-widget.ui-widget-content {
-     width: auto !important;
-}
-</style>

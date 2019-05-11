@@ -1,0 +1,87 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.SoftwareReviewsEntity>
+
+        @foreach (var softwareReview in Model)
+        {
+            <div class="review-list">
+                <div class="rev-rate">
+                    <b class="user-name">@softwareReview.ReviewerFullName</b>
+                    <div class="caption">
+                        <span class="role">@softwareReview.ReviewerDesignation</span> |
+                        <span class="brand-name">@softwareReview.ReviewerCompanyName</span>
+                    </div>
+                    <div class="rating-wrap">
+                        <ul class="star-rate rating-@softwareReview.Rating">
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                        </ul>
+                        <span class="rating-label"><span>@softwareReview.Rating.0/5.0</span></span>
+                    </div>
+                </div>
+                <div class="rev-type">
+                    <ul>
+                        <li><span>Service category:</span> @softwareReview.ServiceCategoryName</li>
+                        <li>&nbsp;</li>           
+                        @*<li><span>Project name:</span> @softwareReview.ReviewerProjectName</li>*@                        
+                    </ul>
+                </div>
+                <div class="rev-text">
+                    <p>@softwareReview.FeedBack</p>
+                </div>
+                <div class="btn-group align-left">
+                    @*<button type="submit" class="btn btn-sm flat-gray">Read more</button>*@
+                    <button class="btn btn-sm flat-gray btn-split btnThankNote" SoftwareReviewID=@softwareReview.SoftwareReviewID.ToString()>
+                        <i class="fa fa-thumbs-up"></i> Thank <span>@softwareReview.NoOfThankNotes</span>
+                    </button>
+                </div>
+            </div>
+        }
+@*<div class="user-reviews-card-wrapper" id="Reviews-main">
+        @foreach (var companyReview in Model)
+        {
+            <div class="user-reviews-card">
+                <div class="fonder-profile">
+                    <img src="@companyReview.UserProfilePicture">
+                    <p class="founder-name">@companyReview.ReviewerFullName</p>
+                    <p><span>@companyReview.ReviewerDesignation</span><span>@companyReview.ReviewerCompanyName</span></p>
+                    <div>
+                        <ul class="ratings">
+                            @for (int i = 0; i < companyReview.Rating; i++)
+                            {
+                                <li><span class="rate" aria-hidden="true">★</span></li>
+                            }
+                            @for (int i = companyReview.Rating; i < 5; i++)
+                            {
+                                <li><span class="ratedisabled" aria-hidden="true">★</span></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tech-used">
+                    <p><span>Project Name:</span><span>@companyReview.ReviewerProjectName</span></p>
+                    <p><span>Service category:</span><span>@companyReview.FocusAreaName</span></p>
+                </div>
+
+                <div class="tech-review">
+                    <p>
+                        <span class="more">
+                            @companyReview.FeedBack
+                        </span>
+                    </p>
+                </div>
+                <div class="review-major-btns">
+                    <div class="input-group thankbutton">
+                        <button class="form-control" aria-label="Text input with segmented button dropdown" id="btnThankNote" CompanyReviewID=@companyReview.CompanyReviewID.ToString()><i class="fa fa-thumbs-up" aria-hidden="true"></i>Thank</button>
+                        <div class="input-group-btn">
+                            <span type="button" class="btn btn-default thankyou-adjust" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@companyReview.NoOfThankNotes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@
+
+

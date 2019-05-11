@@ -1,0 +1,336 @@
+﻿@using System.web.Mvc
+@model UpVotes.Models.SoftwareViewModel
+
+@{
+    ViewBag.Title = Model.SoftwareList[0].SoftwareName + " - Reviews & Ratings " + @DateTime.Now.Year + " - Upvotes.co";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/software")
+</head>
+
+<div>
+    @foreach (var software in Model.SoftwareList)
+    {
+        <input type="hidden" value="@software.SoftwareID" id="hdnSoftwareID" />
+        <input type="hidden" value="@software.SoftwareName" id="hdnSoftwareName" />
+        <input type="hidden" value="@software.DomainID" id="hdnSoftwareDomain" />
+
+        <div class="detail-wrap">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Main banner begins -->
+                    <div class="main-banner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString()" target="_self">Home</a></li>
+                                            <li class="breadcrumb-item current" aria-current="page">@software.SoftwareName</li>
+                                        </ol>
+                                    </nav>
+                                    <div class="banner-info">
+                                        <div class="brand-logo">
+                                            <img title="@software.SoftwareName" src="~/images/SoftwareLogos/@software.LogoName" />
+                                        </div>
+                                        <div class="brand-detail">
+                                            <h1 class="name">@software.SoftwareName</h1>
+                                            <div class="rating-wrap">
+                                                <ul class="star-rate rating-@software.UserRating">
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                    <li><i class="fa fa-star rate"></i></li>
+                                                </ul>
+                                                <span class="rating-label"><span>@software.UserRating.0/5.0</span>-<span>@software.NoOfUsersRated users</span></span>
+                                            </div>
+                                            <ul class="brand-data">
+                                                <li>
+                                                    <a href="@(software.WebSiteURL + "?utm_medium=referral&utm_source=upvotes.co")" target="_blank" rel="nofollow">
+                                                        <i class="fa fa-external-link"></i>
+                                                        Visit website
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i class="fa fa-clock-o"></i>
+                                                        @software.PriceRange
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i class="fa fa-flag-o"></i>
+                                                        Founded: @software.FoundedYear
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <ul class="social-wrap">
+                                                @if (software.LinkedInURL != string.Empty && software.LinkedInURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@software.LinkedInURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (software.FaceBookURL != string.Empty && software.FaceBookURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@software.FaceBookURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (software.TwitterURL != string.Empty && software.TwitterURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@software.TwitterURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
+                                                }
+                                                @if (software.InstagramURL != string.Empty && software.InstagramURL != null)
+                                                {
+                                                    <li><a target="_blank" rel="nofollow" href="@software.InstagramURL"><i class="fa fa-instagram bg-pink" aria-hidden="true"></i></a></li>
+                                                }
+
+                                            </ul>
+                                            <div class="btn-group banner-action align-right">
+                                                <button class="btn btn-md btn-blue" id="btnVote" compid="@software.SoftwareID" calledPage="N"><i class="fa fa-arrow-up"></i>@software.NoOfVotes</button>
+                                                <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Main banner ends -->
+                    <!-- Claim strip -->
+                    @if (!software.IsClaim)
+                    {
+                        <div class="container claim-strip text-center">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <span>Do you confirm that the profile belongs to your company</span>
+                                    <button id="btnClaimListing" data-toggle="modal" data-target="#ClaimModal" class="btn btn-lg btn-blue">Claim listing</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- Claim strip -->
+                    <!-- Scrollspy menu -->
+                    <nav class="navbar navbar-expand-sm content-nav col-xl-12 sticky-title">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="#navOverview">overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navDemo">Product Demo</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navReviews">reviews</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navTeam">team</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navJobs">jobs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#navNews">news</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- Scrollspy menu -->
+                    <div class="container content-wrap">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <section id="navOverview">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">About @software.SoftwareName</h2>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-8 col-md-8">
+                                                <div class="about">
+                                                    @if (!string.IsNullOrEmpty(software.SoftwareDescription))
+                                                    {
+                                                    <p>@Html.Raw(software.SoftwareDescription)</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section id="navDemo">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@software.SoftwareName Product Demo</h2>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(software.DemoURL))
+                                        {
+                                            <div class="row demo-wrap">
+                                                <div class="col-xl-8 col-md-8">
+                                                    @*<iframe src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>*@
+                                                    <iframe src="@software.DemoURL" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row demo-wrap">
+                                                <div class="col-xl-8 col-md-8">
+                                                    <h6>No Demo Added</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </section>
+                                <section id="navReviews">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@software.SoftwareName Reviews</h2>
+                                        </div>
+                                        @if (software.SoftwareReviews.Count > 0)
+                                        {
+                                            <div class="row review-wrap">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("_SoftwareReviews", software.SoftwareReviews)
+                                                    <div class="col text-center load-more">
+                                                        <button type="submit" onclick="getAllReviews('@software.SoftwareName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                            View more reviews...
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Reviews Found</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+</section>
+
+                                <section id="navTeam">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@software.SoftwareName Team</h2>
+                                            <button class="btn btn-sm btn-add f-right hide">Add Member</button>
+                                        </div>
+                                        @if (1 != 1)
+                                        {
+                                            @Html.Partial("_SoftwareMembers")
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Team Members Found</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+
+                                <section id="navJobs">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@software.SoftwareName Jobs</h2>
+                                            <button class="btn btn-sm btn-add f-right hide">Add Jobs</button>
+                                        </div>
+                                        @if (1 != 1)
+                                        {
+                                            @Html.Partial("_SoftwareJobs", Model)
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No Jobs Added</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+
+                                <section id="navNews">
+                                    <div class="content">
+                                        <div class="title-wrap">
+                                            <h2 class="title-small">@software.SoftwareName News</h2>
+                                            <button class="btn btn-sm btn-add f-right" id="btnAddNews">Add News</button>
+                                        </div>
+                                        @if (software.OverviewNewsData != null && software.OverviewNewsData.Count > 0)
+                                        {
+                                            <div class="row news-wrap">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("_SoftwareNews", software.OverviewNewsData)
+                                                    <div class="col text-center load-more">
+                                                        <button type="submit" onclick="getAllNews('@software.SoftwareName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                            View more news...
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row portfolio">
+                                                <div class="col-lg-12">
+                                                    <h6>No News Added</h6>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+</section>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        if (!software.IsClaim)
+        {
+            <div class="modal fade claim-modal" id="ClaimModal" tabindex="-1" role="dialog" aria-labelledby="ClaimModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <!-- Card Loader -->
+                        <div id="ajax_loaderClaim" class="card-loader"></div><!-- If add "show" class loader will appear -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="bg-banner"></div>
+                        <div class="modal-body">
+                            <div class="form-wrap">
+                                <h4 class="title-small">Claim Listing</h4>
+                                <div class="cliam-wrap">
+                                    <label>Login with your assigned work e-mail address.</label>
+                                    <div class="form-group input-medium">
+                                        <input type="text" class="form-control input-txt" id="txtClaimListing" aria-describedby="emailHelp" placeholder="Enter work email without domain">
+                                        <span>@software.DomainID</span>
+                                    </div>
+                                    <div><span id="spnerrordomain" class="error-text"></span></div>
+                                    <div class="action float-left">
+                                        <button id="btnclaimSubmit" type="submit" class="btn btn-lg btn-blue btn-login float-right">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+<div class="scroll-top"><i class="fa fa-chevron-circle-up"></i></div>

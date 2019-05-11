@@ -1,0 +1,201 @@
+﻿@using System.Configuration
+@model UpVotes.Models.SoftwareViewModel
+@{  
+    ViewBag.MetaTag = Model.MetaTag;
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/CompList")
+@Scripts.Render("~/bundles/softlist")
+
+
+<!-- Start Breadcrumbs -->
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Session["SoftwareCategory"]</li>
+            </ol>
+        </div>
+    </div>
+</nav>
+<!-- End Breadcrumbs -->
+<!-- Start Category -->
+<section class="list-wrap content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="title-wrap text-center">
+                    <input type="hidden" id="hdnSoftwareCategoryID" value="@Model.SoftwareCategoryID" />
+                    <h3 class="title-medium t-border">@Model.CategoryHeadLine</h3>
+                </div>
+            </div>
+            <div class="col-xl-12 tab-wrap">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#software-profile">
+                            <i class="fa fa-balance-scale"></i> View & Compare
+                        </a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#userReviews">
+                            <i class="fa fa-users"></i>User reviews
+                        </a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#Overview">
+                            <i class="fa fa-cogs"></i>Overview?
+                        </a>
+                    </div>
+                </nav>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="software-profile">
+                        <div class="d-flex justify-content-between top-bar">
+                            <div class="result">WE FOUND @Model.TotalNoOfSoftwares @Model.CategoryHeadLine</div>
+                            <div class="share">
+                                <div class="list-inline">
+                                    <div class="list-inline-item social">Share:</div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://twitter.com/upvotes_co"><i class="fa fa-twitter bg-picton"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook bg-chambray"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin bg-denim"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mobile-refine">
+                            <div class="mobile-filter">
+                                <a data-toggle="modal" data-target="#filterModal" class="nav-link" href="#">
+                                    <i class="fas fa-sliders-h"></i> Filter
+                                </a>
+                            </div>
+                            <div class="mobile-sort">
+                                <a data-toggle="modal" data-target="#sortModal" class="nav-link" href="#">
+                                    <i class="fas fa-sort-amount-down"></i> Sort
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="filter-wrap">
+                            <div class="modal fade filter" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="modal-body">
+                                            <div class="form-row">
+                                                <label class="caption">Filter by:</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control input-flat" id="txtSoftwareSearch" placeholder="Software Name">
+                                                </div>                                                
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                        <div id="softwarelist">
+                           @Html.Partial("~/Views/SoftwareList/_SoftwareList.cshtml")
+                        </div>
+                       @Html.Partial("~/Views/SoftwareList/_SoftwareQuickLinks.cshtml")
+                    </div>
+                   
+                    <div class="tab-pane fade" id="userReviews">
+                        <div class="d-flex justify-content-between top-bar">
+                            <div class="result">WE FOUND @Model.TotalNoOfSoftwares @Model.CategoryHeadLine - REVIEWS @DateTime.Now.Year.ToString()</div>
+                            <div class="share">
+                                <div class="list-inline">
+                                    <div class="list-inline-item social">Share:</div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://twitter.com/upvotes_co"><i class="fa fa-twitter bg-picton"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook bg-chambray"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin bg-denim"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mobile-refine">
+                            <div class="mobile-filter">
+                                <a data-toggle="modal" data-target="#filterReviewModal" class="nav-link" href="#">
+                                    <i class="fas fa-sliders-h"></i> Filter
+                                </a>
+                            </div>
+                            <div class="mobile-sort">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="filter-wrap">
+                            <div class="modal fade filter" id="filterReviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="modal-body">
+                                            <div class="form-row">
+                                                <label class="caption">Filter by:</label>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control input-flat" id="txtSoftwareReviewSearch" placeholder="Software Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-title">
+                            <h2 class="title">top @Model.CategoryHeadLine - REVIEWS @DateTime.Now.Year.ToString()</h2>
+                            <h3 class="title-caption"><i class="fa fa-bars"></i>Reviews</h3>
+                        </div>
+                        <div id="divSoftwareUserReviews">
+                            @{Html.RenderAction("GetSoftwareUserReviews", "SoftwareList");}
+                        </div>
+                        <div class="col text-center load-more">
+                            <button type="submit" id="btnLoadMoreReviews" pagesize="10" class="btn btn-sm flat-gray">
+                                Load more reviews...
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="Overview">
+                        <div class="d-flex justify-content-between top-bar">
+                            <div class="result">WE FOUND @Model.TotalNoOfSoftwares @Model.CategoryHeadLine - RESOURCES @DateTime.Now.Year.ToString()</div>
+                            <div class="share">
+                                <div class="list-inline">
+                                    <div class="list-inline-item social">Share:</div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://twitter.com/upvotes_co"><i class="fa fa-twitter bg-picton"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook bg-chambray"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin bg-denim"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-title">
+                            <h2 class="title">top @Model.CategoryHeadLine resources</h2>
+                            <h3 class="title-caption"><i class="fa fa-bars"></i>Latest Posts</h3>
+                        </div>
+                        @{Html.RenderAction("GetOverViewNewsForSoftware", "OverViewAndNews", Model);}
+                        <div class="col text-center hide load-more">
+                            <button type="submit" class="btn btn-sm flat-gray">
+                                Load more reviews...
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

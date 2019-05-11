@@ -1,0 +1,475 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@using UpVotes.BusinessEntities.Entities
+@using System.Collections.Generic
+
+@Styles.Render("~/Content/UserCompany")
+@Scripts.Render("~/bundles/UserCompany")
+   
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#ImgLoading').attr("src", $.absoluteurl('/images/ajax-loader.gif'));
+        $("#divRejectionComments").hide();
+        var focusAreaObj = jQuery.parseJSON('@Html.Raw(Json.Encode(Model.FocusAreaList))');
+        $.GetFocusAreaObject(focusAreaObj);
+        $.LoadCountry();
+        $.GetCompanyData(eval('@Html.Raw(Json.Encode(Model.CompanyList[0].CompanyName))'));
+        var companyOwnedByObj = new Object();
+        companyOwnedByObj.CreatedBy = eval('@Html.Raw(Json.Encode(Model.CompanyList[0].CreatedBy))');
+        companyOwnedByObj.IsAdminUser = eval('@Html.Raw(Json.Encode(Model.CompanyList[0].IsAdminUser))');
+        companyOwnedByObj.LoggedInUser = eval('@Html.Raw(Json.Encode(Session["UserID"]))');
+        $.GetCompanyOwnedDetails(companyOwnedByObj);
+    });
+</script>
+<div class="alert alert-danger" id="divFailureMessage" style="display:none;">
+    <strong>ERROR!!</strong>
+    <span id="spnMessage"></span>
+</div>
+@*<div class="alert alert-success hide" id="divSuccessMessage">
+        <strong><span id="spnSuccessMessage"></span></strong>
+    </div>*@
+
+<div class="main-inner">
+
+    <!-- add service profile section -->
+    <div class="row" id="addServiceProfileSection">
+        <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+            <h2 class="title-small">Service Listing</h2>
+        </div>
+
+        <!-- add company service profile -->
+        <div class="@(Model.CompanyList[0].CompanyName == "" ? "col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data" : "col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data hide")" id="emptyServiceData">
+            <!--Add class "hide" to hide the content -->
+            <section class="section-wrap">
+                <div class="jumbotron vertical-center">
+                    <div class="caption">No service profile created yet "Add profile" to get listed.</div>
+                    <button type="submit" class="btn btn-primary" id="addServiceProfile">Add service profile</button>
+                </div>
+            </section>
+        </div>
+        <!-- company service listings tabs -->
+        <div class="@(Model.CompanyList[0].CompanyName == "" ? "col-xl-12 hide" : "col-xl-12")" id="addServiceData">
+            <section class="section-wrap">
+                <div class="tab-wrap primary">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#divCompanyProfile">
+                                Profile
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#divCompanyFocus">
+                                Focus Areas
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#divCompanyIndustryFocus">
+                                Industry Focus
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#divCompanyClientFocus">
+                                Client Focus
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#divCompanyLocations">
+                                Our Locations
+                                <div class="arrow-up"></div>
+                            </a>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active show" id="divCompanyProfile">
+                                <div class="row">
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                        <label for="uplLogo" class="col-form-label">Company Logo<a tabindex="-1" class="hint">?</a></label>
+                                        <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
+                                        <div class="input-group">
+                                            <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm" class="custom-file v1">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <label class="btn-bs-file btn btn-primary">
+                                                            Choose Logo<input type="file" id="UplAttachment" name="postedFile" onchange="CheckForUploadedFile(this)" class="form-control">
+                                                        </label>
+                                                        <div class="file-name" id="txtLogoName"></div>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <div class="logo-preview">
+                                                            <img class="previewimg" id="imgpreview" title="Your Logo" src="#" style="display:none;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtCompanyName" class="col-form-label">Company Name<small class="manditory">*</small></label>
+                                        <input type="text" class="form-control" id="txtCompanyName" value="@Model.CompanyList[0].CompanyName" />
+                                        <input type="hidden" id="hdnUserCompanyID" value="@Model.CompanyList[0].CompanyID" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtTagLine" class="col-form-label">Tag line<a tabindex="-1" class="hint">?</a></label>
+                                        <input type="text" class="form-control" id="txtTagLine" value="@Model.CompanyList[0].TagLine" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtFoundedYear" class="col-form-label">Founded<small class="manditory">*</small></label>
+                                        <input type="text" class="form-control numericOnly" maxlength="4" id="txtFoundedYear" value="@Model.CompanyList[0].FoundedYear" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtWebsite" class="col-form-label">
+                                            Website
+                                            <small class="manditory">*</small>
+                                            <a tabindex="-1" class="hint">?</a>
+                                            <div class="avail-status hide">
+                                                <span class="avail"><i class="fa fa-check"></i>Available</span>
+                                                <span class="not-avail hide"><i class="fa fa-times"></i>Not Available</span>
+                                            </div>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtWebsite" value="@Model.CompanyList[0].URL" />
+                                    </div>
+                                    @if (Model.CompanyList[0].IsAdminUser && (Model.CompanyList[0].CreatedBy == Convert.ToInt32(Session["UserID"])))
+                                    {
+                                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                            <label for="txtCompanyDomain" class="col-form-label">Company Domain <small class="manditory">*</small><a tabindex="-1" class="hint">?</a></label>
+                                            <input type="text" class="form-control" id="txtCompanyDomain" value="@Model.CompanyList[0].CompanyDomain" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                            <label for="txtWorkEmail" class="col-form-label">Work Email<small class="manditory">*</small><a tabindex="-1" class="hint">?</a></label>
+                                            <input type="text" class="form-control" id="txtWorkEmail" value="@Model.CompanyList[0].WorkEmail" />
+                                        </div>
+                                    }
+
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="ddlEmployees" class="col-form-label">Employees<small class="manditory">*</small></label>
+                                        <select class="form-control" id="ddlEmployees">
+                                            <option value="0">--Select--</option>
+                                            <option value="0-10">&lt; 10 </option>
+                                            <option value="11-50">11 - 50</option>
+                                            <option value="51-250">51 - 250</option>
+                                            <option value="251-1000">251 - 1000</option>
+                                            <option value="1001-5000">1001 - 5000</option>
+                                            <option value="5001-10000">5001 - 10000</option>
+                                            <option value="10000-0">10000+</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="usr" class="col-form-label">Avg.Hourly Rate (in US $)<small class="manditory">*</small></label>
+                                        <select class="form-control" id="ddlAvgHourlyRate">
+                                            <option value="0">--Select--</option>
+                                            <option value="0.00-25.00">&lt; $25.00 </option>
+                                            <option value="26.00-50.00">$26.00 - $50.00</option>
+                                            <option value="51.00-100.00">$51.00 - $100.00</option>
+                                            <option value="101.00-150.00">$101.00 - $150.00</option>
+                                            <option value="151.00-200.00">$151.00 - $200.00</option>
+                                            <option value="201.00-300.00">$201.00 - $300.00</option>
+                                            <option value="300.00-0.00">$300.00+</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtWebsite" class="col-form-label">LinkedIn<a tabindex="-1" class="hint">?</a></label>
+                                        <input type="text" class="form-control" id="txtLinkedInProfile" value="@Model.CompanyList[0].LinkedInProfileURL">
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtTwitter" class="col-form-label">Twitter<a tabindex="-1" class="hint">?</a></label>
+                                        <input type="text" class="form-control" id="txtTwitterProfile" value="@Model.CompanyList[0].TwitterProfileURL">
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtFacebook" class="col-form-label">Facebook<a tabindex="-1" class="hint">?</a></label>
+                                        <input type="text" class="form-control" id="txtFacebookProfile" value="@Model.CompanyList[0].FacebookProfileURL" />
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                        <label for="txtGooglePlus" class="col-form-label">Google+<a tabindex="-1" class="hint">?</a></label>
+                                        <input type="text" class="form-control" id="txtGooglePlusProfile" value="@Model.CompanyList[0].GooglePlusProfileURL" />
+                                    </div>
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
+                                        <label for="input1" class="col-form-label">Company summary<small class="manditory">*</small></label>
+                                        <textarea id="txtCompanySummary"></textarea>
+                                    </div>
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
+                                        <label for="txtKeyClients" class="col-form-label">Key clients</label>
+                                        <textarea id="txtKeyClients"></textarea>
+                                    </div>
+                                    <div id="divRejectionComments" class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
+                                        <label for="txtRejectComments" class="col-form-label">Rejection Comments</label>
+                                        <textarea class="form-control" rows="5" cols="50" id="txtRejectComments"></textarea>
+                                    </div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary btnNext">Next</button>
+                                        <button type="submit" class="btn btn-primary btnCompanyCancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane focus-range fade" id="divCompanyFocus">
+                                <div class="row category">
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                        <p>Indicate service lines that your company offers. For the service line(s) you choose, provide the percentage focus. The percentage of the chosen service lines must add up to 100.</p>
+                                        <div class="progress">
+                                            <div class="bar" id="divServiceFocusProgress" style="width: 0%;"></div>
+                                        </div>
+                                        <p class="focus-label">Service focus total = <span id="spnServiceFocusPercentage">0%</span></p>
+                                    </div>
+                                    @{
+                                        List<FocusAreaEntity> focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "P").ToList();
+                                    }
+                                    @if (focusAreaList.Any())
+                                    {
+                                        foreach (FocusAreaEntity focusArea in focusAreaList)
+                                        {
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label for="txtFocus_@focusArea.FocusAreaID" class="col-form-label">@focusArea.FocusAreaName</label>
+                                                <input type="hidden" id="hdnCompanyFocusID_@focusArea.FocusAreaID" value="" />
+                                                <input type="text" class="form-control numericOnly progressChange" maxlength="3" id="txtFocus_@focusArea.FocusAreaID" onBlur="PercentageFormat(this, event);" controlid="divPrimaryFocus_@focusArea.FocusAreaID">
+                                                <span class="percentage">%</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div id="divSubfocus" class="SubFocus">
+                                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                                    {
+                                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                                        {
+                                            <div id="divPrimaryFocus_@focusAreaObj.FocusAreaID" class="row category" style="display:none;">
+                                                <div class="title-wrap col-xl-12 col-md-12 col-sm-12">
+                                                    <h1 class="title-small">@focusAreaObj.FocusAreaName Focus</h1>
+                                                    <div class="progress">
+                                                        <div class="bar" id="divSubFocusProgress_@focusAreaObj.FocusAreaID" style="width: 0%;"></div>
+                                                    </div>
+                                                    <p class="focus-label">@focusAreaObj.FocusAreaName focus total = <span id="spnSubFocusPercentage_@focusAreaObj.FocusAreaID">0%</span></p>
+                                                </div>
+                                                @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                                {
+                                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                        <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" class="col-form-label">@subFocusAreaObj.SubFocusAreaName</label>
+                                                        <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                        <input type="text" class="form-control numericOnly subFocusProgressChange" focusid="@focusAreaObj.FocusAreaID" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                        <span class="percentage">%</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary btnNext">Next</button>
+                                        <button type="submit" class="btn btn-primary btnCompanyCancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane focus-range fade" id="divCompanyIndustryFocus">
+                                <div class="row category">
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                        <p>Indicate industry focus that your company offers. For the industry focus you choose, provide the percentage focus. The percentage of the chosen industry focus must add up to 100.</p>
+                                        <div class="progress">
+                                            <div class="bar" id="divIndustryProgress" style="width: 0%;"></div>
+                                        </div>
+                                        <p class="focus-label">Industry focus total = <span id="spnIndustryFocusPercentage">0%</span></p>
+                                    </div>
+                                    @{
+                                        focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "I").ToList();
+                                    }
+                                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                                    {
+                                        <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
+                                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                                        {
+                                            <div id="divIndustryFocus" class="col-xl-12 row category">
+                                                @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                                {
+                                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                        <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" class="col-form-label">@subFocusAreaObj.SubFocusAreaName</label>
+                                                        <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                        <input type="text" class="form-control numericOnly industryFocusProgressChange" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                        <span class="percentage">%</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary btnNext">Next</button>
+                                        <button type="submit" class="btn btn-primary btnCompanyCancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane focus-range fade" id="divCompanyClientFocus">
+                                <div class="row category">
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                        <p>Indicate client focus that your company offers. For the client focus you choose, provide the percentage focus. The percentage of the chosen client focus must add up to 100.</p>
+                                        <div class="progress">
+                                            <div class="bar" id="divClientProgress" style="width: 0%;"></div>
+                                        </div>
+                                        <p class="focus-label">Client focus total = <span id="spnClientFocusPercentage">0%</span></p>
+                                    </div>
+
+                                    @{
+                                        focusAreaList = Model.FocusAreaList.Where(a => a.FocusType == "C").ToList();
+                                    }
+                                    @foreach (FocusAreaEntity focusAreaObj in focusAreaList)
+                                    {
+                                        <input type="hidden" id="hdnCompanyFocusID_@focusAreaObj.FocusAreaID" value="" />
+                                        if (focusAreaObj.SubFocusAreaEntity.Any())
+                                        {
+                                            <div id="divClientfocus">
+                                                @foreach (SubFocusAreaEntity subFocusAreaObj in focusAreaObj.SubFocusAreaEntity)
+                                                {
+                                                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                                        <label for="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" class="col-form-label">@subFocusAreaObj.SubFocusAreaName</label>
+                                                        <input type="hidden" id="hdnCompanySubFocusAreaID_@subFocusAreaObj.SubFocusAreaID" value="" />
+                                                        <input type="text" class="form-control numericOnly clientFocusProgressChange" maxlength="3" id="txtSubFocus_@subFocusAreaObj.SubFocusAreaID" />
+                                                        <span class="percentage">%</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary btnNext">Next</button>
+                                        <button type="submit" class="btn btn-primary btnCompanyCancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="divCompanyLocations">
+                                <div id="dvLocationBranch">
+                                    @foreach (var companyBranch in Model.CompanyList[0].CompanyBranches)
+                                    {
+                                        <div id="dvLocationBranches_0" class="row branch-group">
+                                            <h2 class="title-xsmall">Company Address 1</h2>
+                                            <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                                <label for="txtstreet_0" class="col-form-label">Branch Name<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtBranch_0">
+                                                <input type="hidden" id="hdnBranchID_0" value="@companyBranch.BranchID" />
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="txtstreet_0" class="col-form-label">Street<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtstreet_0" value="@companyBranch.Address">
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="txtcity_0" class="col-form-label">City<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtcity_0" value="@companyBranch.City">
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="ddlCountry_0" class="col-form-label">Country<small class="manditory">*</small></label>
+                                                <select class="form-control" id="ddlCountry_0">
+                                                    <option value="0">--Select--</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="ddlStates_0" class="col-form-label">State/Province<small class="manditory">*</small></label>
+                                                <select class="form-control" id="ddlStates_0">
+                                                    <option value="0">--Select--</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="txtpostal_0" class="col-form-label">Postal Code<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtpostal_0" value="@companyBranch.PostalCode">
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="txtphone_0" class="col-form-label">Phone Number<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtphone_0" value="@companyBranch.PhoneNumber">
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="txtEmail_0" class="col-form-label">Email<small class="manditory">*</small></label>
+                                                <input type="text" class="form-control" id="txtEmail_0" value="@companyBranch.Email">
+                                            </div>
+                                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                                <label for="ChkIsHeadQuarters_0" class="col-form-label">Is Head Quarters<small class="manditory">*</small></label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="ChkIsHeadQuarters_0" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters" value="@companyBranch.IsHeadQuarters">
+                                                    <label class="custom-control-label" for="ChkIsHeadQuarters_0"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                        <button id="btnAddBranch" class="btn btn-link">Add another branch</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                    <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                        <button id="btnCompanySave" class="btn btn-primary">Save</button>
+                                        <button class="btn btn-primary btnCompanyCancel">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="dvLocationBranches_rNum" class="row branch-group hide">
+                                <div class="delete"><i title="Remove Branch" class="fa fa-times removeBranch"></i></div>
+                                <h2 class="title-xsmall">Company Address <span id="locationnumber"></span></h2>                                
+                                <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                    <label for="txtBranch_rNum" class="col-form-label">Branch Name<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtBranch_rNum">
+                                    <input type="hidden" id="hdnBranchID_rNum" />
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="txtstreet_rNum" class="col-form-label">Street<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtstreet_rNum">
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="txtcity_rNum" class="col-form-label">City<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtcity_rNum">
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="ddlCountry_rNum" class="col-form-label">Country<small class="manditory">*</small></label>
+                                    <select class="form-control" id="ddlCountry_rNum">
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="ddlStates_rNum" class="col-form-label">State/Province<small class="manditory">*</small></label>
+                                    <select class="form-control" id="ddlStates_rNum">
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="txtpostal_rNum" class="col-form-label">Postal Code<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtpostal_rNum">
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="txtphone_rNum" class="col-form-label">Phone Number<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtphone_rNum">
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="txtEmail_rNum" class="col-form-label">Email<small class="manditory">*</small></label>
+                                    <input type="text" class="form-control" id="txtEmail_rNum">
+                                </div>
+                                <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                    <label for="ChkIsHeadQuarters_rNum" class="col-form-label">Is Head Quarters</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="ChkIsHeadQuarters_rNum" onclick="ToggleHeadQuarters(this);" name="ChkHeadQuarters">
+                                        <label class="custom-control-label" for="ChkIsHeadQuarters_rNum"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </section>
+        </div>
+        <!-- Successfully company added-->
+        <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data hide" id="divSuccessMessage">
+            <!--Add class "hide" to hide the content -->
+            <section class="section-wrap">
+                <div class="jumbotron vertical-center">
+                    <div class="caption"><span id="spnSuccessMessage"></span></div>
+                    <button type="submit" class="btn btn-primary" id="btnCompanyList">My Company</button>
+                </div>
+            </section>           
+        </div>
+
+    </div>
+</div>

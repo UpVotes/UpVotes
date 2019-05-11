@@ -12,7 +12,47 @@
         window.open(baseAddress, '_blank')
         return false;
     }
+    function BindCompanyChart(companyFocusData, divid) {
+        var focusareas = new Array();
+        for (i = 0; i < companyFocusData.length; i++) { focusareas.push({ 'name': companyFocusData[i].FocusAreaName, 'data': [companyFocusData[i].FocusAreaPercentage] }); }
 
+        Highcharts.chart(divid, {
+            chart: {
+                type: 'bar',
+                backgroundColor: 'transparent'
+            },
+            exporting: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                alignTicks: true,
+                categories: [''],
+                visible: false
+            },
+            yAxis: {
+                visible: false
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '{series.name} Focus: <b>{point.percentage:.1f}%</b>',
+                default: ''
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: focusareas
+        });
+    }
     $(document).ready(function () {
         $(".Pagenumber").click(function () {
             if (this.className.indexOf("disabled") == -1) {
@@ -43,14 +83,223 @@
                 });
             }
         });
+        //Get Container width
+        var conWidth = $('.content-wrap .container').width();
 
-        $("#hdnCompanyNames")[0].value = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData)));
+        //Sticky header on scroll
+        var stickyOffset = $('.sticky-title').offset().top;
 
+        $(window).scroll(function () {
+            var sticky = $('.sticky-title'),
+                scroll = $(window).scrollTop();
+
+            if (scroll >= stickyOffset) {
+                sticky.addClass('fixed');
+                $('.list-head').css('width', conWidth);
+            }
+            else {
+                sticky.removeClass('fixed');
+            }
+        });
+        //Vote click animation
+        $(".curve").click(function () {
+            $(this).find('.vote').addClass('heartBeat animated');
+            setTimeout(function () {
+                $(".curve .vote").removeClass('heartBeat animated');
+            }, 1000);
+        });
+        $("#hdnCompanyNames")[0].value = decodeURIComponent(@Html.Raw(Json.Encode(Model.CompanyFocusData != null ? Model.CompanyFocusData : "")));            
+            
+        $(".chartList").each(function (index, value) {
+            //var data = $(this).val().replace(/FocusAreaName/g,'name').replace(/FocusAreaPercentage/g,'data')
+            BindCompanyChart(JSON.parse($(this).val()), $(this).attr('divchartid'));
+        });
     });
 </script>
 <script src="~/Scripts/UserScripts/CompanyVote.js"></script>
-
-<div class="fixed-for">
+<div class="sticky-title">
+    <div class="list-head">
+        <div class="head head1">Company Name</div>
+        <div class="head head2">Avg hourly rate</div>
+        <div class="head head3">Employees</div>
+        <div class="head head4">Reviews</div>
+        <div class="head head5">Location</div>
+        <div class="head head6">Contacts</div>
+    </div>
+</div>
+<div class="list-detail">
+    @foreach (var company in Model.CompanyList)
+    {
+        <input type="hidden" id="hdnCompanyNames" />
+        var i = 0;
+        i = i + 1;
+            <!-- List Data -->
+        <div class="list-data">
+            <div class="ribbon"><span>@company.Ranks</span></div>
+            <div class="curve half-circle" compid="@company.CompanyID" calledPage="L">
+                <div class="vote"><i class="fa fa-arrow-up"></i> <span>@company.NoOfVotes</span></div>
+            </div>
+            <div class="business" onclick="GetCompany('@company.CompanyName')">
+                <div class="logo">
+                    <img class="lazy" src="" data-src="/images/CompanyLogos/@company.LogoName" />
+                </div>
+                <div class="name">@company.CompanyName</div>
+            </div>
+            <div class="details">
+                <div class="data hour align-middle">
+                    <div class="parent">
+                        <div class="child">
+                            <div class="truncate">
+                                <small class="mobile-label">Avg hourly rate</small>
+                                @company.AveragHourlyRate
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data employee">
+                    <div class="parent">
+                        <div class="child">
+                            <div class="truncate">
+                                <small class="mobile-label">Employees</small>
+                                @company.TotalEmployees
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data ratings">
+                    <div class="parent">
+                        <div class="child">
+                            <!-- class="rating-1" for one star rating -->
+                            <!-- class="rating-2" for two star rating design handled in css -->
+                            <ul class="star-rate rating-@company.UserRating">
+                                <li><i class="fa fa-star rate"></i></li>
+                                <li><i class="fa fa-star rate"></i></li>
+                                <li><i class="fa fa-star rate"></i></li>
+                                <li><i class="fa fa-star rate"></i></li>
+                                <li><i class="fa fa-star rate"></i></li>
+                            </ul>
+                            <span class="rating-label">@company.UserRating.0/5.0 <a>@company.NoOfUsersRated users</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="data location">
+                    <div class="parent">
+                        <div class="child">
+                            <div class="truncate">
+                                <small class="mobile-label">Location</small>
+                                @company.City, @company.StateName, @company.CountryName
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="explore">
+                <div class="data website">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a onclick="GetCompany('@company.CompanyName')" class="btn btn-flat">
+                            <i class="fa fa-search"></i> Explore
+                        </a>
+                        <a href="@(company.URL+"?utm_medium=referral&utm_source=upvotes.co")" target="_blank" rel="nofollow" class="btn btn-primary">
+                            <i class="fa fa-external-link-alt"></i> Website
+                        </a>
+                    </div>
+                </div>
+                <div class="data contact">
+                    <div class="truncate">
+                        <div class="list mail">
+                            <i class="fa fa-envelope"></i>
+                            <a href="mailto:@company.Email" target="_blank">@company.Email</a>
+                        </div>
+                        <div class="list phone"><i class="fa fa-mobile mob-icon"></i> @company.PhoneNumber</div>
+                    </div>
+                </div>
+            </div>            
+            <div class="status">
+                <div class="track">
+                    <div id="@("FocusChart"+company.CompanyID)" class="line-chart"></div>
+                    @if (company.CompanyFocus != null && company.CompanyFocus.Count > 0)
+                    {   
+                        <input id="@("hdnChart"+company.CompanyID)" class="chartList" value='@Html.Raw(Json.Encode(company.CompanyFocus))' divchartid="@("FocusChart"+company.CompanyID)" type="hidden" />
+                    }
+                </div>
+                <span class="label">@(company.CompanyFocus.Where(x=>x.SubFocusAreaName != "").Select(x=>x.SubFocusAreaName).FirstOrDefault()) </span>
+            </div>
+        </div>
+    }
+    <!-- Pagenation -->
+    <div class="page-nav">
+        <ul class="pagination">
+    @for (int i = 0; i < Model.PageCount; i++)
+    {
+        if (i + 1 == 1)
+        {
+            <li class="@(Model.PageIndex == 1 ? "page-item first disabled FirstPage Pagenumber" : "page-item first FirstPage Pagenumber")" page="@(i+1)" >
+                <a class="page-link" href="#" aria-label="First">
+                    <span aria-hidden="true"><i class="fa fa-step-backward"></i></span>
+                    <span class="sr-only">First</span>
+                </a>
+            </li>
+            <li class="page-item first PreviousPage Pagenumber" page="@(Model.PageNumber == 1 ? 1 : Model.PageNumber-1)">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true"><i class="fa fa-caret-left"></i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+        }
+        if (i + 1 <= 5)
+        {
+            if (Model.PageCount >= 5)
+            {
+                if (i + 1 == 1)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber FirstPageindex" : "page-item Pagenumber Pageindex FirstPageindex")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+                else if (i + 1 == 5)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber LastPageindex" : "page-item Pagenumber Pageindex LastPageindex")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+                else
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber" : "page-item Pagenumber")" page="@(Model.PageIndex)"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+            }
+            else
+            {
+                if (i + 1 == 1)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber FirstPageindex" : "page-item Pagenumber FirstPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+                else if (i + 1 == Model.PageCount)
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber LastPageindex" : "page-item Pagenumber LastPageindex")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+                else
+                {
+                    <li class="@(Model.PageIndex == Model.PageNumber ? "page-item current active Pagenumber" : "page-item Pagenumber")" page="@(Model.PageIndex)" style="cursor:pointer;"><a class="page-link">@(Model.PageIndex)</a></li>
+                }
+            }
+        }
+        if (i + 1 == Model.PageCount)
+        {
+            <li class="page-item last NextPage Pagenumber" page="@(Model.PageNumber == Model.PageCount ? Model.PageCount : Model.PageNumber + 1)">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true"><i class="fa fa-caret-right"></i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            <li class="@(Model.PageNumber == Model.PageCount ? "page-item last disabled LastPage Pagenumber" : "page-item last LastPage Pagenumber")" page="@(Model.PageCount)">
+                <a class="page-link" href="#" aria-label="Last">
+                    <span aria-hidden="true"><i class="fa fa-step-forward"></i></span>
+                    <span class="sr-only">Last</span>
+                </a>
+            </li>                   
+        }
+        Model.PageIndex = Model.PageIndex + 1;
+    }       
+        </ul>
+    </div>
+</div>
+@*<div class="fixed-for">
 
     <div class="card-heading">
         <div class="head1">Company Name</div>
@@ -60,8 +309,6 @@
         <div class="head4">Reviews</div>
     </div>
 </div>
-
-
 @foreach (var company in Model.CompanyList)
 {
     <input type="hidden" id="hdnCompanyNames" />
@@ -73,7 +320,7 @@
             </p>
             <p class="company-complete-name" style="word-break: break-word;">
                 @*<span>@Html.ActionLink(company.CompanyName, "Company", "Company", new { companyID = company.CompanyID }, null) </span>*@
-                <span> @company.CompanyName </span>
+                @*<span> @company.CompanyName </span>
             </p>
         </div>
         <div class="block2">
@@ -122,8 +369,8 @@
         </div>
         <div class="ribbon"><span>@company.Ranks</span></div>
     </div>
-}
-<div class="paginate">
+}*@
+@*<div class="paginate">
 
     <nav aria-label="...">
         <ul class="pagination">
@@ -181,4 +428,4 @@
         </ul>
     </nav>
 
-</div>
+</div>*@

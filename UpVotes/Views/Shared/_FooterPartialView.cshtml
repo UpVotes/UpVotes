@@ -1,108 +1,193 @@
-﻿<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <ul class="categories">
-                    <li><a>CATEGORIES</a></li>
-                    <li><a href="/mobile-application-developers">Mobile App Developement </a></li>
-                    <li><a href="/web-development-companies">Web Developers</a></li>
-                    <li><a href="/web-design-companies">Web Designers </a></li>
-                    <li><a href="/digital-marketing-companies">Digital Marketing</a></li>
-                    <li><a href="/seo-companies">SEO </a></li>
-                    <li><a href="/software-development-companies">Custom Software Developers</a></li>
-                    <li><a href="/ui-ux-agencies">UI/UX Designers</a></li>
-                    <li><a href="/wearable-application-developers">Wearable App Developers</a></li>
-                    <li><a href="/ecommerce-developers">Ecommerce Developers</a></li>
-                    <li><a href="/social-media-marketing-companies">Social Media Agencies</a></li>
-                    <li><a href="/ppc-companies">PPC Agencies</a></li>
-                    <li><a href="/content-marketing-companies">Content Marketing Agencies</a></li>
-                    <li><a href="/iot-application-developers">IOT App Developers</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <ul class="about-us">
-                    <li><a>ABOUT US</a></li>
-                    <li><a href="#">Overview</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#" class="myLoginPopUp">Get Listed</a></li>
-                    <li><a href="#">Why Upvotes.io</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <ul class="resources">
-                    <li><a >RESOURCES</a></li>
-                    <li><a href="/mobile-application-developers">Mobile App Developement </a></li>
-                    <li><a href="/web-development-companies">Web Developers</a></li>
-                    <li><a href="/web-design-companies">Web Designers </a></li>
-                    <li><a href="/digital-marketing-companies">Digital Marketing</a></li>
-                    <li><a href="/seo-companies">SEO </a></li>
-                    <li><a href="/software-development-companies">Custom Software Developers</a></li>
-                    <li><a href="/ui-ux-agencies">UI/UX Designers</a></li>
-                    <li><a href="/wearable-application-developers">Wearable App Developers</a></li>
-                    <li><a href="/ecommerce-developers">Ecommerce Developers</a></li>
-                    <li><a href="/social-media-marketing-companies">Social Media Agencies</a></li>
-                    <li><a href="/ppc-companies">PPC Agencies</a></li>
-                    <li><a href="/content-marketing-companies">Content Marketing Agencies</a></li>
-                    <li><a href="/iot-application-developers">IOT App Developers</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <ul class="contact">
-                    <li><a>CONTACT</a></li>
-                    <li><a href="mailto:support@upvotes.co"><i class="fa fa-envelope-o font-awesome-styling" aria-hidden="true"></i>support@upvotes.co</a></li>
-                    @*<li><a href="#"><i class="fa fa-phone-square font-awesome-styling" aria-hidden="true"></i>+91 9008826876</a></li>*@
-                    <li class="footnote-heading">
-                        <a>Follow Us:</a>
-                    </li>
-                    <li>
-                            <ul class="social-media-icons">
-                                <li><a target="_blank" href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://twitter.com/upvotes_co"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://plus.google.com/b/113394703777804526159/113394703777804526159"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/upvotes.co/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row end-footer">
-            <ul class="privacy-links">
-                <li><a href="#">Terms Of Use</a></li>
-                <li><a href="/privacy-policy">Privacy Policy</a></li>
-                <li><a href="#">Trademarks</a></li>
-            </ul>
-            <p class="footnotes">Handcrafted by UpVote. Copyright &copy; 2017. All rights reserved</p>
-        </div>
+﻿@using System.Configuration
+@using UpVotes.BusinessEntities.Entities
 
-        @*<div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <h1>upvotes</h1>
-
-                    <div class="modal-content upvote-modals">
-
-                        <div class="modal-body">
-
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <footer class="footer teal-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xl-4 col-sm-12">
+                    <div class="single-footer-widget">
+                        <div class="logo">
+                            <a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()" class="navbar-brand">
+                                Upvotes
+                                <img src="~/images/upvotes-logo.png" alt="Upvotes" title="Upvotes">
+                            </a>
                         </div>
-
+                        <p class="caption">Upvotes is your community to finding the best B2B agencies, categorized by their areas of expertise.</p>
+                        <ul class="social">
+                            <li><a target="_blank" href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook-official"></i></a></li>
+                            <li><a target="_blank" href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin-square"></i></a></li>
+                            <li><a target="_blank" href="https://twitter.com/upvotes_co"><i class="fa fa-twitter-square"></i></a></li>
+                            <li><a target="_blank" href="https://plus.google.com/b/113394703777804526159/113394703777804526159"><i class="fa fa-google-plus-square"></i></a></li>
+                            <li><a target="_blank" href="https://www.instagram.com/upvotes.co/"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
                     </div>
-                    <p class="modal-tagline">Log in or sign up for upvote</p>
-                    <p class="modal-subtagline">Upvote is a place where experienced founders share advice to save each other time and money</p>
-                    <div class="modal-buttons">
-                        <button class="btn btn-info modal-buttons-twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with twitter</button>
-                        <button class="btn btn-info modal-buttons-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i>Log in with LinkedIn</button>
-                        <p>We will never post to either without your permission</p>
-                        <input type="text" placeholder="User Name" class="form-control" id="usr">
-                        <input type="Password" placeholder="Password" class="form-control" id="usr">
-                        <button class="btn btn-info modal-buttons-twitter login-modal">Log in</button>
-
-                    </div>
-
                 </div>
-            </div>*@
+                <div class="col col-xl-2 col-sm-6 col-12">
+                    <div class="single-footer-widget">
+                        <h6 class="title">About Us</h6>
+                        <ul>
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#" class="myLoginPopUp">Get Listed</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-xl-2 col-sm-6 col-12">
+                    <div class="single-footer-widget">
+                        <h6 class="title">Providers</h6>
+                        <ul>
+                            <li><a href="#">For Service Providers</a></li>
+                            <li><a href="#">For Software Providers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-xl-2 col-sm-6 col-12">
+                    <div class="single-footer-widget">
+                        <h6 class="title">Resources</h6>
+                        <ul>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Startups</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-xl-2 col-sm-6 col-12">
+                    <div class="single-footer-widget">
+                        <h6 class="title">Contact Us</h6>
+                        <ul>
+                            <li><a href="mailto:support@upvotes.co">support@upvotes.co</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <p class="copyright"> Handcrafted by Upvote.co Copyright &copy; 2019. All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
+    <div class="modal fade login" id="myModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Card Loader -->
+                <div id="ajax_loader" class="card-loader"></div><!-- If add "show" class loader will appear -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="bg-banner"></div>
+                <div class="modal-body">
+                    <div class="form-wrap">
+                        <div class="login-wrap">
+                            <h4 class="title-medium">User Account</h4>
+                            <ul class="social">
+                                <li class="label">Login with</li>
+                                <li><a id="btnlinkedin"><i class="fa fa-linkedin bg-dark-blue"></i></a></li>
+                                <li><a id="btnTwitter"><i class="fa fa-twitter bg-light-blue"></i></a></li>
+                            </ul>
+                            <p>Or Don't have an account? <span>Sign in with Upvotes Account</span></p>
+                            <label>Login with your assigned work e-mail address.</label>
+                            <form>
+                                <div class="form-group input-medium">
+                                    <input type="email" class="form-control input-txt" aria-describedby="emailHelp" id="txtWorkEmailId" placeholder="Work Email id">
+                                </div>
+                                <div class="form-group input-medium error">
+                                    <input type="password" class="form-control input-txt" id="txtPassword" placeholder="Password">
+                                    <span id="errValidWorkEmail" class="error-text" style="display:none;">
+                                        Enter valid Work Email ID & Password
+                                    </span>
+                                </div>
+                                <div class="action float-left">
+                                    <a id="btnForgetPass" class="float-left" href="#">Forgot password?</a>
+                                    <button type="button" id="btnLogin" class="btn btn-info btn-lg btn-blue btn-login float-right">login</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="pass-wrap hide">
+                            <h4 class="title-small">Can't sign in? <br>Forget your password ?</h4>
+                            <p>Enter your email address and will send password reset link.</p>
+                            <form>
+                                <div class="form-group input-medium">
+                                    <input type="email" class="form-control input-txt" id="txtloginEmailForget" aria-describedby="emailHelp" placeholder="Enter your email address">
+                                    <span id="errValidWorkEmail1" class="error-text" style="display:none;">
+                                        Enter valid Work Email ID
+                                    </span>
+                                    <div id="dvforgotpwd" style="display:none;">
+                                        <span class="success-text">
+                                            Your new password has been emailed to you.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="action float-left">
+                                    <button type="button" id="btnForgotPwd" class="btn btn-info btn-lg btn-blue btn-login">Send password</button>
+                                    <a id="btnBackLogin" class="float-right back" href="#">Back to login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="banner">
+                        <h4 class="title-large">Welcome.</h4>
+                        <p>Upvotes.co is the B2B community to help you find the top most Mobile App Development, Web Development, Software Development & eCommerce Development, Digital Marketing Agencies, SEO Companies across the globe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Session["UserObj"] != null)
+    {
+        UserEntity userObj = Session["UserObj"] as UserEntity;
+        if (userObj != null && (userObj.UserType == 1 || userObj.UserType == 4))
+        {
+            <div class="modal fade login" id="myModalChangePwd" tabindex="-1" role="dialog" aria-labelledby="ChangeModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <!-- Card Loader -->
+                        <div id="ajax_loaderchng" class="card-loader"></div><!-- If add "show" class loader will appear -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="bg-banner"></div>
+                        <div class="modal-body">
+                            <div class="form-wrap">
+                                <div class="login-wrap">
+                                    <h4 class="title-small">Change Password</h4>
+
+                                    <div class="form-group input-medium error">
+                                        <input type="password" class="form-control input-txt" id="txtCurrPassword" placeholder="Current Password">
+                                    </div>
+                                    <div class="form-group input-medium">
+                                        <input type="password" class="form-control input-txt" id="txtNewPassword" placeholder="New Password">
+                                    </div>
+                                    <div class="form-group input-medium">
+                                        <input type="password" class="form-control input-txt" id="txtConNewPassword" placeholder="Confirm Password">
+                                    </div>
+                                    <div>
+                                        <span id="errValidChangepwd" class="error-text"></span>
+                                        <div id="dvchangepwd" style="display:none;">
+                                            <span id="MsgChangePwd" class="success-text">
+                                            </span>
+                                        </div>
+                                    </div>                                    
+                                    <div class="action float-left">
+                                        <button id="btnChangePwd" class="btn btn-info btn-lg btn-blue btn-login float-right">Submit</button>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#btnChangePwd").click(function () {
+                                                if ($.ValidateChangePassword()) {
+                                                    $.ChangePassword($('#txtCurrPassword').val(), $('#txtNewPassword').val());
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="banner">
+                                <h4 class="title-large">Welcome.</h4>
+                                <p>Upvotes.co is the B2B community to help you find the top most Mobile App Development, Web Development, Software Development & eCommerce Development, Digital Marketing Agencies, SEO Companies across the globe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }

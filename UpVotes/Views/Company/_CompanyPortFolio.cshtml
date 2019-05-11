@@ -1,0 +1,39 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.CompanyPortFolioEntity>
+
+
+
+    @foreach (var portFolio in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-4 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="@portFolio.Title" data-caption="@portFolio.Description"
+               data-image="@portFolio.ImageURL"
+               data-target="#image-gallery">
+                <img class="img-thumbnail lazy" data-src="@portFolio.ImageURL" alt="">
+                <div class="info">
+                    <b class="truncate">@portFolio.Title</b>
+                    <p class="truncate">@portFolio.Description</p>
+                </div>
+            </a>
+        </div>
+    }
+
+    <!-- Open Modal -->
+    <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="pop-title" id="image-gallery-title"></div>
+                    <div class="pop-caption" id="image-gallery-caption"></div>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="image-gallery-image" class="img-responsive" src="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+

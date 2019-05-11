@@ -1,0 +1,38 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>
+@foreach (var item in Model)
+{
+<div class="review-list">
+    <div class="rev-rate">
+        <b class="user-name">@item.ReviewerFullName</b>
+        <div class="caption">
+            <span class="role">@item.ReviewerDesignation</span> |
+            <span class="brand-name">@item.ReviewerCompanyName</span>
+        </div>
+        <div class="rating-wrap">
+            <ul class="star-rate rating-@item.Rating">
+                <li><i class="fa fa-star rate"></i></li>
+                <li><i class="fa fa-star rate"></i></li>
+                <li><i class="fa fa-star rate"></i></li>
+                <li><i class="fa fa-star rate"></i></li>
+                <li><i class="fa fa-star rate"></i></li>
+            </ul>
+            <span class="rating-label"><span>@item.Rating.0/5.0</span></span>
+        </div>
+    </div>
+    <div class="rev-type">
+        <ul>
+            <li><span>Project name:</span> @item.ReviewerProjectName</li>
+            <li><span>Service category:</span> @item.FocusAreaName</li>
+        </ul>
+    </div>
+    <div class="rev-text">
+        <p>@item.FeedBack</p>
+    </div>
+    <div class="btn-group align-left">
+        @*<button type="submit" class="btn btn-sm flat-gray">Read more</button>*@
+        <button class="btn btn-sm flat-gray btn-split btnCompanyThankNote" TotalThanks=@item.NoOfThankNotes.ToString() CompanyID="@item.CompanyID" ReviewCompanyName='@item.CompanyName.Replace(" ", "-").ToLower()' CompanyReviewID=@item.CompanyReviewID.ToString()>
+            <i class="fa fa-thumbs-up"></i> Thank <span id='@("spn" + item.CompanyReviewID.ToString())'>@item.NoOfThankNotes</span>
+        </button>
+    </div>
+</div>
+}

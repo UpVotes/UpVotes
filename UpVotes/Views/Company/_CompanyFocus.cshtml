@@ -1,0 +1,125 @@
+﻿@model UpVotes.Models.CompanyViewModel
+
+<script type="text/javascript" lang="en">
+        $(function () {
+
+            var companyFocusData = @Html.Raw(Json.Encode(Model.PrimaryCompanyFocus));
+            if(companyFocusData!=null && companyFocusData.length > 0)
+            {
+                $.getCompanyFocus(companyFocusData,'dvPrimaryFocus');
+            }
+
+            var IndustrialFocusData = @Html.Raw(Json.Encode(Model.IndustialCompanyFocus));
+            if(IndustrialFocusData!=null && IndustrialFocusData.length > 0)
+            {
+                $.getCompanyFocus(IndustrialFocusData,'dvIndustrialFocus');
+            }
+
+            var ClientFocusData = @Html.Raw(Json.Encode(Model.CompanyClientFocus));
+            if(ClientFocusData!=null && ClientFocusData.length > 0)
+            {
+                $.getCompanyFocus(ClientFocusData,'dvClientFocus');
+            }
+
+            var subFocusnames = @Html.Raw(Json.Encode(Model.SubfocusNames));
+            var subFocusData = @Html.Raw(Json.Encode(Model.CompanySubFocus));
+            if(subFocusnames!=null && subFocusnames.length > 0)
+            {
+                $.each(subFocusnames, function( index, value ) {
+
+                    var subfocusareas = new Array();
+                    for(i=0;i<subFocusData.length;i++)
+                    {
+                        if(subFocusData[i].FocusAreaName == value)
+                        {
+                            subfocusareas.push({ 'name': subFocusData[i].SubFocusAreaName, 'data': [subFocusData[i].SubFocusAreaPercentage] });
+                        }
+                    }
+                    var subfocusdivid = value.replace(/ /g, '');
+                    $.getSubCompanyFocus(subfocusareas,subfocusdivid);
+                });
+            }
+        });
+</script>
+
+
+@foreach (var company in Model.CompanyList)
+{
+<section id="navFocus">
+    <div class="content">
+        <div class="title-wrap">
+            <h2 class="title-small">@company.CompanyName Focus</h2>
+        </div>
+        <div class="row focus-wrap">
+            <div class="col-lg-12">
+                @if (company.CompanyFocus != null && company.CompanyFocus.Count > 0)
+                {
+                    <div class="focus-section">
+                        <div class="title-wrap">
+                            <div class="title-xsmall">Primary Service Focus</div>
+                        </div>
+                        <div class="graph-wrap">
+                            <div id="dvPrimaryFocus" class="line-chart" style="height: 160px;"></div>
+                        </div>
+                    </div>
+                }
+                @if (company.SubfocusNames != null && company.SubfocusNames.Count > 0)
+                {
+                    <div class="focus-section">
+                        <!-- Carousal -->
+                        <div id="carouselControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < company.SubfocusNames.Count; i++)
+                                {
+                                    <div class="@(i == 0 ? "carousel-item active" : "carousel-item")">
+                                        <div class="title-wrap">
+                                            <div class="title-xsmall">@company.SubfocusNames[i].ToString()</div>
+                                        </div>
+                                        <div class="graph-wrap">
+                                            <div id="@company.SubfocusNames[i].Replace(" ", "").ToString()" class="line-chart" style="height: 160px;"></div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                            @if (company.SubfocusNames.Count > 1)
+                            {
+                                <a class="carousel-control-prev slide-prev" href="#carouselControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon arrow" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                                                <a class="carousel-control-next slide-next" href="#carouselControls" role="button" data-slide="next">
+                                                                    <span class="carousel-control-next-icon arrow" aria-hidden="true"></span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+                @if (company.IndustialCompanyFocus != null && company.IndustialCompanyFocus.Count > 0)
+                {
+                    <div class="focus-section">
+                        <div class="title-wrap">
+                            <div class="title-xsmall">Industrial Focus</div>
+                        </div>
+                        <div class="graph-wrap">
+                            <div id="dvIndustrialFocus" class="line-chart" style="height: 160px;"></div>
+                        </div>
+                    </div>
+                }
+                @if (company.CompanyClientFocus != null && company.CompanyClientFocus.Count > 0)
+                {
+                    <div class="focus-section">
+                        <div class="title-wrap">
+                            <div class="title-xsmall">Client Focus</div>
+                        </div>
+                        <div class="graph-wrap">
+                            <div id="dvClientFocus" class="line-chart" style="height: 160px;"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+}

@@ -1,73 +1,40 @@
 ﻿@model List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>
-<style>
-    .morecontent span {
-        display: none;
-    }
 
-    .morelink {
-        display: block;
-    }
 
-    .fa {
-        float: right;
-    }
-
-    .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        transform: translate(0, 0);
-    }
-</style>
-<script src="~/Scripts/UserScripts/CompanyReviews.js"></script>
-
-<div class="user-reviews-card-wrapper" id="Reviews-main">
-    @foreach (var companyReview in Model)
-    {
-        <div class="user-reviews-card">
-            <div class="fonder-profile">
-                <img src="@companyReview.UserProfilePicture">
-                <p class="founder-name">@companyReview.ReviewerFullName</p>
-                <p><span>@companyReview.ReviewerDesignation</span><span>@companyReview.ReviewerCompanyName</span></p>
-                <div>
-                    <ul class="ratings">
-                        @for (int i = 0; i < companyReview.Rating; i++)
-                        {
-                            <li><span class="rate" aria-hidden="true">★</span></li>
-                        }
-                        @for (int i = companyReview.Rating; i < 5; i++)
-                        {
-                            <li><span class="ratedisabled" aria-hidden="true">★</span></li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tech-used">
-                <p><span>Project Name:</span><span>@companyReview.ReviewerProjectName</span></p>
-                <p><span>Service category:</span><span>@companyReview.FocusAreaName</span></p>
-            </div>
-
-            <div class="tech-review">
-                <p>
-                    <span class="more">
-                        @companyReview.FeedBack
-                    </span>
-                </p>
-            </div>
-            <div class="review-major-btns">
-                <div class="input-group thankbutton">
-                    <button class="form-control" aria-label="Text input with segmented button dropdown" id="btnThankNote" CompanyReviewID=@companyReview.CompanyReviewID.ToString()><i class="fa fa-thumbs-up" aria-hidden="true"></i>Thank</button>
-                    <div class="input-group-btn">
-                        <span type="button" class="btn btn-default thankyou-adjust" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@companyReview.NoOfThankNotes</span>
+        @foreach (var companyReview in Model)
+        {
+            <div class="review-list">
+                <div class="rev-rate">
+                    <b class="user-name">@companyReview.ReviewerFullName</b>
+                    <div class="caption">
+                        <span class="role">@companyReview.ReviewerDesignation</span> |
+                        <span class="brand-name">@companyReview.ReviewerCompanyName</span>
+                    </div>
+                    <div class="rating-wrap">
+                        <ul class="star-rate rating-@companyReview.Rating">
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                            <li><i class="fa fa-star rate"></i></li>
+                        </ul>
+                        <span class="rating-label"><span>@companyReview.Rating.0/5.0</span></span>
                     </div>
                 </div>
+                <div class="rev-type">
+                    <ul>
+                        <li><span>Project name:</span> @companyReview.ReviewerProjectName</li>
+                        <li><span>Service category:</span> @companyReview.FocusAreaName</li>
+                    </ul>
+                </div>
+                <div class="rev-text">
+                    <p>@companyReview.FeedBack</p>
+                </div>
+                <div class="btn-group align-left">
+                    @*<button type="submit" class="btn btn-sm flat-gray">Read more</button>*@
+                    <button class="btn btn-sm flat-gray btn-split btnThankNote" CompanyReviewID=@companyReview.CompanyReviewID.ToString()>
+                        <i class="fa fa-thumbs-up"></i> Thank <span>@companyReview.NoOfThankNotes</span>
+                    </button>
+                </div>
             </div>
-        </div>
-    }
-</div>
-
-
+        }

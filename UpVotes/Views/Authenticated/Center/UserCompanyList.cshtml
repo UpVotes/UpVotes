@@ -1,0 +1,47 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@using UpVotes.BusinessEntities.Entities
+
+@{
+    ViewBag.Title = "My Company List";
+}
+
+@Scripts.Render("~/bundles/UserCompanyList")
+<!-- Company added list -->
+<div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+    <h2 class="title-small">Service Listing</h2>
+</div>
+@if (Model.IsAdmin)
+{
+    <div class="col text-center">
+        <button type="button" id="addAdminServiceProfile" class="btn btn-primary btn-md">Add Service Profile</button>
+    </div>
+    <div class="col">&nbsp;</div>
+}
+<div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table" id="companylist">
+    <!--Add class "hide" to hide the content -->
+    <section class="section-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Company ID</th>
+                    <th>Company Name</th>
+                    <th>User Verified</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CompanyEntity company in Model.CompanyList)
+                {
+                    <tr>
+                        <td><input type="hidden" id="hdn_@company.CompanyID" value="@company.CompanyID" /><span>@company.CompanyID</span></td>
+                        <td><span><a class="link" href="/profile/@company.CompanyName.Replace(" ","-").ToLower()">@company.CompanyName</a></span></td>
+                        <td><span>@company.IsUserVerified</span></td>
+                        <td><span>@(company.IsAdminApproved == "Yes" ? "Live" : "Not Approved")</span></td>
+                        <td><a class="link btnEditCompany" compname="@company.CompanyName">Edit</a> | <a class="link">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>

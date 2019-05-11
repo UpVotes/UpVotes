@@ -1,0 +1,139 @@
+﻿@using System.Configuration
+@model UpVotes.Models.OverviewNewsViewModel
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    <script>
+        function getSoftwareCompany(name, SoftwareOrCompany) {
+            if (SoftwareOrCompany == 1) {
+                window.open(window.location.origin + '/profile/' + encodeURI(name), '_blank');
+            }
+            else {
+                window.open(window.location.origin + '/software/' + encodeURI(name), '_blank');
+            }
+        }
+    </script>
+</head>
+
+<div class="detail-wrap news">
+    @foreach (var newsList in Model.OverviewNewsData)
+    {
+        if (newsList.isRelated == 0)
+        {
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Main banner begins -->
+                    <div class="main-banner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="banner-info">
+                                        <div class="title">@newsList.NewsTitle</div>
+                                        <div class="caption">
+                                            <b>Shared by:</b>
+                                            @if (newsList.CompanyOrSoftwareID != null)
+                                            {
+                                                <span style="cursor:pointer;" onclick="getSoftwareCompany('@newsList.SoftwareCompanyName.Replace(" ","-").ToLower()',@newsList.IsCompanySoftware)"> @newsList.SoftwareCompanyName</span>
+                                            }
+                                            else
+                                            {
+                                                <span> @newsList.SoftwareCompanyName</span>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Main banner ends -->
+                    <!-- Claim strip -->
+                    <div class="container-fluid status-strip text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="d-flex justify-content-between top-bar">                                        
+                                        <div class="result">Category - @newsList.categoryname</div>
+                                        <div class="share">Published Date: @newsList.CreatedDate</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Claim strip -->
+
+                    <div class="container content-wrap">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <section id="navOverview">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12">
+                                                <div class="about">
+                                                    <p>@Html.Raw(newsList.NewsDescription)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section id="navDemo">
+                                    <div class="content">
+                                        <div class="row demo-wrap">
+                                            <div class="col-xl-8 col-md-8">
+                                                @if (newsList.YoutubeURL != null)
+                                                {
+                                                    <iframe src="@newsList.YoutubeURL" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                }
+                                                else if (newsList.ImageName != null)
+                                                {
+                                                    <img src="/images/News/@newsList.ImageName" width="50%" />
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="col text-left view-more">
+                                            <a class="btn" href="@newsList.WebsiteURL" target="_blank" rel="nofollow">
+                                                <button class="btn btn-lg btn-blue">Read full post</button>
+                                            </a>
+                                            <button class="btn btn-link btn-md hide"><i class="fa fa-angle-double-left"></i>View more news</button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+    <div class="related-post">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="title-wrap">
+                        @foreach (var newsList in Model.OverviewNewsData)
+                        {
+                            if (newsList.isRelated == 0)
+                            {
+                                <h3 class="title-small t-border t-left">Related post in @newsList.categoryname</h3>
+                            }
+                        }
+                    </div>
+                    <ul class="related-list">
+                        @foreach (var relatednewsList in Model.OverviewNewsData)
+                        {
+                            if (relatednewsList.isRelated == 1)
+                            {
+                                <li><a href='/news/@relatednewsList.NewsTitle.Replace(" ", "-").ToLower()' target="_blank"><i class="fa fa-long-arrow-right"></i><span>@relatednewsList.NewsTitle</span></a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

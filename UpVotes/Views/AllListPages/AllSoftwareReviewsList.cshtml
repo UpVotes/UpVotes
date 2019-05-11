@@ -1,0 +1,93 @@
+﻿@model UpVotes.Models.SoftwareViewModel
+@{
+    ViewBag.Title = "Software Reviews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/AllListing")
+</head>
+@foreach (var software in Model.SoftwareList)
+{
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item title-capitalize active" aria-current="page">@software.SoftwareName Reviews</li>
+                    <li class="breadcrumb-item title-capitalize active" aria-current="page">Reviews</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
+    <div class="detail-wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Scrollspy menu -->
+                <div class="container content-wrap">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <section id="navReviews">
+                                <div class="content">
+                                    <div class="title-wrap">
+                                        <h1 class="title-small title-capitalize">@software.SoftwareName Reviews</h1>
+                                    </div>
+                                    <div class="row review-wrap">
+                                        <div class="col-lg-12">
+                                            @if (software.SoftwareReviews.Count > 0)
+                                            {
+                                                foreach (var softwareReview in software.SoftwareReviews)
+                                                {
+                                                    <div class="review-list">
+                                                        <div class="rev-rate">
+                                                            <b class="user-name">@softwareReview.ReviewerFullName</b>
+                                                            <div class="caption">
+                                                                <span class="role">@softwareReview.ReviewerDesignation</span> |
+                                                                <span class="brand-name">@softwareReview.ReviewerCompanyName</span>
+                                                            </div>
+                                                            <div class="rating-wrap">
+                                                                <ul class="star-rate rating-@softwareReview.Rating">
+                                                                    <li><i class="fa fa-star rate"></i></li>
+                                                                    <li><i class="fa fa-star rate"></i></li>
+                                                                    <li><i class="fa fa-star rate"></i></li>
+                                                                    <li><i class="fa fa-star rate"></i></li>
+                                                                    <li><i class="fa fa-star rate"></i></li>
+                                                                </ul>
+                                                                <span class="rating-label"><span>@softwareReview.Rating.0/5.0</span></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rev-type">
+                                                            <ul>
+                                                                <li><span>Project name:</span> @softwareReview.ReviewerProjectName</li>
+                                                                <li><span>Service category:</span> @softwareReview.ServiceCategoryName</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="rev-text">
+                                                            <p>@softwareReview.FeedBack</p>
+                                                        </div>
+                                                        <div class="btn-group align-left">
+                                                            @*<button type="submit" class="btn btn-sm flat-gray">Read more</button>*@
+                                                            <button class="btn btn-sm flat-gray btn-split btnSoftwareThankNote" TotalThanks=@softwareReview.NoOfThankNotes.ToString() ReviewSoftwareName='@software.SoftwareName.Replace(" ", "-").ToLower()' SoftwareReviewID=@softwareReview.SoftwareReviewID.ToString() SoftwareID="@softwareReview.SoftwareID">
+                                                                <i class="fa fa-thumbs-up"></i> Thank <span id='@("spn" + softwareReview.SoftwareReviewID.ToString())'>@softwareReview.NoOfThankNotes</span>
+                                                            </button>                                                            
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            <div class="col text-center load-more hide">
+                                                <button type="submit" class="btn btn-sm flat-gray">
+                                                    Load more reviews...
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

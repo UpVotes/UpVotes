@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using TweetSharp;
 using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
+using UpVotes.Utility;
 
 namespace UpVotes.Controllers
 {
@@ -25,42 +26,75 @@ namespace UpVotes.Controllers
             string[] myArray = state.Split('-');
             try
             {
-                TwitterService service = new TwitterService(key, secret);
-                OAuthAccessToken accesstoken = service.GetAccessToken(requesttoken, oauth_verifier);
-                service.AuthenticateWith(accesstoken.Token, accesstoken.TokenSecret);
-                VerifyCredentialsOptions option = new VerifyCredentialsOptions();
-                TwitterUser user = service.VerifyCredentials(option);
-                TwitterLinkedInLoginModel obj = new TwitterLinkedInLoginModel();
-                if (user != null)
+                if (oauth_token != null)
                 {
-                    string[] name = user.Name.Split(' ');
-                    if (name.Length > 1)
+                    TwitterService service = new TwitterService(key, secret);
+                    OAuthAccessToken accesstoken = service.GetAccessToken(requesttoken, oauth_verifier);
+                    service.AuthenticateWith(accesstoken.Token, accesstoken.TokenSecret);
+                    VerifyCredentialsOptions option = new VerifyCredentialsOptions();
+                    TwitterUser user = service.VerifyCredentials(option);
+                    TwitterLinkedInLoginModel obj = new TwitterLinkedInLoginModel();
+                    if (user != null)
                     {
-                        obj.firstName = name[0].ToString();
-                        obj.lastName = name[1].ToString();
+                        string[] name = user.Name.Split(' ');
+                        if (name.Length > 1)
+                        {
+                            obj.firstName = name[0].ToString();
+                            obj.lastName = name[1].ToString();
+                        }
+                        else
+                        {
+                            obj.firstName = name[0].ToString();
+                            obj.lastName = "";
+                        }
+
+                        obj.id = user.Id.ToString();
+                        obj.pictureUrl = user.ProfileImageUrlHttps;
+                        obj.publicProfileUrl = "https://twitter.com/" + user.ScreenName;
+                        obj.userType = 3;
+
+
+                        UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
+                        Session["UserObj"] = userObj;
+                        Session["UserID"] = userObj.UserID;
+                        string message = string.Empty;
+                        if (myArray[0] != "0")
+                        {
+                            if (myArray[1] == "C")
+                            {
+                                message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
+                                if (CacheHandler.Exists("TopVoteCompaniesList"))
+                                {
+                                    CacheHandler.Clear("TopVoteCompaniesList");
+                                }
+                                string compname = "";
+                                if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                                {
+                                    compname = Session["CompanyName"].ToString();
+                                }
+                                if (CacheHandler.Exists(compname))
+                                {
+                                    CacheHandler.Clear(compname);
+                                }
+                            }
+                            else if (myArray[1] == "N")
+                            {
+                                message = new Business.SoftwareService().VoteForSoftware(Convert.ToInt32(myArray[0]), userObj.UserID);
+                                string softwarename = "";
+                                if (!string.IsNullOrEmpty(Session["SoftwareName"].ToString()))
+                                {
+                                    softwarename = Session["SoftwareName"].ToString();
+                                }
+                                if (CacheHandler.Exists(softwarename))
+                                {
+                                    CacheHandler.Clear(softwarename);
+                                }
+                            }
+
+                        }
                     }
-                    else
-                    {
-                        obj.firstName = name[0].ToString();
-                        obj.lastName = "";
-                    }
-
-                    obj.id = user.Id.ToString();
-                    obj.pictureUrl = user.ProfileImageUrlHttps;
-                    obj.publicProfileUrl = "https://twitter.com/" + user.ScreenName;
-                    obj.userType = 3;
-
-
-                    UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
-                    Session["UserObj"] = userObj;
-                    Session["UserID"] = userObj.UserID;
-                    string message = string.Empty;
-                    if (myArray[0] != "0")
-                    {
-                        message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
-                    }
-
-                    if (myArray[1] == "H")
+                }
+                if (myArray[1] == "H")
                     {
                         return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
                     }
@@ -74,9 +108,17 @@ namespace UpVotes.Controllers
                     }
                     else if (myArray[1] == "U")
                     {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-profile");
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
                     }
-                }
+                    else if (myArray[1] == "S")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
+                    }
+                    else if (myArray[1] == "N")
+                    {
+                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
+                    }
+
                 return null;
 
                 // return RedirectToAction("HomePage", "Home");
@@ -94,7 +136,15 @@ namespace UpVotes.Controllers
             Session["UserID"] = null;
             Session["FocusAreaName"] = null;
             Session["CompanyName"] = null;
+            Session["SoftwareName"] = null;
+            Session["SoftwareCategory"] = null;
+            Session["UserDashboardInfo"] = null;
             return ConfigurationManager.AppSettings["WebBaseURL"].ToString();
+        }
+
+        public ActionResult GetFooterSection()
+        {
+            return PartialView("~/Views/Shared/_FooterPartialView.cshtml");
         }
 
         public ActionResult LinkedINcall()
@@ -169,12 +219,44 @@ namespace UpVotes.Controllers
                 TwitterLinkedInLoginModel obj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<TwitterLinkedInLoginModel>(response1.Content.ToString());
                 obj.userType = 2; //LinkedIn
                 UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
-                Session["UserObj"] = userObj;
-                Session["UserID"] = userObj.UserID;
-                string message = string.Empty;
-                if(myArray[0] != "0")
+                if (userObj != null)
                 {
-                    message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]) , userObj.UserID);
+                    Session["UserObj"] = userObj;
+                    Session["UserID"] = userObj.UserID;
+                    string message = string.Empty;
+                    if (myArray[0] != "0")
+                    {
+                        if (myArray[1] == "C")
+                        {
+                            message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
+                            if (CacheHandler.Exists("TopVoteCompaniesList"))
+                            {
+                                CacheHandler.Clear("TopVoteCompaniesList");
+                            }
+                            string compname = "";
+                            if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                            {
+                                compname = Session["CompanyName"].ToString();
+                            }
+                            if (CacheHandler.Exists(compname))
+                            {
+                                CacheHandler.Clear(compname);
+                            }
+                        }
+                        else if (myArray[1] == "N")
+                        {
+                            message = new Business.SoftwareService().VoteForSoftware(Convert.ToInt32(myArray[0]), userObj.UserID);
+                            string softwarename = "";
+                            if (!string.IsNullOrEmpty(Session["SoftwareName"].ToString()))
+                            {
+                                softwarename = Session["SoftwareName"].ToString();
+                            }
+                            if (CacheHandler.Exists(softwarename))
+                            {
+                                CacheHandler.Clear(softwarename);
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -196,9 +278,16 @@ namespace UpVotes.Controllers
             }
             else if (myArray[1] == "U")
             {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-profile");
+                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
             }
-
+            else if (myArray[1] == "S")
+            {
+                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
+            }
+            else if (myArray[1] == "N")
+            {
+                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
+            }
             return null;
         }
 
@@ -245,8 +334,25 @@ namespace UpVotes.Controllers
             int userID = Convert.ToInt32(Session["UserID"]);
             if (userID != 0)
             {
+                if (CacheHandler.Exists("TopVoteCompaniesList"))
+                {
+                    CacheHandler.Clear("TopVoteCompaniesList");
+                }
                 return new Business.CompanyService().VoteForCompany(companyID, userID);
             }else
+            {
+                return "0";
+            }
+        }
+
+        public string VoteForSoftware(int softwareID)
+        {
+            int userID = Convert.ToInt32(Session["UserID"]);
+            if (userID != 0)
+            {                
+                return new Business.SoftwareService().VoteForSoftware(softwareID, userID);
+            }
+            else
             {
                 return "0";
             }

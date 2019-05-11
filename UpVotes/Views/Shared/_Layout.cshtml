@@ -1,28 +1,35 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="zxx" class="no-js">
 
 <head>
-    <link rel="shortcut icon" type="image/png" href="~/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/png" href="~/images/Icons/favicon.ico" />
     <meta charset="utf-8">
     <meta name="p:domain_verify" content="40eaaa94315b4c0998044770dec18efb" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0" />
+    <meta name="author" content="Upvotes">
     <meta name="format-detection" content="telephone=no">
     <meta name="google-site-verification" content="kQT4CmtMn5b9zi_jvJNx4RYqiKLprtr5KhhE96bglCI" />
     <meta name="msvalidate.01" content="7DCB81CFD21B6465AA275F5F761E07AD" />
     <title>@ViewBag.Title</title>
+
     @Html.Raw(!string.IsNullOrEmpty(@ViewBag.MetaTag) ? @ViewBag.MetaTag : "")
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/wvr-styles.css" rel="stylesheet" />*@
+
+    <!--CSS Start-->
+    
+    @Styles.Render("~/Content/css")
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!--CSS End-->
+
+    <!--JS Start-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    @*<script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/media.js"></script>*@
-    @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/UserScripts/Common.js"></script>
-    @Styles.Render("~/Content/css")
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110945248-1"></script>
+    <!--JS End-->
+    @Scripts.Render("~/script/files")    
+    
     <link rel="apple-touch-icon" sizes="57x57" href="~/images/Icons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="~/images/Icons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="~/images/Icons/apple-icon-72x72.png">
@@ -40,20 +47,15 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    @*<script type="text/javascript" src="http://platform.linkedin.com/in.js">
-        api_key: 81emosqfu7h5el
-        authorize: true
-        credentials_cookie: true
-    </script>*@
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $.absoluteurl = function (url) {
                 var path = '@Request.ApplicationPath'
                 if (path == '/')
                     return url;
                 return path + url;
-            };            
+            };
         });
         $(function () {
             $('.smooth-scroll').click(function () {
@@ -63,49 +65,31 @@
                 return false;
             });
         });
+        $(function () {
+            $('.lazy').lazy();
+        });
+
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
+    
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110945248-1"></script>
     <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'UA-110945248-1');
-    </script>
-    <!-- Google Tag Manager -->
-    @*<script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-M4N2WWC');</script>*@
-    <!-- End Google Tag Manager -->
-    <script>
-    $(function() {
-        $('.lazy').lazy();
-    });
-    </script>
-
+        gtag('config', 'UA-110945248-1');
+    </script>  
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    @*<noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4N2WWC"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>*@
-    <!-- End Google Tag Manager (noscript) -->
+    
     @Html.Partial("_HeaderPartialView")
 
     <div class="body-content">
         @RenderBody()
     </div>
-
-    @Html.Partial("_FooterPartialView")
+    <div id="divfooter">
+        @Html.Partial("_FooterPartialView")
+        </div>
 
 </body>
 </html>

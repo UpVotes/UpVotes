@@ -230,7 +230,8 @@ namespace UpVotes.Controllers
                 metaTagObj = new CompanyService().GetCategoryMetaTags(urlFocusAreaName.Trim(), urlSubFocusAreaName.Trim());
                 CacheHandler.Add(metaTagObj, cachename);
             }
-            companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + Country;
+            companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + Country.ToUpper();
+            companyViewModel.CategoryReviewHeadLine = metaTagObj.Title.Replace(" in ", " ").ToUpper();
             companyViewModel.Title = headLine + metaTagObj.Title + Country + "- " + year + " | upvotes.co";
             companyViewModel.MetaTag = CategoryMetaTags(metaTagObj, Country);
         }
@@ -286,40 +287,72 @@ namespace UpVotes.Controllers
             }
         }
 
+        public string ThanksNoteForReview(int companyID, int companyReviewID, string compname)
+        {
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {                
+                if (CacheHandler.Exists(compname))
+                {
+                    CacheHandler.Clear(compname);
+                }
+                string message = new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+                return message;
+            }
+            else
+            {
+                return "Please login to provide thanks note.";
+            }
+        }
+
         public ActionResult GetUserReviews()
         {
-            string companyNames = Convert.ToString(Request.Params["companyName"]);
-            CompanyViewModel companyViewModel = null;
-            if (companyNames != string.Empty)
-            {
-                if (CacheHandler.Exists(companyNames + "reviews"))
-                {
-                    companyViewModel = new CompanyViewModel();
-                    CacheHandler.Get(companyNames + "reviews",out companyViewModel);
-                }
-                else
-                {
-                    companyViewModel = new CompanyViewModel();
-                    companyViewModel = new CompanyService().GetUserReviews(companyNames);
-                    CacheHandler.Add(companyViewModel, companyNames + "reviews");
-                }
-                if (companyViewModel != null && companyViewModel.CompanyList[0].CompanyReviews.Count > 0)
-                {
-                    return PartialView("~/Views/Company/_CompanyReviews.cshtml", companyViewModel.CompanyList[0].CompanyReviews);
-                }
-                else
-                {
-                    return Json("No reviews found.", JsonRequestBehavior.AllowGet);
-                }
+            int focusAreaID = 0;
+            if (Session["FocusAreaName"] != null)
+            { 
+                focusAreaID = new FocusAreaService().GetFocusAreaID(Session["FocusAreaName"].ToString());
             }
+            CompanyFilterEntity UserReviewObj = new CompanyFilterEntity
+            {
+                FocusAreaID = focusAreaID,
+                CompanyName = "",
+                PageNo = 1,
+                PageSize = 10
+            };
 
-            return PartialView("~/Views/Company/_CompanyReviews.cshtml", new List<UpVotes.BusinessEntities.Entities.CompanyReviewsEntity>());
+            CompanySoftwareUserReviews companyReViewModel = new CompanySoftwareUserReviews();
+            companyReViewModel = new CompanyService().GetUserReviewsForCompanyListingPage(UserReviewObj);
+
+            return PartialView("~/Views/CompanyList/_UsersReviewsList.cshtml", companyReViewModel);
+               
         }
 
-        public ActionResult GetCompanyNames()
+        [HttpPost]
+        public ActionResult GetUserReviews(string companyname, int PageSize)
         {
-            return PartialView("_UsersReviewsList", Convert.ToString(Session["CompanyNames"]));
+            int focusAreaID = 0;
+            if (Session["FocusAreaName"] != null)
+            {
+                focusAreaID = new FocusAreaService().GetFocusAreaID(Session["FocusAreaName"].ToString());
+            }
+            CompanyFilterEntity UserReviewObj = new CompanyFilterEntity
+            {
+                FocusAreaID = focusAreaID,
+                CompanyName = companyname,
+                PageNo = 1,
+                PageSize = PageSize
+            };
+
+            CompanySoftwareUserReviews companyReViewModel = new CompanySoftwareUserReviews();
+            companyReViewModel = new CompanyService().GetUserReviewsForCompanyListingPage(UserReviewObj);
+
+            return PartialView("~/Views/CompanyList/_UsersReviewsList.cshtml", companyReViewModel);
+
         }
+
+        //public ActionResult GetCompanyNames()
+        //{
+        //    return PartialView("_UsersReviewsList", Convert.ToString(Session["CompanyNames"]));
+        //}
 
         public ActionResult GetOverViewPage()
         {

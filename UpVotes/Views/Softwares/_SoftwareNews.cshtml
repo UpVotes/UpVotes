@@ -1,0 +1,28 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.OverviewNewsResponseEntity>
+
+
+
+@foreach (var newsList in Model)
+{
+        <div class="news-list">
+            <div class="news-logo">
+                <img title="@newsList.SoftwareCompanyName" class="lazy" data-src="/images/SoftwareLogos/@newsList.LogoName">
+            </div>
+            <div class="news-info">
+                <div class="title"><i class="fa fa-arrow-right"></i> @newsList.NewsTitle</div>
+                <p>@newsList.NewsDescription</p>
+            </div>
+            <div class="news-action">
+                <div class="date">Publish Date | @newsList.CreatedDate</div>
+                <div class="action">
+                    <button type="button" onclick='GetNews("@newsList.NewsTitle.Replace(" ", "-").ToLower()")' class="btn btn-sm btn-dblue">View full post</button>
+                </div>
+            </div>
+        </div>
+}
+        
+        @*<div class="col text-right view-more">
+            <span class="btn btn-link btn-sm">View more news</span>
+        </div>*@
+
+

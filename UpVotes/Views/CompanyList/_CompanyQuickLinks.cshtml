@@ -1,0 +1,369 @@
+﻿
+@if (string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()))
+{
+    if (Session["Country"] != null && Session["Country"].ToString() != "")
+    {
+        string location = Session["Country"].ToString().ToLower();
+        string focusAreaname = Session["FocusAreaName"].ToString().ToLower();
+        string focustext = "";
+        string anchortext = "";
+        string AllLocation = "boston chicago new-york austin atlanta orlando sunnyvale houston washington seattle san-francisco charlotte san-diego san-jose dulles los-angeles chennai ahmedabad noida minneapolis florida california massachusetts georgia illinois texas india united-states";
+        if (AllLocation.Contains(location))
+        {
+            switch (focusAreaname)
+            {
+                case "mobile-application-developers":
+                    focustext = "Mobile App Development Companies"; anchortext = "Mobile App Development Companies";
+                    break;
+                case "web-design-companies":
+                    focustext = "Web Design Agencies"; anchortext = "Web Design Companies";
+                    break;
+                case "web-development-companies":
+                    focustext = "Web Development Companies"; anchortext = "Web Development Companies";
+                    break;
+                case "ecommerce-developers":
+                    focustext = "Ecommerce Website Developers"; anchortext = "Ecommerce Website Developers";
+                    break;
+                case "wearable-application-developers":
+                    focustext = "Wearable App Developers"; anchortext = "Wearable App Developers";
+                    break;
+                case "ui-ux-agencies":
+                    focustext = "UI/UX Design Companies"; anchortext = "UI UX Design Agencies";
+                    break;
+                case "digital-marketing-companies":
+                    focustext = "Digital Marketing Companies"; anchortext = "Digital Marketing Agencies";
+                    break;
+                case "seo-companies":
+                    focustext = "SEO Agencies"; anchortext = "SEO Companies";
+                    break;
+                case "social-media-marketing-companies":
+                    focustext = "Social Media Marketing Companies"; anchortext = "Social Media Marketing Agencies";
+                    break;
+                case "ppc-companies":
+                    focustext = "PPC Agencies"; anchortext = "PPC Companies";
+                    break;
+                case "content-marketing-companies":
+                    focustext = "Content Marketing Companies"; anchortext = "Content Marketing Agencies";
+                    break;
+                case "software-development-companies":
+                    focustext = "Software Developers"; anchortext = "Custom Software Development";
+                    break;
+                case "iot-application-developers":
+                    focustext = "IoT App Development Companies"; anchortext = "IoT App Developers";
+                    break;
+            }
+            if (focustext != "")
+            {
+                <div class="service-list">
+                    <div class="title-wrap">
+                        <h3 class="title-medium t-border t-left">Choose More Service Providers in <span class="capitalize">@location.Replace("-", " ")</span></h3>
+                    </div>
+                    <table class="blackfont">
+                        <tr>
+                            <td><a href="/digital-marketing-companies">Top Digital Marketing Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/web-design-companies">Top Web Designers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/software-development-companies">Top Software Developement Companies in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/iot-application-developers">Top IOT Developement Companies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/web-development-companies">Top Web Developement Companies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/seo-companies">Top SEO Companies in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/ui-ux-agencies">Top UX/UI Designers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/mobile-application-developers">Top Mobile App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/ecommerce-developers">Top Ecommerce Developers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/wearable-application-developers">Top Wearable App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/ar-vr-application-development">Top AR VR Application Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/social-media-marketing-companies">Top Social Media Marketing Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/ppc-companies">Top PPC Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/content-marketing-companies">Top Content Marketing Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/graphic-designers">Top Graphic Designers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/chatbot-development">Top Chatbot App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/mobile-app-marketing-agencies">Top Mobile App Marketing Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/email-marketing-agencies">Top Email Marketing Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/sem-agencies">Top SEM Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/branding-agencies">Top Branding Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/pr-agencies">Top PR Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/digital-strategy-agencies">Top Digital Strategy Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/video-production-agencies">Top Video Production Agencies in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/web-development-companies/wordpress">Top Wordpress Devleopers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/web-development-companies/drupal">Top Drupal Devleopers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/web-development-companies/php">Top PHP Devleopers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/web-development-companies/joomla">Top Joomla Developers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/mobile-application-developers/android">Top Android App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/mobile-application-developers/iphone">Top iOS App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/mobile-application-developers/ipad">Top iPad App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/mobile-application-developers/hybrid">Top Hybrid App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/mobile-application-developers/windows">Top Windows App Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/ecommerce-developers/magento">Top Magento Developers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/ecommerce-developers/shopify">Top Shopify Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/ecommerce-developers/woocommerce">Top WooCommerce Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td><a href="/wearable-application-developers/apple-watch">Top Apple Watch Developers in <span>@location.Replace("-", " ")</span></a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/wearable-application-developers/android-watches">Top Android Watches Developers in <span>@location.Replace("-", " ")</span></a></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+                                        <div class="service-list">
+                                            <div class="title-wrap">
+                                                <h3 class="title-medium t-border t-left">Choose Top @focustext By Location</h3>
+                                            </div>
+                                            <table class="blackfont">
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/united-states">Top @anchortext in United States</a></td>
+                                                    <td><a href="/@focusAreaname/india">Top @anchortext in India</a></td>
+                                                    <td><a href="/@focusAreaname/boston">Top @anchortext in Boston</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/orlando">Top @anchortext in Orlando</a></td>
+                                                    <td><a href="/@focusAreaname/atlanta">Top @anchortext in Atlanta</a></td>
+                                                    <td><a href="/@focusAreaname/new-york">Top @anchortext in New York</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/chicago">Top @anchortext in Chicago</a></td>
+                                                    <td><a href="/@focusAreaname/sunnyvale">Top @anchortext in Sunnyvale</a></td>
+                                                    <td><a href="/@focusAreaname/houston">Top @anchortext in Houston</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/bethesda">Top @anchortext in Bethesda</a></td>
+                                                    <td><a href="/@focusAreaname/washington">Top @anchortext in Washington</a></td>
+                                                    <td><a href="/@focusAreaname/seattle">Top @anchortext in Seattle</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/san-francisco">Top @anchortext in San Francisco</a></td>
+                                                    <td><a href="/@focusAreaname/charlotte">Top @anchortext in Charlotte</a></td>
+                                                    <td><a href="/@focusAreaname/san-diego">Top @anchortext in San Diego</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/san-jose">Top @anchortext in San Jose</a></td>
+                                                    <td><a href="/@focusAreaname/dulles">Top @anchortext in Dulles</a></td>
+                                                    <td><a href="/@focusAreaname/los-angeles">Top @anchortext in Los Angeles</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/chennai">Top @anchortext in Chennai</a></td>
+                                                    <td><a href="/@focusAreaname/ahmedabad">Top @anchortext in Ahmedabad</a></td>
+                                                    <td><a href="/@focusAreaname/bangalore">Top @anchortext in Bangalore</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/noida">Top @anchortext in Noida</a></td>
+                                                    <td><a href="/@focusAreaname/minneapolis">Top @anchortext in Minneapolis</a></td>
+                                                    <td><a href="/@focusAreaname/florida">Top @anchortext in Florida</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/california">Top @anchortext in California</a></td>
+                                                    <td><a href="/@focusAreaname/massachusetts">Top @anchortext in Massachusetts</a></td>
+                                                    <td><a href="/@focusAreaname/georgia">Top @anchortext in Georgia</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/@focusAreaname/illinois">Top @anchortext in Illinois</a></td>
+                                                    <td><a href="/@focusAreaname/texas">Top @anchortext in Texas</a></td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+            }
+        }
+    }
+    else
+    {
+        string focusAreaname = Session["FocusAreaName"].ToString().ToLower();
+        string focustext = "";
+        string anchortext = "";
+        switch (focusAreaname)
+        {
+            case "mobile-application-developers":
+                focustext = "Mobile App Development Companies"; anchortext = "Mobile App Development Companies";
+                break;
+            case "web-design-companies":
+                focustext = "Web Design Agencies"; anchortext = "Web Design Companies";
+                break;
+            case "web-development-companies":
+                focustext = "Web Development Companies"; anchortext = "Web Development Companies";
+                break;
+            case "ecommerce-developers":
+                focustext = "Ecommerce Website Developers"; anchortext = "Ecommerce Website Developers";
+                break;
+            case "wearable-application-developers":
+                focustext = "Wearable App Developers"; anchortext = "Wearable App Developers";
+                break;
+            case "ui-ux-agencies":
+                focustext = "UI/UX Design Companies"; anchortext = "UI UX Design Agencies";
+                break;
+            case "digital-marketing-companies":
+                focustext = "Digital Marketing Companies"; anchortext = "Digital Marketing Agencies";
+                break;
+            case "seo-companies":
+                focustext = "SEO Agencies"; anchortext = "SEO Companies";
+                break;
+            case "social-media-marketing-companies":
+                focustext = "Social Media Marketing Companies"; anchortext = "Social Media Marketing Agencies";
+                break;
+            case "ppc-companies":
+                focustext = "PPC Agencies"; anchortext = "PPC Companies";
+                break;
+            case "content-marketing-companies":
+                focustext = "Content Marketing Companies"; anchortext = "Content Marketing Agencies";
+                break;
+            case "software-development-companies":
+                focustext = "Software Developers"; anchortext = "Custom Software Development";
+                break;
+            case "iot-application-developers":
+                focustext = "IoT App Development Companies"; anchortext = "IoT App Developers";
+                break;
+        }
+        if (focustext != "")
+        {
+            <div class="service-list">
+                <div class="title-wrap">
+                    <h3 class="title-medium t-border t-left">Choose Top @focustext By Location</h3>
+                </div>
+                <table class="blackfont">
+                    <tr>
+                        <td><a href="/@focusAreaname/united-states">Top @anchortext in United States</a></td>
+                        <td><a href="/@focusAreaname/india">Top @anchortext in India</a></td>
+                        <td><a href="/@focusAreaname/boston">Top @anchortext in Boston</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/orlando">Top @anchortext in Orlando</a></td>
+                        <td><a href="/@focusAreaname/atlanta">Top @anchortext in Atlanta</a></td>
+                        <td><a href="/@focusAreaname/new-york">Top @anchortext in New York</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/chicago">Top @anchortext in Chicago</a></td>
+                        <td><a href="/@focusAreaname/sunnyvale">Top @anchortext in Sunnyvale</a></td>
+                        <td><a href="/@focusAreaname/houston">Top @anchortext in Houston</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/bethesda">Top @anchortext in Bethesda</a></td>
+                        <td><a href="/@focusAreaname/washington">Top @anchortext in Washington</a></td>
+                        <td><a href="/@focusAreaname/seattle">Top @anchortext in Seattle</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/san-francisco">Top @anchortext in San Francisco</a></td>
+                        <td><a href="/@focusAreaname/charlotte">Top @anchortext in Charlotte</a></td>
+                        <td><a href="/@focusAreaname/san-diego">Top @anchortext in San Diego</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/san-jose">Top @anchortext in San Jose</a></td>
+                        <td><a href="/@focusAreaname/dulles">Top @anchortext in Dulles</a></td>
+                        <td><a href="/@focusAreaname/los-angeles">Top @anchortext in Los Angeles</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/chennai">Top @anchortext in Chennai</a></td>
+                        <td><a href="/@focusAreaname/ahmedabad">Top @anchortext in Ahmedabad</a></td>
+                        <td><a href="/@focusAreaname/bangalore">Top @anchortext in Bangalore</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/noida">Top @anchortext in Noida</a></td>
+                        <td><a href="/@focusAreaname/minneapolis">Top @anchortext in Minneapolis</a></td>
+                        <td><a href="/@focusAreaname/florida">Top @anchortext in Florida</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/california">Top @anchortext in California</a></td>
+                        <td><a href="/@focusAreaname/massachusetts">Top @anchortext in Massachusetts</a></td>
+                        <td><a href="/@focusAreaname/georgia">Top @anchortext in Georgia</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/@focusAreaname/illinois">Top @anchortext in Illinois</a></td>
+                        <td><a href="/@focusAreaname/texas">Top @anchortext in Texas</a></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+                                <div class="service-list">
+                                    <div class="title-wrap">
+                                        <h3 class="title-medium t-border t-left">Choose More Service Providers</h3>
+                                    </div>
+                                    <table class="blackfont">
+                                        <tr>
+                                            <td><a href="/digital-marketing-companies">Top Digital Marketing Agencies</a></td>
+                                            <td><a href="/web-design-companies">Top Web Designers</a></td>
+                                            <td><a href="/software-development-companies">Top Software Developement Companies</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/iot-application-developers">Top IOT Developement Companies</a></td>
+                                            <td><a href="/web-development-companies">Top Web Developement Companies</a></td>
+                                            <td><a href="/seo-companies">Top SEO Companies</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/ui-ux-agencies">Top UX/UI Designers</a></td>
+                                            <td><a href="/mobile-application-developers">Top Mobile App Developers</a></td>
+                                            <td><a href="/ecommerce-developers">Top Ecommerce Developers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/wearable-application-developers">Top Wearable App Developers</a></td>
+                                            <td><a href="/ar-vr-application-development">Top AR VR Application Developers</a></td>
+                                            <td><a href="/social-media-marketing-companies">Top Social Media Marketing Agencies</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/ppc-companies">Top PPC Agencies</a></td>
+                                            <td><a href="/content-marketing-companies">Top Content Marketing Agencies</a></td>
+                                            <td><a href="/graphic-designers">Top Graphic Designers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/chatbot-development">Top Chatbot App Developers</a></td>
+                                            <td><a href="/mobile-app-marketing-agencies">Top Mobile App Marketing Agencies</a></td>
+                                            <td><a href="/email-marketing-agencies">Top Email Marketing Agencies</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/sem-agencies">Top SEM Agencies</a></td>
+                                            <td><a href="/branding-agencies">Top Branding Agencies</a></td>
+                                            <td><a href="/pr-agencies">Top PR Agencies</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/digital-strategy-agencies">Top Digital Strategy Agencies</a></td>
+                                            <td><a href="/video-production-agencies">Top Video Production Agencies</a></td>
+                                            <td><a href="/web-development-companies/wordpress">Top Wordpress Devleopers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/web-development-companies/drupal">Top Drupal Devleopers</a></td>
+                                            <td><a href="/web-development-companies/php">Top PHP Devleopers</a></td>
+                                            <td><a href="/web-development-companies/joomla">Top Joomla Developers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/mobile-application-developers/android">Top Android App Developers</a></td>
+                                            <td><a href="/mobile-application-developers/iphone">Top iOS App Developers</a></td>
+                                            <td><a href="/mobile-application-developers/ipad">Top iPad App Developers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/mobile-application-developers/hybrid">Top Hybrid App Developers</a></td>
+                                            <td><a href="/mobile-application-developers/windows">Top Windows App Developers</a></td>
+                                            <td><a href="/ecommerce-developers/magento">Top Magento Developers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/ecommerce-developers/shopify">Top Shopify Developers</a></td>
+                                            <td><a href="/ecommerce-developers/woocommerce">Top WooCommerce Developers</a></td>
+                                            <td><a href="/wearable-application-developers/apple-watch">Top Apple Watch Developers</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="/wearable-application-developers/android-watches">Top Android Watches Developers</a></td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </div>
+        }
+    }
+}

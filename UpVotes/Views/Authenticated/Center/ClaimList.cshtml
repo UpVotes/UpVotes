@@ -1,0 +1,109 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@using UpVotes.BusinessEntities.Entities
+
+@{
+    ViewBag.Title = "Claim List";
+}
+@if (Model.IsAdmin)
+{
+    @Scripts.Render("~/bundles/claimlist")
+        <!-- add service profile section -->
+        <div class="row">
+            <div class="col-xl-12 col-md-12 col-sm-12 data-wrap table-responsive-xl data-table">
+                <div class="title-wrap">
+                    <h2 class="title-small">Claim Listing</h2>
+                    </div>
+                <div class="tab-wrap">
+                    <!-- company service listings tabs -->
+                            <div class="tab-wrap">
+                                <nav>
+                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" data-toggle="tab" href="#divServiceClaimListing">
+                                            Service Claim
+                                            <div class="arrow-up"></div>
+                                        </a>
+                                        <a class="nav-item nav-link" data-toggle="tab" href="#divClaimSoftwareListing">
+                                            Software Claim
+                                            <div class="arrow-up"></div>
+                                        </a>
+                                    </div>
+                                </nav>
+                                
+                                    
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active show" id="divServiceClaimListing">
+                                            <div class="table-wrap" id="claimlist">                                                
+                                                    <!--Add class "hide" to hide the content -->                                                    
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><div>Company Name</div></th>
+                                                                    <th><div>Url</div></th>
+                                                                    <th><div>Domain</div></th>
+                                                                    <th><div>Work Email</div></th>
+                                                                    <th><div>User Verified</div></th>
+                                                                    <th><div class="comment">Rejection Comment</div></th>
+                                                                    <th><div class="action">Action</div></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (ClaimInfoDetail claim in Model.ClaimList)
+                                                                {
+                                                                    if (!claim.IsSoftware)
+                                                                    {
+                                                                        <tr id="trclaimListing_@claim.ClaimListingID">
+                                                                            <td><div><a href="@claim.UpvotesURL.ToLower()" class="link" target="_blank">@claim.CompanyName</a></div></td>
+                                                                            <td><div><span>@claim.URL</span></div></td>
+                                                                            <td><div><span>@claim.CompanyDomain</span></div></td>
+                                                                            <td><div><span>@claim.WorkEmail</span></div></td>
+                                                                            <td><div><span>@claim.IsUserApproved</span></div></td>
+                                                                            <td><div><textarea class="form-control" rows="3" id="txtRejectionComment_@claim.ClaimListingID"></textarea></div></td>
+                                                                            <td><div><a class="link ClaimApprove" category="company" id="btnApprove_@claim.ClaimListingID" claimlistingID="@claim.ClaimListingID" companyName="@claim.CompanyName" companyID="@claim.CompanyID" email="@claim.WorkEmail">Approve</a> | <a class="link claimReject" id="btnReject_@claim.ClaimListingID" claimlistingID="@claim.ClaimListingID" category="company" companyName="@claim.CompanyName" companyID="@claim.CompanyID" email="@claim.WorkEmail">Reject</a></div></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>                                                    
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="divClaimSoftwareListing"> 
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><div>Software Name</div></th>
+                                                                    <th><div>Url</div></th>
+                                                                    <th><div>Domain</div></th>
+                                                                    <th><div>Work Email</div></th>
+                                                                    <th><div>User Verified</div></th>
+                                                                    <th><div class="comment">Rejection Comment</div></th>
+                                                                    <th><div class="action">Action</div></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (ClaimInfoDetail claim in Model.ClaimList)
+                                                                {
+                                                                    if (claim.IsSoftware)
+                                                                    {
+                                                                        <tr id="trclaimListing_@claim.ClaimListingID">
+                                                                            <td><div><a href="@claim.UpvotesURL.ToLower()" class="link" target="_blank">@claim.CompanyName</a></div></td>
+                                                                            <td><div><span>@claim.URL</span></div></td>
+                                                                            <td><div><span>@claim.CompanyDomain</span></div></td>
+                                                                            <td><div><span>@claim.WorkEmail</span></div></td>
+                                                                            <td><div><span>@claim.IsUserApproved</span></div></td>
+                                                                            <td><div><textarea class="form-control" rows="3" id="txtRejectionComment_@claim.ClaimListingID"></textarea></div></td>
+                                                                            <td><div><a class="link ClaimApprove" category="software" id="btnApprove_@claim.ClaimListingID" claimlistingID="@claim.ClaimListingID" companyName="@claim.CompanyName" companyID="@claim.CompanyID" email="@claim.WorkEmail">Approve</a> | <a class="link claimReject" id="btnReject_@claim.ClaimListingID" category="software" claimlistingID="@claim.ClaimListingID" companyName="@claim.CompanyName" companyID="@claim.CompanyID" email="@claim.WorkEmail">Reject</a></div></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>                                                    
+                                        </div>
+                                    </div>
+                                
+                            </div>
+
+
+                    </div>
+                </div>
+        </div>    
+}

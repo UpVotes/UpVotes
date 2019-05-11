@@ -8,6 +8,8 @@ namespace UpVotes
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //bundles.Clear();
+            //bundles.ResetAll();
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/media.js"));
@@ -20,30 +22,71 @@ namespace UpVotes
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/script/files").Include(
+                      "~/Scripts/umd/popper.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/media.js",
+                      "~/Scripts/UserScripts/Common.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css",
+                    "~/Content/header-footer.css",
+                    "~/Content/common.css"));
+
+            bundles.Add(new StyleBundle("~/Content/detail").Include("~/Content/details.css"));
+            bundles.Add(new ScriptBundle("~/bundles/AllListing").Include("~/Scripts/UserScripts/AllListPages.js"));
+
+            bundles.Add(new StyleBundle("~/Content/Anews").Include("~/Content/text-editor.css"));
+            bundles.Add(new ScriptBundle("~/bundles/Anews").Include("~/Scripts/text-editor.js", "~/Scripts/UserScripts/News.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/claimlist").Include("~/Scripts/UserScripts/UserCompanyList.js"));
+
+            bundles.Add(new StyleBundle("~/Content/UserCompany").Include("~/Content/text-editor.css"));
+            bundles.Add(new ScriptBundle("~/bundles/UserCompany").Include("~/Scripts/text-editor.js", "~/Scripts/UserScripts/UserCompanyList.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/UserCompanyList").Include("~/Scripts/UserScripts/UserCompanyList.js"));
+
+            bundles.Add(new StyleBundle("~/Content/UserDashboard").Include("~/Content/dashboard.css"));
+            bundles.Add(new ScriptBundle("~/bundles/UserDashboard").Include("~/Scripts/UserScripts/Dashboard.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/review").Include("~/Scripts/UserScripts/SubmitReview.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/CompanyProfiles").Include(
+                      "~/Scripts/highcharts.js",
+                      "~/Scripts/UserScripts/Company.js",
+                      "~/Scripts/UserScripts/CompanyVote.min.js"));
+            
+            bundles.Add(new StyleBundle("~/Content/CompList").Include("~/Content/animation.css", "~/Content/listing.css"));
+            bundles.Add(new ScriptBundle("~/bundles/CompList").Include(
+                      "~/Scripts/highcharts.js",
+                      "~/Scripts/UserScripts/CompanyList.js"));
+
+            bundles.Add(new StyleBundle("~/Content/Homecss").Include("~/Content/owl.carousel.css", "~/Content/home.css"));
+            bundles.Add(new ScriptBundle("~/bundles/homejs").Include("~/Scripts/owl.carousel.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/login").Include("~/Scripts/UserScripts/Login.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/softlist").Include("~/Scripts/UserScripts/SoftwareList.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/software").Include("~/Scripts/UserScripts/Software.js"));
+
+
+
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
                       "~/Scripts/UserScripts/Quotation.min.js"));
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/bootstrap.css",
-            //          "~/Content/bootstrap-theme.min.css",
-            //          "~/Content/wvr - styles.css",
-            //          "~/Content/site.css"));
-            BundleTable.Bundles.UseCdn = true;
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/wvr-styles.css"));            
-            bundles.Add(new StyleBundle("~/Content/Homecss").Include("~/Content/home-design.css"));
+            
+            //BundleTable.Bundles.UseCdn = true;
+
+                       
+            
+
             bundles.Add(new StyleBundle("~/Content/Quotationcss").Include("~/Content/Quotation.css"));
             bundles.Add(new StyleBundle("~/Content/Companycss").Include("~/Content/Company.css"));
-            bundles.Add(new ScriptBundle("~/bundles/CompanyProfile").Include(
+            bundles.Add(new ScriptBundle("~/bundles/CompanyProfiles").Include(
                       "~/Scripts/highcharts.js",
-                      "~/Scripts/UserScripts/Company.min.js",
+                      "~/Scripts/UserScripts/Company.js",
                       "~/Scripts/UserScripts/CompanyVote.min.js"));
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/media.js"));
+            
 
             BundleTable.EnableOptimizations = true;
         }

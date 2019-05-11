@@ -17,13 +17,123 @@ namespace UpVotes.Controllers
         /// Method to return respective view for the controller
         /// </summary>
         /// <returns>Returns view along with the attached model if any</returns>
-        public ActionResult UserCompanyList()
+        //public ActionResult UserCompanyList()
+        //{
+        //    int userID = Convert.ToInt32(Session["UserID"]);
+        //    CompanyViewModel companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
+        //    Session["CompanyViewModel"] = companyViewModel;
+        //    Session["calledPage"] = "U";
+        //    return View(companyViewModel);
+        //}
+
+        public ActionResult UserDashboard()
+        {
+            int userID = Convert.ToInt32(Session["UserID"]);            
+            Session["calledPage"] = "U";
+            if (userID > 0)
+            {
+                UserService userService = new UserService();
+                UserEntity userobj = new UserEntity();
+                userobj.UserID = userID;
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = userService.UserDashboardInfo(userobj);
+                dashboardObj.section = "";
+                if (Request.QueryString["section"] != null)
+                {
+                    dashboardObj.section = Request.QueryString["section"].ToString();
+                }
+                Session["UserDashboardInfo"] = dashboardObj;                
+                return View("~/Views/Authenticated/Dashboard/UserDashboard.cshtml", dashboardObj);
+            }
+            else
+            {
+                return RedirectToAction("HomePage", "Home");
+            }
+        }
+
+        public ActionResult UserCompany(string companyName = "")
         {
             int userID = Convert.ToInt32(Session["UserID"]);
-            CompanyViewModel companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
-            Session["CompanyViewModel"] = companyViewModel;
-            Session["calledPage"] = "U";
-            return View(companyViewModel);
+            CompanyViewModel companyViewModel = null;
+            //if (Session["CompanyViewModel"] != null)
+            //{
+            //    companyViewModel = (CompanyViewModel)Session["CompanyViewModel"];
+            //}
+            //else
+            //{
+            companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
+            //}
+
+            if (companyViewModel.CompanyList.Count > 0)
+            {
+                companyViewModel.IsAdmin= (Session["UserObj"] as UserEntity).UserType == 4 ? true : false;
+                return PartialView("~/Views/Authenticated/Center/UserCompanyList.cshtml", companyViewModel);
+            }
+            else
+            {
+                CompanyEntity newCompany = new CompanyEntity
+                {
+                    CompanyName = companyName,
+                    TotalEmployees = "0",
+                    AveragHourlyRate = "0",
+                    CreatedBy = companyName != string.Empty ? companyViewModel.CompanyList.Where(a => a.CompanyName.Trim().ToUpper() == companyName.Trim().ToUpper()).Select(a => a.CreatedBy).FirstOrDefault() : Convert.ToInt32(Session["UserID"]),
+                    IsAdminUser = (Session["UserObj"] as UserEntity).UserType == 4 ? true : false,
+                    CompanyBranches = new List<CompanyBranchEntity>
+                {
+                    new CompanyBranchEntity()
+                }
+                };
+
+                if (companyViewModel.CompanyList.Count > 0)
+                {
+                    companyViewModel.CompanyList = new List<CompanyEntity>();
+                }
+
+                companyViewModel.CompanyList.Add(newCompany);
+
+                return PartialView("~/Views/Authenticated/Center/UserCompany.cshtml", companyViewModel);
+            }
+            
+        }
+
+        public ActionResult GetClaimListings()
+        {
+            int userID = Convert.ToInt32(Session["UserID"]);
+            CompanyViewModel companyViewModel = null;
+            
+            companyViewModel = new CompanyService().GetClaimListingsForApproval(userID);
+            companyViewModel.IsAdmin = (Session["UserObj"] as UserEntity).UserType == 4 ? true : false;
+
+            return PartialView("~/Views/Authenticated/Center/ClaimList.cshtml", companyViewModel);
+        }
+
+        public ActionResult CreateNewCompanyAdmin()
+        {
+            int userID = Convert.ToInt32(Session["UserID"]);
+            CompanyViewModel companyViewModel = null;
+            
+            companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
+                CompanyEntity newCompany = new CompanyEntity
+                {
+                    CompanyName = "",
+                    TotalEmployees = "0",
+                    AveragHourlyRate = "0",
+                    CreatedBy = Convert.ToInt32(Session["UserID"]),
+                    IsAdminUser = (Session["UserObj"] as UserEntity).UserType == 4 ? true : false,
+                    CompanyBranches = new List<CompanyBranchEntity>
+                {
+                    new CompanyBranchEntity()
+                }
+                };
+
+                if (companyViewModel.CompanyList.Count > 0)
+                {
+                    companyViewModel.CompanyList = new List<CompanyEntity>();
+                }
+
+                companyViewModel.CompanyList.Add(newCompany);
+
+                return PartialView("~/Views/Authenticated/Center/UserCompany.cshtml", companyViewModel);
         }
 
         /// <summary>
@@ -31,30 +141,30 @@ namespace UpVotes.Controllers
         /// </summary>
         /// <param name="companyName">Passing company Name. if empty get all compaies created by respective user else get corresponding company.</param>
         /// <returns>Returns view along with the empty company model.</returns>
-        public ActionResult UserCompany(string companyName = "")
+        public ActionResult GetUserCompanyDetail(string companyName = "")
         {
             int userID = Convert.ToInt32(Session["UserID"]);
             CompanyViewModel companyViewModel = null;
             if (Session["CompanyViewModel"] != null)
             {
-                companyViewModel = (CompanyViewModel)Session["CompanyViewModel"];                              
+                companyViewModel = (CompanyViewModel)Session["CompanyViewModel"];
             }
             else
             {
                 companyViewModel = new CompanyService().GetUserCompanyies(userID, string.Empty);
             }
-            
+
             CompanyEntity newCompany = new CompanyEntity
             {
                 CompanyName = companyName,
                 TotalEmployees = "0",
                 AveragHourlyRate = "0",
-                CreatedBy = companyName != string.Empty ? companyViewModel.CompanyList.Where(a=>a.CompanyName.Trim().ToUpper() == companyName.Trim().ToUpper()).Select(a=>a.CreatedBy).FirstOrDefault() : Convert.ToInt32(Session["UserID"]),
+                CreatedBy = companyName != string.Empty ? companyViewModel.CompanyList.Where(a => a.CompanyName.Trim().ToUpper() == companyName.Trim().ToUpper()).Select(a => a.CreatedBy).FirstOrDefault() : Convert.ToInt32(Session["UserID"]),
                 IsAdminUser = (Session["UserObj"] as UserEntity).UserType == 4 ? true : false,
                 CompanyBranches = new List<CompanyBranchEntity>
-            {
-                new CompanyBranchEntity()
-            }
+                {
+                    new CompanyBranchEntity()
+                }
             };
 
             if (companyViewModel.CompanyList.Count > 0)
@@ -64,7 +174,7 @@ namespace UpVotes.Controllers
 
             companyViewModel.CompanyList.Add(newCompany);
 
-            return View(companyViewModel);
+            return PartialView("~/Views/Authenticated/Center/UserCompany.cshtml",companyViewModel);
         }
 
         /// <summary>
@@ -362,6 +472,25 @@ namespace UpVotes.Controllers
             }
         }
 
+        public JsonResult GetSubFocusAreaByFocusID(int focusAreaID)
+        {
+            try
+            {
+                var jsonResult = default(dynamic);
+                List<SubFocusAreaEntity> subfocusList = new CompanyService().GetSubFocusAreaByFocusID(focusAreaID);
+                jsonResult = new
+                {
+                    subfocusList
+                };
+
+                return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         [ValidateInput(false)]
         public ActionResult CompanyVerificationByUser(string UID, string CID, string COMPID)
         {
@@ -369,6 +498,10 @@ namespace UpVotes.Controllers
             string cID = Request.Params["CID"] == string.Empty ? "XX" : EncryptionAndDecryption.Decrypt(Request.Params["CID"]);
             int compID = Convert.ToString(Request.Params["KID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt((Request.Params["KID"])));
             bool isUserVerified = new CompanyService().CompanyVerificationByUser(uID, cID, compID);
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "H";
+            }
             return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
         }
 
@@ -398,6 +531,32 @@ namespace UpVotes.Controllers
             return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
         }
 
+        [ValidateInput(false)]
+        public ActionResult SoftwareClaimVerificationByUser(string CID, string WID, string KID)
+        {
+            int cID = Convert.ToString(Request.Params["CID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt(Request.Params["CID"]));
+            string wID = Request.Params["WID"] == string.Empty ? "XX" : EncryptionAndDecryption.Decrypt(Request.Params["WID"]);
+            int softID = Convert.ToString(Request.Params["KID"]) == string.Empty ? 0 : Convert.ToInt32(EncryptionAndDecryption.Decrypt((Request.Params["KID"])));
+            var claimListingRequest = new ClaimApproveRejectListingRequest
+            {
+                ClaimListingID = cID,
+                softwareID = softID,
+                IsUserVerify = true,
+                Email = wID
+            };
+            bool isUserVerified = true;
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "H";
+            }
+            string message = new SoftwareService().ClaimSoftwareListing(claimListingRequest);
+            if (message != "Successfully Claimed")
+            {
+                isUserVerified = false;
+            }
+            return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
+        }
+
         public ActionResult UpdateRejectionComments()
         {
             if (Request.Params["companyRejectComments"] != null)
@@ -413,9 +572,9 @@ namespace UpVotes.Controllers
             return null;
         }
 
-        public string AdminClaimApprove(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName)
+        public string AdminClaimApprove(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName, string Type)
         {
-            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, true, Rejectioncomment, Email, CompanyName);
+            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, true, Rejectioncomment, Email, CompanyName, Type);
             if (Utility.CacheHandler.Exists(CompanyName.ToLower().Replace(" ", "-")))
             {
                 Utility.CacheHandler.Clear(CompanyName.ToLower().Replace(" ", "-"));
@@ -423,9 +582,9 @@ namespace UpVotes.Controllers
             return message;
         }
 
-        public string AdminClaimReject(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName)
+        public string AdminClaimReject(int claimlistingID, int companyID, string Rejectioncomment, string Email, string CompanyName, string Type)
         {
-            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, false, Rejectioncomment, Email, CompanyName);
+            string message = new CompanyService().AdminApproveRejectForClaim(Convert.ToInt32(Session["UserID"]), claimlistingID, companyID, false, Rejectioncomment, Email, CompanyName, Type);
 
             return message;
         }

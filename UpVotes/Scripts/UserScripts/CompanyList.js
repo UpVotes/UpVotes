@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+       
+
     $.setData = function (ui, type) {
         if (type == 1) {
             $("#txtCompanySearch")[0].value = ui.item.value;
@@ -8,6 +10,10 @@
             $("#txtLocationSearch")[0].value = ui.item.value;
             $("#txtLocationSearch").change();
         }
+        else if (type == 3) {
+            $("#txtCompanyReviewSearch")[0].value = ui.item.value;
+            $("#txtCompanyReviewSearch").change();
+        }
     }
 
     $.getData = function (request, response, type) {
@@ -15,6 +21,7 @@
             $.ajax({
                 url: $.absoluteurl('/CompanyList/GetDataForAutoComplete?type=' + type),
                 dataType: "json",
+                async: false,
                 data:
                 {
                     featureClass: "leftalign",
@@ -50,6 +57,20 @@
         }
     });
 
+    $("#txtCompanyReviewSearch").autocomplete({
+        source: function (request, response) {
+            $.getData(request, response, 1)
+        },
+        delay: 0,
+        focus: function () {
+            return false;
+        },
+        minLength: 3,
+        select: function (event, ui) {
+            $.setData(ui, 3);
+        }
+    });
+
     $("#txtLocationSearch").autocomplete({
         source: function (request, response) {
             $.getData(request, response, 2)
@@ -79,6 +100,10 @@
     $("#ddlEmployeesSearch").change(function () {
         $.GetCompanyListBasedOnCriteria(this);
     });
+
+    $("#txtCompanyReviewSearch").change(function () {
+        $.GetUserReviewListBasedOnCriteria(this);
+    });       
 
     $.GetCompanyListBasedOnCriteria = function (e) {
         try {
@@ -122,54 +147,90 @@
         catch (e) { debugger; }
     }
 
-    $(".userReviews").click(function () {
-        $.ajax({
-            url: $.absoluteurl('/CompanyList/GetCompanyNames'),
-            mtype: "POST",
-            cache: false,
-            success: function (data) {
-                $('#userReviews').html("");
-                $('#userReviews').show();
-                $('#userReviews').html(data);
-            },
-            error: function (a, b, c) { debugger; }
-        });
+    $('#btnLoadMoreReviews').click(function () {
+        var pagesize = $('#btnLoadMoreReviews').attr('pagesize');
+        $('#btnLoadMoreReviews').attr('pagesize', parseInt(pagesize) + 10);
+        $.GetUserReviewListBasedOnCriteria(this);
     });
-    $(".userReviews").click(function () {
-        $('#userReviews').css("display", "")
-    });
-    $(".Over-view").click(function () {   
-        $('#Overview').css("display", "")
-        $('#userReviews').css("display", "none")
-    });
-    $(".classquote").click(function () {        
-        $('#CustomQuote').css("display", "");
-        $('#userReviews').css("display", "none")
-    });
-    $.GetCompanyReviews = function (companyName) {
-        $.ajax({
-            type: "POST",
-            url: $.absoluteurl('/CompanyList/GetUserReviews'),
-            cache: false,
-            async: false,
-            data: { companyName: companyName },// Location of the service
-            success: function (json) {
-                companyName = companyName.replace(/ /g, "");
-                $('#' + companyName + '1').html(json);
-                $('.lazy').lazy();
-            },
-            error: function (a, b, c) {
-                debugger;
-            }
-        });
-    };
 
-    $('.panel-title a').bind('click', function () {
-        $(this).find('i').toggleClass('fa-plus fa-minus')
-            .closest('panel').siblings('panel')
-            .find('i')
-            .removeClass('fa-minus').addClass('fa-plus');
-    });
+    $.GetUserReviewListBasedOnCriteria = function (e) {
+        try {
+            var companyname = $("#txtCompanyReviewSearch").val();
+            var pagesize = $('#btnLoadMoreReviews').attr('pagesize');
+
+            $.ajax({
+                type: "POST",
+                url: $.absoluteurl('/CompanyList/GetUserReviews'),
+                cache: false,
+                async: false,
+                data: { companyname: companyname, PageSize: pagesize },
+                success: function (json) {
+                    $('#divUserReviews').html(json);
+                    if (companyname != "") {
+                        $('#btnLoadMoreReviews').attr('pagesize', 10);
+                    }                    
+                },
+                error: function (a, b, c) {
+                    debugger;
+                }
+            });
+        }
+        catch (e) { debugger; }
+    }
+
+    //$(".userReviews").click(function () {
+    //    $.ajax({
+    //        url: $.absoluteurl('/CompanyList/GetCompanyNames'),
+    //        mtype: "POST",
+    //        cache: false,
+    //        success: function (data) {
+    //            $('#userReviews').html("");
+    //            $('#userReviews').show();
+    //            $('#userReviews').html(data);
+    //        },
+    //        error: function (a, b, c) { debugger; }
+    //    });
+    //});
+    //$(".userReviews").click(function () {
+    //    $('#userReviews').css("display", "")
+    //});
+    //$(".Over-view").click(function () {   
+    //    $('#Overview').css("display", "")
+    //    $('#userReviews').css("display", "none")
+    //});
+    //$(".classquote").click(function () {        
+    //    $('#CustomQuote').css("display", "");
+    //    $('#userReviews').css("display", "none")
+    //});
+    //$.GetCompanyReviews = function (companyName) {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: $.absoluteurl('/CompanyList/GetUserReviews'),
+    //        cache: false,
+    //        async: false,
+    //        data: { companyName: companyName },// Location of the service
+    //        success: function (json) {
+    //            companyName = companyName.replace(/ /g, "");
+    //            $('#' + companyName + '1').html(json);
+    //            $('.lazy').lazy();
+    //        },
+    //        error: function (a, b, c) {
+    //            debugger;
+    //        }
+    //    });
+    //};
+
+    //$('.panel-title a').bind('click', function () {
+    //    $(this).find('i').toggleClass('fa-plus fa-minus')
+    //        .closest('panel').siblings('panel')
+    //        .find('i')
+    //        .removeClass('fa-minus').addClass('fa-plus');
+    //});
 
 
 });
+
+function GetNews(title) {
+    var baseAddress = $.absoluteurl(window.location.origin + '/news/' + encodeURI(title));
+    window.open(baseAddress, '_blank')
+}

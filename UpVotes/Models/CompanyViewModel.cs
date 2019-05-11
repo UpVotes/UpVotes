@@ -23,6 +23,7 @@ namespace UpVotes.Models
         public string WebBaseURL { get; set; }
 
         public string CategoryHeadLine { get; set; }
+        public string CategoryReviewHeadLine { get; set; }
 
         public string Title { get; set; }
 
@@ -37,7 +38,9 @@ namespace UpVotes.Models
         public int TotalNoOfCompanies { get; set; }
         public string SubFocusArea { get; set; }
         public string Location { get; set; }
+        public bool IsAdmin { get; set; }
         public List<ClaimInfoDetail> ClaimList { get; set; }
+        public List<OverviewNewsResponseEntity> OverviewNewsData { get; set; }
     }
     public class CategoryMetaTagsDetails
     {

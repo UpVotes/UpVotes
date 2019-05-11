@@ -49,7 +49,7 @@ $.ClearDropdown = function (DdlObject) {
         }
     }
 }
-
+debugger;
 $.fn.LoadOptions = function (data, name, value) {
     if (data != undefined && data != null) {
         this.sel = $(this);
@@ -58,3 +58,66 @@ $.fn.LoadOptions = function (data, name, value) {
         }
     }
 }
+
+function GetTopVotedCompanyProfile(companyName) {
+    companyName = companyName.replace(/ /g, "-");
+    var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyName.toLowerCase()));
+    window.open(baseAddress, '_blank')
+    return false;
+}
+
+/* Mega Menu */
+$(document).ready(function () {
+
+
+    //Disable scroll to body			  	
+    $(".megamenu .navbar-toggler").click(function (event) {
+        $('html').addClass('no-scroll');
+    });
+
+
+    //Close the mobile menu
+    $(".megamenu .btn-close").click(function (event) {
+        $("html").removeClass("no-scroll");
+        $('.megamenu .navbar-collapse').removeClass('show');
+    });
+
+
+    //Login & forget password
+    $(".login .close").click(function () {
+        $('.login-wrap').removeClass('hide');
+        $('.pass-wrap').addClass('hide');
+    });
+
+
+    // To forget password screen
+    $("#btnForgetPass").click(function () {
+        $('.login-wrap').addClass('hide');
+        $('.pass-wrap').removeClass('hide');
+    });
+
+
+    //Back to login screen
+    $("#btnBackLogin").click(function () {
+        $('.login-wrap').removeClass('hide');
+        $('.pass-wrap').addClass('hide');
+    });    
+});
+
+//Active menu
+$(document).ready(function () {
+    $('.navbar-nav li').click(function () {
+        $('li').removeClass("active");
+        $(this).addClass("active");
+    });
+});
+
+
+//Detail page show other branches
+$(document).ready(function () {
+    $('.address-wrap .view-more').on('click', function () {
+        $('.address-wrap ul').show();
+        $(this).hide();
+    });
+});
+

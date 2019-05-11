@@ -1,0 +1,283 @@
+﻿@model UpVotes.Models.SubmitReviewViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    @Scripts.Render("~/bundles/review")
+</head>
+<!-- Start Breadcrumbs -->
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Submit Review</li>
+            </ol>
+        </div>
+    </div>
+</nav>
+<!-- End Breadcrumbs -->
+
+<!-- Start Category -->
+<section class="list-wrap content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="user-review tab-wrap">
+                    <div class="title-wrap">
+                        <h2 class="title-small">Share your valuable feedback!</h2>
+                    </div>
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="@(Model.TabIndex == 0 ? "nav-item nav-link active" : "nav-item nav-link")" data-toggle="tab" href="#review-service">
+                                For service profiles
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a class= "@(Model.TabIndex == 1 ? "nav-item nav-link active" : "nav-item nav-link")" data-toggle="tab" href="#review-software">
+                                For software profiles
+                                <div class="arrow-up"></div>
+                            </a>
+                        </div>
+                        <div class="tab-content">
+                            <div class="@(Model.TabIndex == 0 ? "tab-pane fade in active show" : "tab-pane fade")" id="review-service">
+                                <div class="review-wrap">
+                                    <div class="review-form">                                        
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Company being reviewed*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" value="@(Model.TabIndex == 0 ? Model.SoftwareOrCompanyName : "")" id="txtCompanyBeingReviewed" placeholder="">
+                                                    <input type="hidden" id="hdnCompanyID" value="@(Model.TabIndex == 0 ? Model.SoftwareOrCompanyId.ToString() : "0")" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Service category*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <select class="form-control" id="ddlServiceCategory">
+                                                        <option value="0">--Select--</option>
+                                                        <option value='1'>Digital Marketing</option>
+                                                        <option value='2'>Web Design</option>
+                                                        <option value='3'>Software Developement</option>
+                                                        <option value='4'>IOT Developement</option>
+                                                        <option value='5'>Web Developement</option>
+                                                        <option value='6'>Custom Software Developemt</option>
+                                                        <option value='7'>Search Engine Optimization</option>
+                                                        <option value='8'>UX/UI Design</option>
+                                                        <option value='9'>Mobile App Developement</option>
+                                                        <option value='10'>Ecommerce Developement</option>
+                                                        <option value='11'>Wearable App Developement</option>
+                                                        <option value='12'>AR VR Application Development</option>
+                                                        <option value='13'>Social Media Marketing</option>
+                                                        <option value='14'>Pay Per Click</option>
+                                                        <option value='15'>Content Marketing</option>
+                                                        <option value='16'>Graphic Designers</option>
+                                                        <option value='17'>Chatbot Development</option>
+                                                        <option value='18'>Mobile App Marketing Agencies</option>
+                                                        <option value='19'>Email Marketing Agencies</option>
+                                                        <option value='20'>SEM Agencies</option>
+                                                        <option value='21'>Branding Agencies</option>
+                                                        <option value='22'>PR Agencies</option>
+                                                        <option value='23'>Digital Strategy Agencies</option>
+                                                        <option value='24'>Video Production Agencies</option>
+                                                        <option value='25'>Industry Focus</option>
+                                                        <option value='26'>Client Focus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Project name*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtServiceProjectName" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Feedback summary*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <textarea class="form-control" id="txtCompanyFeedBackSummary" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Rating*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <ul id="UlCompanyRating" value="0" class="star-rate rating">
+                                                        <li class="CompanyStar" title='Poor' value="1"><i class="fa fa-star rate"></i></li>
+                                                        <li class="CompanyStar" title='Fair' value="2"><i class="fa fa-star rate"></i></li>
+                                                        <li class="CompanyStar" title='Good' value="3"><i class="fa fa-star rate"></i></li>
+                                                        <li class="CompanyStar" title='Excellent' value="4"><i class="fa fa-star rate"></i></li>
+                                                        <li class="CompanyStar" title='WOW!!!' value="5"><i class="fa fa-star rate"></i></li>
+                                                    </ul>
+                                                    <input type="hidden" id="hdnCompanyRating" value="1" />
+                                                </div>
+                                            </div>
+                                            <p class="sub-caption">Reviewer information (Last step! we just need your contact information to verify that you are who you are.)</p>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Reviewer full name*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtCompanyReviewerUserName" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Designation*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtCompanyReviewerDesignation" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input6" class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Company name*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtReviewercompanyName" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input7" class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">E-mail*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtReviewerCompanyEmail" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input8" class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Phone:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtReviewerCompanyPhoneNumber" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xl-4 col-md-4 col-sm-12 empty-block">
+                                                </div>
+                                                <div class="col-xl-6 col-md-6 col-sm-12 action">
+                                                    <span id="errCompanyMandatory" class="error-text"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xl-4 col-md-4 col-sm-12 empty-block">
+                                                </div>
+                                                <div class="col-xl-6 col-md-6 col-sm-12 action">
+                                                    <button id="btnSaveCompanyReviews" class="btn btn-primary">Submit Your Review</button>
+                                                </div>
+                                            </div>                                       
+                                    </div>
+                                    <div id="divCompanyThank" class="thankyou hide">
+                                        <b><span id="spnCompanyThank"></span></b>
+                                        <span>This update will go in review from backend part.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="@(Model.TabIndex == 1 ? "tab-pane fade in active show" : "tab-pane fade")" id="review-software">
+                                <div class="review-wrap">
+                                    <div class="review-form">                                        
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-sm-12 col-form-label input-lbl">Software being reviewed*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtSoftwareBeingReviewed" value="@(Model.TabIndex == 1 ? Model.SoftwareOrCompanyName : "")" placeholder="">
+                                                    <input type="hidden" id="hdnSoftwareID" value="@(Model.TabIndex == 1 ? Model.SoftwareOrCompanyId.ToString() : "0")" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-sm-12 col-form-label input-lbl">Software category*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <select class="form-control" id="ddlSoftwareCategory">
+                                                        <option value="0">--Select--</option>
+                                                        <option value='1'>Mobile App Softwares</option>
+                                                        <option value='2'>Seo Softwares</option>
+                                                        <option value='3'>Social Media Softwares</option>
+                                                        <option value='4'>Content Marketing Softwares</option>
+                                                        <option value='5'>App Design Softwares</option>
+                                                        <option value='6'>ECommerce Softwares</option>
+                                                        <option value='7'>Marketing Softwares</option>
+                                                        <option value='8'>CMS Softwares</option>
+                                                        <option value='9'>Email Marketing Softwares</option>
+                                                        <option value='10'>Game Development Softwares </option>
+                                                        <option value='11'>Graphic Design Softwares</option>
+                                                        <option value='12'>Iot Softwares</option>
+                                                        <option value='13'>Artificial Intelligence Softwares</option>
+                                                        <option value='14'>Data Visualization Softwares</option>
+                                                        <option value='15'>Inventory Management Softwares</option>
+                                                        <option value='16'>Accounting Softwares</option>
+                                                        <option value='17'>Workflow Management Softwares</option>
+                                                        <option value='18'>CRM Softwares</option>
+                                                        <option value='19'>Business Intelligence Softwares </option>
+                                                        <option value='20'>Machine Learning Softwares</option>
+                                                        <option value='21'>Product Management Softwares</option>
+                                                        <option value='22'>ERP Softwares</option>
+                                                        <option value='23'>Human Resource Softwares</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input4" class="col-xl-4 col-sm-12 col-form-label input-lbl">Feedback summary*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <textarea class="form-control" id="txtSoftwareFeedBackSummary" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input4" class="col-xl-4 col-sm-12 col-form-label input-lbl">Rating*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <ul id="UlSoftwareRating" value="0" class="star-rate rating">
+                                                        <li class="SoftwareStar" title='Poor' value="1"><i class="fa fa-star rate"></i></li>
+                                                        <li class="SoftwareStar" title='Fair' value="2"><i class="fa fa-star rate"></i></li>
+                                                        <li class="SoftwareStar" title='Good' value="3"><i class="fa fa-star rate"></i></li>
+                                                        <li class="SoftwareStar" title='Excellent' value="4"><i class="fa fa-star rate"></i></li>
+                                                        <li class="SoftwareStar" title='WOW!!!' value="5"><i class="fa fa-star rate"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="sub-caption">Reviewer information (Last step! we just need your contact information to verify that you are who you are.)</p>
+                                            <div class="form-group row">
+                                                <label for="input5" class="col-xl-4 col-sm-12 col-form-label input-lbl">Reviewer full name*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtSoftwareReviewerUserName" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-4 col-md-4 col-sm-12 col-form-label input-lbl">Designation*:</label>
+                                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtSoftwareReviewerDesignation" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input6" class="col-xl-4 col-sm-12 col-form-label input-lbl">Company name*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtReviewerSoftwareCompanyName" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input7" class="col-xl-4 col-sm-12 col-form-label input-lbl">E-mail*:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtReviewerSoftwareCompanyEmail" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="input8" class="col-xl-4 col-sm-12 col-form-label input-lbl">Phone:</label>
+                                                <div class="col-xl-6 col-sm-12">
+                                                    <input type="text" class="form-control" id="txtSoftwarePhoneNumber" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xl-4 col-md-4 col-sm-12 empty-block">
+                                                </div>
+                                                <div class="col-xl-6 col-md-6 col-sm-12 action">
+                                                    <span id="errSoftwareMandatory" class="error-text"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xl-4 col-sm-12 empty-block">
+                                                </div>
+                                                <div class="col-xl-6 col-sm-12 action">
+                                                    <button id="btnSaveSoftwareReviews" class="btn btn-primary">Submit Your Review</button>
+                                                </div>
+                                            </div>                                        
+                                    </div>
+                                    <div id="divSoftwareThank" class="thankyou hide">
+                                        <b><span id="spnSoftwareThank"></span></b>
+                                        <span>This update will go in review from backend part.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Category -->	
+
+

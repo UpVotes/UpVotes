@@ -22,13 +22,19 @@
             data: { companyid: companyID, workemail: WorkEmail, password: Password },// Location of the service
             success: function (json) {
                 if (json != "") {
-                    $('#your-modal-id').modal('hide');
-                    $('body').removeClass('modal-open');
-                    $('body').css("padding-right", "");
-                    $('.modal-backdrop').remove();
-                    //$("#divLogin").html('');
-                    $("#divLogin").html(json);
-                    $("#ajax_loader").hide();
+                    location.reload();
+                    //$('#myModal').modal('hide');                    
+                    //$("#divLogin").html(json);
+                    //$("#ajax_loader").hide();                    
+                    //var $dummy = $("<div>");
+                    //$dummy.load("/Login/GetFooterSection", function (response, status, xhr) {
+                    //    if (status == "success") {
+                    //        $("#divfooter").html('');
+                    //        $("#divfooter").html($dummy.html());
+                    //    }
+                    //    else
+                    //        $dummy.remove();
+                    //});
                 }
                 else {
                     $('#errValidWorkEmail').show();
@@ -73,18 +79,22 @@
 
     $.ValidateChangePassword = function()
     {
+        $('#errValidChangepwd').hide();
         $('#errValidChangepwd').text('');
         if ($('#txtCurrPassword').val() == "") {
             $('#errValidChangepwd').text('Error: Current Password cannot be blank!');
+            $('#errValidChangepwd').show();
             return false;
         }
         if ($('#txtNewPassword').val() != "" && $('#txtNewPassword').val() == $('#txtConNewPassword').val()) {
             if (!$.checkPassword($('#txtNewPassword').val())) {
                 $('#errValidChangepwd').text('Error: The password should contain atleast 6 character with one number, one special character');
+                $('#errValidChangepwd').show();
                 return false;
             }
         } else {
             $('#errValidChangepwd').text("Error: Please check that you've entered and confirmed your password!");
+            $('#errValidChangepwd').show();
             return false;
         }
         return true;
@@ -93,6 +103,7 @@
     $.ChangePassword = function(currpwd, newpwd)
     {
         $('#dvchangepwd').hide();
+        $('#errValidChangepwd').hide();
         $("#ajax_loaderchng").show();
         $.ajax({
             type: "POST",
@@ -103,9 +114,13 @@
                     $('#MsgChangePwd').text(json);
                     $('#dvchangepwd').show();
                     $("#ajax_loaderchng").hide();
+                    $('#txtCurrPassword').val('');
+                    $('#txtNewPassword').val('');
+                    $('#txtConNewPassword').val('');
                 }
                 else {
                     $('#dvchangepwd').hide();
+                    $('#errValidChangepwd').show();
                     $('#errValidChangepwd').text("Error: Current Password is incorrect!");
                     $("#ajax_loaderchng").hide();
                 }

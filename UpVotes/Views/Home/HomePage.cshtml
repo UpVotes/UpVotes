@@ -1,4 +1,4 @@
-﻿
+﻿@model List<UpVotes.BusinessEntities.Entities.CompanyEntity>
 @{
     string meta = "<meta name='description' content='Upvotes is a B2B research and voting platform for leading development, design and marketing firms. Which type of firms are you looking for?' />";
     meta = meta + "<meta property='og:url' content='https://www.upvotes.co/' />";
@@ -19,9 +19,298 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/Homecss")
-@*<link href="~/Content/home-design.css" rel="stylesheet" />*@
+@Scripts.Render("~/bundles/homejs")
 
-<div class="mark-home-banner lazy" data-src="images/Untitled-12.jpg">
+<!-- start banner Area -->
+<section class="banner-area gap-medium">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-4 col-lg-12 no-padding">
+                <div class="banner-content">
+                    <h1 class="title-xlarge">Your Identity. Our Responsibility</h1>
+                    <p>
+                        Upvotes is your community to finding the best B2B agencies, categorized by their areas of expertise. Find top full-service agencies, web design companies, digital marketing firms & top technology companies.
+                    </p>
+                    <button type="button" class="btn btn-primary smooth-scroll" href="#divCategory">Find Firms</button>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-12 no-padding banner-image">
+                <img class="lazy" data-src="images/top-banner.jpg" alt="Upvotes" title="Upvotes">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+
+<!-- Start How Upvotes works -->
+<section class="feature gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 order-lg-1 order-2">
+                <div class="feature-list">
+                    <ul>
+                        <li>
+                            <i class="fa fa-sitemap"></i>
+                            <div class="title">Select Category</div>
+                            <p>Select a service or software providers</p>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-globe"></i>
+                            <div class="title">Explore in Detail</div>
+                            <p>Browse the list of 500+ top service & software providers</p>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-check"></i>
+                            <div class="title">Select Right Partner</div>
+                            <p>Make list out one or more partner for your project</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-check-square-o"></i>
+                            <div class="title">Votes & Reviews</div>
+                            <p>Check out verified votes and reviews</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 order-lg-2 order-1">
+                <div class="content gap-large">
+                    <h4 class="title-large">How upvotes can help your bussiness?</h4>
+                    <p>
+                        Searching an appropriate firms with positive feedbacks is vital for the victory of your selecting a tech partner. We help you right here.
+                    </p>
+                    <button type="button" class="btn btn-primary">Know more</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End How Upvotes works -->	
+
+<!-- Start Category -->
+<section id="divCategory" class="category gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="title-wrap text-center">
+                    <h3 class="title-medium t-border">Research Categories</h3>
+                    <p>
+                        Explore top services and software providers across industries to find the right partner for your business.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-12 tab-wrap">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#tab1">For Service Providers</a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#tab2">For Software Providers</a>
+                    </div>
+                </nav>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab1">
+                        <ul class="list">
+                            <li><a href="/mobile-application-developers">Mobile App Developement </a></li>
+                            <li><a href="/web-development-companies">Web Developers</a></li>
+                            <li><a href="/web-design-companies">Web Designers </a></li>
+                            <li><a href="/digital-marketing-companies">Digital Marketing</a></li>
+                            <li><a href="/seo-companies">SEO </a></li>
+                            <li><a href="/software-development-companies">Custom Software Developers</a></li>
+                            <li><a href="/ui-ux-agencies">UI/UX Designers</a></li>
+                            <li><a href="/wearable-application-developers">Wearable App Developers</a></li>
+                            <li><a href="/ecommerce-developers">Ecommerce Developers</a></li>
+                            <li><a href="/social-media-marketing-companies">Social Media Agencies</a></li>
+                            <li><a href="/ppc-companies">PPC Agencies</a></li>
+                            <li><a href="/content-marketing-companies">Content Marketing Agencies</a></li>
+                            <li><a href="/iot-application-developers">IOT App Developers</a></li>
+                            <li><a href="/mobile-app-marketing-agencies">Mobile App Marketing Agencies</a></li>
+                            <li><a href="/email-marketing-agencies">Email Marketing Agencies</a></li>
+                            <li><a href="/sem-agencies">Sem Agencies</a></li>
+                            <li><a href="/branding-agencies">Branding Agencies</a></li>
+                            <li><a href="/pr-agencies">PR Agencies</a></li>
+                            <li><a href="/digital-strategy-agencies">Digital Strategy Agencies</a></li>
+                            <li><a href="/video-production-agencies">Video Production Agencies</a></li>
+                            <li><a href="/chatbot-development">Chatbot Development</a></li>
+                            <li><a href="/ar-vr-application-development">AR VR Application Developers</a></li>
+                            <li><a href="/graphic-designers">Graphic Designers</a></li>
+                            <li></li>
+                        </ul>
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary btn-lg">Browse All Categories</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <ul class="list">
+                            <li><a href="/mobile-app-softwares">Mobile App Softwares</a></li>
+                            <li><a href="/marketing-softwares">Marketing Softwares</a></li>
+                            <li><a href="/seo-softwares">SEO Softwares</a></li>
+                            <li><a href="/social-media-softwares">Social Media Softwares</a></li>
+                            <li><a href="/content-marketing-softwares">Content Marketing Softwares</a></li>
+                            <li><a href="/app-design-softwares">App Design Softwares</a></li>
+                            <li><a href="/cms-softwares">CMS Softwares</a></li>
+                            <li><a href="/ecommerce-softwares">Ecommerce Software</a></li>
+                            <li><a href="/email-marketing-softwares">Email Marketing Softwares</a></li>
+                            <li><a href="/game-development-softwares">Game Development Softwares </a></li>
+                            <li><a href="/graphic-design-softwares">Graphic Design Softwares</a></li>
+                            <li><a href="/iot-softwares">Iot Softwares</a></li>
+                            <li><a href="/artificial-intelligence-softwares">Artificial Intelligence Softwares</a></li>
+                            <li><a href="/data-visualization-softwares">Data Visualization Softwares</a></li>
+                            <li><a href="/inventory-management-softwares">Inventory Management Softwares</a></li>
+                            <li><a href="/accounting-softwares">Accounting Softwares</a></li>
+                            <li><a href="/workflow-management-softwares">Workflow Management Softwares</a></li>
+                            <li><a href="/crm-softwares">CRM Softwares</a></li>
+                            <li><a href="/business-intelligence-softwares ">Business Intelligence Softwares </a></li>
+                            <li><a href="/erp-softwares">ERP Softwares</a></li>
+                            <li><a href="/human-resource-softwares">Human Resource Softwares</a></li>
+                            <li><a href="/machine-learning-softwares">Machine Learning Softwares</a></li>
+                            <li><a href="/product-management-softwares">Product Management Softwares</a></li>
+                            <li></li>
+                        </ul>
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary btn-lg">Browse All Categories</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Category -->	
+
+<!-- Start Featured agencies -->
+<section class="brand-grid gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="title-wrap text-center">
+                    <h3 class="title-medium t-border">Top Voted Agencies</h3>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li onclick="GetTopVotedCompanyProfile('@item.CompanyName')"><img class="lazy topVotedimg" data-src="/images/CompanyLogos/@item.LogoName" alt="@item.CompanyName" title="@item.CompanyName"></li>                    
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Featured agencies -->
+
+			<!-- Start Get Listed -->
+<section class="teal-banner gap-large">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+                <div class="title-wrap text-center">
+                    <h3 class="title-medium">Are you a Leading professional B2B Service or Software providers?</h3>
+                    <p>Join this community and get more visible to your Business profile</p>
+                </div>
+            </div>
+            <div class="col-xl-12 text-center">
+                <button type="button" class="btn btn-light btn-lg myLoginPopUp">Get Listed</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Get Listed -->
+
+			<!-- Start blog Area -->
+<section class="blogs gap-medium">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+                <div class="title-wrap text-center">
+                    <div class="caption">We blog something</div>
+                    <h3 class="title-medium">Have a Look of Our Latest Blog.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row hide">
+            <div class="col-xl-12">
+                <div class="owl-carousel card-slide home-slide">
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb1.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb2.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb3.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb1.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb2.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="thumb">
+                        <div class="img-wrap">
+                            <img class="lazy" data-src="images/Blogs/thumb3.jpg" />
+                        </div>
+                        <div class="content">
+                            <div class="title">Simple, Solution makes it easy!</div>
+                            <p>
+                                Lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum
+                                <span class="more"> Read more</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End blog Area -->
+
+
+
+@*<div class="mark-home-banner lazy" data-src="images/Untitled-12.jpg">
     <h2>Explore Top Agencies and Choose The Most Suitable Partner for Next Big project</h2>
     <div>
         <span>Which type of companies are you looking for ?</span>
@@ -103,9 +392,43 @@
             <input type="button" id="btnSubmitReview" class="create-submit submitbut" value="submit now" style="display:none;" />
         </div>
     </div>
-</div>
+</div>*@
 
-<div id="dialog" style="display:none">
+@*<div id="dialog" style="display:none">
     @Html.Partial("~/Views/Company/_SubmitReview.cshtml")
-</div>
+</div>*@
 
+<script type="text/javascript">
+     			// Carousel Auto-Cycle
+				  $(document).ready(function() {
+				    $('.owl-carousel').owlCarousel({
+					    loop:true,
+					    margin:10,
+					    responsiveClass:true,
+					    navText:["<i class='fa fa-chevron-left'></i> Prev","Next <i class='fa fa-chevron-right'></i>"],
+					    mouseDrag:true,
+					    responsive:{
+					        320:{
+					            items:1,
+					            dots:true
+					        },
+					        480:{
+					            items:2,
+					            dots:true
+					        },
+					        700:{
+					            items:2
+					        },
+					        800:{
+					            items:3,
+					            nav:false
+					        },
+					        1000:{
+					            items:4,
+					            nav:true,
+					            loop:false
+					        }
+					    }
+					})
+				  });
+</script>

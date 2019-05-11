@@ -1,0 +1,86 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@{
+    ViewBag.Title = "Company PortFolio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/AllListing")
+</head>
+@foreach (var company in Model.CompanyList)
+{
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item title-capitalize active" aria-current="page">@company.CompanyName</li>
+                    <li class="breadcrumb-item title-capitalize active" aria-current="page">PortFolio</li>
+                </ol>
+            </div>
+        </div>
+    </nav>
+    <div class="detail-wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Scrollspy menu -->
+                <div class="container content-wrap">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <section id="navPortfolio">
+                                <div class="content">
+                                    <div class="title-wrap">
+                                        <h1 class="title-small title-capitalize">@company.CompanyName Portfolios</h1>
+                                    </div>
+                                    <div class="row portfolio">
+                                        @if (company.CompanyPortFolio.Count > 0)
+                                        {
+                                            foreach (var portFolio in company.CompanyPortFolio)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-sm-4 thumb">
+                                                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="@portFolio.Title" data-caption="The all new app"
+                                                       data-image="@portFolio.ImageURL"
+                                                       data-target="#image-gallery">
+                                                        <img class="img-thumbnail lazy" data-src="@portFolio.ImageURL" alt="">
+                                                        <div class="info">
+                                                            <b class="truncate">@portFolio.Title</b>
+                                                            <p class="truncate">@portFolio.Description</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+
+                                        <!-- Open Modal -->
+                                        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="pop-title" id="image-gallery-title"></div>
+                                                        <div class="pop-caption" id="image-gallery-caption"></div>
+                                                        <button type="button" class="close" data-dismiss="modal">
+                                                            <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img id="image-gallery-image" class="img-responsive" src="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col text-center load-more hide">
+                        <button type="submit" class="btn btn-sm flat-gray">
+                            Load more reviews...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
