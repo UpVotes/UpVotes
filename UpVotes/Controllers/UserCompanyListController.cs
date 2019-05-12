@@ -51,6 +51,24 @@ namespace UpVotes.Controllers
             }
         }
 
+        public ActionResult UserSoftware()
+        {
+            if (1 > 0)
+            {
+                return PartialView("~/Views/Authenticated/Center/UserSoftwareList.cshtml");
+            }
+            else
+            {
+                return PartialView("~/Views/Authenticated/Center/UserSoftware.cshtml");
+            }
+        }
+
+        public ActionResult CreateNewSoftwareAdmin()
+        {           
+
+            return PartialView("~/Views/Authenticated/Center/UserSoftware.cshtml");
+        }
+
         public ActionResult UserCompany(string companyName = "")
         {
             int userID = Convert.ToInt32(Session["UserID"]);

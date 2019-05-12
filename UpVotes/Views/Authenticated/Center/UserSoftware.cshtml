@@ -1,0 +1,141 @@
+﻿
+<link rel="stylesheet" href="~/Content/text-editor.css"/>
+<script src="~/Scripts/text-editor.js"></script>
+<script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>
+
+
+<div class="alert alert-danger" id="divFailureMessage">
+    <strong>ERROR!!</strong>
+    <span id="spnMessage">Fields marked with * are mandatory.</span>
+</div>
+
+<div class="main-inner">
+
+    <!-- add software profile section -->
+    <div class="row" id="addServiceProfileSection">
+        <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+            <h2 class="title-small">Software Listing</h2>
+        </div>
+
+        <!-- add software service profile -->
+        <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data" id="emptySoftwareData">
+            <!--Add class "hide" to hide the content -->
+            <section class="section-wrap">
+                <div class="jumbotron vertical-center">
+                    <div class="caption">No software profile created yet "Add profile" to get listed.</div>
+                    <button type="submit" class="btn btn-primary" id="addServiceProfile">Add software profile</button>
+                </div>
+            </section>
+        </div>
+        
+        <div class="col-xl-12 hide" id="addSoftwareData">
+            <section class="section-wrap">
+                <div class="tab-wrap primary">
+                    <div class="tab-content">
+                        <div class="row">
+                            <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                                <label for="input1" class="col-form-label">Software logo<a href="#" class="hint">?</a></label>
+                                <div class="input-group">
+                                    <div class="custom-file v1">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12">
+                                                <label class="btn-bs-file btn btn-primary">
+                                                    Choose Logo<input type="file" class="form-control">
+                                                </label>
+                                                <div class="file-name">Ags-global-solutions-company-logo.jpg</div>
+                                            </div>
+                                            <div class="col-xl-12 col-md-12 col-sm-12">
+                                                <div class="logo-preview">                                                    
+                                                    <img src="~/images/SoftwareLogos/Ad-optimizer.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Software name<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Software tag line<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Price range<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Software trial<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">
+                                    Website
+                                    <small class="manditory">*</small>
+                                    <a href="#" class="hint">?</a>
+                                    <div class="avail-status">
+                                        <span class="avail"><i class="fa fa-check"></i>Available</span>
+                                        <span class="not-avail hide"><i class="fa fa-times"></i>Not Available</span>
+                                    </div>
+                                </label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Founded year<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Demo URL<small class="manditory">*</small><a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="Youtube URL">
+                            </div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
+                                <label for="input1" class="col-form-label">About software<small class="manditory">*</small></label>
+                                <div id="txtSummary"></div>
+                            </div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="input1" class="col-form-label">Work Email<small class="manditory">*</small><a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="input1" class="col-form-label">LinkedIn<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="input1" class="col-form-label">Twitter<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="input1" class="col-form-label">Facebook<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="input1" class="col-form-label">Instagram<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="input1" placeholder="">
+                            </div>
+
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary" id="saveCompanyProfile">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Successfully company added-->
+        <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data hide" id="successServiceData">
+            <!--Add class "hide" to hide the content -->
+            <section class="section-wrap">
+                <div class="jumbotron vertical-center">
+                    <div class="caption"><span id="spnSuccessMessage">Thank you for submitting your software in Upvotes, we get back you shortly.</span></div>
+                    <button type="submit" class="btn btn-primary" id="btnSoftwareList">My Software</button>
+                </div>
+            </section>
+        </div>
+       
+    </div>
+</div>
