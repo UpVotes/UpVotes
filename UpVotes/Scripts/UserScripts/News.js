@@ -252,7 +252,8 @@ $(document).ready(function () {
                 NewsRequestObj.StateID = 0;
                 NewsRequestObj.City = '';
             }            
-            NewsRequestObj.CompanySoftwareID = $('#hdnCompanySoftwareID').val(); 
+            NewsRequestObj.CompanySoftwareID = $('#hdnCompanySoftwareID').val();
+            NewsRequestObj.CompanySoftwareName = $('#txtCompanySoftware').val();
             NewsRequestObj.WebsiteURL = $('#txtWebsiteURL').val(); 
             NewsRequestObj.Title = $('#txtTitle').val(); 
             NewsRequestObj.Description = ($("#txtDescription").Editor("getText"));
@@ -316,6 +317,7 @@ $(document).ready(function () {
                 NewsRequestObj.City = '';
             }
             NewsRequestObj.CompanySoftwareID = $('#hdnCompanySoftwareID').val();
+            NewsRequestObj.CompanySoftwareName = $('#txtCompanySoftwareName').val();
             NewsRequestObj.WebsiteURL = $('#txtWebsiteURL').val();
             NewsRequestObj.Title = $('#txtTitle').val();
             NewsRequestObj.Description = ($("#txtDescription").Editor("getText"));
