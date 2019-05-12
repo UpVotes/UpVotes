@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Web;
 using System.Web.Mvc;
 using UpVotes.Business;
 using UpVotes.BusinessEntities.Entities;
@@ -215,6 +216,99 @@ namespace UpVotes.Controllers
             }
         }
 
+        public static bool ExecuteWithTimeLimit(TimeSpan timeSpan, Action codeBlock)
+        {
+            try
+            {
+                System.Threading.Tasks.Task task = System.Threading.Tasks.Task.Factory.StartNew(() => codeBlock());
+                task.Wait(timeSpan);
+                return task.IsCompleted;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void SaveFileToServer()
+        {
+            try
+            {
+                int ServiceRequest_ID = Convert.ToInt32(Request.Params["CompanyID"]);
+                HttpPostedFileBase[] postedFile = new HttpPostedFileBase[Request.Files.Count];
+                string AppPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
+
+                bool Completed = ExecuteWithTimeLimit(TimeSpan.FromMilliseconds(300000), () =>
+                {
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        postedFile[i] = Request.Files[i];
+
+                        if (postedFile[i] != null && ServiceRequest_ID > 0)
+                        {
+                            string fileName = postedFile[i].FileName;
+                            if (fileName.Contains("\\"))
+                            {
+                                int lastIndex = fileName.LastIndexOf('\\') + 1;
+                                int len = fileName.Length - lastIndex;
+                                fileName = fileName.Substring(lastIndex, len);
+                            }
+                            string SMP = Server.MapPath(AppPath + "/images/News");
+                            string Path = SMP + "/" + ServiceRequest_ID;
+                            string fullPath = SMP + "/" + ServiceRequest_ID + "/" + fileName;
+                            if (System.IO.Directory.Exists(Path))
+                            {
+                                postedFile[i].SaveAs(fullPath);
+                            }
+                            else
+                            {
+                                System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(Path);
+                                postedFile[i].SaveAs(fullPath);
+                            }
+                        }
+                        else if (postedFile != null && ServiceRequest_ID == 0)
+                        {
+                            int UserID = Convert.ToInt32(Session["UserID"]);
+                            string TempLoc = "Temp_" + UserID;
+                            string fileName = postedFile[i].FileName;
+
+                            if (fileName.Contains("\\"))
+                            {
+                                int lastIndex = fileName.LastIndexOf('\\') + 1;
+                                int len = fileName.Length - lastIndex;
+                                fileName = fileName.Substring(lastIndex, len);
+                            }
+
+                            if (fileName.Contains("\\"))
+                            {
+                                int lastIndex = fileName.LastIndexOf('\\') + 1;
+                                int len = fileName.Length - lastIndex;
+                                fileName = fileName.Substring(lastIndex, len);
+                            }
+                            string SMP = Server.MapPath(AppPath + "/images/News");
+                            string Path = SMP + "/" + TempLoc;
+                            string fullPath = SMP + "/" + TempLoc + "/" + fileName;
+                            if (System.IO.Directory.Exists(Path))
+                            {
+                                postedFile[i].SaveAs(fullPath);
+                            }
+                            else
+                            {
+                                System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(Path);
+                                postedFile[i].SaveAs(fullPath);
+                            }
+                        }
+                    }
+                });
+                if (Completed)
+                    Response.Write("<script>var x=window.open('','_self','','');window.opener = null;x.close();</script>");
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         [ValidateInput(false)]
         public JsonResult SaveNews()
         {
@@ -247,7 +341,7 @@ namespace UpVotes.Controllers
 
                     if (NewsID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
                     {
-                        bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);
+                        //bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);
                         string SMP = Server.MapPath(AppPath + "/images/News");
                         string fullPath = SMP + "/" + news.ImageName.Replace(" ", "");
                         if (System.IO.Directory.Exists(SMP))
@@ -325,7 +419,7 @@ namespace UpVotes.Controllers
 
                     if (NewsID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
                     {
-                        bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);
+                        //bool isFileUploaded = Helper.FTPFileUpload.UploadFile(Request.Files[0]);
                         string SMP = Server.MapPath(AppPath + "/images/News");
                         string fullPath = SMP + "/" + news.ImageName.Replace(" ", "");
                         if (System.IO.Directory.Exists(SMP))
