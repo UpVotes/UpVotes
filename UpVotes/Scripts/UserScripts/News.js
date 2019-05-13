@@ -231,7 +231,7 @@ $(document).ready(function () {
         return IsValid;
     }
 
-    $('#btnSavePost').click(function () {
+    $('#btnSavePost').click(function () {        
         if($.SaveModeValidations())
         {            
             var NewsRequestObj = new Object();
@@ -277,6 +277,7 @@ $(document).ready(function () {
                 success: function (response) {                    
                     $('#ajax_loaderDashboard').hide();
                     if (response.IsSuccess) {
+                        uploadedNewsImage = null;                        
                         alert("Successfully Saved.");
                         $('#showAddNewsSection').click();
                     } else {                        
@@ -341,6 +342,7 @@ $(document).ready(function () {
                 success: function (response) {
                     $('#ajax_loaderDashboard').hide();
                     if (response.IsSuccess) {
+                        uploadedNewsImage = null;                        
                         alert("Successfully Saved.");
                         $('#showAddUserNewsSection').click();
                     } else {
@@ -361,7 +363,7 @@ function CheckForUploadedFile(obj) {
     if (obj.files && obj.files[0]) {
         var ext = uploadedNewsImage.name.split('.').pop().toLowerCase();
         if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-            $('#UplAttachment').val('');
+            uploadedNewsImage = null;
             $('#txtImageName').text('Select Image');
             alert('Select Image!');
             uploadedNewsImage = Object();

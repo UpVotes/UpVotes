@@ -53,7 +53,7 @@
                                                 }
                                                 <div class="news-info">
                                                     <div class="title"><i class="fa fa-arrow-right"></i> @newsList.NewsTitle</div>
-                                                    <p>@newsList.NewsDescription</p>
+                                                    <p>@Html.Raw(newsList.NewsDescription)</p>
                                                 </div>
                                                 <div class="news-action">
                                                     <div class="date">Publish Date | @newsList.CreatedDate</div>
