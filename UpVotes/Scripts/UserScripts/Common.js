@@ -49,7 +49,6 @@ $.ClearDropdown = function (DdlObject) {
         }
     }
 }
-debugger;
 $.fn.LoadOptions = function (data, name, value) {
     if (data != undefined && data != null) {
         this.sel = $(this);

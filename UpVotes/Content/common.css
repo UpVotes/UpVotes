@@ -55,6 +55,7 @@ body {
     /*white-space: nowrap;*/
 }
 
+.cursorPointer{cursor:pointer;}
 
 /* Loader */
 .card-loader {
@@ -485,6 +486,73 @@ h6,
     font-size: 22px;
 }
 
+/*All Categories*/
+.centerText-align {text-align:center;
+}
+.all-cat .tab-pane {
+	padding: 20px;
+}
+.all-cat .sidebar ul {
+	padding: 0;
+}
+.all-cat .sidebar li {
+	list-style-type: none;
+} 
+.all-cat .sidebar li a {
+    color: #fff;
+    padding: 10px 15px;
+    display: block;
+}
+.all-cat .sidebar li a:hover,
+.all-cat .sidebar li.active a {
+    background: #006e7d;
+    text-decoration: none;
+}
+.all-cat .sidebar {
+    width: 300px;
+    background-color: #3FC0C5;
+    padding: 20px;
+}
+.all-cat .data-table {
+    width: calc(100% - 330px);
+    margin-left: 20px;
+}
+.all-cat .data-table.full {
+    width: 97%;
+}
+.all-cat .sidebar,
+.all-cat .data-table {
+    display: inline-block;
+    vertical-align: top;
+}
+.all-cat .data-table table {
+    width: 100%;
+    background: #fff;
+}
+.all-cat .data-table thead tr {
+    background: #7d99a4;
+}
+.all-cat .data-table thead td,
+.all-cat .data-table tbody td {
+    width: 25%;
+    padding: 15px;
+    color: #fff;
+    line-height: normal;
+    border: 1px solid #ddd;
+}
+.all-cat .data-table td a {
+	color:#005da2; 
+	text-decoration: underline;
+}
+.all-cat .sidebar .choose {
+	display: none;
+	color: #fff;
+}
+.all-cat .sidebar .choose i {
+    float: right;
+}
+
+
 .avail-status {
     display: inline-block;
     vertical-align: middle;
@@ -564,6 +632,39 @@ h6,
 		font-size: 14px;
 	}
 	
+    /*All Category*/
+	.all-cat .tab-pane {
+	    padding: 10px;
+	}
+	.all-cat .sidebar,
+	.all-cat .data-table {
+	    width: 100%;
+	    margin: 0;
+	}
+	.all-cat .sidebar {
+		padding: 10px;
+		margin-bottom: 15px;
+		position: relative;
+	}
+	.all-cat .sidebar ul {
+	    position: absolute;
+	    width: 100%;
+	    height: 200px;
+	    display: none;
+	    left: 0;
+	    right: 0;
+	    background: #006e7d;
+	        overflow-y: auto;
+	}
+	.all-cat .sidebar ul.open {
+		display: block;
+	}
+	.all-cat .sidebar .choose {
+		display: block;
+	}
+	.all-cat .data-table {
+	    overflow-x: auto;
+	}
 	
 }
 

@@ -1,0 +1,55 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity>
+
+
+<table>
+    <thead>
+        <tr>
+            <td><div>Platform</div></td>
+            <td><div>Countries</div></td>
+            <td><div>States</div></td>
+            <td><div>Cities</div></td>
+        </tr>
+    </thead>
+    <tbody>       
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div>
+                        @if (Convert.ToString(item.Category) == "SF")
+                        {
+                            <a target="_blank" href="/@item.URL">@item.Name</a>
+                        }
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @if (Convert.ToString(item.countryCategory) == "CY")
+                        {
+                            <a target="_blank" href="/@item.countryURL">@item.countryName</a>
+                        }
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @if (Convert.ToString(item.stateCategory) == "ST")
+                        {
+                            <a target="_blank" href="/@item.stateURL">@item.stateName</a>
+                        }
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @if (Convert.ToString(item.cityCategory) == "CT")
+                        {
+                            <a target="_blank" href="/@item.cityURL">@item.cityName</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>

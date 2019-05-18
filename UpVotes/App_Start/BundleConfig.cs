@@ -70,7 +70,7 @@ namespace UpVotes
 
             bundles.Add(new ScriptBundle("~/bundles/software").Include("~/Scripts/UserScripts/Software.js"));
 
-
+            bundles.Add(new ScriptBundle("~/bundles/allcategories").Include("~/Scripts/UserScripts/AllCategory.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
                       "~/Scripts/UserScripts/Quotation.min.js"));

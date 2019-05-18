@@ -319,6 +319,20 @@ namespace UpVotes.Business
             }
         }
 
+        internal List<CategoryLinksEntity> GetServiceCategoryLinks(int focusAreaID)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetServiceCategoryLinks";
+                string completeURL = WebAPIURL + apiMethod+"/"+ focusAreaID;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                List<CategoryLinksEntity> LinksObj = JsonConvert.DeserializeObject<List<CategoryLinksEntity>>(response);
+                return LinksObj;
+            }
+        }
+
         internal List<StateEntity> GetStates(int countryID)
         {
             using (_httpClient = new HttpClient())
