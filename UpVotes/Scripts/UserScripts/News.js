@@ -171,6 +171,7 @@ $(document).ready(function () {
     });
     $('#txtTitle').change(function () {
         var Title = $(this).val();
+        Title = handleSpecialChar(Title)
         $.IsExistsNews('', Title);
     });
 
@@ -255,7 +256,8 @@ $(document).ready(function () {
             NewsRequestObj.CompanySoftwareID = $('#hdnCompanySoftwareID').val();
             NewsRequestObj.CompanySoftwareName = $('#txtCompanySoftware').val();
             NewsRequestObj.WebsiteURL = $('#txtWebsiteURL').val(); 
-            NewsRequestObj.Title = $('#txtTitle').val(); 
+            NewsRequestObj.Title = $('#txtTitle').val();
+            NewsRequestObj.UrlTitle = handleSpecialChar($('#txtTitle').val());
             NewsRequestObj.Description = ($("#txtDescription").Editor("getText"));
             NewsRequestObj.YoutubeURL = $('#txtYoutubeUrl').val();
             var form = $('#myForm')[0];
@@ -321,6 +323,7 @@ $(document).ready(function () {
             NewsRequestObj.CompanySoftwareName = $('#txtCompanySoftwareName').val();
             NewsRequestObj.WebsiteURL = $('#txtWebsiteURL').val();
             NewsRequestObj.Title = $('#txtTitle').val();
+            NewsRequestObj.UrlTitle = handleSpecialChar($('#txtTitle').val());
             NewsRequestObj.Description = ($("#txtDescription").Editor("getText"));
             NewsRequestObj.YoutubeURL = $('#txtYoutubeUrl').val();
             var form = $('#myForm')[0];
@@ -372,4 +375,10 @@ function CheckForUploadedFile(obj) {
             $('#txtImageName').text(uploadedNewsImage.name);            
         }
     }
+}
+
+function handleSpecialChar(value)
+{
+    value = value.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+    return value;
 }

@@ -35,5 +35,14 @@ namespace UpVotes.Utility
             }
             return sb.ToString();
         }
+
+        public static string FirstCharToUpper(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+            return char.ToUpper(str[0]) + str.Substring(1);
+        }
     }
 }
