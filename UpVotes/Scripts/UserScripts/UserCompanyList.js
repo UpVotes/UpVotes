@@ -272,18 +272,18 @@ $(document).ready(function ()
                 status = 1;
             }
 
-            if (status != 1)
+            if (status !== 1)
             {
                 //Focus Area Section
                 var primaryFocusPercentageTotal = 0;
                 actualFocusAreaArray = [];
-                for (var i = 0; i < focusAreaObject.length; i++)
-                {
-                    if (focusAreaObject[i].FocusType == "P")
+                for (var i = 0; i < focusAreaObject.length; i++) {
+                    var actualFocusAreaObj;
+                    if (focusAreaObject[i].FocusType === "P")
                     {
                         if ($("#txtFocus_" + focusAreaObject[i].FocusAreaID)[0].value != "")
                         {
-                            var actualFocusAreaObj = new Object();
+                            actualFocusAreaObj = new Object();
                             actualFocusAreaObj.FocusAreaID = focusAreaObject[i].FocusAreaID;
                             actualFocusAreaObj.CompanyFocusID = $("#hdnCompanyFocusID_" + focusAreaObject[i].FocusAreaID)[0].value == "" ? 0 : $("#hdnCompanyFocusID_" + focusAreaObject[i].FocusAreaID)[0].value;
                             actualFocusAreaObj.FocusAreaPercentage = $("#txtFocus_" + focusAreaObject[i].FocusAreaID)[0].value;
@@ -304,7 +304,7 @@ $(document).ready(function ()
                         }
                     } else
                     {
-                        var actualFocusAreaObj = new Object();
+                        actualFocusAreaObj = new Object();
                         actualFocusAreaObj.FocusAreaID = focusAreaObject[i].FocusAreaID;
                         actualFocusAreaObj.CompanyFocusID = $("#hdnCompanyFocusID_" + focusAreaObject[i].FocusAreaID)[0].value == "" ? 0 : $("#hdnCompanyFocusID_" + focusAreaObject[i].FocusAreaID)[0].value;
                         actualFocusAreaObj.FocusAreaPercentage = 0;
@@ -373,7 +373,7 @@ $(document).ready(function ()
                 }
 
 
-                if (subFocusPercentageTotal != 100 * subFocusCount)
+                if (subFocusPercentageTotal !== 100 * subFocusCount)
                 {
                     $.DisplayMessage(true, "Sub-focus percentage must be equal to 100%", 1);
                     return false;
@@ -765,11 +765,11 @@ $(document).ready(function ()
     });
 
     $.GetCompanyData = function (companyName)
-    {
+    {        
         isAddMode = false;
         //$('#divLoading').dialog({ modal: true, title: '', width: '115', height: '115', open: function () { $('.ui-widget-overlay').addClass('custom-overlay'); $(".ui-dialog-titlebar-close").hide(); $(".ui-widget-header").hide(); }, close: function () { $('.ui-widget-overlay').removeClass('custom-overlay'); $(".ui-dialog-titlebar-close").show(); $(".ui-widget-header").show(); } });
         $('#ajax_loaderDashboard').show();
-        if (companyName != "" && companyName != null && companyName != undefined)
+        if (companyName !== "" && companyName != null && companyName !== undefined)
         {
             $.ajax({
                 url: $.absoluteurl('/UserCompanyList/GetUserCompanyData?companyName=' + $.EncryptString(companyName)),

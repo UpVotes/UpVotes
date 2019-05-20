@@ -86,7 +86,14 @@ namespace UpVotes
                       "~/Scripts/highcharts.js",
                       "~/Scripts/UserScripts/Company.js",
                       "~/Scripts/UserScripts/CompanyVote.min.js"));
-            
+
+            bundles.Add(new StyleBundle("~/Content/UserListCss").Include("~/Content/text-editor.css",
+                "~/Content/multi-select.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/UserSoftwareListPluginJs").Include("~/Scripts/multi-select.js",
+                "~/Scripts/text-editor.js"));
+            bundles.Add(
+                new ScriptBundle("~/bundles/UserSoftwareList").Include("~/Scripts/UserScripts/UserSoftwareList.js"));
 
             BundleTable.EnableOptimizations = true;
         }

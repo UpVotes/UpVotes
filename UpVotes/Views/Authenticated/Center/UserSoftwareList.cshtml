@@ -1,12 +1,16 @@
-﻿
+﻿@model UpVotes.Models.SoftwareViewModel
+
 @{
-    ViewBag.Title = "My Company List";
+    ViewBag.Title = "My Software List";
 }
 
-<script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>
+@*<script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>*@
+
+@Scripts.Render("~/bundles/UserSoftwareList")
+
 <!-- Company added list -->
 <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
-    <h2 class="title-small">Service Listing</h2>
+    <h2 class="title-small">Software Listing</h2>
 </div>
 
     <div class="col text-center">
@@ -28,29 +32,16 @@
                 </tr>
             </thead>
             <tbody>
-                
+                @foreach (var software in Model.SoftwareList)
+                {
                     <tr>
-                        <td><input type="hidden" id="hdn_1" value="1" /><span>1</span></td>
-                        <td><span><a class="link" href="/profile/">robosoft</a></span></td>
-                        <td><span>Yes</span></td>
-                        <td><span>Not Approved</span></td>
-                        <td><a class="link btnEditSoftware" compname="roboso">Edit</a> | <a class="link">Delete</a></td>
+                        <td><input type="hidden" id="hdn_@software.SoftwareID" value="@software.SoftwareID" /><span>@software.SoftwareID</span></td>
+                        <td><span><a class="link" href="/software/@software.SoftwareName.Replace(" ","-").ToLower()">@software.SoftwareName</a></span></td>
+                        <td><span>@software.IsUserVerified</span></td>
+                        <td><span>@(software.IsAdminApproved == "Yes" ? "Live" : "Not Approved")</span></td>
+                        <td><a class="link btnEditSoftware" softwarename="@software.SoftwareName">Edit</a> | <a class="link">Delete</a></td>
                     </tr>
-                <tr>
-                    <td><input type="hidden" id="hdn_1" value="2" /><span>2</span></td>
-                    <td><span><a class="link" href="/profile/">robosoft</a></span></td>
-                    <td><span>Yes</span></td>
-                    <td><span>Live</span></td>
-                    <td><a class="link btnEditSoftware" compname="roboso">Edit</a> | <a class="link">Delete</a></td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" id="hdn_1" value="1" /><span>1</span></td>
-                    <td><span><a class="link" href="/profile/">info</a></span></td>
-                    <td><span>Yes</span></td>
-                    <td><span>Not Approved</span></td>
-                    <td><a class="link btnEditSoftware" compname="roboso">Edit</a> | <a class="link">Delete</a></td>
-                </tr>
-               
+                }
             </tbody>
         </table>
     </section>

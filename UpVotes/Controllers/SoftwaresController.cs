@@ -12,7 +12,7 @@ namespace UpVotes.Controllers
 {
     public class SoftwaresController : Controller
     {
-        private string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
+        private readonly string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
        
         [ValidateInput(false)]
         public ActionResult Softwares()
@@ -47,10 +47,10 @@ namespace UpVotes.Controllers
                     CacheHandler.Add(softwareViewModel, softwareName);
                 }
 
-                softwareViewModel.WebBaseURL = _webBaseURL;
+                softwareViewModel.WebBaseUrl = _webBaseURL;
                 return View(softwareViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -106,7 +106,7 @@ namespace UpVotes.Controllers
                 softwareViewModel = new SoftwareService().GetAllSoftwareReviews(softwarereviewsFilter);
                 if (softwareViewModel != null && (softwareViewModel.SoftwareList != null && softwareViewModel.SoftwareList.Count > 0))
                 {
-                    softwareViewModel.WebBaseURL = _webBaseURL;
+                    softwareViewModel.WebBaseUrl = _webBaseURL;
                     return View("~/Views/AllListPages/AllSoftwareReviewsList.cshtml", softwareViewModel);
                 }
                 else
@@ -198,6 +198,22 @@ namespace UpVotes.Controllers
                 CacheHandler.Clear(id);
             }
 
+        }
+
+        public ActionResult UpdateSoftwareRejectionComments()
+        {
+            if (Request.Params["softwareRejectComments"] != null)
+            {
+                JObject jobj = JObject.Parse(Request.Params["softwareRejectComments"]);
+                SoftwareRejectComments softwareRejectComments = jobj.ToObject<SoftwareRejectComments>();
+                UserEntity loggedInUser = (UserEntity)Session["UserObj"];
+                softwareRejectComments.RejectedBy = loggedInUser.FirstName + " " + loggedInUser.LastName;
+                bool isRejectCommentsUpdated = new SoftwareService().UpdateSoftwareRejectionComments(softwareRejectComments);
+                return PartialView("~/Views/Authenticated/Center/UserSoftwareList.cshtml",
+                    new SoftwareViewModel() { SoftwareList = new List<SoftwareEntity>() });
+            }
+
+            return null;
         }
 
     }

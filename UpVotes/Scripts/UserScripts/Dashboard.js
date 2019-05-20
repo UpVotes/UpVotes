@@ -24,7 +24,7 @@
         });
     });
 
-    $('#ancSoftwareListing').click(function () {
+    $('#ancSoftwareListing').click(function () {        
         $('#ajax_loaderDashboard').show();
         $.ajax({
             url: $.absoluteurl('/UserCompanyList/UserSoftware'),

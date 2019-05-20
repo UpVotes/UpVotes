@@ -12,30 +12,27 @@ namespace UpVotes.Business
     public class SoftwareService
     {
         HttpClient _httpClient = null;
+        readonly string _webApiurl = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
 
         internal SoftwareViewModel GetSoftware(SoftwareFilterEntity softwareFilter)
         {
+            StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareFilter), Encoding.UTF8, "application/json");
             using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "GetSoftware";
-                string completeURL = WebAPIURL + apiMethod + '/';
+            {                
+                const string apiMethod = "GetSoftware";
+                var completeUrl = _webApiurl + apiMethod + '/';
 
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareFilter), Encoding.UTF8, "application/json");
-
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                SoftwareViewModel softwareViewModel = new SoftwareViewModel();
-                softwareViewModel = JsonConvert.DeserializeObject<SoftwareViewModel>(response.Content.ReadAsStringAsync().Result);
+                var response = _httpClient.PostAsync(completeUrl, httpContent).Result;
+                var softwareViewModel = JsonConvert.DeserializeObject<SoftwareViewModel>(response.Content.ReadAsStringAsync().Result);
                 return softwareViewModel;
             }
         }
         internal SoftwareViewModel GetAllSoftwareReviews(SoftwareFilterEntity softwareReviewsFilter)
         {
             using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+            {                
                 string apiMethod = "GetUserReviewsForSoftware";
-                string completeURL = WebAPIURL + apiMethod;
+                string completeURL = _webApiurl + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareReviewsFilter), Encoding.UTF8, "application/json");
 
                 var response = _httpClient.PostAsync(completeURL, httpContent).Result;
@@ -53,64 +50,56 @@ namespace UpVotes.Business
             }
         }
 
-        internal string ThanksNoteForReview(int softwareID, int softwareReviewID, int userID)
+        internal SoftwareViewModel GetUserSoftwares(int userId, bool isAdmin)
+        {            
+            using (_httpClient = new HttpClient())
+            {                
+                const string apiMethodName = "GetUserSoftwares";
+                var completeUrl = _webApiurl + apiMethodName + '/' + userId + '/' + isAdmin;
+                var response = _httpClient.GetStringAsync(completeUrl).Result;
+                return JsonConvert.DeserializeObject<SoftwareViewModel>(response);                
+            }
+        }
+
+        internal string ThanksNoteForReview(int softwareId, int softwareReviewId, int userId)
         {
             using (_httpClient = new HttpClient())
-            {
-                string message = string.Empty;
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "ThanksNoteForSoftwareReview";
-                string completeURL = WebAPIURL + apiMethod + '/';
+            {                
+                const string apiMethod = "ThanksNoteForSoftwareReview";
+                var completeUrl = _webApiurl + apiMethod + '/';
 
                 SoftwareReviewThankNoteEntity softwareReviewThankNoteEntity = new SoftwareReviewThankNoteEntity
                 {
-                    SoftwareID = softwareID,
-                    UserID = userID,
-                    SoftwareReviewID = softwareReviewID,
+                    SoftwareID = softwareId,
+                    UserID = userId,
+                    SoftwareReviewID = softwareReviewId,
                 };
 
 
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareReviewThankNoteEntity), Encoding.UTF8, "application/json");
+                var httpContent = new StringContent(JsonConvert.SerializeObject(softwareReviewThankNoteEntity), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    message = response.Content.ReadAsStringAsync().Result;
-                }
-                else
-                {
-                    message = "Something error occured while giving thanks note. Please contact support.";
-                }
+                var response = _httpClient.PostAsync(completeUrl, httpContent).Result;
+                var message = response.IsSuccessStatusCode ? response.Content.ReadAsStringAsync().Result : "Something error occured while giving thanks note. Please contact support.";
 
                 return message;
             }
         }
 
-        internal string VoteForSoftware(int softwareID, int userID)
+        internal string VoteForSoftware(int softwareId, int userId)
         {
+            var softwareVote = new SoftwareVoteEntity
+            {
+                SoftwareID = softwareId,
+                UserID = userId
+            };
+            var httpContent = new StringContent(JsonConvert.SerializeObject(softwareVote), Encoding.UTF8, "application/json");
             using (_httpClient = new HttpClient())
             {
-                string message = string.Empty;
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "VoteForSoftware";
-                string completeURL = WebAPIURL + apiMethod + '/';
+                const string apiMethod = "VoteForSoftware";
+                var completeUrl = _webApiurl + apiMethod + '/';
 
-                SoftwareVoteEntity softwareVote = new SoftwareVoteEntity
-                {
-                    SoftwareID = softwareID,
-                    UserID = userID
-                };
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareVote), Encoding.UTF8, "application/json");
-
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    message = response.Content.ReadAsStringAsync().Result;
-                }
-                else
-                {
-                    message = "Something error occured while voting. Please contact support.";
-                }
+                var response = _httpClient.PostAsync(completeUrl, httpContent).Result;
+                var message = response.IsSuccessStatusCode ? response.Content.ReadAsStringAsync().Result : "Something error occured while voting. Please contact support.";
 
                 return message;
             }
@@ -118,36 +107,28 @@ namespace UpVotes.Business
 
         internal string ClaimSoftwareListing(ClaimApproveRejectListingRequest claimlistingrequest)
         {
-
+            const string apiMethod = "InsertVerifyClaimSoftwareListing";
+            var completeUrl = _webApiurl + apiMethod + '/';
+            var httpContent = new StringContent(JsonConvert.SerializeObject(claimlistingrequest), Encoding.UTF8, "application/json");
             using (_httpClient = new HttpClient())
             {
-                string message = string.Empty;
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "InsertVerifyClaimSoftwareListing";
-                string completeURL = WebAPIURL + apiMethod + '/';
-
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(claimlistingrequest), Encoding.UTF8, "application/json");
-
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                if (response.IsSuccessStatusCode)
+                HttpResponseMessage response;
+                using (httpContent)
                 {
-                    message = "Successfully Claimed";
+                    response = _httpClient.PostAsync(completeUrl, httpContent).Result;
                 }
-                else
-                {
-                    message = "Something error occured while claiming. Please contact support.";
-                }
+
+                var message = response.IsSuccessStatusCode ? "Successfully Claimed" : "Something error occured while claiming. Please contact support.";
                 return message;
             }
         }
 
-        internal List<string> GetSoftwareForAutoComplete(int SoftwareCategory, string searchTerm)
+        internal List<string> GetSoftwareForAutoComplete(int softwareCategory, string searchTerm)
         {
             using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+            {                
                 string apiMethod = "GetSoftwareForAutoComplete";
-                string completeURL = WebAPIURL + apiMethod + '/' + SoftwareCategory + '/' + searchTerm;
+                string completeURL = _webApiurl + apiMethod + '/' + softwareCategory + '/' + searchTerm;
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 List<string> myAutoCompleteList = JsonConvert.DeserializeObject<List<string>>(response);
                 return myAutoCompleteList;
@@ -157,28 +138,26 @@ namespace UpVotes.Business
         internal CategoryMetaTagsDetails GetSoftwareCategoryMetaTags(string urlSoftwareCategory)
         {
             using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+            {                
                 string apiMethod = "GetSoftwareCategoryMetaTags";                
                 string apiParameter = urlSoftwareCategory;
-                string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
+                string completeURL = _webApiurl + apiMethod + '/' + apiParameter;
                 var response = _httpClient.GetStringAsync(completeURL).Result;
                 CategoryMetaTagsDetails metaTagsTitle = JsonConvert.DeserializeObject<CategoryMetaTagsDetails>(response);
                 return metaTagsTitle;
             }
         }
 
-        internal CompanySoftwareUserReviews GetUserReviewsForSoftwareListingPage(SoftwareFilterEntity UserReviewObj)
+        internal CompanySoftwareUserReviews GetUserReviewsForSoftwareListingPage(SoftwareFilterEntity userReviewObj)
         {
             using (_httpClient = new HttpClient())
-            {
-                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
-                string apiMethod = "GetSoftwareReviewsForListingPage";
-                string completeURL = WebAPIURL + apiMethod;
-                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(UserReviewObj), Encoding.UTF8, "application/json");
+            {                
+                const string apiMethod = "GetSoftwareReviewsForListingPage";
+                string completeUrl = _webApiurl + apiMethod;
+                var httpContent = new StringContent(JsonConvert.SerializeObject(userReviewObj), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
-                CompanySoftwareUserReviews softwareReviews = new CompanySoftwareUserReviews();
+                var response = _httpClient.PostAsync(completeUrl, httpContent).Result;
+                var softwareReviews = new CompanySoftwareUserReviews();
                 if (response.IsSuccessStatusCode)
                 {
                     softwareReviews = JsonConvert.DeserializeObject<CompanySoftwareUserReviews>(response.Content.ReadAsStringAsync().Result);
@@ -189,6 +168,72 @@ namespace UpVotes.Business
                     return softwareReviews;
                 }
 
+            }
+        }
+
+        internal SoftwareViewModel GetUserSoftwareByName(string softwareName)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                const string apiMethod = "GetUserSoftwareByName";
+                var completeUrl = _webApiurl + apiMethod + '/' + softwareName;
+                var response = _httpClient.GetStringAsync(completeUrl).Result;
+                return JsonConvert.DeserializeObject<SoftwareViewModel>(response);
+            }
+        }
+
+        public int SaveSoftwareDetails(SoftwareEntity software)
+        {
+            using (_httpClient = new HttpClient())
+            {                
+                const string apiMethod = "SaveSoftwareDetails";
+                var completeUrl = _webApiurl + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(software), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeUrl, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        public bool SoftwareVerificationByUser(int uId, string cId, int softId)
+        {
+            using (_httpClient = new HttpClient())
+            {                
+                const string apiMethod = "SoftwareVerificationByUser";
+                string completeURL = _webApiurl + apiMethod + '/' + uId + '/' + cId + '/' + softId;
+
+                var response = _httpClient.GetStringAsync(completeURL).Result;
+                bool isUserVerifiedCompany = JsonConvert.DeserializeObject<bool>(response);
+                return isUserVerifiedCompany;
+            }
+        }
+
+        public bool UpdateSoftwareRejectionComments(SoftwareRejectComments softwareRejectComments)
+        {
+            using (_httpClient = new HttpClient())
+            {                
+                const string apiMethod = "UpdateSoftwareRejectionComments";
+                string completeURL = _webApiurl + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(softwareRejectComments), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

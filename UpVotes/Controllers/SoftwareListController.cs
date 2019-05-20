@@ -14,15 +14,15 @@ namespace UpVotes.Controllers
 {
     public class SoftwareListController : Controller
     {
-        private string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
+        private readonly string _webBaseUrl = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
 
         // GET: CompanyList
         public ActionResult SoftwareList(string id)
         {
             Session["calledPage"] = "S";
-            string urlSoftwareCategory = Convert.ToString(Request.Url.Segments[1]);
-            SoftwareService softwareService = new SoftwareService();
-            int SoftwareCategoryID = 0;
+            var urlSoftwareCategory = Convert.ToString(Request.Url.Segments[1]);
+            var softwareService = new SoftwareService();
+            var softwareCategoryId = 0;
             if (Request.Url.Segments.Length > 2)
             {
                 urlSoftwareCategory = urlSoftwareCategory.Replace("/", "");
@@ -30,12 +30,12 @@ namespace UpVotes.Controllers
             if (urlSoftwareCategory != string.Empty)
             {
                 Session["SoftwareCategory"] = urlSoftwareCategory.ToString();
-                SoftwareCategoryID = new FocusAreaService().GetSoftwareCategoryID(urlSoftwareCategory);
+                softwareCategoryId = new FocusAreaService().GetSoftwareCategoryID(urlSoftwareCategory);
             }
             SoftwareFilterEntity softwareFilter = new SoftwareFilterEntity
             {
                 SoftwareName = "",
-                SoftwareCategoryId= SoftwareCategoryID,
+                SoftwareCategoryId= softwareCategoryId,
                 PageNo=1,
                 PageSize=10,
                 SortBy = "ASC",
@@ -43,9 +43,9 @@ namespace UpVotes.Controllers
             };
 
             SoftwareViewModel softwareViewModel = softwareService.GetSoftware(softwareFilter);
-            softwareViewModel.WebBaseURL = _webBaseURL;
+            softwareViewModel.WebBaseUrl = _webBaseUrl;
             GetSoftwareCategoryHeadLine(urlSoftwareCategory, softwareViewModel);
-            softwareViewModel.SoftwareCategoryID = SoftwareCategoryID.ToString();
+            softwareViewModel.SoftwareCategoryId = softwareCategoryId.ToString();
             softwareViewModel.PageCount = 0;
             softwareViewModel.PageNumber = 1;
             softwareViewModel.PageIndex = 1;
@@ -199,7 +199,7 @@ namespace UpVotes.Controllers
             };
 
             SoftwareViewModel softwareViewModel = softwareService.GetSoftware(softwareFilter);
-            softwareViewModel.WebBaseURL = _webBaseURL;
+            softwareViewModel.WebBaseUrl = _webBaseUrl;
             softwareViewModel.PageCount = 0;
             softwareViewModel.PageNumber = PageNo;
             softwareViewModel.PageIndex = 1;

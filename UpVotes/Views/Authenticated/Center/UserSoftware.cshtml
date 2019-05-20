@@ -1,7 +1,28 @@
-﻿
-<link rel="stylesheet" href="~/Content/text-editor.css"/>
-<script src="~/Scripts/text-editor.js"></script>
-<script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>
+﻿@model UpVotes.Models.SoftwareViewModel
+@using UpVotes.BusinessEntities.Entities
+@using System.Collections.Generic
+
+@*<link rel="stylesheet" href="~/Content/text-editor.css" />
+    <link href="~/Content/multi-select.css" rel="stylesheet" />
+    <script src="~/Scripts/multi-select.js"></script>
+    <script src="~/Scripts/text-editor.js"></script>
+    <script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>*@
+
+@Styles.Render("~/Content/UserListCss")
+@Scripts.Render("~/bundles/UserSoftwareListPluginJs")
+@Scripts.Render("~/bundles/UserSoftwareList")
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $('.select-category').SumoSelect();
+        $("#divRejectionComments").hide();
+        $("#btnSoftwraeCancel").hide();
+        $("#txtSummary").Editor("setText",((jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].SoftwareDescription))'))));
+        $.BindSoftwareData((jQuery.parseJSON('@Html.Raw(Json.Encode(Model.IsAdmin))')), (jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].SoftwareID))')), (jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].LogoName))')));
+
+    })
+</script>
 
 
 <div class="alert alert-danger" id="divFailureMessage">
@@ -27,50 +48,87 @@
                 </div>
             </section>
         </div>
-        
+
         <div class="col-xl-12 hide" id="addSoftwareData">
             <section class="section-wrap">
                 <div class="tab-wrap primary">
                     <div class="tab-content">
                         <div class="row">
                             <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                <label for="input1" class="col-form-label">Software logo<a href="#" class="hint">?</a></label>
+                                <label for="UplAttachment" class="col-form-label">Software logo<a href="#" class="hint">?</a></label>
+                                <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
                                 <div class="input-group">
-                                    <div class="custom-file v1">
+                                    <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm" class="custom-file v1">
                                         <div class="row">
                                             <div class="col-xl-12 col-md-12 col-sm-12">
                                                 <label class="btn-bs-file btn btn-primary">
-                                                    Choose Logo<input type="file" class="form-control">
+                                                    Choose Logo<input type="file" id="UplAttachment" name="postedFile" onchange="CheckForUploadedFile(this)" class="form-control" />
                                                 </label>
-                                                <div class="file-name">Ags-global-solutions-company-logo.jpg</div>
+                                                <div class="file-name" id="txtLogoName">@Model.SoftwareList[0].LogoName</div>
                                             </div>
                                             <div class="col-xl-12 col-md-12 col-sm-12">
-                                                <div class="logo-preview">                                                    
-                                                    <img src="~/images/SoftwareLogos/Ad-optimizer.png" />
+                                                <div class="logo-preview">
+                                                    <img class="previewimg" id="imgpreview" title="Your Logo" src="#" style="display: none;" />
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Software name<small class="manditory">*</small></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="txtSoftwareName" class="col-form-label">Software Name<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="txtSoftwareName" placeholder="" value="@Model.SoftwareList[0].SoftwareName" />
+                                <input type="hidden" id="hdnUserSoftwareID" value="@Model.SoftwareList[0].SoftwareID" />
+                                <input type="hidden" id="hdnIsAdmin" value="@Model.IsAdmin" />
+                                <input type="hidden" id="hdnLoggedInUserID" value="@Model.LoggedInUser" />
+                                <input type="hidden" id="hdnCreatedBy" value="@Model.SoftwareList[0].CreatedBy" />
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Software tag line<a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="ddlSoftwareCategory" class="col-form-label">Software Category<small class="manditory">*</small></label>
+                                @{
+                                    var categoryArray = Model.SoftwareList[0].SoftwareCatagoryIds.Split(new Char[] { '_' });
+                                }
+                                <select multiple="multiple" placeholder="Select categories" class="multi-select select-category" id="ddlSoftwareCategory">
+                                    <option disabled="disabled" value="0">Select Category</option>
+                                    <option value="1" @(Array.IndexOf(categoryArray, "1") != -1 ? "selected" : "")>Mobile App Softwares</option>
+                                    <option value="2" @(Array.IndexOf(categoryArray, "2") != -1 ? "selected" : "")>Seo Softwares</option>
+                                    <option value="3" @(Array.IndexOf(categoryArray, "3") != -1 ? "selected" : "")>Social Media Softwares</option>
+                                    <option value="4" @(Array.IndexOf(categoryArray, "4") != -1 ? "selected" : "")>Content Marketing Softwares</option>
+                                    <option value="5" @(Array.IndexOf(categoryArray, "5") != -1 ? "selected" : "")>App Design Softwares</option>
+                                    <option value="6" @(Array.IndexOf(categoryArray, "6") != -1 ? "selected" : "")>ECommerce Softwares</option>
+                                    <option value="7" @(Array.IndexOf(categoryArray, "7") != -1 ? "selected" : "")>Marketing Softwares</option>
+                                    <option value="8" @(Array.IndexOf(categoryArray, "8") != -1 ? "selected" : "")>CMS Softwares</option>
+                                    <option value="9" @(Array.IndexOf(categoryArray, "9") != -1 ? "selected" : "")>Email Marketing Softwares</option>
+                                    <option value="10" @(Array.IndexOf(categoryArray, "10") != -1 ? "selected" : "")>Game Development Softwares </option>
+                                    <option value="11" @(Array.IndexOf(categoryArray, "11") != -1 ? "selected" : "")>Graphic Design Softwares</option>
+                                    <option value="12" @(Array.IndexOf(categoryArray, "12") != -1 ? "selected" : "")>Iot Softwares</option>
+                                    <option value="13" @(Array.IndexOf(categoryArray, "13") != -1 ? "selected" : "")>Artificial Intelligence Softwares</option>
+                                    <option value="14" @(Array.IndexOf(categoryArray, "14") != -1 ? "selected" : "")>Data Visualization Softwares</option>
+                                    <option value="15" @(Array.IndexOf(categoryArray, "15") != -1 ? "selected" : "")>Inventory Management Softwares</option>
+                                    <option value="16" @(Array.IndexOf(categoryArray, "16") != -1 ? "selected" : "")>Accounting Softwares</option>
+                                    <option value="17" @(Array.IndexOf(categoryArray, "17") != -1 ? "selected" : "")>Workflow Management Softwares</option>
+                                    <option value="18" @(Array.IndexOf(categoryArray, "18") != -1 ? "selected" : "")>CRM Softwares</option>
+                                    <option value="19" @(Array.IndexOf(categoryArray, "19") != -1 ? "selected" : "")>Business Intelligence Softwares </option>
+                                    <option value="20" @(Array.IndexOf(categoryArray, "20") != -1 ? "selected" : "")>Machine Learning Softwares</option>
+                                    <option value="21" @(Array.IndexOf(categoryArray, "21") != -1 ? "selected" : "")>Product Management Softwares</option>
+                                    <option value="22" @(Array.IndexOf(categoryArray, "22") != -1 ? "selected" : "")>ERP Softwares</option>
+                                    <option value="23" @(Array.IndexOf(categoryArray, "23") != -1 ? "selected" : "")>Human Resource Softwares</option>
+                                </select>
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Price range<small class="manditory">*</small></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="txtSoftwareTagLine" class="col-form-label">Software Tag Line<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtSoftwareTagLine" placeholder="" value="@Model.SoftwareList[0].TagLine" />
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Software trial<small class="manditory">*</small></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="txtPriceRange" class="col-form-label">Price Range<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="txtPriceRange" placeholder="" value="@Model.SoftwareList[0].PriceRange" />
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">
+                                <label for="txtSoftwareTrail" class="col-form-label">Software Trial<small class="manditory">*</small></label>
+                                <input type="text" class="form-control" id="txtSoftwareTrail" placeholder="" value="@Model.SoftwareList[0].SoftwareTrail" />
+                            </div>
+                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                <label for="txtSoftwareWebSiteUrl" class="col-form-label">
                                     Website
                                     <small class="manditory">*</small>
                                     <a href="#" class="hint">?</a>
@@ -79,47 +137,63 @@
                                         <span class="not-avail hide"><i class="fa fa-times"></i>Not Available</span>
                                     </div>
                                 </label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <input type="text" class="form-control" id="txtSoftwareWebSiteUrl" placeholder="" value="@Model.SoftwareList[0].WebSiteURL" />
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Founded year<small class="manditory">*</small></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="txtFoundedYear" class="col-form-label">Founded year<small class="manditory">*</small></label>
+                                <input type="text" class="form-control numericOnly" id="txtFoundedYear" placeholder="" value="@Model.SoftwareList[0].FoundedYear" />
                             </div>
                             <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Demo URL<small class="manditory">*</small><a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="Youtube URL">
+                                <label for="txtDemoUrl" class="col-form-label">Demo URL<small class="manditory">*</small><a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtDemoUrl" placeholder="Youtube URL" value="@Model.SoftwareList[0].DemoURL" />
                             </div>
                             <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
                             <div class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
-                                <label for="input1" class="col-form-label">About software<small class="manditory">*</small></label>
-                                <div id="txtSummary"></div>
-                            </div>
-                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
-                            <div class="form-group col-xl-8 col-md-8 col-sm-12">
-                                <label for="input1" class="col-form-label">Work Email<small class="manditory">*</small><a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
-                            </div>
-                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
-                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                                <label for="input1" class="col-form-label">LinkedIn<a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
-                            </div>
-                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                                <label for="input1" class="col-form-label">Twitter<a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
-                            </div>
-                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                                <label for="input1" class="col-form-label">Facebook<a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
-                            </div>
-                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
-                                <label for="input1" class="col-form-label">Instagram<a href="#" class="hint">?</a></label>
-                                <input type="text" class="form-control" id="input1" placeholder="">
+                                <label for="txtSummary" class="col-form-label">About software<small class="manditory">*</small></label>
+                                <div id="txtSummary">@Model.SoftwareList[0].SoftwareDescription</div>
                             </div>
 
+                            @if (Model.IsAdmin && (Model.SoftwareList[0].CreatedBy == Convert.ToInt32(Session["UserID"])))
+                            {
+                                <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                    <label for="txtSoftwareDomain" class="col-form-label">Company Domain <small class="manditory">*</small><a tabindex="-1" class="hint">?</a></label>
+                                    <input type="text" class="form-control" id="txtSoftwareDomain" value="@Model.SoftwareList[0].DomainID" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                                <div class="form-group col-xl-8 col-md-8 col-sm-12">
+                                    <label for="txtWorkEmailId" class="col-form-label">Work Email<small class="manditory">*</small><a tabindex="-1" class="hint">?</a></label>
+                                    <input type="text" class="form-control" id="txtWorkEmailId" value="@Model.SoftwareList[0].WorkEmail" />
+                                </div>
+                            }
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="txtLinkedInProfile" class="col-form-label">LinkedIn<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtLinkedInProfile" placeholder="" value="@Model.SoftwareList[0].LinkedInURL" />
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="txtTwitterProfile" class="col-form-label">Twitter<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtTwitterProfile" placeholder="" value="@Model.SoftwareList[0].TwitterURL" />
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="txtFacebookProfile" class="col-form-label">Facebook<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtFacebookProfile" placeholder="" value="@Model.SoftwareList[0].FaceBookURL" />
+                            </div>
+                            <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                                <label for="txtInstagramProfile" class="col-form-label">Instagram<a href="#" class="hint">?</a></label>
+                                <input type="text" class="form-control" id="txtInstagramProfile" placeholder="" value="@Model.SoftwareList[0].InstagramURL" />
+                            </div>
+                            <div id="divRejectionComments" class="form-group col-xl-12 col-md-12 col-sm-12 custom-editor">
+                                <label for="txtRejectComments" class="col-form-label">Rejection Comments</label>
+                                <textarea class="form-control" rows="5" cols="50" id="txtRejectComments" value="@Model.SoftwareList[0].Remarks"></textarea>
+                            </div>
                             <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
                             <div class="col-xl-12 col-md-12 col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary" id="saveCompanyProfile">Save</button>
+                                <button type="submit" class="btn btn-primary" id="btnSaveSoftwareProfile">Save</button>
+                                <button type="submit" class="btn btn-primary" id="btnSoftwraeCancel">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -136,6 +210,6 @@
                 </div>
             </section>
         </div>
-       
+
     </div>
 </div>

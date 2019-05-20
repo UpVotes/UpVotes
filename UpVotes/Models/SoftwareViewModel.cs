@@ -11,7 +11,7 @@ namespace UpVotes.Models
 
         public int TotalNoOfUsers { get; set; }        
 
-        public string WebBaseURL { get; set; }
+        public string WebBaseUrl { get; set; }
 
         public string CategoryHeadLine { get; set; }
 
@@ -26,7 +26,13 @@ namespace UpVotes.Models
         public int PageIndex { get; set; }
 
         public int TotalNoOfSoftwares { get; set; }
-        public string SoftwareCategoryID { get; set; }
+
+        public string SoftwareCategoryId { get; set; }
+
+        public int LoggedInUser { get; set; }
+
+        public bool IsAdmin { get; set; }
+
         public List<OverviewNewsResponseEntity> OverviewNewsData { get; set; }
     }    
 }

@@ -286,6 +286,7 @@
     <Content Include="Content\jQuery\ui.jqgrid.css" />
     <Content Include="Content\Company.css" />
     <Content Include="Content\listing.css" />
+    <Content Include="Content\multi-select.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.default.css" />
     <Content Include="Content\StarRating.css" />
@@ -2454,6 +2455,7 @@
     <Content Include="Scripts\media.js" />
     <Content Include="Scripts\media.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\multi-select.js" />
     <Content Include="Scripts\nicEdit.js" />
     <Content Include="images\nicEditorIcons.gif" />
     <Content Include="Scripts\npm.js" />
