@@ -1,0 +1,91 @@
+﻿@using System.web.Mvc
+@model List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity>
+
+@{
+    ViewBag.Title = "All Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string section = "";
+    section = Request.QueryString["section"] != null ? Request.QueryString["section"].ToString() : "";
+}
+@Scripts.Render("~/bundles/allcategories")
+    <!-- Start Breadcrumbs -->
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Directories</li>
+            </ol>
+        </div>
+    </div>
+</nav>
+<!-- End Breadcrumbs -->
+<!-- Start Category -->
+<section class="list-wrap content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="user-review tab-wrap">
+                    <div class="title-wrap">
+                        <h2 id="titleCategory" class="title-small text-center">@(section != "" ? (section== "service"? "Browse All Service Categories" : "Browse All Software Categories") :"Browse All Service Categories")</h2>
+                    </div>
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a heading="Browse All Service Categories" class="@(section != "" ? (section== "service"? "nav-item nav-link active tabselect" : "nav-item nav-link tabselect") :"nav-item nav-link active tabselect")" data-toggle="tab" href="#service-category">
+                                All Service Profiles
+                                <div class="arrow-up"></div>
+                            </a>
+                            <a heading="Browse All Software Categories" class="@(section != "" ? (section == "service"? "nav-item nav-link tabselect" : "nav-item nav-link active tabselect") :"nav-item nav-link tabselect")" data-toggle="tab" href="#software-category">
+                                All Software Profiles
+                                <div class="arrow-up"></div>
+                            </a>
+                        </div>
+                        <div class="tab-content all-cat">
+                            <div class="@(section != "" ? (section == "service"? "tab-pane fade in active show" : "tab-pane fade") :"tab-pane fade in active show")" id="service-category">
+                                <div class="sidebar">
+                                    <div class="choose"><span>Select Category <i class="fa fa-chevron-down"></i></span></div>
+                                    <ul id="UlserviceCategory">
+                                        <li class="cursorPointer serviceClick active" focusid="9"><a>Mobile app development</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="1"><a>Digital Marketing</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="2"><a>Web Design</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="3"><a>Software Developement</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="4"><a>IOT Developement</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="5"><a>Web Developement</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="7"><a>Search Engine Optimization</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="8"><a>UX/UI Design</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="10"><a>Ecommerce Developement</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="11"><a>Wearable App Developement</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="12"><a>AR VR Application Development</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="13"><a>Social Media Marketing</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="14"><a>Pay Per Click</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="15"><a>Content Marketing</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="16"><a>Graphic Designers</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="17"><a>Chatbot Development</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="18"><a>Mobile App Marketing Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="19"><a>Email Marketing Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="20"><a>SEM Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="21"><a>Branding Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="22"><a>PR Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="23"><a>Digital Strategy Agencies</a></li>
+                                        <li class="cursorPointer serviceClick" focusid="24"><a>Video Production Agencies</a></li>
+                                    </ul>
+                                </div>
+                                <div id="divServiceCategory" class="data-table">
+                                    @Html.Partial("~/Views/Navigation/_ServiceCategories.cshtml", Model)   
+                                </div>
+                            </div>
+                            <div class="@(section != "" ? (section == "service"? "tab-pane fade" : "tab-pane fade in active show") :"tab-pane fade")" id="software-category">
+                                <div id="divSoftwareCategory" class="data-table full">
+                                    @Html.Partial("~/Views/Navigation/_SoftwareCategories.cshtml")                                                                        
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Category -->
+
+

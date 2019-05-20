@@ -2442,6 +2442,9 @@
     <Content Include="images\CompanyListLogos\desktop.ini" />
     <Content Include="manifest.json" />
     <Content Include="bundleconfig.json" />
+    <Content Include="Content\fonts\Colfax-Bold.woff" />
+    <Content Include="Content\fonts\Colfax-Medium.woff" />
+    <Content Include="Content\fonts\Colfax-Regular.woff" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-te-1.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -2466,6 +2469,7 @@
     <Content Include="Scripts\text-editor.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\UserScripts\AllCategory.js" />
     <Content Include="Scripts\UserScripts\News.js" />
     <Content Include="Scripts\UserScripts\Common.js" />
     <Content Include="Scripts\UserScripts\Common.min.js">
@@ -2634,10 +2638,12 @@
     <Content Include="Views\Authenticated\Center\UserNews.cshtml" />
     <Content Include="Views\Authenticated\Center\UserSoftwareList.cshtml" />
     <Content Include="Views\Authenticated\Center\UserSoftware.cshtml" />
+    <Content Include="Views\Navigation\AllCategories.cshtml" />
+    <Content Include="Views\Navigation\_ServiceCategories.cshtml" />
+    <Content Include="Views\Navigation\_SoftwareCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\fonts\" />
     <Folder Include="images\CompanyMembers\" />
     <Folder Include="images\FeaturedAgencies\" />
     <Folder Include="images\News\" />

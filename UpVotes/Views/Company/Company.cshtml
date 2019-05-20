@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings " + @DateTime.Now.Year + " - Upvotes.co";
+    ViewBag.MetaTag = "<link rel='canonical' href='"+ Request.Url.ToString() + "' />";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

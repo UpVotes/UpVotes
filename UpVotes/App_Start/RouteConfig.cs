@@ -21,6 +21,7 @@ namespace UpVotes
             routes.MapRoute("SoftwaresReviews", "{Software}/{id}/reviews", new { controller = "Softwares", action = "SoftwareAllReviewsByName", id = UrlParameter.Optional }, new RouteValueDictionary { { "Software", "Software" } });
             routes.MapRoute("Softwares", "{Software}/{id}", new { controller = "Softwares", action = "Softwares", id = UrlParameter.Optional }, new RouteValueDictionary { { "Software", "Software" } });            
             routes.MapRoute("blogs", "{Blog}/{id}", new { controller = "blogs", action = "blog", id = UrlParameter.Optional }, new RouteValueDictionary { { "Blog", "resources" } });
+            routes.MapRoute("navigation", "all-categories/{id}", new { controller = "blogs", action = "AllCategories", id = UrlParameter.Optional });
             routes.MapRoute("userCompany", "company/my-dashboard/{id}", new { controller = "UserCompanyList", action = "UserDashboard", id = UrlParameter.Optional });
             //routes.MapRoute("userDashboard", "company/my-profile/{id}", new { controller = "UserCompanyList", action = "UserCompanyList", id = UrlParameter.Optional });
             routes.MapRoute("claimCompany", "company/claimcompanyverification/{id}", new { controller = "UserCompanyList", action = "CompanyClaimVerificationByUser", id = UrlParameter.Optional });

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UpVotes.Business;
+//using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
 
 namespace UpVotes.Controllers
@@ -79,5 +81,23 @@ namespace UpVotes.Controllers
             }
             return PartialView("~/Views/Quotation/_QuotationBreakdown.cshtml", quotationresponse);            
         }
+
+        public ActionResult AllCategories()
+        {
+            Session["calledPage"] = "";
+            List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity> LinksObj = new List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity>();
+            LinksObj = new CompanyService().GetServiceCategoryLinks(9);
+            return View("~/Views/Navigation/AllCategories.cshtml", LinksObj);
+        }
+
+        [HttpPost]
+        public ActionResult AllCategories(int focusAreaID)
+        {
+            List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity> LinksObj = new List<UpVotes.BusinessEntities.Entities.CategoryLinksEntity>();
+            LinksObj = new CompanyService().GetServiceCategoryLinks(focusAreaID);
+            return PartialView("~/Views/Navigation/_ServiceCategories.cshtml", LinksObj);
+        }
+
+
     }
 }

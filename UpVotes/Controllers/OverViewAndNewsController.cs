@@ -64,6 +64,7 @@ namespace UpVotes.Controllers
                 if (newsViewModel != null && (newsViewModel.OverviewNewsData != null && newsViewModel.OverviewNewsData.Count > 0))
                 {
                     newsViewModel.Title = id.Replace("-", " ");
+                    //newsViewModel.Title = id.FirstCharToUpper().Replace("-", " ");
                     return View("~/Views/News/NewsDetail.cshtml", newsViewModel);
                 }
                 else
