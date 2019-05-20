@@ -13,10 +13,20 @@
     <h2 class="title-small">Software Listing</h2>
 </div>
 
+@if (Model.SoftwareList.Count == 0 && !Model.IsAdmin)
+{
     <div class="col text-center">
         <button type="button" id="addAdminSoftwareProfile" class="btn btn-primary btn-md">Add Software Profile</button>
     </div>
     <div class="col">&nbsp;</div>
+}
+else if(Model.IsAdmin)
+{
+    <div class="col text-center">
+        <button type="button" id="addAdminSoftwareProfile" class="btn btn-primary btn-md">Add Software Profile</button>
+    </div>
+    <div class="col">&nbsp;</div>
+}
 
 <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table" id="softwarelist">
     <!--Add class "hide" to hide the content -->
