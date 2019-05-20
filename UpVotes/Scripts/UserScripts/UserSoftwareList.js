@@ -100,10 +100,10 @@ $(document).ready(function ()
     };
 
     $.DisplayMessage = function (isError, displayText)
-    {
+    {        
         if (isError)
         {
-            $("#divFailureMessage").show();
+            $("#divFailureMessage").removeClass('hide');
             $('#spnMessage').css('display', 'block');
             $('#spnMessage').html(displayText);
 
@@ -114,7 +114,7 @@ $(document).ready(function ()
         }
         else
         {
-            $("#divFailureMessage").hide();
+            $("#divFailureMessage").addClass('hide');
             $('#spnMessage').css('display', 'none');
             $('#spnMessage').html("");
         }
@@ -296,7 +296,7 @@ $(document).ready(function ()
                     {
                         $("#successServiceData").removeClass('hide');
                         $('#spnSuccessMessage').css('display', 'block');
-                        $("#addServiceData").addClass('hide');
+                        $("#addSoftwareData").addClass('hide');
                         if ($("#hdnIsAdmin")[0].value === "true")
                         {
                             $.ajax({
