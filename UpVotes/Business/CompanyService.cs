@@ -223,6 +223,78 @@ namespace UpVotes.Business
 
             }
         }
+
+        internal int DeletePortFolio(int portfolioID)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                CompanyPortFolioEntity filter = new CompanyPortFolioEntity();
+                filter.CompanyPortFolioID = portfolioID;
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "DeleteCompanyPortfolio";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(filter), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+        }
+
+        internal List<CompanyPortFolioEntity> GetCompanyPortfolioByID(CompanyFilterEntity companyPortfolioFilter)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetAllCompanyPortfolioByID";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyPortfolioFilter), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                List<CompanyPortFolioEntity> companyPortFolioObj = new List<CompanyPortFolioEntity>();
+                if (response.IsSuccessStatusCode)
+                {
+                    companyPortFolioObj = JsonConvert.DeserializeObject<List<CompanyPortFolioEntity>>(response.Content.ReadAsStringAsync().Result);
+                    return companyPortFolioObj;
+                }
+                else
+                {
+                    return companyPortFolioObj;
+                }
+
+            }
+        }
+
+        internal CompanyPortFolioEntity GetPortfolioInfoByID(CompanyPortFolioEntity PortFolioFilter)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetPortfolioInfoByID";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(PortFolioFilter), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                CompanyPortFolioEntity PortFolioObj = new CompanyPortFolioEntity();
+                if (response.IsSuccessStatusCode)
+                {
+                    PortFolioObj = JsonConvert.DeserializeObject<CompanyPortFolioEntity>(response.Content.ReadAsStringAsync().Result);
+                    return PortFolioObj;
+                }
+                else
+                {
+                    return PortFolioObj;
+                }
+            }
+        }
+
         internal CompanyViewModel GetUserReviews(CompanyFilterEntity companyReviewsFilter)
         {
             using (_httpClient = new HttpClient())
@@ -278,6 +350,28 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod + '/';
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyEntity), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        internal int SavePortFolio(CompanyPortFolioEntity portfolioEntity)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "SaveUpdateCompanyPortFolio";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(portfolioEntity), Encoding.UTF8, "application/json");
 
                 var response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)

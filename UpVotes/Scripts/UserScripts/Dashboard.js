@@ -81,4 +81,18 @@
         });
     });
 
+    $('#showAddUserPortfolioSection').click(function () {
+        $('#ajax_loaderDashboard').show();
+        $.ajax({
+            url: $.absoluteurl('/UserCompanyList/GetUserPortfolioForm'),
+            type: "POST",
+            success: function (response) {
+                $('#ajax_loaderDashboard').hide();
+                $('#DetailsContent').html("");
+                $('#DetailsContent').html(response);
+            }
+
+        });
+    });
+
 });

@@ -151,7 +151,7 @@
                             </div>
                         </div>
                         <div class="bg-title">
-                            <h2 class="title">top @Model.CategoryHeadLine - REVIEWS @DateTime.Now.Year.ToString()</h2>
+                            <h2 class="title">@Model.CategoryHeadLine - REVIEWS @DateTime.Now.Year.ToString()</h2>
                             <h3 class="title-caption"><i class="fa fa-bars"></i>Reviews</h3>
                         </div>
                         <div id="divSoftwareUserReviews">
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <div class="bg-title">
-                            <h2 class="title">top @Model.CategoryHeadLine resources</h2>
+                            <h2 class="title">@Model.CategoryHeadLine resources</h2>
                             <h3 class="title-caption"><i class="fa fa-bars"></i>Latest Posts</h3>
                         </div>
                         @{Html.RenderAction("GetOverViewNewsForSoftware", "OverViewAndNews", Model);}

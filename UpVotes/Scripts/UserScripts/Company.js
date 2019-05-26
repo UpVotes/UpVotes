@@ -300,7 +300,7 @@ $(document)
               $('#image-gallery-caption')
                 .text($sel.data('caption'));
               $('#image-gallery-image')
-                .attr('src', $sel.data('image'));
+                .attr('src', '/images/CompanyPortfolio/'+$sel.data('image'));
               disableButtons(counter, $sel.data('image-id'));
           }
 

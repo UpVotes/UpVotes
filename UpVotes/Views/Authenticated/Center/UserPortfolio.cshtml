@@ -1,0 +1,86 @@
+﻿@model UpVotes.BusinessEntities.Entities.CompanyPortFolioEntity
+
+@Scripts.Render("~/bundles/CompanyPortfolio")
+
+<div class="alert alert-danger hide" id="divFailureMessage">
+    <strong>ERROR!!</strong>
+    <span id="spnMessage">Fields marked with * are mandatory.</span>
+</div>
+
+<div class="main-inner">
+
+    <!-- add software profile section -->
+    <div class="row" >
+        <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+            <h2 class="title-small">Company Portfolio</h2>
+        </div>
+
+        <!-- add software service profile -->
+
+
+        <div class="col-xl-12" id="addPortFolioSection">
+            <section class="section-wrap">
+                <div class="tab-wrap primary">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-2 col-md-2 col-sm-12 col-form-label">Company Name<small class="manditory">*</small></label>
+                            <div class="col-xl-8 col-md-8 col-sm-12">
+                                <input type="text" class="form-control" id="txtcompanyName" value="@Model.CompanyName" placeholder="" disabled>
+                                <input type="hidden" id="hdnPortfolioID" value="@Model.CompanyPortFolioID" />
+                                <input type="hidden" id="hdnCompanyID" value="@Model.CompanyID" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-2 col-md-2 col-sm-12 col-form-label">Project Name<small class="manditory">*</small></label>
+                            <div class="col-xl-8 col-md-8 col-sm-12">
+                                <input type="text" class="form-control" id="txtProjectName" value="@Model.Title" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-2 col-md-2 col-sm-12 col-form-label">Description<small class="manditory">*</small></label>
+                            <div class="col-xl-8 col-md-8 col-sm-12">
+                                <textarea class="form-control" id="txtProjectDescription" rows="5" cols="5" placeholder="">@Model.Description</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xl-2 col-md-2 col-sm-12"></div>
+                            <div class="col-xl-8 col-md-8 col-sm-12 input-group">
+                                <div class="custom-file v1">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12">
+                                            <form action="" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm">
+                                                <label class="btn-bs-file btn btn-primary">
+                                                    Add photo<input type="file" class="custom-file-input" id="UplAttachment" onchange="CheckForUploadedFile(this)" aria-describedby="inputGroupFileAddon01">
+                                                </label>
+                                            </form>
+                                            
+                                        </div>
+                                        <div class="col-xl-12 col-md-12 col-sm-12">
+                                            <div class="logo-preview">
+                                                @if (@Model.CompanyPortFolioID > 0)
+                                                {
+                                                <img id="imgpreview" class="previewimg" src="/images/CompanyPortfolio/@Model.ImageURL" />
+                                                }
+                                                else
+                                                {
+                                                    <img id="imgpreview" class="previewimg" src=""/>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary" id="btnsavePortFolio">Save Portfolio</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>

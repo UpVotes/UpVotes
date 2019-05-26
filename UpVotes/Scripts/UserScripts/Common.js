@@ -65,6 +65,11 @@ function GetTopVotedCompanyProfile(companyName) {
     return false;
 }
 
+function BrowseAllCategory(category) {
+    var baseAddress = $.absoluteurl(window.location.origin + '/all-categories?section=' + category);
+    window.open(baseAddress, '_blank')
+}
+
 /* Mega Menu */
 $(document).ready(function () {
 

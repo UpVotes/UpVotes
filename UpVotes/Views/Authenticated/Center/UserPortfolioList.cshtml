@@ -1,0 +1,73 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.CompanyPortFolioEntity>
+
+    @{
+        ViewBag.Title = "My PortFolio List";
+    }
+
+@Scripts.Render("~/bundles/CompanyPortfolio")
+
+
+    <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+        <h2 class="title-small">Company Portfolio</h2>
+    </div>
+
+    <div class="@(Model.Count > 0 ? "main-inner hide": "main-inner")">
+        <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data" id="divEmptyportfolioData">
+            <!--Add class "hide" to hide the content -->
+            <section class="section-wrap">
+                <div class="jumbotron vertical-center">
+                    <div class="caption">No company portfolio is not submitted yet "Add portfolio" to get update.</div>
+                    <button type="submit" class="btn btn-primary btnaddPortFolio">Add Portfolio</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <div class="@(Model.Count > 0 ? "col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table" : "col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table hide")" id="tablePortFolioData">
+        <!--Add class "hide" to hide the content -->
+        <section class="section-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><div>@item.Title</div></td>
+                            <td><div>@item.Description</div></td>
+                            <td><div><a class="link btnEditPortfolio" portid="@item.CompanyPortFolioID">Edit</a> | <a class="link btnDeletePortFolio" data-toggle="modal" portid="@item.CompanyPortFolioID" image="@item.ImageURL" compid="@item.CompanyID" data-target="#deleteList">Delete</a></div></td>
+                        </tr>
+                    }                    
+                </tbody>
+            </table>
+            <div class="col">&nbsp;</div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary btn-md btnaddPortFolio">Add Portfolio</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" id="deleteList" tabindex="-1" role="dialog" aria-labelledby="deleteList" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close btnDeleteNo" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure you want to delete this portfolio</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnDeleteNo" data-dismiss="modal">No</button>
+                    <button type="button" id="btnDeleteYes" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<input type="hidden" id="hdnPortfolioID" value="0" />
+<input type="hidden" id="hdnImageUrl" value="" />

@@ -21,51 +21,51 @@
                         <nav class="nav flex-column">
                             @if (Model.IsDashboard)
                             {
-                                <a class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-tachometer"></i> Dashboard</a>
                             }
                             <div class="sub-nav">
-                                <a class="nav-link"><i class="fa fa-suitcase"></i> Manage Listing <i class="fa fa-chevron-down down-menu"></i></a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-suitcase"></i> Manage Listing <i class="fa fa-chevron-down down-menu"></i></a>
                                 <div class="sub-list">
                                     @*@Ajax.ActionLink(string.Format("<i class='fa fa-bars'></i> Service Listing"), "UserCompanyList1", "UserCompanyList", new { section="service" }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "DetailsContent" }, new { @class = "nav-link" })*@
                                     @if (Model.IsService)
                                     {
-                                        <a class="nav-link" id="ancServiceListing"><i class="fa fa-bars"></i> Service Listing</a>
+                                        <a class="nav-link cursorPointer" id="ancServiceListing"><i class="fa fa-bars"></i> Service Listing</a>
                                     }
                                     @if (Model.IsSoftware)
                                     {
-                                        <a class="nav-link" id="ancSoftwareListing"><i class="fa fa-bars"></i> Software Listing</a>
+                                        <a class="nav-link cursorPointer" id="ancSoftwareListing"><i class="fa fa-bars"></i> Software Listing</a>
                                     }
                                 </div>
                             </div>
                             @if (Model.IsJobListing)
                             {
-                                <a class="nav-link"><i class="fa fa-user-plus"></i> Company Job Listing</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-user-plus"></i> Company Job Listing</a>
                             }
                             @if (Model.IsEmployees)
                             {
-                                <a class="nav-link"><i class="fa fa-users"></i> Company Employees</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-users"></i> Company Employees</a>
                             }
                             @if (Model.IsNews)
                             {
-                                <a class="@(Model.section=="news" ? "nav-link active":"nav-link")" id="showAddUserNewsSection"><i class="fa fa-file-text"></i> Company News</a>
+                                <a class="@(Model.section=="news" ? "nav-link cursorPointer active":"nav-link cursorPointer")" id="showAddUserNewsSection"><i class="fa fa-file-text"></i> Company News</a>
                             }
                             @if (Model.IsPortFolio)
                             {
-                                <a class="nav-link"><i class="fa fa-bolt"></i> Company Portfolio</a>
+                                <a class="@(Model.section=="portfolio" ? "nav-link cursorPointer active":"nav-link cursorPointer")" id="showAddUserPortfolioSection"><i class="fa fa-bolt"></i> Company Portfolio</a>
                             }
                             @if (Model.IsReview)
                             {
-                                <a class="nav-link"><i class="fa fa-commenting"></i> Company Reviews</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-commenting"></i> Company Reviews</a>
                             }
                             @if (Model.IsPricing)
                             {
-                                <a class="nav-link"><i class="fa fa-usd"></i> Pricing Plans</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-usd"></i> Pricing Plans</a>
                             }
                             @if (Model.IsBadges)
                             {
-                                <a class="nav-link"><i class="fa fa-certificate"></i> Badges</a>
+                                <a class="nav-link cursorPointer"><i class="fa fa-certificate"></i> Badges</a>
                             }
-                            <a onclick="closeSession()" class="nav-link"><i class="fa fa-sign-out"></i>Logout</a>
+                            <a onclick="closeSession()" class="nav-link cursorPointer"><i class="fa fa-sign-out"></i>Logout</a>
                         </nav>
                         @if (Model.IsAdmin)
                         {
@@ -75,9 +75,9 @@
                                     <h2 class="title-xsmall">Manage Admin</h2>
                                 </div>
                                 <nav class="nav flex-column">
-                                    <a class="nav-link" id="showAddNewsSection"><i class="fa fa-file-text"></i> Add News</a>
-                                    <a class="nav-link"><i class="fa fa-suitcase"></i> Add Jobs</a>
-                                    <a class="nav-link" id="showClaimListingSection"><i class="fa fa-check"></i> Claim Listing</a>
+                                    <a class="nav-link cursorPointer" id="showAddNewsSection"><i class="fa fa-file-text"></i> Add News</a>
+                                    <a class="nav-link cursorPointer"><i class="fa fa-suitcase"></i> Add Jobs</a>
+                                    <a class="nav-link cursorPointer" id="showClaimListingSection"><i class="fa fa-check"></i> Claim Listing</a>
                                 </nav>
                             </div>
                         }

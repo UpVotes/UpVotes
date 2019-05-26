@@ -2507,6 +2507,7 @@
     <Content Include="Scripts\UserScripts\SubmitReview.min.js">
       <DependentUpon>SubmitReview.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\UserScripts\UserPortfolioList.js" />
     <Content Include="Scripts\UserScripts\UserSoftwareList.js" />
     <Content Include="Scripts\UserScripts\UserCompanyList.js" />
     <Content Include="Scripts\UserScripts\UserCompanyList.min.js">
@@ -2641,10 +2642,13 @@
     <Content Include="Views\Navigation\AllCategories.cshtml" />
     <Content Include="Views\Navigation\_ServiceCategories.cshtml" />
     <Content Include="Views\Navigation\_SoftwareCategories.cshtml" />
+    <Content Include="Views\Authenticated\Center\UserPortfolioList.cshtml" />
+    <Content Include="Views\Authenticated\Center\UserPortfolio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\CompanyMembers\" />
+    <Folder Include="images\CompanyPortfolio\" />
     <Folder Include="images\FeaturedAgencies\" />
     <Folder Include="images\News\" />
     <Folder Include="images\SoftwareMembers\" />

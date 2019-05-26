@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,6 +58,198 @@ namespace UpVotes.Controllers
                     new SoftwareViewModel() { SoftwareList = new List<SoftwareEntity>() });
             }
 
+        }
+
+        public ActionResult GetUserPortfolioForm()
+        {
+            Session["calledPage"] = "N";
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    CompanyFilterEntity companyportfolioFilter = new CompanyFilterEntity
+                    {
+                        CompanyID = Convert.ToInt32(dashboardObj.CompanySoftwareID),
+                        Rows = 0
+                    };
+                    List<CompanyPortFolioEntity> portfolioObj = new CompanyService().GetCompanyPortfolioByID(companyportfolioFilter);
+                    //if (portfolioObj.Count > 0)
+                    //{
+                        return PartialView("~/Views/Authenticated/Center/UserPortfolioList.cshtml", portfolioObj);
+                    //}
+                    //else
+                    //{
+                    //    portfolioObj = new List<CompanyPortFolioEntity>();
+                    //    return PartialView("~/Views/Authenticated/Center/UserPortfolio.cshtml", portfolioObj);                        
+                    //}
+                    
+                    
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }            
+        }
+
+        public ActionResult DeletePortFolio(int portfolioID, string ImageUrl)
+        {
+            dynamic jsonData = default(dynamic);
+            try
+            {
+                int deleted = new CompanyService().DeletePortFolio(portfolioID);
+
+                if (deleted > 0)
+                {
+                    string AppPath = string.Empty;
+                    AppPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
+                    string fullPath = Server.MapPath(AppPath + "/images/CompanyPortfolio/" + ImageUrl);
+                    FileInfo file = new FileInfo(fullPath);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+
+                    DashboardViewModel dashboardObj = new DashboardViewModel();
+                    dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                    if (Utility.CacheHandler.Exists(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-")))
+                    {
+                        UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-"));
+                    }
+
+                    jsonData = new
+                    {
+                        IsSuccess = true,
+                    };
+                }
+                
+            }
+            catch (Exception)
+            {
+                jsonData = new
+                {
+                    IsSuccess = false
+                };
+            }
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult SaveCompanyPortfolio()
+        {
+            
+            dynamic jsonData = default(dynamic);
+            try
+            {
+                if (Request.Params["PortfolioData"] != null)
+                {
+                    string AppPath = string.Empty; string fileName = string.Empty; string extension = string.Empty;
+                    CompanyPortFolioEntity portfolioInfo = JObject.Parse(Request.Params["PortfolioData"].ToString()).ToObject<CompanyPortFolioEntity>();
+                    portfolioInfo.CreatedBy = Convert.ToInt32(Session["UserID"]);
+
+                    if (Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
+                    {
+                        fileName = Request.Files[0].FileName;
+                        AppPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
+                        if (fileName.Contains("\\"))
+                        {
+                            int lastIndex = fileName.LastIndexOf('\\') + 1;
+                            int len = fileName.Length - lastIndex;
+                            fileName = fileName.Substring(lastIndex, len);
+                            fileName = fileName.Replace(" ", "");
+                        }
+
+                        extension = System.IO.Path.GetExtension(fileName);
+                        portfolioInfo.ImageURL = extension;
+                    }
+
+                    int portfolioID = new CompanyService().SavePortFolio(portfolioInfo);
+
+                    if (portfolioID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
+                    {                        
+                        string SMP = Server.MapPath(AppPath + "/images/CompanyPortfolio/"+ Convert.ToString(portfolioInfo.CompanyID));
+                        string fullPath = SMP + "/" + Convert.ToString(portfolioID) + extension;
+                        if (System.IO.Directory.Exists(SMP))
+                        {
+                            Request.Files[0].SaveAs(fullPath);
+                        }
+                        else
+                        {
+                            System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(SMP);
+                            Request.Files[0].SaveAs(fullPath);
+                        }
+
+                        DashboardViewModel dashboardObj = new DashboardViewModel();
+                        dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                        if (Utility.CacheHandler.Exists(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-")))
+                        {
+                            UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-"));
+                        }
+                    }
+                    
+                    jsonData = new
+                    {
+                        IsSuccess = true,
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                jsonData = new
+                {
+                    IsSuccess = false
+                };
+            }
+            return Json(jsonData, JsonRequestBehavior.AllowGet);            
+        }
+
+        [HttpPost]
+        public ActionResult CreateNewPortFolioForm(int portfolioID)
+        {           
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    CompanyPortFolioEntity portfolioObj = new CompanyPortFolioEntity();
+                    if (portfolioID > 0)
+                    {
+                        CompanyPortFolioEntity portfolioFilter = new CompanyPortFolioEntity
+                        {
+                            CompanyPortFolioID = portfolioID
+                        };
+                        portfolioObj = new CompanyService().GetPortfolioInfoByID(portfolioFilter);
+                        portfolioObj.CompanyName = dashboardObj.CompanySoftwareName;
+                        portfolioObj.CompanyID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                    }
+                    else
+                    {
+                        portfolioObj.CompanyName = dashboardObj.CompanySoftwareName;
+                        portfolioObj.CompanyID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                        portfolioObj.CompanyPortFolioID = 0;
+                        portfolioObj.Description = "";
+                        portfolioObj.ImageURL = "";
+                        portfolioObj.Title = "";
+                    }
+                    return PartialView("~/Views/Authenticated/Center/UserPortfolio.cshtml", portfolioObj);                        
+                    
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult CreateNewSoftwareAdmin()
