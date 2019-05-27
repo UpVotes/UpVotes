@@ -98,6 +98,61 @@ namespace UpVotes.Controllers
             }            
         }
 
+        public ActionResult GetCompanyEmployeeForm()
+        {
+            Session["calledPage"] = "N";
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    
+                    return PartialView("~/Views/Authenticated/Center/UserCompanyTeamMembersList.cshtml");
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateNewCompanyEmployeeForm(int companyEmployeeID)
+        {
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    CompanyPortFolioEntity portfolioObj = new CompanyPortFolioEntity();
+                    if (companyEmployeeID > 0)
+                    {
+                        
+                    }
+                    else
+                    {
+                        
+                    }
+                    return PartialView("~/Views/Authenticated/Center/UserCompanyTeamMembers.cshtml");
+
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult DeletePortFolio(int portfolioID, string ImageUrl)
         {
             dynamic jsonData = default(dynamic);

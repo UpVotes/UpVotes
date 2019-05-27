@@ -167,3 +167,8 @@ function getAllReviews(softwarename) {
     var baseAddress = $.absoluteurl(window.location.origin + '/software/' + encodeURI(softwarename) + '/reviews');
     window.open(baseAddress, '_blank')
 }
+function getAllCompanyEmployees(name) {
+    var baseAddress = '';
+    baseAddress = $.absoluteurl(window.location.origin + '/software/' + encodeURI(name) + '/team-members');
+    window.open(baseAddress, '_blank')
+}

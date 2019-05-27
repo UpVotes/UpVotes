@@ -68,6 +68,19 @@ namespace UpVotes.Controllers
             }
         }
 
+        public ActionResult CompanyAllTeamMembersByName(string id)
+        {
+            Session["calledPage"] = "P";
+            if (1 == 1)
+            {
+                return View("~/Views/AllListPages/AllCompanyEmployeesList.cshtml");
+            }
+            else
+            {
+                return View("~/Views/Error/PageNotFound.cshtml");
+            }
+        }
+
         public string VoteForSoftware(int softwareID)
         {
             if (Convert.ToInt32(Session["UserID"]) != 0)

@@ -294,11 +294,21 @@
                                     <div class="content">
                                         <div class="title-wrap">
                                             <h2 class="title-small">@company.CompanyName Team</h2>
-                                            <button class="btn btn-sm btn-add f-right hide">Add Member</button>
+                                            <button class="btn btn-sm btn-add f-right">Add Member</button>
                                         </div>
-                                        @if (1 != 1)
+                                        @if (1 == 1)
                                         {
-                                            @Html.Partial("_CompanyMembers")
+                                            <div class="row member-wrap">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("_CompanyMembers")
+                                                    <div class="col text-center view-more">
+                                                        <button type="submit" onclick="getAllCompanyEmployees('@company.CompanyName.Replace(" ", "-").ToLower()',1);" class="btn btn-sm flat-gray">
+                                                            View more team member
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         }
                                         else
                                         {
@@ -309,7 +319,8 @@
                                             </div>
                                         }
                                     </div>
-                                </section>
+
+</section>
 
                                 <section id="navJobs">
                                     <div class="content">

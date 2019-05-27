@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "My Company Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/AllListing")    
+</head>
+
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Robosoft Technologies Team members</li>
+            </ol>
+        </div>
+    </div>
+</nav>
+<div class="detail-wrap">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Scrollspy menu -->
+            <div class="container content-wrap">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <section id="navTeam">
+                            <div class="content">
+                                <div class="title-wrap">
+                                    <h1 class="title-small">Robosoft Technologies Team members</h1>
+                                    <button class="btn btn-sm btn-add f-right">Add Member</button>
+                                </div>
+                                <div class="row member-wrap">
+                                    <div class="col-lg-12">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><div>Member</div></td>
+                                                    <td><div>Role</div></td>
+                                                    <td><div>Period</div></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div><img src="img/member1.jpg"><span>Doug Ireland</span></div></td>
+                                                    <td><div>VP of Finance</div></td>
+                                                    <td><div>Apr 2013 to Present</div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div><img src="img/member2.jpg"><span>Nadjya Ghausi</span></div></td>
+                                                    <td><div>VP of Finance</div></td>
+                                                    <td><div>Aug 2016 to Present</div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div><img src="img/member3.jpg"><span>Spencer Waldron</span></div></td>
+                                                    <td><div>European Regional Director</div></td>
+                                                    <td><div>Unknown to Present</div></td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        <div class="col text-right view-more hide">
+                                            <span class="btn btn-link btn-sm">View more team member</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

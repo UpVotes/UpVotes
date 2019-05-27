@@ -81,6 +81,20 @@
         });
     });
 
+    $('#showAddCompanyEmployeeSection').click(function () {
+        $('#ajax_loaderDashboard').show();
+        $.ajax({
+            url: $.absoluteurl('/UserCompanyList/GetCompanyEmployeeForm'),
+            type: "POST",
+            success: function (response) {
+                $('#ajax_loaderDashboard').hide();
+                $('#DetailsContent').html("");
+                $('#DetailsContent').html(response);
+            }
+
+        });
+    });
+
     $('#showAddUserPortfolioSection').click(function () {
         $('#ajax_loaderDashboard').show();
         $.ajax({

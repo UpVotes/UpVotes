@@ -359,3 +359,8 @@ $(document)
       var baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(companyname) + '/portfolio');
       window.open(baseAddress, '_blank');
   }
+  function getAllCompanyEmployees(name) {
+      var baseAddress = '';      
+      baseAddress = $.absoluteurl(window.location.origin + '/profile/' + encodeURI(name) + '/team-members');        
+      window.open(baseAddress, '_blank')
+  }
