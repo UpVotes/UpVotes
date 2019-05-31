@@ -79,6 +79,10 @@ body {
 }
 
 /* Error message */
+.manditory {
+    color: #d50000;
+    font-size: 16px;
+}
 .error-text {
     color: #d50000;
     font-size: 12px;
@@ -552,6 +556,184 @@ h6,
     float: right;
 }
 
+/*Contact*/
+.contact .banner-content {
+    width: 100%;
+    right: auto;
+    background: transparent;
+    padding: 0;
+    margin: 100px 0;
+}
+.contact.teal-banner {
+    background: #fbfaf6;
+    color: #333;
+    margin-top: 300px;
+}
+.contact.banner-area {
+    height: 70vh;
+    position: relative;
+    min-height: 650px;
+}
+.contact .bg-map {
+    background: url(../images/ContactUs/contact-map.jpg) no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+}
+.contact .bg-map:before {
+	content: '';
+	background-color: #58ade6;
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.85;
+}
+.contact .map-marker {
+    position: absolute;
+    z-index: 2;
+    font-size: 60px;
+    color: #fff;
+    top: 20%;
+    right: 40%;
+    opacity: 0.8;
+}
+.contact .banner-content .title-xlarge {
+    font-weight: 600;
+    color: #fff;
+}
+.contact .banner-content p {
+    font-size: 24px;
+    width: 600px;
+}
+.contact .contact-form {
+    background: #fff;
+    box-shadow: 0 12px 16px 10px rgba(0,0,0,0.2), 0 0 0 0 rgba(0,0,0,0.08);
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+}
+.contact .address {
+    background: #11406e;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.contact .contact-form .form .title-small,
+.contact .contact-form .address .title-small {
+	font-size: 22px;
+	margin-bottom: 40px;
+}
+.contact .contact-form .form .title-small {
+    color: #11406e;
+}
+.contact .contact-form .form,
+.contact .contact-form .address {
+    height: 500px;
+    padding: 50px;
+}
+.contact .address ul {
+	padding-left: 0;
+}
+.contact .address ul li {
+    list-style-type: none;
+    margin: 20px 0;
+}
+.contact .address ul li i {
+    margin-right: 10px;
+    width: 30px;
+    text-align: center;
+    opacity: 0.5;
+}
+.contact .social-wrap li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.contact .social-wrap li a {
+    color: #fff;
+    font-size: 22px;
+    opacity: 0.5;
+}
+.contact .bg-logo {
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    transform: rotate(-30deg);
+    opacity: 0.2;
+}
+.contact .bg-logo img {
+    width: 150px;
+}
+.contact .contact-form .form input,
+.contact .contact-form .form textarea {
+    border: 0;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    padding: 0;
+}
+.contact .contact-form .form textarea {
+    padding-right: 60px;
+}
+.contact .contact-form .form .form-group {
+    margin: 15px 0;
+}
+.contact .contact-form .form .title-small i {
+    position: absolute;
+    right: 50px;
+    font-size: 36px;
+    opacity: 0.8;
+    color: #44a5f6;
+}
+.contact .contact-form .form .form-group label {
+    font-size: 14px;
+    color: #999;
+}
+.contact .contact-form .form .btn-submit {
+    display: block;
+    background: #44a5f6;
+    color: #fff;
+    font-size: 32px;
+    font-weight: normal;
+    width: 70px;
+    height: 70px;
+    min-width: inherit;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 75px;
+    right: 40px;
+}
+
+.contact-modal .thankyou {
+	text-align: center;
+	padding: 20px 0;
+}
+.contact-modal .thankyou .tick-icon {
+    font-size: 56px;
+    border: 10px solid #333;
+    border-radius: 100%;
+    color: #333;
+    padding: 10px;
+}
+.contact-modal .thankyou .message {
+    font-size: 26px;
+    text-transform: uppercase;
+    margin: 15px 0;
+}
+.contact-modal .thankyou .caption {
+    font-size: 14px;
+    color: #666;
+}
+.color-white {
+color:#fff;
+}
 
 .avail-status {
     display: inline-block;
@@ -664,6 +846,57 @@ h6,
 	}
 	.all-cat .data-table {
 	    overflow-x: auto;
+	}
+
+    /*Contact*/
+	.contact .banner-content {
+		margin: 20px 0;
+	}
+	.contact .map-marker {
+	    display: none;
+	}
+	.contact .banner-content .title-xlarge {
+	    font-size: 32px;
+	}
+	.contact .banner-content p {
+	    font-size: 18px;
+	    width: 100%;
+	}
+	.contact .contact-form .form,
+	.contact .contact-form .address {
+	    height: auto;
+	    padding: 20px;
+	}
+	.contact .contact-form .form .title-small i {
+		right: 20px;
+	}
+	.contact .contact-form .form .title-small,
+	.contact .contact-form .address .title-small {
+		margin-bottom: 15px;
+	}
+	.contact.banner-area {
+	    height: auto;
+	    padding: 0;
+	}
+	.contact.teal-banner {
+		margin-top: 0;
+	}
+	.contact .address ul li {
+	    margin-bottom: 0;
+	}
+	.contact .contact-form .form .btn-submit {
+	    position: static;
+	    font-size: 16px;
+	    width: auto;
+	    height: auto;
+	    border-radius: 3px;
+	    margin-left: 15px;
+	}
+	.contact .contact-form .form .btn-submit:before {
+	    content: 'Submit';
+	}
+	.contact .contact-form .form .btn-submit i {
+	    display: none;
 	}
 	
 }

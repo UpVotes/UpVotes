@@ -88,6 +88,10 @@
                     {
                         Html.RenderPartial("~/Views/Authenticated/Center/UserNews.cshtml", Model);
                     }
+                    else if (Model.section == "portfolio")
+                    {
+                        Html.RenderAction("GetUserPortfolioForm", "UserCompanyList");
+                    }
                 </div>
             </div>
         </div>

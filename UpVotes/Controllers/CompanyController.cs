@@ -224,6 +224,18 @@ namespace UpVotes.Controllers
             }
         }
 
+        public ActionResult AddPortfolio()
+        {
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {
+                return Json("/company/my-dashboard?section=portfolio", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Please login to add the portfolio.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //public ActionResult CompanyReview(string id)
         //{   
         //    return Json("Please login to submit the review.", JsonRequestBehavior.AllowGet);

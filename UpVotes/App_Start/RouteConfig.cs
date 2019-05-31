@@ -30,6 +30,7 @@ namespace UpVotes
             routes.MapRoute("claimSoftware", "Softwares/claimsoftwareverification/{id}", new { controller = "UserCompanyList", action = "SoftwareClaimVerificationByUser", id = UrlParameter.Optional });
             routes.MapRoute("SubmitReview", "submit/submit-review/{id}", new { controller = "SubmitReview", action = "SubmitReview", id = UrlParameter.Optional });
             routes.MapRoute("privatePolicy", "privacy-policy/{id}", new { controller = "Home", action = "PrivatePolicy", id = UrlParameter.Optional });
+            routes.MapRoute("contactUs", "contact-us/{id}", new { controller = "ContactUs", action = "ContactUsForm", id = UrlParameter.Optional });
             routes.MapRoute("newsDetail", "news/{id}", new { controller = "OverViewAndNews", action = "DetailNews", id = UrlParameter.Optional });
             //routes.MapRoute("categories", "{categoriesname}",new { controller = "CompanyList", action = "CompanyList" }, new RouteValueDictionary { { "categoriesname", "mobile-application-developers|seo-companies|digital-marketing-companies|web-design-companies|software-development-companies|web-development-companies|ui-ux-agencies|wearable-application-developers|ecommerce-developers|social-media-marketing-companies|ppc-companies|content-marketing-companies|iot-application-developers" } });
             //routes.MapRoute("mobilesubcategories", "mobile-application-developers/{id}", new { controller = "Resources", action = "ResourceSub", id = UrlParameter.Optional }, new { id = "(Microsoft)|(Apple)" });

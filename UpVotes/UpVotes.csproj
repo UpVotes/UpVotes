@@ -214,6 +214,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\ContactUsService.cs" />
     <Compile Include="Business\OverviewAndNewsService.cs" />
     <Compile Include="Business\SubmitReviewService.cs" />
     <Compile Include="Business\SoftwareService.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\FocusAreaService.cs" />
     <Compile Include="Business\UserService.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\OverViewAndNewsController.cs" />
     <Compile Include="Controllers\SubmitReviewController.cs" />
     <Compile Include="Controllers\SoftwaresController.cs" />
@@ -1359,6 +1361,8 @@
     <Content Include="images\CompanyLogos\Zebra.png" />
     <Content Include="images\CompanyLogos\zGames.png" />
     <Content Include="images\CompanyLogos\ZignutsTechnolab.png" />
+    <Content Include="images\ContactUs\contact-map.jpg" />
+    <Content Include="images\ContactUs\u-logo.png" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\finger.png" />
     <Content Include="images\footer-banner.png" />
@@ -2468,10 +2472,12 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\StarRating.js" />
+    <Content Include="Scripts\user-text-editor.js" />
     <Content Include="Scripts\text-editor.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\UserScripts\AllCategory.js" />
+    <Content Include="Scripts\UserScripts\ContactUs.js" />
     <Content Include="Scripts\UserScripts\News.js" />
     <Content Include="Scripts\UserScripts\Common.js" />
     <Content Include="Scripts\UserScripts\Common.min.js">
@@ -2650,6 +2656,7 @@
     <Content Include="Views\Authenticated\Center\UserCompanyTeamMembers.cshtml" />
     <Content Include="Views\Authenticated\Center\UserCompanyTeamMembersList.cshtml" />
     <Content Include="Views\AllListPages\AllCompanyEmployeesList.cshtml" />
+    <Content Include="Views\ContactUs\ContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

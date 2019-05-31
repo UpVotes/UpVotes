@@ -1,0 +1,114 @@
+﻿@using System.web.Mvc
+
+@{
+    ViewBag.Title = "Contact Us";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Scripts.Render("~/bundles/ContactUs")
+</head>
+
+
+			<!-- start banner Area -->
+<section class="banner-area contact gap-medium">
+    <div class="bg-map"><i class="fa fa-map-marker map-marker"></i></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-12 col-lg-12 no-padding">
+                <div class="banner-content">
+                    <h1 class="title-xlarge">Get in Touch</h1>
+                    <p>Whether you have a question about features, pricing or anything else, our team is ready to answer all your questions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container contact-form">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-8 col-lg-8 no-padding form">
+                <div class="title-small">Send us a message <i class="fa fa-envelope-o"></i></div>
+                <div class="row">
+                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                        <label>Name</label><small class="manditory">*</small>
+                        <input type="text" class="form-control" id="txtContactName" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                        <label>Email</label><small class="manditory">*</small>
+                        <input type="text" class="form-control" id="txtContactEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                        <label>Phone</label><small class="manditory">*</small>
+                        <input type="text" class="form-control" id="txtContactPhone" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group col-xl-6 col-md-6 col-sm-12">
+                        <label>Company</label><small class="manditory">*</small>
+                        <input type="text" class="form-control" id="txtContactCompany" placeholder="Enter company name">
+                    </div>
+                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                        <label>Message</label><small class="manditory">*</small>
+                        <textarea type="text" class="form-control" id="txtContactMessage" placeholder="Enter message"></textarea>
+                    </div>
+                    <div class="form-group col-xl-12 col-md-12 col-sm-12">
+                        <span class="error-text" id="spnErrorMessage"></span>
+                    </div>
+                    <button type="submit" id="btnContactSubmit" class="btn btn-submit"><i class="fa fa-paper-plane-o"></i></button>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 no-padding address">
+                <div class="title-small">Contact Information</div>
+                <ul class="address-wrap">
+                    <li><i class="fa fa-map-marker"></i><span>Bangalore</span></li>
+                    <li><i class="fa fa-envelope"></i><a href="mailto:support@upvotes.co"><span class="color-white">support@upvotes.co</span></a></li>
+                    <li><i class="fa fa-skype"></i><span>upvotes.co</span></li>
+                </ul>
+                <ul class="social-wrap">
+                    <li><a target="_blank" href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" href="https://twitter.com/upvotes_co"><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a target="_blank" href="https://www.instagram.com/upvotes.co/"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+                <div class="bg-logo"><img class="lazy" data-src="images/ContactUs/u-logo.png"></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- End banner Area -->
+<!-- Start Get Listed -->
+<section class="teal-banner contact gap-large">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 text-center">
+                <div class="title-wrap text-center">
+                    <h3 class="title-medium">Are you a Leading professional B2B Service or Software providers?</h3>
+                    <p>Join this community and get more visible to your Business profile</p>
+                </div>
+            </div>
+            <div class="col-xl-12 text-center">
+                <button type="button" class="btn btn-primary btn-lg myLoginPopUp">Get Listed</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Get Listed -->
+<!-- Contact  -->
+<div class="modal fade contact-modal" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="bg-banner"></div>
+            <div class="modal-body">
+                <div class="thankyou">
+                    <i class="fa fa-check tick-icon"></i>
+                    <div class="message">Thank you.</div>
+                    <span class="caption">A member of our analyst team will connect with you shortly.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ajax_loaderContact" class="card-loader"></div>

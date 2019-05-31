@@ -164,6 +164,24 @@
         });
     });
 
+    $('#btnAddPortfolio').click(function () {
+        $.ajax({
+            url: $.absoluteurl('/Company/AddPortfolio'),
+            cache: false,
+            async: false,
+            datatype: 'json',
+            type: 'POST',
+            success: function (response) {
+                if (response != "Please login to add the portfolio.") {
+                    window.open(window.location.origin + response, "_self");
+                }
+                else {
+                    alert(response);
+                }
+            }
+        });
+    });
+
     $('.btnThankNote').click(function () {
         var companyReviewID = $(this).attr('CompanyReviewID');
         var companyID = $('#hdnCompanyID')[0].value;

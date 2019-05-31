@@ -38,6 +38,7 @@ namespace UpVotes
 
             bundles.Add(new StyleBundle("~/Content/Anews").Include("~/Content/text-editor.css"));
             bundles.Add(new ScriptBundle("~/bundles/Anews").Include("~/Scripts/text-editor.js", "~/Scripts/UserScripts/News.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Unews").Include("~/Scripts/user-text-editor.js", "~/Scripts/UserScripts/News.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/claimlist").Include("~/Scripts/UserScripts/UserCompanyList.js"));
 
@@ -73,6 +74,8 @@ namespace UpVotes
             bundles.Add(new ScriptBundle("~/bundles/allcategories").Include("~/Scripts/UserScripts/AllCategory.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/CompanyPortfolio").Include("~/Scripts/UserScripts/UserPortfolioList.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ContactUs").Include("~/Scripts/UserScripts/ContactUs.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
                       "~/Scripts/UserScripts/Quotation.min.js"));
