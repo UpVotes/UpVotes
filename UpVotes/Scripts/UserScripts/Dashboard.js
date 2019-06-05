@@ -81,10 +81,10 @@
         });
     });
 
-    $('#showAddCompanyEmployeeSection').click(function () {
+    $('#showAddTeamMembersSection').click(function () {
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/UserCompanyList/GetCompanyEmployeeForm'),
+            url: $.absoluteurl('/UserCompanyList/GetAllTeamMembers'),
             type: "POST",
             success: function (response) {
                 $('#ajax_loaderDashboard').hide();

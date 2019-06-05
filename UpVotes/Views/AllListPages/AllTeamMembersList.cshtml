@@ -1,0 +1,97 @@
+﻿@using System.Globalization
+@using UpVotes.Models
+@model List<UpVotes.BusinessEntities.Entities.TeamMemebersEntity>
+
+@{
+    ViewBag.Title = "My Team Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string companyOrSoftwareName;
+    var myTi = new CultureInfo("en-US", false).TextInfo;
+    if (Model[0].CompanyId == null)
+    {
+        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(Session["SoftwareName"]).Replace('-', ' ')); ;
+    }
+    else
+    {        
+        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(Session["CompanyName"]).Replace('-', ' ')); ;
+    }
+}
+
+<head>
+    @Styles.Render("~/Content/detail")
+    @Scripts.Render("~/bundles/AllListing")
+</head>
+
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@companyOrSoftwareName Team members</li>
+            </ol>
+        </div>
+    </div>
+</nav>
+<div class="detail-wrap">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Scrollspy menu -->
+            <div class="container content-wrap">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <section id="navTeam">
+                            <div class="content">
+                                <div class="title-wrap">
+                                    <h1 class="title-small">@companyOrSoftwareName Team members</h1>
+                                    <button class="btn btn-sm btn-add f-right" id="btnAddTeamMember">Add Member</button>
+                                </div>
+                                <div class="row member-wrap">
+                                    <div class="col-lg-12">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td><div>Member</div></td>
+                                                    <td><div>Role</div></td>
+                                                    <td><div>Period</div></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var teamMember in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                                                        </td>
+                                                        <td>
+                                                            <div>@teamMember.Designation</div>
+                                                        </td>
+                                                        <td>
+                                                            @if (!string.IsNullOrEmpty(teamMember.EndDate))
+                                                            {
+                                                                <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to @Convert.ToDateTime(teamMember.EndDate).ToString("MMM-yyyy")</div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to Present </div>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div class="col text-right view-more hide">
+                                            <span class="btn btn-link btn-sm">View more team member</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

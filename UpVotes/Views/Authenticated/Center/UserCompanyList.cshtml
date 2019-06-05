@@ -38,7 +38,7 @@
                         <td><span><a class="link" href="/profile/@company.CompanyName.Replace(" ","-").ToLower()">@company.CompanyName</a></span></td>
                         <td><span>@company.IsUserVerified</span></td>
                         <td><span>@(company.IsAdminApproved == "Yes" ? "Live" : "Not Approved")</span></td>
-                        <td><a class="link btnEditCompany" compname="@company.CompanyName">Edit</a> | <a class="link">Delete</a></td>
+                        <td><a class="link btnEditCompany" compname="@company.CompanyName">Edit</a> | <a class="link btnDeleteCompany" compid="@company.CompanyID">Delete</a></td>
                     </tr>
                 }
             </tbody>

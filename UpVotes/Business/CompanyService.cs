@@ -1,17 +1,16 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
-using System;
 
 namespace UpVotes.Business
 {
     public class CompanyService
     {
-        HttpClient _httpClient = null;
+        private HttpClient _httpClient = null;
 
         internal CompanyViewModel GetUserCompanyies(int userID, string companyName)
         {
@@ -21,7 +20,7 @@ namespace UpVotes.Business
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetUserCompanies";
                 string completeURL = WebAPIURL + apiMethod + '/' + userID + '/' + companyName;
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
                 return companyViewModel;
             }
@@ -30,11 +29,11 @@ namespace UpVotes.Business
         internal CompanyViewModel GetClaimListingsForApproval(int userID)
         {
             using (_httpClient = new HttpClient())
-            {                
+            {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetClaimListingsForApproval";
                 string completeURL = WebAPIURL + apiMethod + '/' + userID;
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 CompanyViewModel companyViewModel = JsonConvert.DeserializeObject<CompanyViewModel>(response);
                 return companyViewModel;
             }
@@ -50,7 +49,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 CompanyViewModel companyViewModel = new CompanyViewModel();
                 if (response.IsSuccessStatusCode)
                 {
@@ -104,7 +103,7 @@ namespace UpVotes.Business
                     return companyViewModel;
                 }
             }
-        }        
+        }
 
         internal CategoryMetaTagsDetails GetCategoryMetaTags(string FocusAreaName, string SubFocusAreaName)
         {
@@ -113,14 +112,17 @@ namespace UpVotes.Business
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetCategoryMetaTags";
                 if (string.IsNullOrEmpty(SubFocusAreaName))
+                {
                     SubFocusAreaName = "0";
+                }
+
                 string apiParameter = FocusAreaName + "/" + SubFocusAreaName;
                 string completeURL = WebAPIURL + apiMethod + '/' + apiParameter;
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 CategoryMetaTagsDetails metaTagsTitle = JsonConvert.DeserializeObject<CategoryMetaTagsDetails>(response);
                 return metaTagsTitle;
-            }  
-        }        
+            }
+        }
 
         internal string VoteForCompany(int companyID, int userID)
         {
@@ -140,7 +142,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyVote), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = response.Content.ReadAsStringAsync().Result;
@@ -173,7 +175,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewThankNoteEntity), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = response.Content.ReadAsStringAsync().Result;
@@ -194,12 +196,12 @@ namespace UpVotes.Business
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetDataForAutoComplete";
                 string completeURL = WebAPIURL + apiMethod + '/' + type + '/' + focusAreaID + '/' + searchTerm;
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<string> myAutoCompleteList = JsonConvert.DeserializeObject<List<string>>(response);
                 return myAutoCompleteList;
             }
         }
-        
+
         internal CompanyViewModel GetCompanyPortfolio(CompanyFilterEntity companyReviewsFilter)
         {
             using (_httpClient = new HttpClient())
@@ -209,7 +211,7 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 CompanyViewModel companyReviewsViewModel = new Models.CompanyViewModel();
                 if (response.IsSuccessStatusCode)
                 {
@@ -228,14 +230,16 @@ namespace UpVotes.Business
         {
             using (_httpClient = new HttpClient())
             {
-                CompanyPortFolioEntity filter = new CompanyPortFolioEntity();
-                filter.CompanyPortFolioID = portfolioID;
+                CompanyPortFolioEntity filter = new CompanyPortFolioEntity
+                {
+                    CompanyPortFolioID = portfolioID
+                };
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "DeleteCompanyPortfolio";
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(filter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
@@ -257,7 +261,7 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyPortfolioFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 List<CompanyPortFolioEntity> companyPortFolioObj = new List<CompanyPortFolioEntity>();
                 if (response.IsSuccessStatusCode)
                 {
@@ -281,7 +285,7 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(PortFolioFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 CompanyPortFolioEntity PortFolioObj = new CompanyPortFolioEntity();
                 if (response.IsSuccessStatusCode)
                 {
@@ -304,7 +308,7 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyReviewsFilter), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 CompanyViewModel companyReviewsViewModel = new Models.CompanyViewModel();
                 if (response.IsSuccessStatusCode)
                 {
@@ -314,8 +318,8 @@ namespace UpVotes.Business
                 else
                 {
                     return companyReviewsViewModel;
-                }                
-                
+                }
+
             }
         }
         internal CompanySoftwareUserReviews GetUserReviewsForCompanyListingPage(CompanyFilterEntity UserReviewObj)
@@ -327,7 +331,7 @@ namespace UpVotes.Business
                 string completeURL = WebAPIURL + apiMethod;
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(UserReviewObj), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 CompanySoftwareUserReviews companyReviews = new CompanySoftwareUserReviews();
                 if (response.IsSuccessStatusCode)
                 {
@@ -338,7 +342,7 @@ namespace UpVotes.Business
                 {
                     return companyReviews;
                 }
-                
+
             }
         }
         internal int SaveCompany(CompanyEntity companyEntity)
@@ -351,7 +355,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyEntity), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
@@ -373,7 +377,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(portfolioEntity), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
@@ -393,7 +397,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetCountry";
                 string completeURL = WebAPIURL + apiMethod;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<CountryEntity> countryList = JsonConvert.DeserializeObject<List<CountryEntity>>(response);
                 return countryList;
             }
@@ -407,7 +411,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetTopVoteCompanies";
                 string completeURL = WebAPIURL + apiMethod;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<CompanyEntity> TopVotedCompanyList = JsonConvert.DeserializeObject<List<CompanyEntity>>(response);
                 return TopVotedCompanyList;
             }
@@ -419,9 +423,9 @@ namespace UpVotes.Business
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "GetServiceCategoryLinks";
-                string completeURL = WebAPIURL + apiMethod+"/"+ focusAreaID;
+                string completeURL = WebAPIURL + apiMethod + "/" + focusAreaID;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<CategoryLinksEntity> LinksObj = JsonConvert.DeserializeObject<List<CategoryLinksEntity>>(response);
                 return LinksObj;
             }
@@ -435,7 +439,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetStates";
                 string completeURL = WebAPIURL + apiMethod + '/' + countryID;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<StateEntity> statesList = JsonConvert.DeserializeObject<List<StateEntity>>(response);
                 return statesList;
             }
@@ -449,7 +453,7 @@ namespace UpVotes.Business
                 string apiMethod = "GetSubFocusAreaByFocusID";
                 string completeURL = WebAPIURL + apiMethod + '/' + focusAreaID;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 List<SubFocusAreaEntity> subfocusList = JsonConvert.DeserializeObject<List<SubFocusAreaEntity>>(response);
                 return subfocusList;
             }
@@ -463,7 +467,7 @@ namespace UpVotes.Business
                 string apiMethod = "CompanyVerificationByUser";
                 string completeURL = WebAPIURL + apiMethod + '/' + uID + '/' + cID + '/' + compID;
 
-                var response = _httpClient.GetStringAsync(completeURL).Result;
+                string response = _httpClient.GetStringAsync(completeURL).Result;
                 bool isUserVerifiedCompany = JsonConvert.DeserializeObject<bool>(response);
                 return isUserVerifiedCompany;
             }
@@ -479,7 +483,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(companyRejectComments), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -493,7 +497,7 @@ namespace UpVotes.Business
 
         internal string ClaimListing(ClaimApproveRejectListingRequest claimlistingrequest)
         {
-            
+
             using (_httpClient = new HttpClient())
             {
                 string message = string.Empty;
@@ -503,7 +507,7 @@ namespace UpVotes.Business
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(claimlistingrequest), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = "Successfully Claimed";
@@ -518,35 +522,43 @@ namespace UpVotes.Business
         public string AdminApproveRejectForClaim(int userID, int claimlistingID, int companyID, bool isAdminApproved, string Rejectioncomment, string Email, string CompanyName, string Type)
         {
             string message = "";
-            ClaimApproveRejectListingRequest claimRequestobj = new ClaimApproveRejectListingRequest();
-            claimRequestobj.ClaimListingID = claimlistingID;
-            claimRequestobj.userID = userID;
-            claimRequestobj.companyID = companyID;
-            claimRequestobj.IsAdminApproved = isAdminApproved;
-            claimRequestobj.RejectionComment = Rejectioncomment;
-            claimRequestobj.Email = Email;
-            claimRequestobj.CompanyName = CompanyName;
-            claimRequestobj.Type = Type;
+            ClaimApproveRejectListingRequest claimRequestobj = new ClaimApproveRejectListingRequest
+            {
+                ClaimListingID = claimlistingID,
+                userID = userID,
+                companyID = companyID,
+                IsAdminApproved = isAdminApproved,
+                RejectionComment = Rejectioncomment,
+                Email = Email,
+                CompanyName = CompanyName,
+                Type = Type
+            };
 
             using (_httpClient = new HttpClient())
             {
                 string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
                 string apiMethod = "AdminApproveRejectForClaim";
                 string completeURL = WebAPIURL + apiMethod + '/';
-                
+
 
                 StringContent httpContent = new StringContent(JsonConvert.SerializeObject(claimRequestobj), Encoding.UTF8, "application/json");
 
-                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     message = response.Content.ReadAsStringAsync().Result;
                     if (message.Contains("claimed"))
+                    {
                         message = "claimed";
+                    }
                     else if (message.Contains("Rejected"))
+                    {
                         message = "Rejected";
+                    }
                     else
+                    {
                         message = "error";
+                    }
                 }
                 else
                 {
@@ -556,5 +568,15 @@ namespace UpVotes.Business
             return message;
         }
 
+        internal string DeleteCompany(int companyId)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "DeleteCompany";
+                string completeURL = WebAPIURL + apiMethod + '/' + companyId;
+                return _httpClient.GetStringAsync(completeURL).Result;
+            }
+        }
     }
 }

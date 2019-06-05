@@ -222,6 +222,7 @@
     <Compile Include="Business\QuotationService.cs" />
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\FocusAreaService.cs" />
+    <Compile Include="Business\TeamMembersService.cs" />
     <Compile Include="Business\UserService.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\OverViewAndNewsController.cs" />
@@ -2515,7 +2516,7 @@
     <Content Include="Scripts\UserScripts\SubmitReview.min.js">
       <DependentUpon>SubmitReview.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\UserScripts\UserCompanyEmployee.js" />
+    <Content Include="Scripts\UserScripts\TeamMembers.js" />
     <Content Include="Scripts\UserScripts\UserPortfolioList.js" />
     <Content Include="Scripts\UserScripts\UserSoftwareList.js" />
     <Content Include="Scripts\UserScripts\UserCompanyList.js" />
@@ -2653,9 +2654,9 @@
     <Content Include="Views\Navigation\_SoftwareCategories.cshtml" />
     <Content Include="Views\Authenticated\Center\UserPortfolioList.cshtml" />
     <Content Include="Views\Authenticated\Center\UserPortfolio.cshtml" />
-    <Content Include="Views\Authenticated\Center\UserCompanyTeamMembers.cshtml" />
-    <Content Include="Views\Authenticated\Center\UserCompanyTeamMembersList.cshtml" />
-    <Content Include="Views\AllListPages\AllCompanyEmployeesList.cshtml" />
+    <Content Include="Views\Authenticated\Center\TeamMember.cshtml" />
+    <Content Include="Views\Authenticated\Center\TeamMembersList.cshtml" />
+    <Content Include="Views\AllListPages\AllTeamMembersList.cshtml" />
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>

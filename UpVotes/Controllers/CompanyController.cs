@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
@@ -12,7 +11,7 @@ namespace UpVotes.Controllers
 {
     public class CompanyController : Controller
     {
-        private string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
+        private readonly string _webBaseURL = ConfigurationManager.AppSettings["WebBaseURL"].ToString();
         /// <summary>
         ///
         /// </summary>
@@ -50,17 +49,21 @@ namespace UpVotes.Controllers
                         SubFocusArea = "0",
                         UserID = Convert.ToInt32(Session["UserID"]),
                         PageNo = 1,
-                        PageSize = 10,                        
+                        PageSize = 10,
                     };
 
                     companyViewModel = new CompanyService().GetCompany(companyFilter);
+                    if (companyViewModel != null && companyViewModel.CompanyList[0].CompanyID != 0)
+                    {
+                        Session["CompanyID"] = companyViewModel.CompanyList[0].CompanyID;
+                    }
                     CacheHandler.Add(companyViewModel, companyName);
-                }                
-                
+                }
+
                 companyViewModel.WebBaseURL = _webBaseURL;
                 return View(companyViewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -90,9 +93,10 @@ namespace UpVotes.Controllers
         public ActionResult CompanyAllTeamMembersByName(string id)
         {
             Session["calledPage"] = "P";            
-            if (1==1)
+            var teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(Convert.ToInt32(Session["CompanyID"]), true);            
+            if (teamMembersViewModel.Count > 0)
             {                
-                return View("~/Views/AllListPages/AllCompanyEmployeesList.cshtml");
+                return View("~/Views/AllListPages/AllTeamMembersList.cshtml", teamMembersViewModel);
             }
             else
             {
@@ -105,27 +109,27 @@ namespace UpVotes.Controllers
             try
             {
                 Session["calledPage"] = "R";
-                
+
                 CompanyViewModel companyViewModel = null;
-               
+
                 CompanyFilterEntity companyreviewsFilter = new CompanyFilterEntity
                 {
                     CompanyName = id.Replace("-", " "),
-                    Rows = 0                        
+                    Rows = 0
                 };
 
                 companyViewModel = new CompanyService().GetUserReviews(companyreviewsFilter);
                 if (companyViewModel != null && (companyViewModel.CompanyList != null && companyViewModel.CompanyList.Count > 0))
                 {
-                    companyViewModel.WebBaseURL = _webBaseURL;                    
+                    companyViewModel.WebBaseURL = _webBaseURL;
                     return View("~/Views/AllListPages/AllCompanyReviewsList.cshtml", companyViewModel);
                 }
                 else
                 {
                     return View("~/Views/Error/PageNotFound.cshtml");
-                }                
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -133,7 +137,7 @@ namespace UpVotes.Controllers
 
         public JsonResult GetFocusArea()
         {
-            var jsonResult = default(dynamic);
+            dynamic jsonResult = default(dynamic);
             try
             {
                 List<FocusAreaEntity> focusAreaList = new FocusAreaService().GetFocusAreas();
@@ -142,7 +146,7 @@ namespace UpVotes.Controllers
                     focusAreaList
                 };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -150,7 +154,7 @@ namespace UpVotes.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        
+
 
         public string VoteForCompany(int companyID)
         {
@@ -165,7 +169,7 @@ namespace UpVotes.Controllers
                 {
                     CacheHandler.Clear(compname);
                 }
-                if(CacheHandler.Exists("TopVoteCompaniesList"))
+                if (CacheHandler.Exists("TopVoteCompaniesList"))
                 {
                     CacheHandler.Clear("TopVoteCompaniesList");
                 }
@@ -190,7 +194,7 @@ namespace UpVotes.Controllers
                 {
                     CacheHandler.Clear(compname);
                 }
-                string message =  new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
+                string message = new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
                 return message;
             }
             else
@@ -201,8 +205,8 @@ namespace UpVotes.Controllers
         public ActionResult SubmitReview(int companyID, string companyName)
         {
             if (Convert.ToInt32(Session["UserID"]) != 0)
-            {                
-                TempData["SubmitReviewInformation"] = new SubmitReviewViewModel() { SoftwareOrCompanyId = companyID, SoftwareOrCompanyName = companyName, TabIndex = 0 };  
+            {
+                TempData["SubmitReviewInformation"] = new SubmitReviewViewModel() { SoftwareOrCompanyId = companyID, SoftwareOrCompanyName = companyName, TabIndex = 0 };
                 return Json("/submit/submit-review", JsonRequestBehavior.AllowGet);
                 //return new CompanyService().ThanksNoteForReview(companyID, companyReviewID, Convert.ToInt32(Session["UserID"]));
             }
@@ -215,12 +219,24 @@ namespace UpVotes.Controllers
         public ActionResult AddNews()
         {
             if (Convert.ToInt32(Session["UserID"]) != 0)
-            {                
-                return Json("/company/my-dashboard?section=news", JsonRequestBehavior.AllowGet);                
+            {
+                return Json("/company/my-dashboard?section=news", JsonRequestBehavior.AllowGet);
             }
             else
             {
                 return Json("Please login to add the news.", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddTeamMember()
+        {
+            if (Convert.ToInt32(Session["UserID"]) != 0)
+            {
+                return Json("/company/my-dashboard?section=employees", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Please login to add the team members.", JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -242,7 +258,7 @@ namespace UpVotes.Controllers
 
         //}
 
-        public string ClaimListing(int companyID,string Email,string Domain)
+        public string ClaimListing(int companyID, string Email, string Domain)
         {
             int UserID = 0;
             string message = string.Empty;
@@ -255,12 +271,12 @@ namespace UpVotes.Controllers
             {
                 compname = Session["CompanyName"].ToString();
             }
-            
+
             try
             {
-                var claimListingRequest = new ClaimApproveRejectListingRequest
+                ClaimApproveRejectListingRequest claimListingRequest = new ClaimApproveRejectListingRequest
                 {
-                    ClaimListingID=0,
+                    ClaimListingID = 0,
                     companyID = companyID,
                     CompanyName = compname,
                     IsUserVerify = false,
@@ -271,7 +287,7 @@ namespace UpVotes.Controllers
 
                 message = new CompanyService().ClaimListing(claimListingRequest);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return message;

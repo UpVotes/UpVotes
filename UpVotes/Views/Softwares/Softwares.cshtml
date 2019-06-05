@@ -221,13 +221,13 @@
                                     <div class="content">
                                         <div class="title-wrap">
                                             <h2 class="title-small">@software.SoftwareName Team</h2>
-                                            <button class="btn btn-sm btn-add f-right">Add Member</button>
+                                            <button class="btn btn-sm btn-add f-right" id="btnAddTeamMember">Add Member</button>
                                         </div>
-                                        @if (1 == 1)
+                                        @if (software.SoftwareTeamMembers.Count > 0)
                                         {
                                             <div class="row member-wrap">
                                                 <div class="col-lg-12">
-                                                    @Html.Partial("_SoftwareMembers")
+                                                    @Html.Partial("_SoftwareMembers", software.SoftwareTeamMembers)
                                                     <div class="col text-center view-more">
                                                         <button type="submit" onclick="getAllCompanyEmployees('@software.SoftwareName.Replace(" ", "-").ToLower()',2);" class="btn btn-sm flat-gray">
                                                             View more team member

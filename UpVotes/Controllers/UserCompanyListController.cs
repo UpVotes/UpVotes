@@ -77,15 +77,15 @@ namespace UpVotes.Controllers
                     List<CompanyPortFolioEntity> portfolioObj = new CompanyService().GetCompanyPortfolioByID(companyportfolioFilter);
                     //if (portfolioObj.Count > 0)
                     //{
-                        return PartialView("~/Views/Authenticated/Center/UserPortfolioList.cshtml", portfolioObj);
+                    return PartialView("~/Views/Authenticated/Center/UserPortfolioList.cshtml", portfolioObj);
                     //}
                     //else
                     //{
                     //    portfolioObj = new List<CompanyPortFolioEntity>();
                     //    return PartialView("~/Views/Authenticated/Center/UserPortfolio.cshtml", portfolioObj);                        
                     //}
-                    
-                    
+
+
                 }
                 else
                 {
@@ -95,20 +95,62 @@ namespace UpVotes.Controllers
             else
             {
                 return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
-            }            
+            }
         }
 
-        public ActionResult GetCompanyEmployeeForm()
+        public ActionResult GetAllTeamMembers()
         {
             Session["calledPage"] = "N";
             if (Session["UserDashboardInfo"] != null)
             {
-                DashboardViewModel dashboardObj = new DashboardViewModel();
-                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
-                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                DashboardViewModel dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (dashboardObj != null && (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved)))
                 {
-                    
-                    return PartialView("~/Views/Authenticated/Center/UserCompanyTeamMembersList.cshtml");
+                    List<TeamMemebersEntity> teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(dashboardObj.CompanySoftwareID, dashboardObj.IsService);
+
+                    return PartialView("~/Views/Authenticated/Center/TeamMembersList.cshtml", teamMembersViewModel);
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
+        }
+        
+        public ActionResult TeamMemberForm()
+        {
+            if (Session["UserDashboardInfo"] != null)
+            {
+                int memberId = Convert.ToInt32(Request.Params["memberId"]);
+                DashboardViewModel dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (dashboardObj != null && (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved)))
+                {
+                    if (memberId > 0)
+                    {
+                        TeamMemebersEntity teamMember = new TeamMembersService().GetTeamMember(memberId, dashboardObj.IsService);
+                        teamMember.CompanyId = dashboardObj.IsService ? dashboardObj.CompanySoftwareID : null;
+                        teamMember.SoftwareId = dashboardObj.IsSoftware ? dashboardObj.CompanySoftwareID : null;
+                        teamMember.CompanyOrSoftwareName = dashboardObj.CompanySoftwareName;
+                        teamMember.IsService = dashboardObj.IsService;
+                        return PartialView("~/Views/Authenticated/Center/TeamMember.cshtml", teamMember);
+                    }
+                    else
+                    {
+                        TeamMemebersEntity teamMemeber = new TeamMemebersEntity
+                        {
+                            MemberId = 0,
+                            CompanyId = dashboardObj.IsService ? dashboardObj.CompanySoftwareID : null,
+                            SoftwareId = dashboardObj.IsSoftware ? dashboardObj.CompanySoftwareID : null,
+                            CompanyOrSoftwareName = dashboardObj.CompanySoftwareName,
+                            IsService = dashboardObj.IsService,
+                        };
+
+                        return PartialView("~/Views/Authenticated/Center/TeamMember.cshtml", teamMemeber);
+                    }
                 }
                 else
                 {
@@ -121,36 +163,131 @@ namespace UpVotes.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult CreateNewCompanyEmployeeForm(int companyEmployeeID)
+        public ActionResult SaveTeamMembers()
         {
-            if (Session["UserDashboardInfo"] != null)
+            dynamic jsonData = default(dynamic);
+            try
             {
-                DashboardViewModel dashboardObj = new DashboardViewModel();
-                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
-                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                string appPath = string.Empty;
+                if (Request.Params["TeamMemberData"] != null)
                 {
-                    CompanyPortFolioEntity portfolioObj = new CompanyPortFolioEntity();
-                    if (companyEmployeeID > 0)
+                    string extension = string.Empty;
+                    TeamMemebersEntity teamMembersInfo = JObject.Parse(Request.Params["TeamMemberData"].ToString()).ToObject<TeamMemebersEntity>();
+                    DashboardViewModel dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                    if (dashboardObj != null)
                     {
-                        
-                    }
-                    else
-                    {
-                        
-                    }
-                    return PartialView("~/Views/Authenticated/Center/UserCompanyTeamMembers.cshtml");
+                        teamMembersInfo.IsService = dashboardObj.IsService;
+                        teamMembersInfo.CompanyId = dashboardObj.IsService ? dashboardObj.CompanySoftwareID : null;
+                        teamMembersInfo.SoftwareId = dashboardObj.IsSoftware ? dashboardObj.CompanySoftwareID : null;
+                        teamMembersInfo.CompanyOrSoftwareName = dashboardObj.CompanySoftwareName;
 
-                }
-                else
-                {
-                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                        if (Request.Files.Count > 0 && Request.Files[0]?.FileName != string.Empty)
+                        {
+                            string fileName = Request.Files[0]?.FileName;
+                            appPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
+                            if (fileName != null && fileName.Contains("\\"))
+                            {
+                                int lastIndex = fileName.LastIndexOf('\\') + 1;
+                                int len = fileName.Length - lastIndex;
+                                fileName = fileName.Substring(lastIndex, len);
+                                fileName = fileName.Replace(" ", "");
+                            }
+
+                            extension = System.IO.Path.GetExtension(fileName);
+                            teamMembersInfo.PictureName = extension;
+                        }
+
+                        int teamMemberId = new TeamMembersService().SaveTeamMembers(teamMembersInfo);
+
+                        if (teamMemberId != 0 && Request.Files.Count > 0 && Request.Files[0]?.FileName != string.Empty)
+                        {
+                            string SMP = teamMembersInfo.IsService
+                                ? Server.MapPath(appPath + "/images/CompanyMembers/" +
+                                                 Convert.ToString(teamMembersInfo.CompanyId))
+                                : Server.MapPath(appPath + "/images/SoftwareMembers/" +
+                                                 Convert.ToString(teamMembersInfo.SoftwareId));
+
+                            string fullPath = SMP + "/" + Convert.ToString(teamMemberId) + extension;
+                            if (System.IO.Directory.Exists(SMP))
+                            {
+                                FileInfo file = new FileInfo(fullPath);
+                                if (file.Exists)
+                                {
+                                    file.Delete();
+                                }
+
+                                Request.Files[0]?.SaveAs(fullPath);
+                            }
+                            else
+                            {
+                                System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(SMP);
+                                Request.Files[0]?.SaveAs(fullPath);
+                            }
+
+                            if (dashboardObj != null &&
+                                Utility.CacheHandler.Exists(
+                                    dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-")))
+                            {
+                                UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower()
+                                    .Replace(" ", "-"));
+                            }
+                        }
+                    }
+
+                    jsonData = new
+                    {
+                        IsSuccess = true,
+                    };
                 }
             }
-            else
+            catch (Exception)
             {
-                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                jsonData = new
+                {
+                    IsSuccess = false
+                };
             }
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteTeamMember(int teamMemberId, string imageUrl)
+        {
+            dynamic jsonData = default(dynamic);
+            try
+            {
+                DashboardViewModel dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                bool deleted = new TeamMembersService().DeleteTeamMember(teamMemberId, dashboardObj != null && dashboardObj.IsService);
+                if (deleted)
+                {
+                    string appPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
+                    string fullPath = Server.MapPath(appPath + imageUrl);
+                    FileInfo file = new FileInfo(fullPath);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+
+                    if (dashboardObj != null && Utility.CacheHandler.Exists(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-")))
+                    {
+                        UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-"));
+                    }
+
+                    jsonData = new
+                    {
+                        IsSuccess = true,
+                    };
+                }
+
+            }
+            catch (Exception)
+            {
+                jsonData = new
+                {
+                    IsSuccess = false
+                };
+            }
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeletePortFolio(int portfolioID, string ImageUrl)
@@ -183,7 +320,7 @@ namespace UpVotes.Controllers
                         IsSuccess = true,
                     };
                 }
-                
+
             }
             catch (Exception)
             {
@@ -198,7 +335,7 @@ namespace UpVotes.Controllers
         [ValidateInput(false)]
         public ActionResult SaveCompanyPortfolio()
         {
-            
+
             dynamic jsonData = default(dynamic);
             try
             {
@@ -227,8 +364,8 @@ namespace UpVotes.Controllers
                     int portfolioID = new CompanyService().SavePortFolio(portfolioInfo);
 
                     if (portfolioID != 0 && Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
-                    {                        
-                        string SMP = Server.MapPath(AppPath + "/images/CompanyPortfolio/"+ Convert.ToString(portfolioInfo.CompanyID));
+                    {
+                        string SMP = Server.MapPath(AppPath + "/images/CompanyPortfolio/" + Convert.ToString(portfolioInfo.CompanyID));
                         string fullPath = SMP + "/" + Convert.ToString(portfolioID) + extension;
                         if (System.IO.Directory.Exists(SMP))
                         {
@@ -247,7 +384,7 @@ namespace UpVotes.Controllers
                             UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-"));
                         }
                     }
-                    
+
                     jsonData = new
                     {
                         IsSuccess = true,
@@ -261,12 +398,12 @@ namespace UpVotes.Controllers
                     IsSuccess = false
                 };
             }
-            return Json(jsonData, JsonRequestBehavior.AllowGet);            
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult CreateNewPortFolioForm(int portfolioID)
-        {           
+        {
             if (Session["UserDashboardInfo"] != null)
             {
                 DashboardViewModel dashboardObj = new DashboardViewModel();
@@ -293,8 +430,8 @@ namespace UpVotes.Controllers
                         portfolioObj.ImageURL = "";
                         portfolioObj.Title = "";
                     }
-                    return PartialView("~/Views/Authenticated/Center/UserPortfolio.cshtml", portfolioObj);                        
-                    
+                    return PartialView("~/Views/Authenticated/Center/UserPortfolio.cshtml", portfolioObj);
+
                 }
                 else
                 {
@@ -315,7 +452,7 @@ namespace UpVotes.Controllers
                 LogoName = string.Empty,
                 CreatedBy = Convert.ToInt32(Session["UserID"]),
                 SoftwareCatagoryIds = string.Empty
-            };            
+            };
 
             SoftwareViewModel softwareViewModel = new SoftwareViewModel { SoftwareList = new List<SoftwareEntity> { softwareEntity } };
             softwareViewModel.IsAdmin = ((UserEntity)Session["UserObj"]).UserType == 4 ? true : false;
@@ -943,6 +1080,18 @@ namespace UpVotes.Controllers
                 Session["calledPage"] = "H";
             }
             return View("~/Views/UserCompanyList/UserVerification.cshtml", isUserVerified);
+        }
+
+        public JsonResult DeleteCompany(int companyId)
+        {
+            string message = new CompanyService().DeleteCompany(companyId);
+            dynamic jsonResult = default(dynamic);
+            jsonResult = new
+            {
+                message
+            };
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
     }
 }

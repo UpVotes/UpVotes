@@ -43,7 +43,7 @@
                             }
                             @if (Model.IsEmployees)
                             {
-                                <a class="@(Model.section=="employees" ? "nav-link cursorPointer active":"nav-link cursorPointer")" id="showAddCompanyEmployeeSection"><i class="fa fa-users"></i> Company Employees</a>
+                                <a class="@(Model.section=="employees" ? "nav-link cursorPointer active":"nav-link cursorPointer")" id="showAddTeamMembersSection"><i class="fa fa-users"></i>Team Members</a>
                             }
                             @if (Model.IsNews)
                             {
@@ -91,6 +91,10 @@
                     else if (Model.section == "portfolio")
                     {
                         Html.RenderAction("GetUserPortfolioForm", "UserCompanyList");
+                    }
+                    else if (Model.section == "employees")
+                    {
+                        Html.RenderAction("TeamMemberForm", "UserCompanyList");
                     }
                 </div>
             </div>

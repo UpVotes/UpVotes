@@ -12,9 +12,10 @@ $(document).ready(function ()
     var countryList = '';
     //$("#divmylist").tabs();
     //$("#divCompanyTabs").tabs();
-    if ($("#txtCompanySummary").length > 0) {
+    if ($("#txtCompanySummary").length > 0)
+    {
         $("#txtCompanySummary").Editor();
-        $("#txtKeyClients").Editor();        
+        $("#txtKeyClients").Editor();
     }
     //$('#ImgLoading').attr("src", $.absoluteurl('/images/ajax-loader.gif'));
 
@@ -23,20 +24,25 @@ $(document).ready(function ()
         return $(this).IsValidNumber(e);
     });
 
-    $('.progressChange').change(function () {
+    $('.progressChange').change(function ()
+    {
         var total = 0;
-        $('.progressChange').each(function() {            
-            total = total + (parseInt($(this).val() || 0));            
-        });        
+        $('.progressChange').each(function ()
+        {
+            total = total + (parseInt($(this).val() || 0));
+        });
         $('#divServiceFocusProgress').css('width', total + '%');
         $('#spnServiceFocusPercentage').text(total + '%');
     });
 
-    $('.subFocusProgressChange').change(function () {
+    $('.subFocusProgressChange').change(function ()
+    {
         var total = 0;
         var focusid = $(this).attr('focusid');
-        $('.subFocusProgressChange').each(function () {
-            if (focusid == $(this).attr('focusid')) {
+        $('.subFocusProgressChange').each(function ()
+        {
+            if (focusid == $(this).attr('focusid'))
+            {
                 total = total + (parseInt($(this).val() || 0));
             }
         });
@@ -46,18 +52,22 @@ $(document).ready(function ()
         $('#' + spnPercentageid).text(total + '%');
     });
 
-    $('.industryFocusProgressChange').change(function () {
+    $('.industryFocusProgressChange').change(function ()
+    {
         var total = 0;
-        $('.industryFocusProgressChange').each(function () {
+        $('.industryFocusProgressChange').each(function ()
+        {
             total = total + (parseInt($(this).val() || 0));
         });
         $('#divIndustryProgress').css('width', total + '%');
         $('#spnIndustryFocusPercentage').text(total + '%');
     });
 
-    $('.clientFocusProgressChange').change(function () {
+    $('.clientFocusProgressChange').change(function ()
+    {
         var total = 0;
-        $('.clientFocusProgressChange').each(function () {
+        $('.clientFocusProgressChange').each(function ()
+        {
             total = total + (parseInt($(this).val() || 0));
         });
         $('#divClientProgress').css('width', total + '%');
@@ -65,7 +75,7 @@ $(document).ready(function ()
     });
 
     $.GetCompanyOwnedDetails = function (obj)
-    {        
+    {
         companyOwnedByObj.CreatedBy = obj.CreatedBy;
         companyOwnedByObj.IsAdminUser = obj.IsAdminUser;
         companyOwnedByObj.LoggedInUser = obj.LoggedInUser;
@@ -185,7 +195,7 @@ $(document).ready(function ()
             $('#spnSuccessMessage').css('display', 'none');
             $('#spnSuccessMessage').html("");
             $('html, body').animate({ scrollTop: 0 }, 'slow');
-            $(".nav-tabs a:eq("+tabIndex+")").tab('show');
+            $(".nav-tabs a:eq(" + tabIndex + ")").tab('show');
             //$("#divCompanyTabs").tabs("option", "active", tabIndex);
         }
         else
@@ -277,7 +287,8 @@ $(document).ready(function ()
                 //Focus Area Section
                 var primaryFocusPercentageTotal = 0;
                 actualFocusAreaArray = [];
-                for (var i = 0; i < focusAreaObject.length; i++) {
+                for (var i = 0; i < focusAreaObject.length; i++)
+                {
                     var actualFocusAreaObj;
                     if (focusAreaObject[i].FocusType === "P")
                     {
@@ -469,12 +480,14 @@ $(document).ready(function ()
         }
     }
 
-    $('#addAdminServiceProfile').click(function () {
+    $('#addAdminServiceProfile').click(function ()
+    {
         $('#ajax_loaderDashboard').show();
         $.ajax({
             url: $.absoluteurl('/UserCompanyList/CreateNewCompanyAdmin'),
             type: "POST",
-            success: function (response) {
+            success: function (response)
+            {
                 $('#ajax_loaderDashboard').hide();
                 $('#DetailsContent').html("");
                 $('#DetailsContent').html(response);
@@ -483,24 +496,48 @@ $(document).ready(function ()
         });
     });
 
-    $('.btnEditCompany').click(function () {
+    $('.btnEditCompany').click(function ()
+    {
         $('#ajax_loaderDashboard').show();
         $.ajax({
             url: $.absoluteurl('/UserCompanyList/GetUserCompanyDetail'),
             data: { companyName: $(this).attr('compname') },
             type: "POST",
-            success: function (response) {
+            success: function (response)
+            {
                 $('#ajax_loaderDashboard').hide();
                 $('#DetailsContent').html("");
                 $('#DetailsContent').html(response);
             }
-
         });
     });
 
-    $("#btnCompanySave").click(function ()
+    $('.btnDeleteCompany').click(function ()
     {
-        
+        $('#ajax_loaderDashboard').show();
+        $.ajax({
+            url: $.absoluteurl('/UserCompanyList/DeleteCompany'),
+            data: { companyId: $(this).attr('compid') },
+            type: "POST",
+            success: function (response) {
+                debugger;
+                $('#ajax_loaderDashboard').hide();
+                if (response.IsSuccess) {
+                    $('#spnSuccessMessage')
+                        .html(
+                            "Your company profile has been deleted.");
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');                    
+                }
+            },
+            error: function(a, b, c) {
+                debugger;
+            }
+        });
+    });
+
+
+    $("#btnCompanySave").click(function () {
+        debugger;
         $.DisplayMessage(false, "", -1);
         $('#ajax_loaderDashboard').show();
         //$('#divLoading').dialog({ modal: true, title: '', width: '115', height: '115', open: function () { $('.ui-widget-overlay').addClass('custom-overlay'); $(".ui-dialog-titlebar-close").hide(); $(".ui-widget-header").hide(); }, close: function () { $('.ui-widget-overlay').removeClass('custom-overlay'); $(".ui-dialog-titlebar-close").show(); $(".ui-widget-header").show(); } });
@@ -587,7 +624,7 @@ $(document).ready(function ()
                     $('#ajax_loaderDashboard').hide();
                     if (response.IsSuccess)
                     {
-                        $("#divSuccessMessage").removeClass('hide');                        
+                        $("#divSuccessMessage").removeClass('hide');
                         $('#spnSuccessMessage').css('display', 'block');
                         $("#addServiceData").addClass('hide');
                         if (isAdmin)
@@ -596,7 +633,8 @@ $(document).ready(function ()
                                 url: $.absoluteurl('/UserCompanyList/UserCompany'),
                                 data: { companyName: "" },
                                 type: "POST",
-                                success: function (response) {
+                                success: function (response)
+                                {
                                     $('#ajax_loaderDashboard').hide();
                                     $('#DetailsContent').html("");
                                     $('#DetailsContent').html(response);
@@ -658,7 +696,8 @@ $(document).ready(function ()
                     url: $.absoluteurl('/UserCompanyList/UserCompany'),
                     data: { companyName: "" },
                     type: "POST",
-                    success: function (response) {
+                    success: function (response)
+                    {
                         $('#ajax_loaderDashboard').hide();
                         $('#DetailsContent').html("");
                         $('#DetailsContent').html(response);
@@ -675,7 +714,7 @@ $(document).ready(function ()
     }
 
     $(".btnCompanyCancel").click(function ()
-    {        
+    {
         if (isAdmin && ($("#txtRejectComments")[0].value == "" || $("#txtRejectComments")[0].value == undefined))
         {
             $.DisplayMessage(true, "Please fill comment for rejection in profile section.", 0)
@@ -691,7 +730,8 @@ $(document).ready(function ()
                 url: $.absoluteurl('/UserCompanyList/UserCompany'),
                 data: { companyName: "" },
                 type: "POST",
-                success: function (response) {
+                success: function (response)
+                {
                     $('#ajax_loaderDashboard').hide();
                     $('#DetailsContent').html("");
                     $('#DetailsContent').html(response);
@@ -703,7 +743,7 @@ $(document).ready(function ()
 
     $('#btnAddBranch').click(function ()
     {
-        
+
         var idLastBranch = 0;
         var BranchNum = 0;
         if ($("#dvLocationBranch [id*=dvLocationBranches_]:last").attr('id') != undefined)
@@ -721,8 +761,9 @@ $(document).ready(function ()
                 $(this).attr('id', oldID.replace('_rNum', '_' + BranchNum));
             });
 
-            $(duplicate).find('label[for="ChkIsHeadQuarters_rNum"]').each(function () {
-                var checkboxid = $(this).attr('for');                
+            $(duplicate).find('label[for="ChkIsHeadQuarters_rNum"]').each(function ()
+            {
+                var checkboxid = $(this).attr('for');
                 $(this).attr('for', checkboxid.replace('_rNum', '_' + BranchNum));
             });
 
@@ -765,7 +806,7 @@ $(document).ready(function ()
     });
 
     $.GetCompanyData = function (companyName)
-    {        
+    {
         isAddMode = false;
         //$('#divLoading').dialog({ modal: true, title: '', width: '115', height: '115', open: function () { $('.ui-widget-overlay').addClass('custom-overlay'); $(".ui-dialog-titlebar-close").hide(); $(".ui-widget-header").hide(); }, close: function () { $('.ui-widget-overlay').removeClass('custom-overlay'); $(".ui-dialog-titlebar-close").show(); $(".ui-widget-header").show(); } });
         $('#ajax_loaderDashboard').show();
@@ -777,7 +818,7 @@ $(document).ready(function ()
                 content: "application/json; charset=utf-8",
                 type: 'POST',
                 success: function (data)
-                {                    
+                {
                     if (data != null && data.companyData != null)
                     {
                         if (data.isAdminUser)
@@ -810,9 +851,7 @@ $(document).ready(function ()
                         document.getElementById('ddlEmployees').value = data.companyData.TotalEmployees;
                         document.getElementById('ddlAvgHourlyRate').value = data.companyData.AveragHourlyRate;
                         $("#txtCompanySummary").Editor("setText", (data.companyData.Summary + '<br/>' + data.companyData.Summary1 + '<br/>' + data.companyData.Summary2 + '<br/>' + data.companyData.Summary3));
-                        $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));
-                        //$("#txtCompanySummary").val(data.companyData.Summary);
-                        //$("#txtKeyClients").val(data.companyData.KeyClients);
+                        $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));                        
                         if (data.companyData.LogoName != "")
                         {
                             $('#txtLogoName').text(data.companyData.LogoName);
@@ -938,7 +977,7 @@ $(document).ready(function ()
                 $('#ajax_loaderDashboard').show();
                 $.ajax({
                     url: $.absoluteurl('/UserCompanyList/AdminClaimReject'),
-                    data: { claimlistingID: claimlistingid, companyID: companyid, Rejectioncomment: rejectioncomment, Email: email, CompanyName: compName, Type:type },
+                    data: { claimlistingID: claimlistingid, companyID: companyid, Rejectioncomment: rejectioncomment, Email: email, CompanyName: compName, Type: type },
                     type: 'POST',
                     success: function (response)
                     {
@@ -967,23 +1006,27 @@ $(document).ready(function ()
         }
     });
 
-    $("#addServiceProfile").click(function () {
+    $("#addServiceProfile").click(function ()
+    {
         $("#emptyServiceData").addClass("hide");
         $("#addServiceData").removeClass("hide");
     });
 
-    $('.btnNext').click(function () {
+    $('.btnNext').click(function ()
+    {
         $('.nav-tabs > .active').next('a').trigger('click');
         var scrollPos = $("#addServiceProfileSection").offset().top;
         $(window).scrollTop(scrollPos);
     });
 
-    $("#btnCompanyList").click(function () {
+    $("#btnCompanyList").click(function ()
+    {
         $.ajax({
             url: $.absoluteurl('/UserCompanyList/UserCompany'),
             data: { companyName: "" },
             type: "POST",
-            success: function (response) {
+            success: function (response)
+            {
                 $('#ajax_loaderDashboard').hide();
                 $('#DetailsContent').html("");
                 $('#DetailsContent').html(response);

@@ -1,0 +1,123 @@
+﻿@model UpVotes.BusinessEntities.Entities.TeamMemebersEntity
+
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script>$('.date-control input').datepicker();</script>
+<script src="~/Scripts/UserScripts/TeamMembers.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {        
+        var picturePath = jQuery.parseJSON('@Html.Raw(Json.Encode(Model.PictureName))');
+        if (picturePath !== "" && picturePath !== undefined && picturePath !== null) {
+            var logoName = jQuery.parseJSON('@Html.Raw(Json.Encode(Model.MemberId))') + picturePath.substring(picturePath.lastIndexOf('.'));
+            $("#txtLogoName")[0].value = picturePath.substring(picturePath.lastIndexOf('.'));
+            $('#txtLogoName').text(logoName);
+            $('#imgpreview').show();
+            $('#imgpreview').attr('src', '../' + picturePath);
+        }
+    })
+</script>
+
+<div class="alert alert-danger hide" id="divFailureMessage">
+    <strong>ERROR!!</strong>
+    <span id="spnMessage">Fields marked with * are mandatory.</span>
+</div>
+
+<div class="main-inner">
+
+    <!-- add software profile section -->
+    <div class="row">
+        <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+            <h2 class="title-small">Team Members</h2>
+        </div>
+
+        <div class="col-xl-12" id="addEmployeeSection">
+            <section class="section-wrap">
+                <div class="tab-wrap primary">
+                    <div class="tab-content">
+                        <b>Add team member to your company</b>
+                        <br /><br />
+                        <div class="form-group row">
+                            @if (Model.IsService)
+                            {
+                                <label for="txtCompanyOrSoftwareName" class="col-xl-3 col-md-3 col-sm-12 col-form-label"> Company Name <small class="manditory">*</small></label>
+                            }
+                            else
+                            {
+                                <label for="txtCompanyOrSoftwareName" class="col-xl-3 col-md-3 col-sm-12 col-form-label"> Software Name <small class="manditory">*</small></label>
+                            }
+
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <input type="text" class="form-control" id="txtCompanyOrSoftwareName" placeholder="" value="@Model.CompanyOrSoftwareName" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xl-3 col-md-3 col-sm-12">
+                                <label for="UplAttachment" class="col-form-label">Profile Picture</label>
+                            </div>
+                            <iframe id="frmAttachment" name="_blank" style="display: none"></iframe>
+                            <div class="col-xl-6 col-md-6 col-sm-12 input-group">
+                                <form action="/UserCompanyList/SaveFileToServer" target="frmAttachment" method="post" enctype="multipart/form-data" id="myForm" class="custom-file v1">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12">
+                                            <label class="btn-bs-file btn btn-primary">
+                                                Choose Photo<input type="file" id="UplAttachment" name="postedFile" onchange="CheckForUploadedFile(this)" class="form-control" />
+                                            </label>
+                                            <div class="file-name" id="txtLogoName">@Model.PictureName</div>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12 col-sm-12">
+                                            <div class="logo-preview">
+                                                <img class="previewimg" id="imgpreview" title="Your photo" src="#" style="display: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="txtMemberName" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Member Name<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <input type="text" class="form-control" id="txtMemberName" placeholder="" value="@Model.MemberName" />
+                                <input type="hidden" id="hdnMemberId" value="@Model.MemberId" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="txtDesignation" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Designation<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <input type="text" class="form-control" id="txtDesignation" placeholder="" value="@Model.Designation" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="txtLinkedInProfile" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Linkedin Profile</label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <input type="text" class="form-control" id="txtLinkedInProfile" placeholder="" value="@Model.LinkedInProfile" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="txtStartDate" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Start Date<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12 date-control">
+                                <input type="text" class="form-control" value="@Model.StartDate" id="txtStartDate" />(mm/dd/yyyy)
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">End Date</label>
+                            <div class="col-xl-6 col-md-6 col-sm-12 date-control">
+                                <input type="text" class="form-control" value="@Model.EndDate" id="txtEndDate" />(mm/dd/yyyy)
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary" id="btnSaveTeamMember">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>

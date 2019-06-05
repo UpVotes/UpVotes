@@ -120,6 +120,28 @@
             }
         });
     });
+
+    $('#btnAddTeamMember').click(function ()
+    {
+        $.ajax({
+            url: $.absoluteurl('/Softwares/AddTeamMember'),
+            cache: false,
+            async: false,
+            datatype: 'json',
+            type: 'POST',
+            success: function (response)
+            {
+                if (response != "Please login to add the team members.")
+                {
+                    window.open(window.location.origin + response, "_self");
+                }
+                else
+                {
+                    alert(response);
+                }
+            }
+        });
+    });
     
     //Get Container width
     var conWidth = $('.content-wrap .container').width();

@@ -292,8 +292,8 @@ $(document).ready(function ()
                 success: function (response)
                 {                    
                     $('#ajax_loaderDashboard').hide();
-                    if (response.IsSuccess)
-                    {
+                    if (response.IsSuccess) {
+                        uploadedSoftwareLogo = null;
                         $("#successServiceData").removeClass('hide');
                         $('#spnSuccessMessage').css('display', 'block');
                         $("#addSoftwareData").addClass('hide');

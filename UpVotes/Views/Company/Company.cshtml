@@ -2,9 +2,11 @@
 @model UpVotes.Models.CompanyViewModel
 
 @{
-    ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings " + @DateTime.Now.Year + " - Upvotes.co";
-    ViewBag.MetaTag = "<link rel='canonical' href='"+ Request.Url.ToString() + "' />";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = Model.CompanyList[0].CompanyName + " - Reviews & Ratings " + @DateTime.Now.Year + " - Upvotes.co";
+                ViewBag.MetaTag = "<link rel='canonical' href='" + Request.Url.ToString() + "' />";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -238,8 +240,8 @@
                                         </div>
                                         @if (company.CompanyPortFolio.Count > 0)
                                         {
-                                            <div class="row portfolio">                                                
-                                                    @Html.Partial("_CompanyPortFolio", company.CompanyPortFolio)
+                                            <div class="row portfolio">
+                                                @Html.Partial("_CompanyPortFolio", company.CompanyPortFolio)
                                                 <div class="col-lg-12">
                                                     <div class="col text-center load-more">
                                                         <button type="submit" onclick="getAllPortFolio('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
@@ -247,7 +249,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                </div>
+                                            </div>
                                         }
                                         else
                                         {
@@ -295,13 +297,13 @@
                                     <div class="content">
                                         <div class="title-wrap">
                                             <h2 class="title-small">@company.CompanyName Team</h2>
-                                            <button class="btn btn-sm btn-add f-right">Add Member</button>
+                                            <button class="btn btn-sm btn-add f-right" id="btnAddTeamMember">Add Member</button>
                                         </div>
-                                        @if (1 == 1)
+                                        @if (company.CompanyTeamMembers.Count > 0)
                                         {
                                             <div class="row member-wrap">
                                                 <div class="col-lg-12">
-                                                    @Html.Partial("_CompanyMembers")
+                                                    @Html.Partial("_CompanyMembers", company.CompanyTeamMembers)
                                                     <div class="col text-center view-more">
                                                         <button type="submit" onclick="getAllCompanyEmployees('@company.CompanyName.Replace(" ", "-").ToLower()',1);" class="btn btn-sm flat-gray">
                                                             View more team member
@@ -321,7 +323,7 @@
                                         }
                                     </div>
 
-</section>
+                                </section>
 
                                 <section id="navJobs">
                                     <div class="content">

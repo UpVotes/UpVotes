@@ -1,15 +1,30 @@
-﻿var uploadPortFolioImg;
+﻿var uploadedProfilePicture;
 $(document).ready(function ()
 {
-
-
-    $('.btnaddPortFolio').click(function ()
+    $('.btnaddTeamMember').click(function ()
     {
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/UserCompanyList/CreateNewPortFolioForm'),
-            type: "POST",
-            data: {portfolioID : 0},
+            url: $.absoluteurl('/UserCompanyList/TeamMemberForm'),
+            type: "GET",
+            data: { memberId: 0 },
+            success: function (response)
+            {
+                $('#ajax_loaderDashboard').hide();
+                $('#DetailsContent').html("");
+                $('#DetailsContent').html(response);
+            }
+
+        });
+    });
+
+    $('.btnEditTeamMember').click(function () {        
+        var teamMemberId = $(this).attr("memberID");
+        $('#ajax_loaderDashboard').show();
+        $.ajax({
+            url: $.absoluteurl('/UserCompanyList/TeamMemberForm'),
+            type: "GET",
+            data: { memberID: teamMemberId },
             success: function (response)
             {
                 $('#ajax_loaderDashboard').hide();
@@ -19,27 +34,9 @@ $(document).ready(function ()
 
         });
     });
-    
-    $('.btnEditPortfolio').click(function ()
-    {
-        var PortFolioID=$(this).attr('portid');
-        $('#ajax_loaderDashboard').show();
-        $.ajax({
-            url: $.absoluteurl('/UserCompanyList/CreateNewPortFolioForm'),
-            data: { portfolioID: PortFolioID },
-            type: "POST",
-            success: function (response)
-            {
-                $('#ajax_loaderDashboard').hide();
-                $('#DetailsContent').html("");
-                $('#DetailsContent').html(response);                
-            }
 
-        });
-    });
-    
     $.DisplayMessage = function (isError, displayText)
-    {        
+    {
         if (isError)
         {
             $("#divFailureMessage").removeClass('hide');
@@ -56,19 +53,35 @@ $(document).ready(function ()
     }
 
     $.SaveModeValidations = function ()
-    {
+    {        
         try
         {
             var status = 0;
             var fileMessage = '';
-            if ($('#txtProjectName').val() === "" || $('#txtProjectName').val() === undefined)
+            if ($('#txtMemberName').val() === "" || $('#txtMemberName').val() === undefined)
             {
                 status = 1;
             }
 
-            if ($('#txtProjectDescription').val() === "" || $('#txtProjectDescription').val() === undefined)
+            if ($('#txtDesignation').val() === "" || $('#txtDesignation').val() === undefined)
             {
                 status = 1;
+            }
+
+            if ($('#txtStartDate').val() === "" || $('#txtStartDate').val() === undefined)
+            {
+                status = 1;
+            } else
+            {
+                if (!isDate($('#txtStartDate').val()))
+                {
+                    status = 2;
+                }
+            }
+
+            if ($('#txtEndDate').val() !== "" && $('#txtEndDate').val() !== undefined && !isDate($('#txtEndDate').val()))
+            {
+                status = 2;
             }
 
             if ($("#UplAttachment")[0].value !== "" && $("#UplAttachment")[0].value !== undefined)
@@ -76,7 +89,7 @@ $(document).ready(function ()
                 fileMessage = ValidateUploadedFile();
             }
 
-            if (parseInt($('#hdnPortfolioID').val()) == 0)
+            if (parseInt($('#hdnMemberId').val()) === 0)
             {
                 fileMessage = ValidateUploadedFile();
             }
@@ -86,7 +99,12 @@ $(document).ready(function ()
                 $.DisplayMessage(true, "Fields marked with * are mandatory.", 0);
                 return false;
             }
-            else if (fileMessage !== '')
+            else if (status === 2)
+            {
+                $.DisplayMessage(true, "Invalid date.", 0);
+                return false;
+            }
+            else if (fileMessage !== "")
             {
                 $.DisplayMessage(true, fileMessage, 0);
                 return false;
@@ -99,38 +117,93 @@ $(document).ready(function ()
 
         } catch (e)
         {
-           
+
         }
     }
 
-    $('.btnDeletePortFolio').click(function () {
-        $('#hdnPortfolioID').val($(this).attr('portid'));
-        $('#hdnImageUrl').val($(this).attr('image'));       
+    $('#btnSaveTeamMember').click(function() {        
+        $.DisplayMessage(false, "", -1);
+        $('#ajax_loaderDashboard').show();
+
+        if ($.SaveModeValidations()) {
+            var teamMemberData = new Object();
+            teamMemberData.MemberId = (($("#hdnMemberId")[0].value === "" || $("#hdnMemberId")[0].value === undefined)
+                ? 0
+                : $("#hdnMemberId")[0].value);
+            teamMemberData.MemberName = $("#txtMemberName")[0].value;
+            teamMemberData.PictureName = $("#txtLogoName")[0].value;
+            teamMemberData.Designation = $("#txtDesignation")[0].value;
+            teamMemberData.LinkedInProfile = $("#txtLinkedInProfile")[0].value;
+            teamMemberData.StartDate = $("#txtStartDate")[0].value;
+            teamMemberData.EndDate = $("#txtEndDate")[0].value;
+
+            var form = $('#myForm')[0];
+            var data = new FormData(form);
+            data.append('UploadedFile', uploadedProfilePicture);
+
+            var myTeamMemberData = JSON.stringify(teamMemberData);
+            data.append('TeamMemberData', myTeamMemberData);
+
+            $.ajax({
+                url: $.absoluteurl('/UserCompanyList/SaveTeamMembers'),
+                data: data,
+                cache: false,
+                datatype: 'json',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function(response) {                    
+                    $('#ajax_loaderDashboard').hide();
+                    if (response.IsSuccess) {
+                        uploadedProfilePicture = null;
+                        alert("Successfully Saved.");
+                        $('#showAddTeamMembersSection').click();
+                    } else {
+                        $.DisplayMessage(true, "Failed to save.");
+                    }
+                },
+                error: function(e) {
+                    $('#spnMessage').css('display', 'block');
+                    $.DisplayMessage(true, "Some error has occured. Failed to save. Please contact admin.", 0);
+                    $('#ajax_loaderDashboard').hide();
+                }
+            });
+        } else {
+            $('#ajax_loaderDashboard').hide();
+        }
     });
 
-    $('.btnDeleteNo').click(function () {
-        $('#hdnPortfolioID').val('0');
-        $('#hdnImageUrl').val('');        
+    $('.btnDeleteTeamMember').click(function () {        
+        $('#hdnTeamMemberId').val($(this).attr('memberID'));
+        $('#hdnPictureUrl').val($(this).attr('image'));
     });
 
-    $('#btnDeleteYes').click(function () {
-        var PortFolioID = $('#hdnPortfolioID').val();
-        var ImageUrl = $('#hdnImageUrl').val();
+    $('.btnDeleteNo').click(function ()
+    {
+        $('#hdnTeamMemberId').val('0');
+        $('#hdnPictureUrl').val('');
+    });
+
+    $('#btnDeleteYes').click(function () {        
+        var teamMemberId = $('#hdnTeamMemberId').val();
+        var ImageUrl = $('#hdnPictureUrl').val();
         $('.btnDeleteNo').click();
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/UserCompanyList/DeletePortFolio'),
-            data: { portfolioID: PortFolioID, ImageUrl: ImageUrl },
+            url: $.absoluteurl('/UserCompanyList/DeleteTeamMember'),
+            data: { teamMemberId: teamMemberId, imageUrl: ImageUrl },
             type: "POST",
-            success: function (response) {
+            success: function (response)
+            {
                 $('#ajax_loaderDashboard').hide();
-                if (response.IsSuccess) {
-                    alert('Successfully Deleted');                    
-                    $('#hdnPortfolioID').val('0');
-                    $('#hdnImageUrl').val('');
-                    $('#showAddUserPortfolioSection').click();
+                if (response.IsSuccess)
+                {
+                    alert('Successfully Deleted');
+                    $('#hdnTeamMemberId').val('0');
+                    $('#hdnPictureUrl').val('');
+                    $('#showAddTeamMembersSection').click();
                 }
-                
+
             },
             error: function (e)
             {
@@ -141,69 +214,10 @@ $(document).ready(function ()
         });
     });
 
-    $('#btnsavePortFolio').click(function ()
-    {        
-        $.DisplayMessage(false, "", -1);
-        $('#ajax_loaderDashboard').show();
-
-        if ($.SaveModeValidations())
-        {
-            var Portfoliodata = new Object();
-            Portfoliodata.CompanyID = $('#hdnCompanyID').val();
-            Portfoliodata.CompanyPortFolioID = $('#hdnPortfolioID').val();
-            Portfoliodata.Description = $('#txtProjectDescription').val();
-            Portfoliodata.Title = $('#txtProjectName').val();
-
-            var form = $('#myForm')[0];
-            var data = new FormData(form);
-            data.append('UploadedFile', uploadPortFolioImg);
-
-            var myPortfolioData = JSON.stringify(Portfoliodata);
-            data.append('PortfolioData', myPortfolioData);
-
-            $.ajax({
-                url: $.absoluteurl('/UserCompanyList/SaveCompanyPortfolio'),
-                data: data,
-                cache: false,
-                datatype: 'json',
-                type: 'POST',
-                contentType: false,
-                processData: false,
-                success: function (response)
-                {                    
-                    $('#ajax_loaderDashboard').hide();
-                    if (response.IsSuccess)
-                    {
-                        uploadPortFolioImg = null;
-                        alert("Successfully Saved.");
-                        $('#showAddUserPortfolioSection').click();                        
-                    } else
-                    {
-                        $.DisplayMessage(true, "Failed to save.");
-                    }
-                },
-                error: function (e)
-                {
-                    $('#spnMessage').css('display', 'block');
-                    $.DisplayMessage(true, "Some error has occured. Failed to save. Please contact admin.", 0);
-                    $('#ajax_loaderDashboard').hide();
-                }
-            });
-
-        } else
-        {
-            $('#ajax_loaderDashboard').hide();
-        }
-    });
-
-    
-
-    
 });
-
 function CheckForUploadedFile(obj)
 {
-    uploadPortFolioImg = obj.files[0];
+    uploadedProfilePicture = obj.files[0];
     if (obj.files && obj.files[0])
     {
         var reader = new FileReader();
@@ -212,15 +226,16 @@ function CheckForUploadedFile(obj)
         {
             $('#imgpreview').attr('src', e.target.result);
             $('#imgpreview').show();
+            $('#txtLogoName').text(uploadedProfilePicture.name);
         };
 
         reader.readAsDataURL(obj.files[0]);
     }
 }
 
-
 function ValidateUploadedFile()
-{    
+{
+
     if ($("#UplAttachment")[0].value === "")
     {
         return 'Please select a file';
@@ -268,7 +283,7 @@ function ValidateUploadedFile()
         fileNames = fileNames.substring(0, fileNames.lastIndexOf(","));
         $("#UplAttachment")[0].value = '';
         $("#UplAttachment").replaceWith($("#UplAttachment").clone(true));
-        return 'Image should not exceed more than 100 characters ' + ' (' + fileNames + ')';
+        return 'Logo name should not exceed more than 100 characters ' + ' (' + fileNames + ')';
     }
 
     fileNames = "";
@@ -285,8 +300,40 @@ function ValidateUploadedFile()
         filesSize = parseFloat(filesSize / 1048576).toFixed(2);
         $("#UplAttachment")[0].value = '';
         $("#UplAttachment").replaceWith($("#UplAttachment").clone(true));
-        return 'Image should be 1MB in size. Your file size is ' + filesSize + 'MB';
+        return 'Logo should be 1MB in size. Your file size is ' + filesSize + 'MB';
     }
 
     return '';
+}
+
+function isDate(txtDate)
+{
+    var currVal = txtDate;
+    if (currVal === '')
+        return false;
+
+    var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/; //Declare Regex
+    var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+    if (dtArray == null)
+        return false;
+
+    //Checks for mm/dd/yyyy format.
+    var dtMonth = dtArray[1];
+    var dtDay = dtArray[3];
+    var dtYear = dtArray[5];
+
+    if (dtMonth < 1 || dtMonth > 12)
+        return false;
+    else if (dtDay < 1 || dtDay > 31)
+        return false;
+    else if ((dtMonth === 4 || dtMonth === 6 || dtMonth === 9 || dtMonth === 11) && dtDay === 31)
+        return false;
+    else if (dtMonth === 2) 
+    {
+        var isleap = (dtYear % 4 === 0 && (dtYear % 100 !== 0 || dtYear % 400 === 0));
+        if (dtDay > 29 || (dtDay === 29 && !isleap))
+            return false;
+    }
+    return true;
 }
