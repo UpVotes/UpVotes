@@ -330,3 +330,43 @@
 .post-wrap .action {
     margin-top: 20px;
 }
+
+/*Reviewer information*/
+.dashboard .review-info .review-list:first-child {
+    margin-bottom: 30px;
+}
+.dashboard .review-info ul {
+    padding: 0;
+}
+.dashboard .review-info li {
+    list-style-type: none;
+    margin: 15px 0;
+}
+.dashboard .review-info li div {
+    display: inline-block;
+    vertical-align: middle;
+}
+.dashboard .review-info li div.label {
+    font-weight: 600;
+    width: 200px;
+}
+.dashboard .review-info li div.data {
+    color: #666;
+    width: calc(100% - 230px);
+    padding-left: 30px;
+}
+.dashboard .review-info .title-small {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) { 
+  .dashboard .review-info li div.label,
+  .dashboard .review-info li div.data {
+    width: 100%;
+    padding: 0;
+  }
+  .dashboard .review-info .dot {
+      display: none;
+  }
+}

@@ -82,6 +82,7 @@ namespace UpVotes
             bundles.Add(new StyleBundle("~/Content/TeamMembers").Include("~/Content/bootstrap-datepicker.css"));
             bundles.Add(new ScriptBundle("~/bundles/TeamMembers").Include("~/Scripts/bootstrap-datepicker.js", "~/Scripts/UserScripts/TeamMembers.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/UserReviewApproval").Include("~/Scripts/UserScripts/UserReviewForApproval.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
                       "~/Scripts/UserScripts/Quotation.min.js"));

@@ -151,7 +151,8 @@
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="UpVotes.BussinessEntities">
+    <Reference Include="UpVotes.BussinessEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\UpVotes.Services\UpVotes.WebAPI\bin\UpVotes.BussinessEntities.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
@@ -2517,6 +2518,7 @@
       <DependentUpon>SubmitReview.js</DependentUpon>
     </Content>
     <Content Include="Scripts\UserScripts\TeamMembers.js" />
+    <Content Include="Scripts\UserScripts\UserReviewForApproval.js" />
     <Content Include="Scripts\UserScripts\UserPortfolioList.js" />
     <Content Include="Scripts\UserScripts\UserSoftwareList.js" />
     <Content Include="Scripts\UserScripts\UserCompanyList.js" />
@@ -2658,6 +2660,7 @@
     <Content Include="Views\Authenticated\Center\TeamMembersList.cshtml" />
     <Content Include="Views\AllListPages\AllTeamMembersList.cshtml" />
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
+    <Content Include="Views\Authenticated\Center\UserReviewForApprovalList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

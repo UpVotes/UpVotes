@@ -118,5 +118,77 @@ namespace UpVotes.Business
             bool isSuccess = AddSoftwareReview(softwareReviewEntity);
             return isSuccess;
         }
+
+        internal List<UserReviewsResponseEntity> GetUserReviewsListForApproval(UserReviewRequestEntity ReviewRequest)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetUserReviewsListForApproval";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(ReviewRequest), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                List<UserReviewsResponseEntity> reviewResponseObj = new List<UserReviewsResponseEntity>();
+                if (response.IsSuccessStatusCode)
+                {
+                    reviewResponseObj = JsonConvert.DeserializeObject<List<UserReviewsResponseEntity>>(response.Content.ReadAsStringAsync().Result);
+                    return reviewResponseObj;
+                }
+                else
+                {
+                    return reviewResponseObj;
+                }
+
+            }
+        }
+
+        internal UserReviewsResponseEntity ViewReviewByID(UserReviewRequestEntity ReviewRequest)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "GetUserReviewByReviewID";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(ReviewRequest), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                UserReviewsResponseEntity reviewResponseObj = new UserReviewsResponseEntity();
+                if (response.IsSuccessStatusCode)
+                {
+                    reviewResponseObj = JsonConvert.DeserializeObject<UserReviewsResponseEntity>(response.Content.ReadAsStringAsync().Result);
+                    return reviewResponseObj;
+                }
+                else
+                {
+                    return reviewResponseObj;
+                }
+
+            }
+        }
+
+        internal bool ApproveRejectUserReview(UserReviewRequestEntity ReviewRequest)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "ApproveRejectUserReview";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(ReviewRequest), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                bool isApproveReject = false;
+                if (response.IsSuccessStatusCode)
+                {
+                    isApproveReject = JsonConvert.DeserializeObject<bool>(response.Content.ReadAsStringAsync().Result);
+                    return isApproveReject;
+                }
+                else
+                {
+                    return isApproveReject;
+                }
+
+            }
+        }
     }
 }

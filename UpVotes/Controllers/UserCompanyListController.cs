@@ -1093,5 +1093,122 @@ namespace UpVotes.Controllers
 
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetUserReviewApproveForm()
+        {
+            Session["calledPage"] = "";
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    UserReviewRequestEntity ReviewRequest = new UserReviewRequestEntity();
+                    if(dashboardObj.IsService)
+                    {
+                        ReviewRequest.softwareID = 0;
+                        ReviewRequest.companyID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                        ViewBag.isService = true;
+                    }
+                    else if(dashboardObj.IsSoftware)
+                    {
+                        ReviewRequest.companyID = 0;
+                        ReviewRequest.softwareID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                        ViewBag.isService = false;
+                    }
+                    int userID = Convert.ToInt32(Session["UserID"]);
+                    ReviewRequest.userID = userID;
+
+                    List<UserReviewsResponseEntity> reviewListObj = new SubmitReviewService().GetUserReviewsListForApproval(ReviewRequest);
+                    return PartialView("~/Views/Authenticated/Center/UserReviewForApprovalList.cshtml", reviewListObj);
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ViewReviewByID(UserReviewRequestEntity ReviewRequest)
+        {
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    if (dashboardObj.IsService)
+                    {
+                        ReviewRequest.softwareID = 0;
+                        ReviewRequest.companyID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                    }
+                    else if (dashboardObj.IsSoftware)
+                    {
+                        ReviewRequest.companyID = 0;
+                        ReviewRequest.softwareID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                    }
+                    int userID = Convert.ToInt32(Session["UserID"]);
+                    ReviewRequest.userID = userID;
+
+                    UserReviewsResponseEntity reviewListObj = new SubmitReviewService().ViewReviewByID(ReviewRequest);
+                    return Json(reviewListObj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new EmptyResult(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ApproveRejectUserReview(UserReviewRequestEntity ReviewRequest)
+        {
+            if (Session["UserDashboardInfo"] != null)
+            {
+                DashboardViewModel dashboardObj = new DashboardViewModel();
+                dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
+                if (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved))
+                {
+                    if (dashboardObj.IsService)
+                    {
+                        ReviewRequest.softwareID = 0;
+                        ReviewRequest.companyID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                    }
+                    else if (dashboardObj.IsSoftware)
+                    {
+                        ReviewRequest.companyID = 0;
+                        ReviewRequest.softwareID = Convert.ToInt32(dashboardObj.CompanySoftwareID);
+                    }
+                    int userID = Convert.ToInt32(Session["UserID"]);
+                    ReviewRequest.userID = userID;
+
+                    bool isApproveReject = new SubmitReviewService().ApproveRejectUserReview(ReviewRequest);
+
+                    if (dashboardObj != null && Utility.CacheHandler.Exists(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-")))
+                    {
+                        UpVotes.Utility.CacheHandler.Clear(dashboardObj.CompanySoftwareName.ToLower().Replace(" ", "-"));
+                    }
+
+                    return Json(isApproveReject, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

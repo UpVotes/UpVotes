@@ -1,0 +1,140 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.UserReviewsResponseEntity>
+
+@{
+    ViewBag.Title = "Company Reviews";
+}
+
+<head>
+    @Scripts.Render("~/bundles/UserReviewApproval")
+</head>
+
+
+<div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+    <h2 class="title-small">Review Listings</h2>
+</div>
+
+<div class="@(Model.Count > 0 ? "main-inner hide": "main-inner")">
+    <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap no-data" id="divEmptyreviewData">
+        <!--Add class "hide" to hide the content -->
+        <section class="section-wrap">
+            <div class="jumbotron vertical-center">
+                <div class="caption">No reviews are submitted yet.</div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="@(Model.Count > 0 ? "col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table" : "col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table hide")" id="tableUserReviewData">
+    <!--Add class "hide" to hide the content -->
+    <section class="section-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reviewer name</th>
+                    <th>Company name</th>
+                    <th>Project name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Review in Model)
+                {
+                    <tr>
+                        <td><div>@Review.ReviewerUserName</div></td>
+                        <td><div>@Review.ReviewerCompanyName</div></td>
+                        <td><div>@Review.ProjectName</div></td>
+                        <td><div>@(Review.IsApproved ? "Live" : "Not Approved")</div></td>
+                        <td><div><a class="link cursorPointer btnViewReview" ReviewID="@Review.ReviewID">View</a></div></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    </section>
+</div>
+
+<div class="modal review-info" id="divViewReviewDetails" tabindex="-1" role="dialog" aria-labelledby="viewReviewer" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+                <div class="review-list">
+                    <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+                        <h2 class="title-small">Review Details</h2>
+                        <ul>
+                            <li>
+                                <div class="label">@(ViewBag.isService ? "Service category" : "Software category")</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnCategoryName"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Project name</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnProjectName"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Feedback summary</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnSummary"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Rating</div>
+                                <div class="dot">:</div>
+                                <div class="data">
+                                    <ul id="ulRating" class="star-rate rating-0">
+                                        <li><i class="fa fa-star rate"></i></li>
+                                        <li><i class="fa fa-star rate"></i></li>
+                                        <li><i class="fa fa-star rate"></i></li>
+                                        <li><i class="fa fa-star rate"></i></li>
+                                        <li><i class="fa fa-star rate"></i></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="review-list">
+                    <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+                        <h2 class="title-small">Reviewer Information</h2>
+                        <ul>
+                            <li>
+                                <div class="label">Reviewer full name</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnReviewerName"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Designation</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnDesignation"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Company name</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnReviewerCompanyName"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">E-mail</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnEmail"></span></div>
+                            </li>
+                            <li>
+                                <div class="label">Phone</div>
+                                <div class="dot">:</div>
+                                <div class="data"><span id="spnPhone"></span></div>
+                            </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="divApproveRejectButton" class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnReject">Reject</button>
+                <button type="button" class="btn btn-primary" id="btnApprove">Approve</button>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="hdnReviewID" value="0" />
+</div>
