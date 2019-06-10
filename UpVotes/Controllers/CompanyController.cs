@@ -52,11 +52,7 @@ namespace UpVotes.Controllers
                         PageSize = 10,
                     };
 
-                    companyViewModel = new CompanyService().GetCompany(companyFilter);
-                    if (companyViewModel != null && companyViewModel.CompanyList[0].CompanyID != 0)
-                    {
-                        Session["CompanyID"] = companyViewModel.CompanyList[0].CompanyID;
-                    }
+                    companyViewModel = new CompanyService().GetCompany(companyFilter);                    
                     CacheHandler.Add(companyViewModel, companyName);
                 }
 
@@ -93,9 +89,9 @@ namespace UpVotes.Controllers
         public ActionResult CompanyAllTeamMembersByName(string id)
         {
             Session["calledPage"] = "P";            
-            var teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(Convert.ToInt32(Session["CompanyID"]), true);            
+            List<TeamMemebersEntity> teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(id, true);
             if (teamMembersViewModel.Count > 0)
-            {                
+            {
                 return View("~/Views/AllListPages/AllTeamMembersList.cshtml", teamMembersViewModel);
             }
             else

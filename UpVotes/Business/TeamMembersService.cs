@@ -14,12 +14,12 @@ namespace UpVotes.Business
         private static string WebApiUrl { get; } = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
 
 
-        public List<TeamMemebersEntity> GetAllTeamMembers(int? companyOrsoftwareId, bool isService)
+        public List<TeamMemebersEntity> GetAllTeamMembers(string companyOrsoftwareName, bool isService)
         {
             using (_httpClient = new HttpClient())
             {
-                string apiMethod = isService ? "GetTeamMembersByCompanyId" : "GetTeamMembersBySoftwareId";
-                string completeUrl = WebApiUrl + apiMethod + '/' + companyOrsoftwareId;
+                string apiMethod = isService ? "GetTeamMembersByCompany" : "GetTeamMembersBySoftware";
+                string completeUrl = WebApiUrl + apiMethod + '/' + companyOrsoftwareName;
 
                 string response = _httpClient.GetStringAsync(completeUrl).Result;
                 return JsonConvert.DeserializeObject<List<TeamMemebersEntity>>(response);

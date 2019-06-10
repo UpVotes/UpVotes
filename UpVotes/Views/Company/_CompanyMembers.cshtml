@@ -13,7 +13,16 @@
         {
             <tr>
                 <td>
-                    <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                    @if (string.IsNullOrEmpty(teamMember.LinkedInProfile))
+                    {
+                        <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                    }
+                    else
+                    {
+                        <a href="@teamMember.LinkedInProfile" target="_blank" title="@teamMember.MemberName - LinkedIn Profile">
+                            <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                        </a>
+                    }
                 </td>
                 <td>
                     <div>@teamMember.Designation</div>

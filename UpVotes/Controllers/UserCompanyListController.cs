@@ -106,7 +106,7 @@ namespace UpVotes.Controllers
                 DashboardViewModel dashboardObj = (Session["UserDashboardInfo"] as DashboardViewModel);
                 if (dashboardObj != null && (Convert.ToBoolean(dashboardObj.IsUserApproved) && Convert.ToBoolean(dashboardObj.IsAdminApproved)))
                 {
-                    List<TeamMemebersEntity> teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(dashboardObj.CompanySoftwareID, dashboardObj.IsService);
+                    List<TeamMemebersEntity> teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(dashboardObj.CompanySoftwareName, dashboardObj.IsService);
 
                     return PartialView("~/Views/Authenticated/Center/TeamMembersList.cshtml", teamMembersViewModel);
                 }

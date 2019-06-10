@@ -44,11 +44,6 @@ namespace UpVotes.Controllers
                     };
 
                     softwareViewModel = new SoftwareService().GetSoftware(companyFilter);
-                    if (softwareViewModel != null && softwareViewModel.SoftwareList[0].SoftwareID != 0)
-                    {
-                        Session["SoftwareID"] = softwareViewModel.SoftwareList[0].SoftwareID;
-                    }
-
                     CacheHandler.Add(softwareViewModel, softwareName);
                 }
 
@@ -88,7 +83,7 @@ namespace UpVotes.Controllers
         public ActionResult CompanyAllTeamMembersByName(string id)
         {
             Session["calledPage"] = "P";            
-            var teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(Convert.ToInt32(Session["SoftwareID"]), false);
+            var teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(id, false);
             if (teamMembersViewModel.Count > 0)
             {
                 return View("~/Views/AllListPages/AllTeamMembersList.cshtml", teamMembersViewModel);

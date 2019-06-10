@@ -40,12 +40,33 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            <div><input type="image" src="@item.PictureName" width="50" height="50" /> </div>
-                        </td>
-                        <td>
-                            <div>@item.MemberName</div>
-                        </td>
+
+                        @if (string.IsNullOrEmpty(item.LinkedInProfile))
+                        {
+                            <td>
+                                <div>
+                                    <input type="image" src="@item.PictureName" width="50" height="50" />
+                                </div>
+                            </td>
+                            <td>
+                                <div>@item.MemberName</div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a href="@item.LinkedInProfile" target="_blank">
+                                    <div>
+                                        <input type="image" src="@item.PictureName" width="50" height="50" />
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@item.LinkedInProfile" target="_blank">
+                                    <div>@item.MemberName</div>
+                                </a>
+                            </td>
+                        }
                         <td>
                             <div>@item.Designation</div>
                         </td>

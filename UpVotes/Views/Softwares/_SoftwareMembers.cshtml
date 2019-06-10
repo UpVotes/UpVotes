@@ -2,33 +2,42 @@
 
 <table>
     <thead>
-    <tr>
-        <td><div>Member</div></td>
-        <td><div>Role</div></td>
-        <td><div>Period</div></td>
-    </tr>
+        <tr>
+            <td><div>Member</div></td>
+            <td><div>Role</div></td>
+            <td><div>Period</div></td>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var teamMember in Model)
-    {
-        <tr>
-            <td>
-                <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
-            </td>
-            <td>
-                <div>@teamMember.Designation</div>
-            </td>
-            <td>
-                @if (!string.IsNullOrEmpty(teamMember.EndDate))
-                {
-                    <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to @Convert.ToDateTime(teamMember.EndDate).ToString("MMM-yyyy")</div>
-                }
-                else
-                {
-                    <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to Present </div>
-                }
-            </td>
-        </tr>
-    }
+        @foreach (var teamMember in Model)
+        {
+            <tr>
+                <td>
+                    @if (string.IsNullOrEmpty(teamMember.LinkedInProfile))
+                    {
+                        <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                    }
+                    else
+                    {
+                        <a href="@teamMember.LinkedInProfile" target="_blank" title="@teamMember.MemberName - LinkedIn Profile">
+                            <div><img class="lazy" data-src="@teamMember.PictureName" /><span>@teamMember.MemberName</span></div>
+                        </a>
+                    }
+                </td>
+                <td>
+                    <div>@teamMember.Designation</div>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(teamMember.EndDate))
+                    {
+                        <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to @Convert.ToDateTime(teamMember.EndDate).ToString("MMM-yyyy")</div>
+                    }
+                    else
+                    {
+                        <div> @Convert.ToDateTime(teamMember.StartDate).ToString("MMM yyyy") to Present </div>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
