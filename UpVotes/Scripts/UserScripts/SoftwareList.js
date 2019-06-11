@@ -105,7 +105,7 @@
             var SoftwareCategoryID = parseInt($('#hdnSoftwareCategoryID').val());
             var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));       
             var PageSize = 10;
-            var FirstPage = parseInt($('.FirstPageindex').attr('page'));
+            var FirstPage = isNaN(parseInt($('.FirstPageindex').attr('page'))) ? 1 : parseInt($('.FirstPageindex').attr('page'));
             var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
             var softwarename = $("#txtSoftwareSearch")[0].value;
 

@@ -12,11 +12,11 @@
     var myTi = new CultureInfo("en-US", false).TextInfo;
     if (Model[0].CompanyId == null)
     {
-        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(Session["SoftwareName"]).Replace('-', ' ')); ;
+        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(ViewBag.ServiceSoftwareName).Replace('-', ' ')); ;
     }
     else
     {        
-        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(Session["CompanyName"]).Replace('-', ' ')); ;
+        companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(ViewBag.ServiceSoftwareName).Replace('-', ' ')); ;
     }
 }
 

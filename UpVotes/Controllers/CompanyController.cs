@@ -92,6 +92,7 @@ namespace UpVotes.Controllers
             List<TeamMemebersEntity> teamMembersViewModel = new TeamMembersService().GetAllTeamMembers(id, true);
             if (teamMembersViewModel.Count > 0)
             {
+                ViewBag.ServiceSoftwareName = id;
                 return View("~/Views/AllListPages/AllTeamMembersList.cshtml", teamMembersViewModel);
             }
             else

@@ -126,7 +126,7 @@
 
             var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));//1;//parseInt($(this).attr('page'));            
             var PageSize = 10;
-            var FirstPage = parseInt($('.FirstPageindex').attr('page'));
+            var FirstPage = isNaN(parseInt($('.FirstPageindex').attr('page'))) ? 1 : parseInt($('.FirstPageindex').attr('page'));
             var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
 
             $.ajax({
