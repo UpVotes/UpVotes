@@ -296,7 +296,7 @@
 
 /*tab wrap*/
 .dashboard .data-table .table div {
-    white-space: pre-wrap;
+    /*white-space: pre-wrap;*/
     word-break: break-word;
     min-width: 60px;
 }
