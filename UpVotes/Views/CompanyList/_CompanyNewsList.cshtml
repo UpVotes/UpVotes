@@ -23,7 +23,9 @@
                         <h3 class="title"><i class="fa fa-arrow-right"></i> @newsList.NewsTitle</h3>
                         <p>@Html.Raw(newsList.NewsDescription)</p>
                         <div class="action">
-                            <button type="button" onclick='GetNews("@newsList.NewsTitleUrl.ToLower()")' class="btn btn-sm btn-dblue">View full post</button>
+                            <a target="_blank" href="/news/@newsList.NewsTitleUrl.ToLower()">
+                                <button type="button" class="btn btn-sm btn-dblue">View full post</button>
+                            </a>
                         </div>
                     </div>
                 </div>
