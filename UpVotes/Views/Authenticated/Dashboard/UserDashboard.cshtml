@@ -88,11 +88,11 @@
                     {
                         Html.RenderPartial("~/Views/Authenticated/Center/UserNews.cshtml", Model);
                     }
-                    else if (Model.section == "portfolio")
+                    else if (Model.section == "portfolio" && !Model.IsAdmin)
                     {
                         Html.RenderAction("GetUserPortfolioForm", "UserCompanyList");
                     }
-                    else if (Model.section == "employees")
+                    else if (Model.section == "employees" && !Model.IsAdmin)
                     {
                         Html.RenderAction("TeamMemberForm", "UserCompanyList");
                     }
