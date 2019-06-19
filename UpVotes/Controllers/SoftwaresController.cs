@@ -36,11 +36,12 @@ namespace UpVotes.Controllers
                     SoftwareFilterEntity companyFilter = new SoftwareFilterEntity
                     {
                         SoftwareName = softwareName.Replace("-", " "),                        
-                        SortBy = "ASC",
+                        SortBy = "DESC",
                         SoftwareCategoryId = 0,                        
                         UserID = Convert.ToInt32(Session["UserID"]),
                         PageNo = 1,
-                        PageSize = 10,                        
+                        PageSize = 10, 
+                        OrderColumn = 1                       
                     };
 
                     softwareViewModel = new SoftwareService().GetSoftware(companyFilter);

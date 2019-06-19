@@ -49,6 +49,7 @@ namespace UpVotes
 
             bundles.Add(new StyleBundle("~/Content/UserDashboard").Include("~/Content/dashboard.css"));
             bundles.Add(new ScriptBundle("~/bundles/UserDashboard").Include("~/Scripts/UserScripts/Dashboard.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ADashboard").Include("~/Scripts/UserScripts/Dashboard.js", "~/Scripts/UserScripts/AdminDashboard.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/review").Include("~/Scripts/UserScripts/SubmitReview.js"));
 
@@ -83,6 +84,9 @@ namespace UpVotes
             bundles.Add(new ScriptBundle("~/bundles/TeamMembers").Include("~/Scripts/bootstrap-datepicker.js", "~/Scripts/UserScripts/TeamMembers.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/UserReviewApproval").Include("~/Scripts/UserScripts/UserReviewForApproval.js"));
+
+            bundles.Add(new StyleBundle("~/Content/Sponsorship").Include("~/Content/bootstrap-datepicker.css"));
+            bundles.Add(new ScriptBundle("~/bundles/Sponsorship").Include("~/Scripts/bootstrap-datepicker.js", "~/Scripts/UserScripts/SponsorShip.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Quotation").Include(
                       "~/Scripts/UserScripts/Quotation.min.js"));

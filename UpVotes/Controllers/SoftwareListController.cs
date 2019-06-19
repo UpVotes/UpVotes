@@ -38,8 +38,9 @@ namespace UpVotes.Controllers
                 SoftwareCategoryId= softwareCategoryId,
                 PageNo=1,
                 PageSize=10,
-                SortBy = "ASC",
-                UserID = Convert.ToInt32(Session["UserID"])
+                SortBy = "DESC",
+                UserID = Convert.ToInt32(Session["UserID"]),
+                OrderColumn = 1,
             };
 
             SoftwareViewModel softwareViewModel = softwareService.GetSoftware(softwareFilter);
@@ -184,7 +185,7 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult SoftwareList(string SoftwareName, int SoftwareCategoryID, string sortby, int PageNo, int PageSize, int FirstPage, int LastPage)
+        public ActionResult SoftwareList(string SoftwareName, int SoftwareCategoryID, string sortby, int PageNo, int PageSize, int FirstPage, int LastPage, int OrderColumn)
         {
             SoftwareService softwareService = new SoftwareService();
 
@@ -195,7 +196,8 @@ namespace UpVotes.Controllers
                 PageNo = PageNo,
                 PageSize = PageSize,
                 SortBy = sortby,
-                UserID = Convert.ToInt32(Session["UserID"])
+                UserID = Convert.ToInt32(Session["UserID"]),
+                OrderColumn = OrderColumn
             };
 
             SoftwareViewModel softwareViewModel = softwareService.GetSoftware(softwareFilter);

@@ -215,6 +215,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\SponsorshipService.cs" />
     <Compile Include="Business\ContactUsService.cs" />
     <Compile Include="Business\OverviewAndNewsService.cs" />
     <Compile Include="Business\SubmitReviewService.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SoftwareListController.cs" />
+    <Compile Include="Controllers\SponsorshipController.cs" />
     <Compile Include="Controllers\UserCompanyListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2480,6 +2482,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\UserScripts\AllCategory.js" />
     <Content Include="Scripts\UserScripts\ContactUs.js" />
+    <Content Include="Scripts\UserScripts\AdminDashboard.js" />
     <Content Include="Scripts\UserScripts\News.js" />
     <Content Include="Scripts\UserScripts\Common.js" />
     <Content Include="Scripts\UserScripts\Common.min.js">
@@ -2517,6 +2520,7 @@
     <Content Include="Scripts\UserScripts\SubmitReview.min.js">
       <DependentUpon>SubmitReview.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\UserScripts\SponsorShip.js" />
     <Content Include="Scripts\UserScripts\TeamMembers.js" />
     <Content Include="Scripts\UserScripts\UserReviewForApproval.js" />
     <Content Include="Scripts\UserScripts\UserPortfolioList.js" />
@@ -2661,6 +2665,8 @@
     <Content Include="Views\AllListPages\AllTeamMembersList.cshtml" />
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
     <Content Include="Views\Authenticated\Center\UserReviewForApprovalList.cshtml" />
+    <Content Include="Views\Authenticated\Center\UserSponsershipForm.cshtml" />
+    <Content Include="Views\Authenticated\Center\SchedulerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

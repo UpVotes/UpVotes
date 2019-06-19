@@ -95,7 +95,25 @@
                                         </div>                                        
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>  
+                            <div class="modal fade sortby" id="sortModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="modal-body">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item caption">Sort by:</li>
+                                                <li class="list-inline-item active sortingOrder" ordercolumn="1">Sponsored</li>
+                                                <li class="list-inline-item sortingOrder" ordercolumn="4">Top voted firm</li>
+                                                <li class="list-inline-item sortingOrder" ordercolumn="2">Top reviews</li>
+                                                <li class="list-inline-item sortingOrder" ordercolumn="3">Company names</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                          
                         </div>
                         <div id="softwarelist">
                            @Html.Partial("~/Views/SoftwareList/_SoftwareList.cshtml")
@@ -148,7 +166,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="bg-title">
                             <h2 class="title">@Model.CategoryHeadLine - REVIEWS @DateTime.Now.Year.ToString()</h2>

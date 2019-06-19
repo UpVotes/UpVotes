@@ -38,61 +38,64 @@
                                             <img title="@software.SoftwareName" src="~/images/SoftwareLogos/@software.LogoName" />
                                         </div>
                                         <div class="brand-detail">
-                                            <h1 class="name">@software.SoftwareName</h1>
-                                            <div class="rating-wrap">
-                                                <ul class="star-rate rating-@software.UserRating">
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
+                                            <div class="name-wrap">
+                                                <h1 class="name">@software.SoftwareName</h1>
+                                                <div class="sponcer-wrap tag sponcer">@(Convert.ToInt32(software.SponsorshipCategoryID) > 1 ? "Sponsor" : "")</div>
+                                             </div>
+                                                <div class="rating-wrap">
+                                                    <ul class="star-rate rating-@software.UserRating">
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                    </ul>
+                                                    <span class="rating-label"><span>@software.UserRating.0/5.0</span>-<span>@software.NoOfUsersRated users</span></span>
+                                                </div>
+                                                <ul class="brand-data">
+                                                    <li>
+                                                        <a href="@(software.WebSiteURL + "?utm_medium=referral&utm_source=upvotes.co")" target="_blank" rel="nofollow">
+                                                            <i class="fa fa-external-link"></i>
+                                                            Visit website
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <i class="fa fa-clock-o"></i>
+                                                            @software.PriceRange
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <i class="fa fa-flag-o"></i>
+                                                            Founded: @software.FoundedYear
+                                                        </a>
+                                                    </li>
                                                 </ul>
-                                                <span class="rating-label"><span>@software.UserRating.0/5.0</span>-<span>@software.NoOfUsersRated users</span></span>
-                                            </div>
-                                            <ul class="brand-data">
-                                                <li>
-                                                    <a href="@(software.WebSiteURL + "?utm_medium=referral&utm_source=upvotes.co")" target="_blank" rel="nofollow">
-                                                        <i class="fa fa-external-link"></i>
-                                                        Visit website
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        <i class="fa fa-clock-o"></i>
-                                                        @software.PriceRange
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        <i class="fa fa-flag-o"></i>
-                                                        Founded: @software.FoundedYear
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <ul class="social-wrap">
-                                                @if (software.LinkedInURL != string.Empty && software.LinkedInURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@software.LinkedInURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (software.FaceBookURL != string.Empty && software.FaceBookURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@software.FaceBookURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (software.TwitterURL != string.Empty && software.TwitterURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@software.TwitterURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (software.InstagramURL != string.Empty && software.InstagramURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@software.InstagramURL"><i class="fa fa-instagram bg-pink" aria-hidden="true"></i></a></li>
-                                                }
+                                                <ul class="social-wrap">
+                                                    @if (software.LinkedInURL != string.Empty && software.LinkedInURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@software.LinkedInURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (software.FaceBookURL != string.Empty && software.FaceBookURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@software.FaceBookURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (software.TwitterURL != string.Empty && software.TwitterURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@software.TwitterURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (software.InstagramURL != string.Empty && software.InstagramURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@software.InstagramURL"><i class="fa fa-instagram bg-pink" aria-hidden="true"></i></a></li>
+                                                    }
 
-                                            </ul>
-                                            <div class="btn-group banner-action align-right">
-                                                <button class="btn btn-md btn-blue" id="btnVote" compid="@software.SoftwareID" calledPage="N"><i class="fa fa-arrow-up"></i>@software.NoOfVotes</button>
-                                                <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                                </ul>
+                                                <div class="btn-group banner-action align-right">
+                                                    <button class="btn btn-md btn-blue" id="btnVote" compid="@software.SoftwareID" calledPage="N"><i class="fa fa-arrow-up"></i>@software.NoOfVotes</button>
+                                                    <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

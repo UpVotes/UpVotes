@@ -1,0 +1,38 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.SponsorshipExpiredListEntity>
+    @{
+        ViewBag.Title = "Scheduler";
+    }
+    @Scripts.Render("~/bundles/Sponsorship")
+    <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+        <h2 class="title-small">Expired sponsorship list & Scheduler</h2>
+    </div>
+
+
+    <div class="col-xl-12 col-md-12 col-sm-12 text-center data-wrap table-responsive-xl data-table" id="tableExpiredList">
+        <!--Add class "hide" to hide the content -->
+        <section class="section-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Category</th>
+                        <th>Package</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><div>@item.Name</div></td>
+                        <td><div>@item.Category</div></td>
+                        <td><div>@item.Package</div></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <div class="col">&nbsp;</div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary btn-md" id="btnScheduler">Scheduler</button>
+            </div>
+        </section>
+    </div>

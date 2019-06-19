@@ -40,81 +40,84 @@
                                             <img title="@company.CompanyName" src="~/images/CompanyLogos/@company.LogoName" />
                                         </div>
                                         <div class="brand-detail">
-                                            <h1 class="name">@company.CompanyName</h1>
-                                            <div class="rating-wrap">
-                                                <ul class="star-rate rating-@company.UserRating">
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
-                                                    <li><i class="fa fa-star rate"></i></li>
+                                            <div class="name-wrap">
+                                                <h1 class="name">@company.CompanyName</h1>
+                                                <div class="sponcer-wrap tag sponcer">@(Convert.ToInt32(company.SponsorshipCategoryID) > 1 ? "Sponsor" : "")</div>
+                                             </div>
+                                                <div class="rating-wrap">
+                                                    <ul class="star-rate rating-@company.UserRating">
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                        <li><i class="fa fa-star rate"></i></li>
+                                                    </ul>
+                                                    <span class="rating-label"><span>@company.UserRating.0/5.0</span>-<span>@company.NoOfUsersRated users</span></span>
+                                                </div>
+                                                <div class="locality"><i class="fas fa-map-marker-alt"></i> @company.City, @company.CountryName</div>
+                                                <ul class="brand-data">
+                                                    <li>
+                                                        <a href="@(company.URL + "?utm_medium=referral&utm_source=upvotes.co")" rel="nofollow" target="_blank">
+                                                            <i class="fa fa-external-link"></i>
+                                                            Visit website
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <i class="fa fa-clock-o"></i>
+                                                            @company.AveragHourlyRate
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="tel:@company.PhoneNumber">
+                                                            <i class="fa fa-phone-square"></i>
+                                                            @company.PhoneNumber
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <i class="fa fa-user-o"></i>
+                                                            @company.TotalEmployees
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="mailto:@company.Email">
+                                                            <i class="fa fa-envelope-o"></i>
+                                                            @company.Email
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <i class="fa fa-flag-o"></i>
+                                                            Founded: @company.FoundedYear
+                                                        </a>
+                                                    </li>
                                                 </ul>
-                                                <span class="rating-label"><span>@company.UserRating.0/5.0</span>-<span>@company.NoOfUsersRated users</span></span>
-                                            </div>
-                                            <div class="locality"><i class="fas fa-map-marker-alt"></i> @company.City, @company.CountryName</div>
-                                            <ul class="brand-data">
-                                                <li>
-                                                    <a href="@(company.URL + "?utm_medium=referral&utm_source=upvotes.co")" rel="nofollow" target="_blank">
-                                                        <i class="fa fa-external-link"></i>
-                                                        Visit website
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        <i class="fa fa-clock-o"></i>
-                                                        @company.AveragHourlyRate
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="tel:@company.PhoneNumber">
-                                                        <i class="fa fa-phone-square"></i>
-                                                        @company.PhoneNumber
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        <i class="fa fa-user-o"></i>
-                                                        @company.TotalEmployees
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="mailto:@company.Email">
-                                                        <i class="fa fa-envelope-o"></i>
-                                                        @company.Email
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a>
-                                                        <i class="fa fa-flag-o"></i>
-                                                        Founded: @company.FoundedYear
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <ul class="social-wrap">
-                                                @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@company.LinkedInProfileURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@company.FacebookProfileURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@company.TwitterProfileURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
-                                                }
-                                                @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
-                                                {
-                                                    <li><a target="_blank" rel="nofollow" href="@company.GooglePlusProfileURL"><i class="fa fa-google-plus bg-light-maroon" aria-hidden="true"></i></a></li>
-                                                }
+                                                <ul class="social-wrap">
+                                                    @if (company.LinkedInProfileURL != string.Empty && company.LinkedInProfileURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@company.LinkedInProfileURL"><i class="fa fa-linkedin bg-dark-blue" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (company.FacebookProfileURL != string.Empty && company.FacebookProfileURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@company.FacebookProfileURL"><i class="fa fa-facebook bg-dark-blue1" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (company.TwitterProfileURL != string.Empty && company.TwitterProfileURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@company.TwitterProfileURL"><i class="fa fa-twitter bg-light-blue" aria-hidden="true"></i></a></li>
+                                                    }
+                                                    @if (company.GooglePlusProfileURL != string.Empty && company.GooglePlusProfileURL != null)
+                                                    {
+                                                        <li><a target="_blank" rel="nofollow" href="@company.GooglePlusProfileURL"><i class="fa fa-google-plus bg-light-maroon" aria-hidden="true"></i></a></li>
+                                                    }
 
-                                            </ul>
-                                            <div class="btn-group banner-action align-right">
-                                                <button class="btn btn-md btn-blue" id="btnVote" compid="@company.CompanyID" calledPage="L"><i class="fa fa-arrow-up"></i>@company.NoOfVotes</button>
-                                                @*@Ajax.ActionLink("Submit Review", "submit-review", "submit", new { companyID = company.CompanyID, companyName= company.CompanyName }, new AjaxOptions { HttpMethod="POST"},new { @target="_blank", @class="btn btn-md btn-blue", @id="btnSubmitReview" })*@
-                                                <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                                </ul>
+                                                <div class="btn-group banner-action align-right">
+                                                    <button class="btn btn-md btn-blue" id="btnVote" compid="@company.CompanyID" calledPage="L"><i class="fa fa-arrow-up"></i>@company.NoOfVotes</button>
+                                                    @*@Ajax.ActionLink("Submit Review", "submit-review", "submit", new { companyID = company.CompanyID, companyName= company.CompanyName }, new AjaxOptions { HttpMethod="POST"},new { @target="_blank", @class="btn btn-md btn-blue", @id="btnSubmitReview" })*@
+                                                    <button class="btn btn-md btn-blue" id="btnSubmitReview">Submit Review</button>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

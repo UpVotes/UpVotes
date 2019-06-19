@@ -144,6 +144,7 @@
                     <img class="lazy" src="" data-src="/images/CompanyLogos/@company.LogoName" />
                 </div>
                 <div class="name">@company.CompanyName</div>
+                <div class="tag sponcer">@(Convert.ToInt32(company.SponsorshipCategoryID) > 1 ? "Sponsor" : "")</div>
             </div>
             <div class="details">
                 <div class="data hour align-middle">

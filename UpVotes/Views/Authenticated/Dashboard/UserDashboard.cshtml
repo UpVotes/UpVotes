@@ -5,7 +5,14 @@
 }
 <head>    
     @Styles.Render("~/Content/UserDashboard")
-    @Scripts.Render("~/bundles/UserDashboard")
+    @if (Model.IsAdmin)
+    {
+        @Scripts.Render("~/bundles/ADashboard")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/UserDashboard")
+    }
 </head>
 <body class="dashboard">
     <div id="ajax_loaderDashboard" class="card-loader"></div>
@@ -78,6 +85,8 @@
                                     <a class="nav-link cursorPointer" id="showAddNewsSection"><i class="fa fa-file-text"></i> Add News</a>
                                     <a class="nav-link cursorPointer"><i class="fa fa-suitcase"></i> Add Jobs</a>
                                     <a class="nav-link cursorPointer" id="showClaimListingSection"><i class="fa fa-check"></i> Claim Listing</a>
+                                    <a class="nav-link cursorPointer" id="showUserSponsorShipForm"><i class="fa fa-handshake-o"></i> Sponsorship</a>
+                                    <a class="nav-link cursorPointer" id="showExpiredSponsorShipForm"><i class="fa fa-calendar"></i> Scheduler</a>
                                 </nav>
                             </div>
                         }

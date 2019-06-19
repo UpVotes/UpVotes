@@ -1,5 +1,16 @@
 ﻿$(document).ready(function () {
 
+    var ordercolumn = 1;
+    var sortby = 'DESC';
+
+    $('.sortingOrder').click(function () {
+        $('.sortingOrder').removeClass('active');
+        $(this).addClass('active');
+        ordercolumn = $(this).attr('ordercolumn');
+        sortby = sortby == 'DESC' ? 'ASC' : 'DESC';
+        $.GetSoftwareListBasedOnCriteria(this);
+    });
+
     $.getData = function (request, response) {
         if ($.trim(request.term) != "" && $.trim(request.term).length > 0) {
             $.ajax({
@@ -99,22 +110,22 @@
     }
 
     $.GetSoftwareListBasedOnCriteria = function (e) {
-        try {            
-            
-            var sortby = 'Asc';
+        try {
+
             var SoftwareCategoryID = parseInt($('#hdnSoftwareCategoryID').val());
             var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));       
             var PageSize = 10;
             var FirstPage = isNaN(parseInt($('.FirstPageindex').attr('page'))) ? 1 : parseInt($('.FirstPageindex').attr('page'));
             var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
             var softwarename = $("#txtSoftwareSearch")[0].value;
+            var OrderColumn = parseInt(ordercolumn);
 
             $.ajax({
                 type: "POST",
                 url: $.absoluteurl('/SoftwareList/SoftwareList'),
                 cache: false,
                 async: false,
-                data: { SoftwareName: softwarename, SoftwareCategoryID: SoftwareCategoryID, sortby: sortby, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },
+                data: { SoftwareName: softwarename, SoftwareCategoryID: SoftwareCategoryID, sortby: sortby, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage, OrderColumn: OrderColumn },
                 success: function (json) {
                     $('#softwarelist').html(json);
                     $('.lazy').lazy();

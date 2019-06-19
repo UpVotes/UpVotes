@@ -54,13 +54,14 @@ namespace UpVotes.Controllers
                 MaxRate = 0,
                 MinEmployee = 0,
                 MaxEmployee = 0,
-                SortBy = "ASC",
+                SortBy = "DESC",
                 FocusAreaID = focusAreaID,
                 Location = id,
                 SubFocusArea = "0",
                 UserID = Convert.ToInt32(Session["UserID"]),
                 PageNo = 1,
-                PageSize = 10
+                PageSize = 10,
+                OrderColumn= 1,
             };
 
 
@@ -120,13 +121,14 @@ namespace UpVotes.Controllers
                 MaxRate = 0,
                 MinEmployee = 0,
                 MaxEmployee = 0,
-                SortBy = "ASC",
+                SortBy = "DESC",
                 FocusAreaID = focusAreaID,
                 Location = id,
                 SubFocusArea = urlSubFocusAreaName,
                 UserID = Convert.ToInt32(Session["UserID"]),
                 PageNo = 1,
-                PageSize = 10
+                PageSize = 10,
+                OrderColumn = 1
             };
 
             CompanyViewModel companyViewModel = companyService.GetCompany(companyFilter);            
@@ -151,7 +153,7 @@ namespace UpVotes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby, string location,string subFocusArea, int PageNo, int PageSize, int FirstPage, int LastPage)
+        public ActionResult CompanyList(string companyID, decimal minRate, decimal maxRate, int minEmployee, int maxEmployee, string sortby, string location,string subFocusArea, int PageNo, int PageSize, int FirstPage, int LastPage, int OrderColumn)
         {
             CompanyService companyService = new CompanyService();
             string urlFocusAreaName = Convert.ToString(Session["FocusAreaName"]);
@@ -174,7 +176,8 @@ namespace UpVotes.Controllers
                 SubFocusArea = subFocusArea,
                 UserID = Convert.ToInt32(Session["UserID"]),
                 PageNo = PageNo,
-                PageSize = PageSize
+                PageSize = PageSize,
+                OrderColumn = OrderColumn
             };
 
             CompanyViewModel companyViewModel = companyService.GetCompany(companyFilter);

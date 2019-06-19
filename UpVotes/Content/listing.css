@@ -300,6 +300,18 @@
     color: #000;
     text-transform: uppercase;
 }
+
+.list-detail .business .tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    line-height: normal;
+}
+.list-detail .business .tag.sponcer {
+    color: #999;
+}
 .list-detail .details {
     font-size: 0;
 }

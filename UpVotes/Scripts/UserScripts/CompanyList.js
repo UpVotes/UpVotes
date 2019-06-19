@@ -1,5 +1,15 @@
 ﻿$(document).ready(function () {
        
+    var ordercolumn = 1;
+    var sortby = 'DESC';
+
+    $('.sortingOrder').click(function () {
+        $('.sortingOrder').removeClass('active');
+        $(this).addClass('active');
+        ordercolumn = $(this).attr('ordercolumn');
+        sortby = sortby == 'DESC' ? 'ASC' : 'DESC';
+        $.GetCompanyListBasedOnCriteria(this);
+    });
 
     $.setData = function (ui, type) {
         if (type == 1) {
@@ -111,8 +121,7 @@
             var location = $("#txtLocationSearch")[0].value == "" ? "0" : $("#txtLocationSearch")[0].value;
             var compid = $("#txtCompanySearch")[0].value == "" ? "0" : $("#txtCompanySearch")[0].value;
             var avgHourlyRate = $("#ddlAvgHourlyRateSearch")[0].value;
-            var employeeCount = $("#ddlEmployeesSearch")[0].value;
-            var sortby = 'Asc';
+            var employeeCount = $("#ddlEmployeesSearch")[0].value;            
             var subFocusArea = $('#hdnSubFocusArea').val();
             location = location == "0" ? $('#hdnLocation').val() : location;
             //(window.location.pathname.split('/').length == 3 ? window.location.pathname.split('/')[2].replace(/ /g, "-") : location)
@@ -128,13 +137,14 @@
             var PageSize = 10;
             var FirstPage = isNaN(parseInt($('.FirstPageindex').attr('page'))) ? 1 : parseInt($('.FirstPageindex').attr('page'));
             var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
+            var OrderColumn = parseInt(ordercolumn);
 
             $.ajax({
                 type: "POST",
                 url: $.absoluteurl('/CompanyList/CompanyList'),
                 cache: false,
                 async: false,
-                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, subFocusArea: subFocusArea, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage },// Location of the service
+                data: { companyid: compid, minRate: AvgminRate, maxRate: Avgmaxrate, minEmployee: minEmp, maxEmployee: maxEmp, sortby: sortby, location: location, subFocusArea: subFocusArea, PageNo: PageNo, PageSize: PageSize, FirstPage: FirstPage, LastPage: LastPage, OrderColumn: OrderColumn },// Location of the service
                 success: function (json) {
                     $('#complist').html(json);
                     $('.lazy').lazy();

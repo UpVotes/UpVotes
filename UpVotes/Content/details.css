@@ -40,7 +40,22 @@
 }
 .brand-detail .name  {
     font-size: 36px;
+    margin: 0;
 }
+
+.brand-detail .name-wrap {
+    position: relative;
+    margin-bottom: 15px;
+}
+.brand-detail .tag {
+    font-size: 11px;
+    text-transform: uppercase;    
+    line-height: normal;
+}
+.brand-detail .tag.sponcer {
+    color: #ddd;
+}
+
 .brand-detail .rating-label,
 .brand-detail .locality  {
     font-size: 14px;
@@ -864,7 +879,8 @@ text-transform:capitalize;
     }
     .brand-detail .name, 
     .brand-detail .rating-wrap,
-    .brand-detail .locality {
+    .brand-detail .locality,
+    .brand-detail .sponcer-wrap {
         padding-left: 110px;
     }
     .brand-detail {

@@ -37,35 +37,7 @@
             }
 
         });
-    });
-
-    $('#showClaimListingSection').click(function () {
-        $('#ajax_loaderDashboard').show();
-        $.ajax({
-            url: $.absoluteurl('/UserCompanyList/GetClaimListings'),            
-            type: "POST",
-            success: function (response) {
-                $('#ajax_loaderDashboard').hide();
-                $('#DetailsContent').html("");
-                $('#DetailsContent').html(response);
-            }
-
-        });
-    });
-
-    $('#showAddNewsSection').click(function () {
-        $('#ajax_loaderDashboard').show();
-        $.ajax({
-            url: $.absoluteurl('/OverViewAndNews/GetNewsForm'),
-            type: "POST",
-            success: function (response) {
-                $('#ajax_loaderDashboard').hide();
-                $('#DetailsContent').html("");
-                $('#DetailsContent').html(response);
-            }
-
-        });
-    });
+    });    
 
     $('#showAddUserNewsSection').click(function () {
         $('#ajax_loaderDashboard').show();

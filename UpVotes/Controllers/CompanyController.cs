@@ -43,13 +43,14 @@ namespace UpVotes.Controllers
                         MaxRate = 0,
                         MinEmployee = 0,
                         MaxEmployee = 0,
-                        SortBy = "ASC",
+                        SortBy = "DESC",
                         FocusAreaID = 0,
                         Location = "0",
                         SubFocusArea = "0",
                         UserID = Convert.ToInt32(Session["UserID"]),
                         PageNo = 1,
                         PageSize = 10,
+                        OrderColumn = 1
                     };
 
                     companyViewModel = new CompanyService().GetCompany(companyFilter);                    

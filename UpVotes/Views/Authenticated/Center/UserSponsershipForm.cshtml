@@ -1,0 +1,87 @@
+﻿@model UpVotes.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Company Sponsorship";
+}
+@if (Convert.ToBoolean(Model.IsAdmin))
+{
+    @Styles.Render("~/Content/Sponsorship")
+    @Scripts.Render("~/bundles/Sponsorship")
+ 
+<div class="alert alert-danger hide" id="divFailureMessage">
+    <strong>ERROR!!</strong>
+    <span id="spnMessage">Fields marked with * are mandatory.</span>
+</div>
+
+<div class="main-inner">
+
+    <!-- add service profile section -->
+    <div class="row" id="addServiceProfileSection">
+        <div class="col-xl-12 col-md-12 col-sm-12 title-wrap">
+            <h2 class="title-small">Sponsorship</h2>
+        </div>
+
+
+        <div class="col-xl-12">
+            <section class="section-wrap">
+                <div class="tab-wrap primary">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Provider<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <select class="form-control" id="ddlProvider">
+                                    <option value="1">Service providers</option>
+                                    <option value="2">Software providers</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Company Name<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <input type="text" class="form-control" id="txtCompanySoftware" placeholder="">
+                                <input type="hidden" class="form-control" value="0" id="hdnCompanySoftwareID">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Sponsorship Package<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12">
+                                <select class="form-control" id="ddlSponsorshipCategory">
+                                    <option value="0">--Select package--</option>
+                                    <option value="1">Free Package</option>
+                                    <option value="2">Bronze Package</option>
+                                    <option value="3">Silver Package</option>
+                                    <option value="4">Gold Package</option>
+                                    <option value="5">Platinum Package</option>
+                                    <option value="6">Diamond Package</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <b>Sponsorship package period</b>
+                        <br><br>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">Start Date<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12 date-control">
+                                <input type="text" id="txtStartDate" class="form-control" placeholder="MM/DD/YYYY">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input1" class="col-xl-3 col-md-3 col-sm-12 col-form-label">End Date<small class="manditory">*</small></label>
+                            <div class="col-xl-6 col-md-6 col-sm-12 date-control">
+                                <input type="text" id="txtEndDate" class="form-control" placeholder="MM/DD/YYYY">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 empty-block">&nbsp;</div>
+                            <div class="col-xl-12 col-md-12 col-sm-12 text-center">
+                                <button class="btn btn-primary" id="btnSponsorship">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+}
