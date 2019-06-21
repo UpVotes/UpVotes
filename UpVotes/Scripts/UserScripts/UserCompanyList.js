@@ -174,6 +174,17 @@ $(document).ready(function ()
         }
     }
 
+
+    $.handleSpecialChar = function (value)
+    {
+        var reg = /^[a-zA-Z0-9\s]*$/;
+        if (reg.test(value)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     var focusAreaObject = '';
     var actualFocusAreaArray = [];
     var companyBranchArray = [];
@@ -213,9 +224,12 @@ $(document).ready(function ()
         {
             var status = 0;
             var fileMessage = '';
-            if ($("#txtCompanyName")[0].value === "" || $("#txtCompanyName")[0].value === undefined)
-            {
+            if ($("#txtCompanyName")[0].value === "" || $("#txtCompanyName")[0].value === undefined) {
                 status = 1;
+            } else {
+                if (!$.handleSpecialChar($("#txtCompanyName")[0].value)) {
+                    status = 3;
+                }
             }
 
             if ($("#UplAttachment")[0].value !== "" && $("#UplAttachment")[0].value !== undefined)
@@ -469,6 +483,10 @@ $(document).ready(function ()
                 $.DisplayMessage(true, "Head Quarters is missing in the branch section.", 4);
                 return false;
             }
+            else if (status === 3) {
+                $.DisplayMessage(true, "Company Name must contain only alphanumeric and spaces.", 0);
+                return false;
+            }
             else
             {
                 $.DisplayMessage(false, "", -1);
@@ -519,24 +537,28 @@ $(document).ready(function ()
             url: $.absoluteurl('/UserCompanyList/DeleteCompany'),
             data: { companyId: $(this).attr('compid') },
             type: "POST",
-            success: function (response) {
+            success: function (response)
+            {
                 debugger;
                 $('#ajax_loaderDashboard').hide();
-                if (response.IsSuccess) {
+                if (response.IsSuccess)
+                {
                     $('#spnSuccessMessage')
                         .html(
                             "Your company profile has been deleted.");
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');                    
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
                 }
             },
-            error: function(a, b, c) {
+            error: function (a, b, c)
+            {
                 debugger;
             }
         });
     });
 
 
-    $("#btnCompanySave").click(function () {
+    $("#btnCompanySave").click(function ()
+    {
         debugger;
         $.DisplayMessage(false, "", -1);
         $('#ajax_loaderDashboard').show();
@@ -851,7 +873,7 @@ $(document).ready(function ()
                         document.getElementById('ddlEmployees').value = data.companyData.TotalEmployees;
                         document.getElementById('ddlAvgHourlyRate').value = data.companyData.AveragHourlyRate;
                         $("#txtCompanySummary").Editor("setText", (data.companyData.Summary + '<br/>' + data.companyData.Summary1 + '<br/>' + data.companyData.Summary2 + '<br/>' + data.companyData.Summary3));
-                        $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));                        
+                        $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));
                         if (data.companyData.LogoName != "")
                         {
                             $('#txtLogoName').text(data.companyData.LogoName);

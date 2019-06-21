@@ -120,15 +120,31 @@ $(document).ready(function ()
         }
     }
 
+    $.handleSpecialChar = function (value)
+    {
+        var reg = /^[a-zA-Z0-9\s]*$/;
+        if (reg.test(value))
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    };
+
     $.SaveModeValidations = function ()
     {
         try
         {
             var status = 0;
             var fileMessage = '';
-            if ($("#txtSoftwareName")[0].value === "" || $("#txtSoftwareName")[0].value === undefined)
-            {
+            if ($("#txtSoftwareName")[0].value === "" || $("#txtSoftwareName")[0].value === undefined) {
                 status = 1;
+            } else {
+                if (!$.handleSpecialChar($("#txtSoftwareName")[0].value))
+                {
+                    status = 3;
+                }
             }
 
             if ($("#UplAttachment")[0].value !== "" && $("#UplAttachment")[0].value !== undefined)
@@ -214,6 +230,11 @@ $(document).ready(function ()
             {
                 $.DisplayMessage(true, "Fields marked with * are mandatory.", 0);
                 return false;
+            }
+            else if (status === 3)
+            {
+                $.DisplayMessage(true, "Software Name must contain only alphanumeric and spaces.", 0);
+                return false;                
             }
             else if (fileMessage !== '')
             {
