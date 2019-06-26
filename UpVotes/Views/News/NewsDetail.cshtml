@@ -1,7 +1,10 @@
 ﻿@using System.Configuration
+@using System.Globalization
 @model UpVotes.Models.OverviewNewsViewModel
 @{
-    ViewBag.Title = @Model.Title;
+    var myTi = new CultureInfo("en-US", false).TextInfo;
+
+    ViewBag.Title = myTi.ToTitleCase(@Model.Title);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
