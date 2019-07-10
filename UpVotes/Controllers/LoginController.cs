@@ -199,71 +199,115 @@ namespace UpVotes.Controllers
         {
             //This method path is your return URL
             string[] myArray = state.Split('-');
-            try
+            if (code != null)
             {
-                var a = Request.Url;
-                var client = new RestClient("https://www.linkedin.com/oauth/v2/accessToken");
-                var request = new RestRequest(Method.POST);
-                request.AddParameter("grant_type", "authorization_code");
-                request.AddParameter("code", code);
-                request.AddParameter("redirect_uri", _baseURL + "Login/LinkedINAuth");
-                request.AddParameter("client_id", ConfigurationManager.AppSettings["LinkedInClientID"].ToString());
-                request.AddParameter("client_secret", ConfigurationManager.AppSettings["LinkedInCLientSecret"].ToString());
-                var response = client.Execute<InventoryItem>(request);
-                var content = response.Content;
-                string access_token = response.Data.access_token;
-                client = new RestClient("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,certifications,date-of-birth,email-address,picture-url,summary,public-profile-url,positions,skills,location)?oauth2_access_token=" + access_token + "&format=json");
-                request = new RestRequest(Method.GET);
-
-                var response1 = client.Execute(request);
-                TwitterLinkedInLoginModel obj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<TwitterLinkedInLoginModel>(response1.Content.ToString());
-                obj.userType = 2; //LinkedIn
-                UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
-                if (userObj != null)
+                try
                 {
-                    Session["UserObj"] = userObj;
-                    Session["UserID"] = userObj.UserID;
-                    string message = string.Empty;
-                    if (myArray[0] != "0")
+                    var a = Request.Url;
+                    var client = new RestClient("https://www.linkedin.com/oauth/v2/accessToken");
+                    var request = new RestRequest(Method.POST);
+                    request.AddParameter("grant_type", "authorization_code");
+                    request.AddParameter("code", code);
+                    request.AddParameter("redirect_uri", _baseURL + "Login/LinkedINAuth");
+                    request.AddParameter("client_id", ConfigurationManager.AppSettings["LinkedInClientID"].ToString());
+                    request.AddParameter("client_secret", ConfigurationManager.AppSettings["LinkedInCLientSecret"].ToString());
+                    request.AddParameter("scope", "all");
+                    var response = client.Execute<InventoryItem>(request);
+                    var content = response.Content;
+                    string access_token = response.Data.access_token;
+                    //client = new RestClient("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,certifications,date-of-birth,email-address,picture-url,summary,public-profile-url,positions,skills,location)?oauth2_access_token=" + access_token + "&format=json");
+                    client = new RestClient("https://api.linkedin.com/v2/me?oauth2_access_token=" + access_token); //for user info
+                    request = new RestRequest(Method.GET);
+                    var response1 = client.Execute(request);
+                    LinkedInInfo linkedInUserobj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<LinkedInInfo>(response1.Content.ToString());
+
+                    //client = new RestClient("https://api.linkedin.com/v2/me?projection=(id,profilePicture(displayImage~:playableStreams))&oauth2_access_token=" + access_token);--for profileimage
+                    //client = new RestClient("https://api.linkedin.com/v2/me?fields=id,firstName,lastName,educations,skills,positions&oauth2_access_token=" + access_token);
+                    client = new RestClient("https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token=" + access_token);
+
+                    request = new RestRequest(Method.GET);
+
+                    response1 = client.Execute(request);
+                    LinkedInImageInfo linkedInImgObj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<LinkedInImageInfo>(response1.Content.Replace("~", "tilde").ToString());
+                    string imageName = "";
+                    if (linkedInImgObj.profilePicture != null && linkedInImgObj.profilePicture.displayImagetilde != null)
                     {
-                        if (myArray[1] == "C")
+                        foreach (var item in linkedInImgObj.profilePicture.displayImagetilde.elements)
                         {
-                            message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
-                            if (CacheHandler.Exists("TopVoteCompaniesList"))
+                            if (imageName == "")
                             {
-                                CacheHandler.Clear("TopVoteCompaniesList");
+                                foreach (var img in item.identifiers)
+                                {
+                                    if (img.identifier.Contains("_100_100"))
+                                    {
+                                        imageName = img.identifier;
+                                        break;
+                                    }
+
+                                }
                             }
-                            string compname = "";
-                            if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                            else
                             {
-                                compname = Session["CompanyName"].ToString();
-                            }
-                            if (CacheHandler.Exists(compname))
-                            {
-                                CacheHandler.Clear(compname);
+                                break;
                             }
                         }
-                        else if (myArray[1] == "N")
+
+                    }
+
+                    //TwitterLinkedInLoginModel obj = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<TwitterLinkedInLoginModel>(response1.Content.ToString());
+                    TwitterLinkedInLoginModel obj = new TwitterLinkedInLoginModel();
+                    obj.firstName = linkedInUserobj.localizedFirstName;
+                    obj.id = linkedInUserobj.id;
+                    obj.lastName = linkedInUserobj.localizedLastName;
+                    obj.pictureUrl = imageName;
+                    obj.publicProfileUrl = "";
+                    obj.userType = 2; //LinkedIn
+                    UserEntity userObj = new Business.UserService().AddOrUpdateUser(obj);
+                    if (userObj != null)
+                    {
+                        Session["UserObj"] = userObj;
+                        Session["UserID"] = userObj.UserID;
+                        string message = string.Empty;
+                        if (myArray[0] != "0")
                         {
-                            message = new Business.SoftwareService().VoteForSoftware(Convert.ToInt32(myArray[0]), userObj.UserID);
-                            string softwarename = "";
-                            if (!string.IsNullOrEmpty(Session["SoftwareName"].ToString()))
+                            if (myArray[1] == "C")
                             {
-                                softwarename = Session["SoftwareName"].ToString();
+                                message = new Business.CompanyService().VoteForCompany(Convert.ToInt32(myArray[0]), userObj.UserID);
+                                if (CacheHandler.Exists("TopVoteCompaniesList"))
+                                {
+                                    CacheHandler.Clear("TopVoteCompaniesList");
+                                }
+                                string compname = "";
+                                if (!string.IsNullOrEmpty(Session["CompanyName"].ToString()))
+                                {
+                                    compname = Session["CompanyName"].ToString();
+                                }
+                                if (CacheHandler.Exists(compname))
+                                {
+                                    CacheHandler.Clear(compname);
+                                }
                             }
-                            if (CacheHandler.Exists(softwarename))
+                            else if (myArray[1] == "N")
                             {
-                                CacheHandler.Clear(softwarename);
+                                message = new Business.SoftwareService().VoteForSoftware(Convert.ToInt32(myArray[0]), userObj.UserID);
+                                string softwarename = "";
+                                if (!string.IsNullOrEmpty(Session["SoftwareName"].ToString()))
+                                {
+                                    softwarename = Session["SoftwareName"].ToString();
+                                }
+                                if (CacheHandler.Exists(softwarename))
+                                {
+                                    CacheHandler.Clear(softwarename);
+                                }
                             }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
             if (myArray[1] == "H")
             {
                 return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
@@ -312,7 +356,8 @@ namespace UpVotes.Controllers
         {
             //Need to install below library
             //Install-Package Restsharp
-            return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_basicprofile");
+            return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_liteprofile");
+            //return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_basicprofile");
         }
 
         [HttpPost]
