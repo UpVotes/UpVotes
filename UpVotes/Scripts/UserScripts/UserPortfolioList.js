@@ -71,15 +71,15 @@ $(document).ready(function ()
                 status = 1;
             }
 
-            if ($("#UplAttachment")[0].value !== "" && $("#UplAttachment")[0].value !== undefined)
+            if (($("#UplAttachment")[0].value !== "" && $("#UplAttachment")[0].value !== undefined) || (parseInt($('#hdnPortfolioID').val()) == 0))
             {
                 fileMessage = ValidateUploadedFile();
             }
 
-            if (parseInt($('#hdnPortfolioID').val()) == 0)
-            {
-                fileMessage = ValidateUploadedFile();
-            }
+            //if (parseInt($('#hdnPortfolioID').val()) == 0)
+            //{
+            //    fileMessage = ValidateUploadedFile();
+            //}
 
             if (status === 1)
             {
@@ -246,7 +246,7 @@ function ValidateUploadedFile()
     {
         $("#UplAttachment")[0].value = '';
         $("#UplAttachment").replaceWith($("#UplAttachment").clone(true));
-
+        $('#imgpreview').attr('src', '');
         return 'Logo format is not supported. Supported formats are ' + "\n" + extensionString;
     }
     var uploadedFile = $("#UplAttachment")[0].value;
@@ -268,6 +268,7 @@ function ValidateUploadedFile()
         fileNames = fileNames.substring(0, fileNames.lastIndexOf(","));
         $("#UplAttachment")[0].value = '';
         $("#UplAttachment").replaceWith($("#UplAttachment").clone(true));
+        $('#imgpreview').attr('src', '')
         return 'Image should not exceed more than 100 characters ' + ' (' + fileNames + ')';
     }
 
@@ -285,6 +286,7 @@ function ValidateUploadedFile()
         filesSize = parseFloat(filesSize / 1048576).toFixed(2);
         $("#UplAttachment")[0].value = '';
         $("#UplAttachment").replaceWith($("#UplAttachment").clone(true));
+        $('#imgpreview').attr('src', '')
         return 'Image should be 1MB in size. Your file size is ' + filesSize + 'MB';
     }
 

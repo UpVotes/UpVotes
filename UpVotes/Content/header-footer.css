@@ -15,8 +15,9 @@ header .logo a {
 }
 .navbar .navbar-nav.menu li.active a.nav-link,
 .navbar .navbar-nav.menu li a.nav-link:hover,
-.navbar .navbar-nav.menu li a.nav-link:hover {
-	border-bottom: 2px solid #19a7ad;
+.navbar .navbar-nav.menu li a.nav-link:hover,
+.navbar .navbar-nav.menu li.show a.nav-link  {
+	border-bottom: 2px solid #00a7ae;
 	color: #fff;
 }
 .navbar .signin li {
