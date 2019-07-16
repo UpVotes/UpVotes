@@ -139,7 +139,8 @@ header .logo a {
     box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 0 rgba(0,0,0,0.08);
     border: 0;
     border-radius: 0;
-    max-height: 300px;
+    /*max-height: 300px;*/
+    max-height: 405px;
     min-height: 200px;
 }
 .megamenu .menu-banner {
@@ -160,7 +161,8 @@ header .logo a {
 }
 .menu-list {
     padding: 30px;
-    max-height: 300px;
+    max-height:405px;
+    /*max-height: 300px;*/
     /*overflow-y: auto;*/
 }
 .menu-list ul {

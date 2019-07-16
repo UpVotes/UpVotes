@@ -870,8 +870,17 @@ $(document).ready(function ()
                         $('#txtWorkEmail').val(data.companyData.WorkEmail);
                         $("#txtCompanyDomain").val(data.companyData.CompanyDomain);
                         $("#txtRejectComments").val(data.companyData.Remarks);
-                        document.getElementById('ddlEmployees').value = data.companyData.TotalEmployees;
-                        document.getElementById('ddlAvgHourlyRate').value = data.companyData.AveragHourlyRate;
+                        $("#ddlEmployees").val('0');
+                        $("#ddlAvgHourlyRate").val('0');
+                        if ($("#ddlEmployees option[value='" + data.companyData.TotalEmployees + "']").length > 0) {
+                            $("#ddlEmployees").val(data.companyData.TotalEmployees);
+                        }
+
+                        if ($("#ddlAvgHourlyRate option[value='" + data.companyData.AveragHourlyRate + "']").length > 0) {
+                            $("#ddlAvgHourlyRate").val(data.companyData.AveragHourlyRate);
+                        }
+                        //document.getElementById('ddlEmployees').value = data.companyData.TotalEmployees;
+                        //document.getElementById('ddlAvgHourlyRate').value = data.companyData.AveragHourlyRate;
                         $("#txtCompanySummary").Editor("setText", (data.companyData.Summary + '<br/>' + data.companyData.Summary1 + '<br/>' + data.companyData.Summary2 + '<br/>' + data.companyData.Summary3));
                         $("#txtKeyClients").Editor("setText", (data.companyData.KeyClients));
                         if (data.companyData.LogoName != "")

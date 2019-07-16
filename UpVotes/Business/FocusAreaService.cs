@@ -109,6 +109,36 @@ namespace UpVotes.Business
                 case "graphic-designers":
                     focusAreaID = (int)FocusAreas.GraphicDesigners;
                     break;
+                case "human-resources-companies":
+                    focusAreaID = (int)FocusAreas.HumanResources;
+                    break;
+                case "blockchain-developers":
+                    focusAreaID = (int)FocusAreas.BlockchainDevelopers;
+                    break;
+                case "software-testing-companies":
+                    focusAreaID = (int)FocusAreas.ApplicationTesting;
+                    break;
+                case "logo-design-agencies":
+                    focusAreaID = (int)FocusAreas.LogoDesignAgencies;
+                    break;
+                case "print-design-agencies":
+                    focusAreaID = (int)FocusAreas.PrintDesignAgencies;
+                    break;
+                case "product-design-agencies":
+                    focusAreaID = (int)FocusAreas.ProductDesignAgencies;
+                    break;
+                case "packaging-design-agencies":
+                    focusAreaID = (int)FocusAreas.PackagingDesignAgencies;
+                    break;
+                case "affiliate-marketing-agencies":
+                    focusAreaID = (int)FocusAreas.AffiliateMarketingAgencies;
+                    break;
+                case "artificial-intelligence-companies":
+                    focusAreaID = (int)FocusAreas.ArtificialIntelligence;
+                    break;
+                case "cloud-consulting-companies":
+                    focusAreaID = (int)FocusAreas.CloudConsultants;
+                    break;
                 default:
                     focusAreaID = (int)FocusAreas.MobileAppDevelopement;
                     break;
@@ -231,7 +261,17 @@ namespace UpVotes.Business
         BrandingAgencies,
         PRAgencies,
         DigitalStrategyAgencies,
-        VideoProductionAgencies
+        VideoProductionAgencies,
+        HumanResources=27,
+        BlockchainDevelopers,
+        ApplicationTesting,
+        LogoDesignAgencies,
+        PrintDesignAgencies,
+        ProductDesignAgencies,
+        PackagingDesignAgencies,
+        AffiliateMarketingAgencies,
+        ArtificialIntelligence,
+        CloudConsultants
     }
     public enum SoftwareCategories
     {
