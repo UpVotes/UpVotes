@@ -227,7 +227,11 @@ namespace UpVotes.Controllers
             {
                 softwareViewModel.PageIndex = (PageNo - 5) + 1;
             }
-            
+            else if (PageNo >= FirstPage && PageNo <= LastPage)
+            {
+                softwareViewModel.PageIndex = FirstPage;
+            }
+
             return PartialView("_SoftwareList", softwareViewModel);
         }
     }

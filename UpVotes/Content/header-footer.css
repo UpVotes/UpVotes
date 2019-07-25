@@ -13,12 +13,26 @@ header .logo a {
 .navbar .navbar-nav.menu li a.nav-link {
 	color: #fff;
 }
-.navbar .navbar-nav.menu li.active a.nav-link,
+/*.navbar .navbar-nav.menu li.active a.nav-link,
 .navbar .navbar-nav.menu li a.nav-link:hover,
 .navbar .navbar-nav.menu li a.nav-link:hover,
 .navbar .navbar-nav.menu li.show a.nav-link  {
 	border-bottom: 2px solid #00a7ae;
 	color: #fff;
+}*/
+.navbar .navbar-nav.menu li.active a.nav-link,
+.navbar .navbar-nav.menu li a.nav-link:hover,
+.navbar .navbar-nav.menu li.show a.nav-link,
+.navbar.megamenu .navbar-nav.menu li:hover {
+	border-bottom: 2px solid #00a7ae;
+	color: #fff;
+}
+.navbar.megamenu .navbar-nav.menu li {
+	border-bottom: 2px solid transparent;
+}
+.navbar.megamenu .navbar-nav.menu li .dropdown-menu li:hover,
+.navbar.megamenu .navbar-nav.menu li .dropdown-menu li {
+	border-bottom: 0;
 }
 .navbar .signin li {
 	position: relative;
@@ -142,6 +156,7 @@ header .logo a {
     /*max-height: 300px;*/
     max-height: 405px;
     min-height: 200px;
+    margin-top: -5px;
 }
 .megamenu .menu-banner {
     padding: 30px 30px 30px 40px;
@@ -358,13 +373,37 @@ header .logo a {
 
 /* Media Screen */
 @media (min-width: 768px) { 
-	.megamenu .nav-link:hover + .dropdown-menu {
+	.megamenu .navbar-nav .dropdown:hover .dropdown-menu {
 	    display: block;
 	}
 	.megamenu .btn-close {
 		display: none;
 	}
+	.megamenu .dropdown.megamenu-fw .dropmenu-wrap {
+	    padding-top: 10px;
+	}
+	.megamenu .dropdown.megamenu-fw .dropmenu-wrap {
+	    padding-top: 15px;
+	    position: absolute;
+	    width: 100%;
+	    left: 0;
+	    right: 0;
+	    display: none;
+	}
+	.megamenu .dropdown.megamenu-fw:hover .dropmenu-wrap {
+	    display: block;
+	}
 
+
+	.megamenu .dropdown.megamenu-fw {
+	    cursor: pointer;
+	}
+	.megamenu .dropdown.megamenu-fw a {
+	    pointer-events: none;
+	}
+	.megamenu .dropdown.megamenu-fw .dropmenu-wrap a {
+	    pointer-events: inherit;
+	}
 }
 
 
@@ -390,10 +429,6 @@ header .logo a {
 		padding: 15px 0;
 		margin-top: 15px;
 	}
-}
-@media (max-width: 1023px) { 
-
-
 }
 
 @media (max-width: 767px) { 
@@ -431,6 +466,12 @@ header .logo a {
 	    margin: 0;
 	    padding: 5px 10px;
 	}*/
+    .navbar .menu li.active a {
+	    border-bottom: 2px solid #19a7ad;
+	    background: #19a7ad;
+	    margin: 0;
+	    /*padding: 5px 10px;*/
+	}
 	.menu-banner {
 		display: none;
 	}
@@ -489,6 +530,9 @@ header .logo a {
 	}
 	.megamenu .menu-bottom .show li {
 	    border-top: 1px solid #ddd;
+	}
+    .megamenu .menu-bottom .container {
+	    padding: 0;
 	}
 	.megamenu .menu-bottom .dropdown-toggle::after {
 		position: absolute;

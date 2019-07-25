@@ -207,6 +207,10 @@ namespace UpVotes.Controllers
             {
                 companyViewModel.PageIndex = (PageNo - 5) + 1;
             }
+            else if(PageNo >= FirstPage && PageNo <= LastPage)
+            {
+                companyViewModel.PageIndex = FirstPage;
+            }
 
             Session["CompanyNames"] = companyViewModel.CompanyFocusData;
             return PartialView("_CompList", companyViewModel);
