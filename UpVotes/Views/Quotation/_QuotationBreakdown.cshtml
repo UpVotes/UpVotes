@@ -1,148 +1,107 @@
 ﻿@model UpVotes.Models.QuotationResponse
-@Styles.Render("~/Content/Quotationcss")
+
 @Scripts.Render("~/bundles/Quotation")
 
-@if (ViewBag.isPublicQuote)
-{
-    <div style="height: 75px;"></div>
-}
-    <div class="container">
-        <!--for carousel -->
-        <div class="well">            
-                <input type="image" id="liClose" public=@(ViewBag.isPublicQuote ? "public" : "tab") src="../images/images.png" width="25" height="25" style="border-radius: 17px;cursor: pointer;float: right;margin-top: -38px;margin-right: -39px;border: 1px solid gray;">
-            <div id="carousel-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-
-                <div class="carousel-inner">
-                    <div class="item active" id="first_carousel">
-                        <div class="platform-section">
-                            <h2><span>Here's your Cost Estimate in Different Geographies! with Based on Current Industry:</span></h2>
-                            <br />
-                            
-                            <h2><span>Your app estimate</span></h2>
-                            
-                            <h2>
-                                <span  id="spnTotalAmountZone1" style="display:block;" class="clsZone1">$@Convert.ToInt32(Model.TotalMinZone1).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone1).ToString("#,##0")</span>
-                                <span  id="spnTotalAmountZone2" class="clsZone2" style="display:none;">$@Convert.ToInt32(Model.TotalMinZone2).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone2).ToString("#,##0")</span>
-                                <span  id="spnTotalAmountZone3" class="clsZone3" style="display:none;">$@Convert.ToInt32(Model.TotalMinZone3).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone3).ToString("#,##0")</span>
-                            </h2>
-                            
-                            @*<div class="block612 pull-right" style="float: left !important;margin-left: 29%;" href="#carousel-generic" data-slide="next" id="next_carousel" ><span><i aria-hidden="true"></i>Get an Estimate</span></div>*@
-                            <div class="center-align-button" ><div class="block612 quote-break"  id="btnShowBreakdown"><span><i aria-hidden="true"></i>SHOW BREAKDOWN</span></div>
-                        </div>
-                        </div>
-
-                    </div>
-                   
-                   
-                </div>
-                
-            </div>
-
-            <div id="divbreakdown" class="slideDown">
-    
-                        <div class="platform-section row">
-                            <div class="col-sm-4" style="text-align:center">
-                                <h2><span class="h2zone">Zone-1</span></h2>
-                                <p>(USA, Canada, Western Europe &amp; Australia)</p>
-                                <div>
-                                    <div class="block612"  id="btnEstimateZ1"><span><i aria-hidden="true"></i>Estimate</span></div>
-                                </div>
-                                </div>
-                            <div class="col-sm-4" style="text-align:center">
-                                <h2><span class="h2zone">Zone-2</span></h2>
-                                <p>(Eastern Europe, Middle East, Central &amp; South America)</p>
-                                <div>
-                                    <div class="block612"  id="btnEstimateZ2"><span><i aria-hidden="true"></i>Estimate</span></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" style="text-align:center">
-                                <h2><span class="h2zone">Zone-3</span></h2>
-                                <p>(South Asia, East Asia, South East Asia &amp; Africa)</p>
-                                <div>
-                                    <div class="block612"  id="btnEstimateZ3"><span><i aria-hidden="true"></i>Estimate</span></div>
-                                </div>
-                            </div>
-                        </div>
-                <div class="platform-section" style="font-size: 20px;color:#00A4AD"><span id="spnbreakdownz1" class="clsZone1" style="display:block">Zone 1 - Breakdown</span><span id="spnbreakdownz2" style="display:none" class="clsZone2">Zone 2 - Breakdown</span><span id="spnbreakdown" style="display:none" class="clsZone3">Zone 3 - Breakdown</span></div>
-                <div class="platform-section" style="background:white;">
-@if (Model != null)
-{
-    string platformclassname = "";
-    foreach (var quotation in Model.QuotationData)
-    {
-        if (quotation.SubCategory != "Features")
-        {
-                    <div class="row" style="border-bottom:1px solid #EAEAEA;min-height:85px;">
-                        <div style="margin-top:12px;">
-                            <div class="col-sm-1" style="text-align:center;">
-                                <ul class="os-sectionbreakdown">
-                                    <li class="@quotation.Classname"></li>
-                                    @if (platformclassname == "")
-                                    {
-                                        platformclassname = quotation.Classname;
-                                    }
-                                </ul>
-                            </div>
-                            <div class="col-sm-8 final-sec">
-                                <div style="margin-top: 10px;">
-                                    <span style="font-size:15px;"><strong>@quotation.Question</strong></span>
-                                    <br><p>@quotation.Answer</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3  final-sec">
-                                <div style="margin-top: 10px;">
-                                    <span style="font-size:15px;color:#00A4AD;display:block" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
-                                    <span style="font-size:15px;color:#00A4AD;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
-                                    <span style="font-size:15px;color:#00A4AD;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        }
-    }
-
-
-    <div class="row" style="margin-top:10px">
-        <div class="col-sm-1" style="text-align:center;">
-            <ul class="os-sectionbreakdown">
-                <li class="@platformclassname"></li>
-            </ul>
+<div class="custom-quote text-center">
+    <div class="step step12 final">
+        <div class="title">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Thanks for your interest!
         </div>
-        <div class="col-sm-8" style="text-align:left;">
-            <div style="margin-top: 10px;">
-                <span style="font-size:15px;"><strong>Check all the features you want on your app?</strong></span>
-                <br />
-                <br />
-                @foreach (var quotation in Model.QuotationData)
+        <div class="sub-title">We will send detailed estimation report to your mail</div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-blue btn-md" id="btnShowReport">Show Report</button>
+        </div>
+    </div>
+    <div class="step step11 estimate hide">
+        <div class="title">Here's your Cost Estimation in Different Geographies! with Based on Current Industry</div>
+        <div class="total">
+            Your app estimation
+            <div id="spnTotalAmountZone1" style="display:block;" class="cost clsTotalZone1">$@Convert.ToInt32(Model.TotalMinZone1).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone1).ToString("#,##0")</div>
+            <div id="spnTotalAmountZone2" style="display:none;" class="cost clsTotalZone2">$@Convert.ToInt32(Model.TotalMinZone2).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone2).ToString("#,##0")</div>
+            <div id="spnTotalAmountZone3" style="display:none;" class="cost clsTotalZone3">$@Convert.ToInt32(Model.TotalMinZone3).ToString("#,##0") - $@Convert.ToInt32(Model.TotalMaxZone3).ToString("#,##0")</div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-blue btn-md" id="btnShowBreakdown">Show Breakdown</button>
+            </div>
+            <div class="btn-group">
+                &nbsp;&nbsp;
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-blue btn-md" id="liClose" public="tab">New Quote</button>
+            </div>
+        </div>
+        <div id="divbreakdown" class="slideDown" style="display:none">
+        <div class="zone-wrap">
+            <div class="item">
+                <strong>Zone-1</strong>
+                <span>(USA, Canada, Western Europe & Australia)</span>
+                <div class="btn-group">
+                    <button type="button" id="btnEstimateZ1" class="btn btn-blue-line btn-sm">Estimate</button>
+                </div>
+            </div>
+            <div class="item">
+                <strong>Zone-2</strong>
+                <span>(Eastern Europe, Middle East, Central & South America)</span>
+                <div class="btn-group">
+                    <button type="button" id="btnEstimateZ2" class="btn btn-blue-line btn-sm">Estimate</button>
+                </div>
+            </div>
+            <div class="item">
+                <strong>Zone-3</strong>
+                <span>(South Asia, East Asia, South East Asia & Africa)</span>
+                <div class="btn-group">
+                    <button type="button" id="btnEstimateZ3" class="btn btn-blue-line btn-sm">Estimate</button>
+                </div>
+            </div>
+        </div>
+        <div class="final-list">
+            <ul>
+                @if (Model != null)
                 {
-                    if (quotation.SubCategory == "Features")
+                    string platformclassname = "";
+                    foreach (var quotation in Model.QuotationData)
                     {
-
-                        <div class="row" style="margin-left:1px;">
-                            <div class="col-sm-7" style="height: 43px;border-top:1px solid #EAEAEA;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA">
-                                <span style="font-size:15px;margin-left:-13px;position: absolute;margin-top: 7px;"><strong>@quotation.Ctypes</strong></span>
-                            </div>
-                            <div class="col-sm-5" style="height: 43px;border-top:1px solid #EAEAEA;border-right:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA">
-                                <span style="font-size:15px;margin-top: 7px;" class="clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span>
-                                <span style="font-size:15px;margin-top: 7px;display:none;" class="clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span>
-                                <span style="font-size:15px;margin-top: 7px;display:none;" class="clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span>
-                            </div>
-                        </div>                        
+                        if (quotation.SubCategory != "Features")
+                        {
+                            <li>
+                                <div class="symbol"><i class="@quotation.Classname" aria-hidden="true"></i></div>
+                                @if (platformclassname == "")
+                                {
+                                    platformclassname = quotation.Classname;
+                                }
+                                <div class="category">
+                                    <span>
+                                        @quotation.Question
+                                        <small>@quotation.Answer</small>
+                                    </span>
+                                </div>
+                                <div style="display:inline-block" class="price clsZone1">Cost: $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</div>
+                                <div style="display:none" class="price clsZone2">Cost: $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</div>
+                                <div style="display:none" class="price clsZone3">Cost: $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</div>
+                            </li>
+                        }
                     }
+                    <li>
+                        <div class="symbol"><i class="@platformclassname" aria-hidden="true"></i></div>
+                        <div class="category">
+                            <span>Check all the feature you want on your app?</span>
+                            <div class="feature">
+                                @foreach (var quotation in Model.QuotationData)
+                                {
+                                    if (quotation.SubCategory == "Features")
+                                    {
+                                        <div class="clsFeatureZone1"><span class="label">@quotation.Ctypes</span><span>Cost:  $@Convert.ToInt32(quotation.MinPriceZone1).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone1).ToString("#,##0")</span></div>
+                                        <div style="display:none;" class="clsFeatureZone2"><span class="label">@quotation.Ctypes</span><span>Cost:  $@Convert.ToInt32(quotation.MinPriceZone2).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone2).ToString("#,##0")</span></div>
+                                        <div style="display:none;" class="clsFeatureZone3"><span class="label">@quotation.Ctypes</span><span>Cost:  $@Convert.ToInt32(quotation.MinPriceZone3).ToString("#,##0") - $@Convert.ToInt32(quotation.MaxPriceZone3).ToString("#,##0")</span></div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="price"></div>
+                    </li>
                 }
+                </ul>
+            </div>
             </div>
         </div>
     </div>
-}
-                    </div>
-                </div>
-
-        </div>
-        
-
-        
-    </div>
-   
-   
-
-

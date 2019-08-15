@@ -1,4 +1,8 @@
 /* List Tab */
+.liDisabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
 .list-wrap {
     padding: 20px 0;
 }
@@ -688,7 +692,278 @@
     margin: 0 10px;
 }
 
-
+/*Custom quote*/
+.custom-quote {
+    position: relative;
+}
+.custom-quote .rough-quote {
+    background: #666;
+    width: 150px;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.custom-quote .rough-quote .back-nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    padding: 12px 10px;
+    font-size: 16px;
+}
+.custom-quote .rough-quote .back-nav i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+.rough-quote .amount {
+    font-size: 18px;
+    font-weight: 600;
+}
+.custom-quote .step {
+    background-color: #f5f4f4;
+    padding: 10% 0;
+}
+.custom-quote .step,
+.custom-quote .intro .text,
+.custom-quote .intro .caption,
+.custom-quote .step .title,
+.custom-quote .step .sub-title {
+    margin: 15px 0;
+    line-height: normal;
+}
+.custom-quote .btn-group {
+    margin: 40px 0;
+}
+.custom-quote .intro .text {
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.custom-quote .intro .caption {
+    font-size: 22px;
+    color: #666;
+}
+.custom-quote .step .title {
+    font-size: 36px;
+    font-weight: 600;
+}
+.custom-quote .step .sub-title {
+    font-size: 20px;
+    color: #666;
+}
+.custom-quote .step .option {
+    font-size: 0;
+    max-width: 650px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0;
+    margin: 30px auto;
+}
+.custom-quote .step .option li {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    font-size: 18px;
+    border-top: 1px solid #ddd;
+    color: #333;
+    text-align: left;
+    padding: 15px 20px;
+    position: relative;
+    min-height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+.custom-quote .step .option li:nth-child(odd) {
+    border-right: 1px solid #ddd;
+}
+.custom-quote .step .option li:nth-of-type(1),
+.custom-quote .step .option li:nth-of-type(2) {
+    border-top: 0;
+}
+.custom-quote .step .option li i {
+    font-size: 30px;
+    width: 50px;
+    color: #abacac;
+    vertical-align: middle;
+    display: inline-block;
+}
+.custom-quote .step .option li span {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 50px);
+    line-height: normal;
+}
+.custom-quote .step .option li small {
+    display: block;
+    color: #666;
+    font-size: 14px;
+}
+.custom-quote .step .option li.selected,
+.custom-quote .step .option li.selected i,
+.custom-quote .step .option li.selected small {
+    color: #19a7ad;
+}
+.custom-quote .step .option li.selected:after {
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #19a7ad;
+    content: '';
+}
+.custom-quote .estimate .title {
+    font-size: 24px;
+    color: #666;
+    font-weight: normal;
+}
+.custom-quote .estimate .total {
+    font-size: 32px;
+    font-weight: 600;
+    color: rgba(25,167,173,0.9);
+    margin: 20px 0;
+}
+.custom-quote .estimate .total .cost {
+    font-size: 26px;
+    color: #333;
+    font-weight: 500;
+    margin: 10px 0;
+}
+.custom-quote .estimate .total .btn-group {
+    margin: 20px 0;
+}
+.custom-quote .estimate .zone-wrap {
+    margin: 30px 0;
+    padding: 50px 0 20px 0;
+    border-top: 1px solid #ddd;
+}
+.custom-quote .estimate .zone-wrap .btn-group {
+    margin: 5px 0;
+}
+.custom-quote .zone-wrap .item {
+    display: inline-block;
+    vertical-align: top;
+    width: 33%;
+}
+.custom-quote .zone-wrap .item strong {
+    color: rgba(29,176,234,0.9);
+    font-size: 26px;
+    font-weight: 500;
+}
+.custom-quote .zone-wrap .item span {
+    display: block;
+    font-size: 16px;
+    margin: 5px auto;
+    width: 60%;
+    color: #666;
+}
+.custom-quote .estimate .final-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+}
+.custom-quote .estimate .final-list li {
+    text-align: left;
+    list-style-type: none;
+}
+.custom-quote .estimate .final-list .symbol,
+.custom-quote .estimate .final-list .category,
+.custom-quote .estimate .final-list .price {
+    display: inline-block;
+    vertical-align: top;
+}
+.custom-quote .estimate .final-list .category {
+    width: calc(100% - 280px);
+    margin: 15px 0 0 30px;
+}
+.custom-quote .estimate .final-list .symbol i {
+    font-size: 32px;
+    background: #f5f4f4;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 100%;
+    color: #666;
+}
+.custom-quote .estimate .final-list span {
+    font-size: 16px;
+    font-weight: 500;
+}
+.custom-quote .estimate .final-list small {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+.custom-quote .estimate .final-list li {
+    text-align: left;
+    list-style-type: none;
+    border-top: 1px solid #eee;
+    padding: 15px 0;
+    margin: 15px 0;
+}
+.custom-quote .estimate .final-list li:first-child {
+    margin-top: 0;
+    border-top: 0;
+}
+.custom-quote .estimate .final-list .price {
+    color: rgba(29,176,234,1);
+    width: 180px;
+    text-align: right;
+}
+.custom-quote .estimate .final-list .feature {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    max-width: 600px;
+}
+.custom-quote .estimate .final-list .feature div {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+.custom-quote .estimate .final-list .feature div:hover {
+    background: #f4f4f4;
+}
+.custom-quote .estimate .final-list .feature div:first-child {
+    border-top: 0;
+}
+.custom-quote .estimate .final-list .feature span {
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: middle;
+    width: 180px;
+    text-align: right;
+}
+.custom-quote .estimate .final-list .feature .label {
+    width: calc(100% - 180px);
+    text-align: left;
+}
+.custom-quote .contact form {
+    width: 350px;
+    margin: 50px auto;
+}
+.custom-quote .contact form .error {
+    text-align: left;
+}
+.custom-quote .contact .btn-group {
+    margin: 10px 0;
+}
+.custom-quote .step.final .title {
+    color: #028402;
+}
+.custom-quote .step.final .title i {
+    display: block;
+    border: 1px solid #028402;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    margin: 20px auto;
+    border-radius: 100%;
+}
 
 @media (min-width: 1023px) {
     .modal.filter,
@@ -888,6 +1163,111 @@
         border-bottom: 0;
     }
 
+    /*Custom Quote*/
+    .custom-quote .rough-quote {
+        position: static;
+        width: 100%;
+        margin: 15px 0;
+    }
+    .custom-quote .intro .text,
+    .custom-quote .step .title {
+        font-size: 26px;
+    }
+    .custom-quote .intro .caption,
+    .custom-quote .step .sub-title {
+        font-size: 16px;
+    }
+    .custom-quote .step .option li i {
+        font-size: 22px;
+    }
+    .custom-quote .step .option li span {
+        font-size: 16px;
+    }
+    .custom-quote .step {
+        padding: 10px;
+        margin: 0;
+    }
+    .custom-quote.fixed {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        background: #f5f4f4;
+        overflow: auto;
+    }
+    .custom-quote.fixed .rough-quote {
+        margin: 0;
+        text-align: right;
+        padding: 5px 10px;
+    }
+    .custom-quote .step .option li {
+        width: 100%;
+        min-height: 30px;
+        line-height: 30px;
+    }
+    .custom-quote .step .option li:nth-of-type(1),
+    .custom-quote .step .option li:nth-of-type(2) {
+        border-top: 1px solid #ddd;
+    }
+    .custom-quote .step .option li:first-child {
+        border-top: 0;
+    }
+    .custom-quote .step .option li:nth-child(odd) {
+        border-right: 0;
+    }
+    .custom-quote .step .option li.empty {
+        display: none;
+    }
+    .custom-quote .intro .text,
+    .custom-quote .step .title {
+        font-size: 18px;
+    }
+    .custom-quote .estimate .total {
+        font-size: 22px;
+    }
+    .custom-quote .estimate .total .cost {
+        font-size: 20px;
+    }
+    .custom-quote .estimate .zone-wrap {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+    .custom-quote .zone-wrap .item {
+        width: 100%;
+        margin: 20px 0;
+    }
+    .custom-quote .estimate .final-list ul {
+        padding: 0;
+    }
+    .custom-quote .estimate .final-list .category {
+        width: calc(100% - 100px);
+        margin: 10px 0 10px 20px;
+    }
+    .custom-quote .estimate .final-list .price {
+        width: 100%;
+    }
+    .custom-quote .estimate .final-list .feature .label {
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+        color: #666;
+    }
+    .custom-quote .estimate .final-list .feature span {
+        text-align: left;
+        margin: 2px 0;
+    }
+    .custom-quote .btn-group {
+        margin: 10px 0;
+    }
+    .custom-quote .step .option {
+        margin: 10px auto;
+    }
+    .custom-quote.fixed .rough-quote .back-nav {
+        display: block;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -984,6 +1364,40 @@
         font-size: 12px;
     }
 }
+
+@media (max-width: 500px) {
+    /*Overview news*/
+    .list-wrap .news-list .news-logo,
+    .list-wrap .news-list .news-info {
+        width: 100%;
+        margin: 0;        
+    }
+    .list-wrap .news-list .news-info {
+        padding: 0 20px 20px 20px;
+    }
+    .list-wrap .news-list .news-action {
+        position: absolute;
+        top: 15px;
+        right: 0;
+        border-top: 0;
+    }
+    .list-wrap .news-list .date {
+        display: block;
+        padding: 0;
+        height: auto;
+    }
+
+    
+    /*BG Title*/
+    .bg-title .title {
+        font-size: 18px;
+    }
+    .bg-title .title-caption {
+        font-size: 16px;
+    }
+
+}
+
 @media (max-width: 480px) {
     .list-wrap {
         padding: 15px 0;

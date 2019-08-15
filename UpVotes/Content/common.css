@@ -256,6 +256,11 @@ h6,
 	background-color: rgba(29,176,234, 1);
 	border-color: rgba(29,176,234, 1);
 }
+.btn.btn-blue-line {
+    border: 1px solid rgba(29,176,234,0.9);
+    color: rgba(29,176,234,0.9);
+    background: none;
+}
 .btn.btn-add {
 	background-color: rgba(54,139,206,0.9);
 	border-color: rgba(54,139,206,0.9);

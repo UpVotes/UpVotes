@@ -9,7 +9,14 @@
     <script src="~/Scripts/UserScripts/UserSoftwareList.js"></script>*@
 
 @Styles.Render("~/Content/UserListCss")
-@Scripts.Render("~/bundles/UserSoftwareListPluginJs")
+@if (Model.IsAdmin)
+{
+    @Scripts.Render("~/bundles/AUserSoftwareListPluginJs")    
+}
+else
+{
+    @Scripts.Render("~/bundles/UserSoftwareListPluginJs")
+}
 @Scripts.Render("~/bundles/UserSoftwareList")
 
 <script type="text/javascript">

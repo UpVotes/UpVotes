@@ -3,8 +3,15 @@
 @using System.Collections.Generic
 
 @Styles.Render("~/Content/UserCompany")
-@Scripts.Render("~/bundles/UserCompany")
-   
+@if (Model.CompanyList[0].IsAdminUser)
+{
+    @Scripts.Render("~/bundles/AUserCompany")
+}
+else
+{
+    @Scripts.Render("~/bundles/UserCompany")
+}
+
 <script type="text/javascript">
     $(document).ready(function () {
         //$('#ImgLoading').attr("src", $.absoluteurl('/images/ajax-loader.gif'));

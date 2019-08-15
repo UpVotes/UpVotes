@@ -38,9 +38,12 @@
                         <a class="nav-item nav-link active" data-toggle="tab" href="#company-profile">
                             <i class="fa fa-balance-scale"></i> View & Compare
                         </a>
-                        <a class="nav-item nav-link" data-toggle="tab" href="#CustomQuote">
-                            <i class="fa fa-usd"></i>Custom quote
-                        </a>
+                        @if (Session["FocusAreaName"].ToString() == "mobile-application-developers")
+                        {
+                            <a class="nav-item nav-link" data-toggle="tab" href="#CustomQuote">
+                                <i class="fa fa-usd"></i>Custom quote
+                            </a>
+                        }
                         <a class="nav-item nav-link" data-toggle="tab" href="#userReviews">
                             <i class="fa fa-users"></i>User reviews
                         </a>
@@ -157,8 +160,7 @@
                        @Html.Partial("~/Views/CompanyList/_CompanyQuickLinks.cshtml")
                     </div>
                     <div class="tab-pane fade" id="CustomQuote">
-
-
+                        @{Html.RenderAction("GetQuotation", "Quotation");}
                     </div>
                     <div class="tab-pane fade" id="userReviews">                        
                             <div class="d-flex justify-content-between top-bar">
