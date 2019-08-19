@@ -184,7 +184,7 @@ namespace UpVotes.Business
                 case "email-marketing-softwares":
                     softwareCategoryID = (int)SoftwareCategories.EmailMarketingSoftwares;
                     break;
-                case "game-development-softwares-":
+                case "game-development-softwares":
                     softwareCategoryID = (int)SoftwareCategories.GameDevelopmentSoftwares;
                     break;
                 case "graphic-design-softwares":
@@ -211,7 +211,7 @@ namespace UpVotes.Business
                 case "crm-softwares":
                     softwareCategoryID = (int)SoftwareCategories.CRMSoftwares;
                     break;
-                case "business-intelligence-softwares-":
+                case "business-intelligence-softwares":
                     softwareCategoryID = (int)SoftwareCategories.BusinessIntelligenceSoftwares;
                     break;
                 case "machine-learning-softwares":
