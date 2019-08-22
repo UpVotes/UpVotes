@@ -353,16 +353,15 @@ namespace UpVotes.Controllers
                         {
                             System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(SMP);
                             Request.Files[0].SaveAs(fullPath);
-                        }
-
-                        if (CacheHandler.Exists(news.CompanySoftwareName.Replace(" ","-").ToLower()))
-                        {
-                            CacheHandler.Clear(news.CompanySoftwareName.Replace(" ", "-").ToLower());                           
-                        }
+                        }                        
                     }
 
                     if (NewsID > 0)
                     {
+                        if (CacheHandler.Exists(news.CompanySoftwareName.Replace(" ", "-").ToLower()))
+                        {
+                            CacheHandler.Clear(news.CompanySoftwareName.Replace(" ", "-").ToLower());
+                        }
                         jsonData = new
                         {
                             IsSuccess = true,
