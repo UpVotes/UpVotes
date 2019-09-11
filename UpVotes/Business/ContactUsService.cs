@@ -35,5 +35,27 @@ namespace UpVotes.Business
             }
         }
 
+        internal int SaveSponsorInfo(SponsorerInfoEntity sponsorEntity)
+        {
+            using (_httpClient = new HttpClient())
+            {
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = "SaveSponsorerInfo";
+                string completeURL = WebAPIURL + apiMethod + '/';
+
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(sponsorEntity), Encoding.UTF8, "application/json");
+
+                var response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return Convert.ToInt32(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
     }
 }

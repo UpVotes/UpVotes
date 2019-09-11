@@ -50,5 +50,38 @@ namespace UpVotes.Controllers
             }
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult SaveSponsorerInfo(SponsorerInfoEntity sponsorInfo)
+        {
+            dynamic jsonData = default(dynamic);
+            try
+            {
+                sponsorInfo.AddedBy = Convert.ToInt32(Session["UserID"]);
+                int SponsorID = new ContactUsService().SaveSponsorInfo(sponsorInfo);
+                if (SponsorID > 0)
+                {
+                    jsonData = new
+                    {
+                        IsSuccess = true
+                    };
+                }
+                else
+                {
+                    jsonData = new
+                    {
+                        IsSuccess = false
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                jsonData = new
+                {
+                    IsSuccess = false
+                };
+            }
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
     }
 }

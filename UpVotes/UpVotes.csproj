@@ -227,6 +227,7 @@
     <Compile Include="Business\TeamMembersService.cs" />
     <Compile Include="Business\UserService.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\OverViewAndNewsController.cs" />
     <Compile Include="Controllers\SubmitReviewController.cs" />
     <Compile Include="Controllers\SoftwaresController.cs" />
@@ -2667,6 +2668,8 @@
     <Content Include="Views\Authenticated\Center\UserReviewForApprovalList.cshtml" />
     <Content Include="Views\Authenticated\Center\UserSponsershipForm.cshtml" />
     <Content Include="Views\Authenticated\Center\SchedulerForm.cshtml" />
+    <Content Include="Views\Authenticated\Center\PricingPlan.cshtml" />
+    <Content Include="Views\Sponsorship\_PublicPricingPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

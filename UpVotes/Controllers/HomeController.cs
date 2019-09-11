@@ -37,5 +37,13 @@ namespace UpVotes.Controllers
             }
             return View("~/Views/Policy/_PrivatePolicy.cshtml");
         }
+        public ActionResult Sponsorship()
+        {
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "P";
+            }
+            return View("~/Views/Sponsorship/_PublicPricingPlan.cshtml");
+        }
     }
 }

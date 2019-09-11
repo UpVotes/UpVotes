@@ -68,6 +68,72 @@ $(document).ready(function () {
         $('#spnErrorMessage').hide();        
     }
 
+    $.ClearSponsorshipControls = function () {
+        $('#txtSponsorerName').val('');
+        $('#txtSponsorerCompanyName').val('');
+        $('#txtSponsorerEmail').val('');
+        $('#ddlSponsorship').val('0');
+        $('#txtSponsorerDescription').val('');
+    }
+
+    $.SaveModeValidationForSponsorship = function () {
+        var name = $('#txtSponsorerName').val();
+        var companyname = $('#txtSponsorerCompanyName').val();
+        var email = $('#txtSponsorerEmail').val();
+        var sponsorship = $('#ddlSponsorship').val();
+        var description = $('#txtSponsorerDescription').val();        
+        
+        $('#errValidationMessage').text('');
+        $('#errValidationMessage').hide();
+
+        if (name.trim() == '' || companyname.trim() == '' || email.trim() == '' || sponsorship == '0') {
+            $('#errValidationMessage').show();
+            $('#errValidationMessage').text('All * are mandatory');
+            return false;
+        }
+        else if (!$.ValidateEmail(email.trim())) {
+            $('#errValidationMessage').show();
+            $('#errValidationMessage').text('Enter valid email!');
+            return false;
+        }
+        return true;
+    }
+
+    $('#submitPlan').click(function () {
+        if ($.SaveModeValidationForSponsorship()) {
+            var name = $('#txtSponsorerName').val();
+            var companyname = $('#txtSponsorerCompanyName').val();
+            var email = $('#txtSponsorerEmail').val();
+            var sponsorship = $('#ddlSponsorship').val();
+            var description = $('#txtSponsorerDescription').val();
+
+            $('#ajax_loaderSponsorer').show();
+            $.ajax({
+                url: $.absoluteurl('/ContactUs/SaveSponsorerInfo'),
+                data: { Name: name.trim(), Email: email.trim(), CompanyName: companyname.trim(), Sponsorship: sponsorship, UserDescription: description.trim() },
+                type: "POST",
+                success: function (response) {
+                    $('#ajax_loaderSponsorer').hide();
+                    if (response.IsSuccess) {
+                        $('#subscribeThank').removeClass('hide');
+                        $.ClearSponsorshipControls();
+                    }
+
+                },
+                error: function (e) {
+                    alert('Some error has occured. Failed to save. Please contact admin.');
+                    $('#ajax_loaderSponsorer').hide();
+                }
+
+            });
+        }
+    });
+
+    $('#subscribeModal').on('hide.bs.modal', function () {
+        $.ClearSponsorshipControls();
+        $('#subscribeThank').addClass('hide');
+    });
+
 });
 
 

@@ -407,7 +407,7 @@ h6,
 
 /* Input Field */
 .input-medium {
-    height: 65px;
+    min-height: 50px;
 }
 .input-medium .input-txt {
     height: 48px;
@@ -756,6 +756,156 @@ color:#fff;
     color: #d50000;
 }
 
+/*Package*/
+.package-banner {
+    background: #005679;
+    color: #fff;
+    text-align: center;
+}
+.package-banner .content {
+    width: 50%;
+    margin: 0 auto;
+}
+.package-wrap {
+    background: #f1f6fa;
+    padding: 40px 15px;
+    margin-top: -60px;
+}
+.package-wrap .package-item {
+    background: #fff;
+    border-radius: 10px;
+}
+.package-item .heading {
+    background: #19a7ad;
+    color: #fff;
+    text-align: center;
+    font-size: 26px;
+    line-height: normal;
+    padding: 15px 0;
+    border-radius: 10px 10px 0 0;
+    font-weight: 500;
+}
+.package-item .heading span {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+}
+.package-item .title {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+}
+.package-item ul {
+    padding: 0 20px;
+}
+.package-item li {
+    list-style-type: none;
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+}
+.package-item li:first-child {
+    border-top: 0;
+}
+.package-item li i {
+    font-size: 18px;
+    margin-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.package-item li i.yes {
+    color: #018500;
+}
+.package-item li i.no {
+    color: #fe0000;
+}
+.package-item li span {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 50px);
+    color: #333;
+}
+.package-item .submit {
+    color: #fff;
+    background: #005679;
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+}
+
+/*Package FAQ*/
+.package-group .faq .title-large {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.package-group .faq {
+    background: #f1f6fa;
+    margin: 50px -15px;
+    padding: 30px 15px;
+}
+.package-group .faq .content {
+    padding: 50px;
+    background: #fff;
+}
+.package-group .content ul {
+    padding: 0;
+}
+.package-group .content li {
+    list-style: none;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+}
+.package-group .content li:first-child {
+    border-top: 0;
+}
+.package-group .faq b {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+.package-group .faq p {
+    font-size: 18px;
+    color: #666;
+    margin: 0;
+}
+.package-group .info {
+    margin: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+.package-group .info a,
+.package-group .faq a {
+    font-weight: normal;
+    text-decoration: underline;
+}
+.package-item .submit.top {
+    display: none;
+}
+.subscribe-modal .modal-dialog {
+    width: 600px;
+}
+.subscribe-modal .modal-body {
+    padding: 30px;
+}
+.subscribe-modal .title-small {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.subscribe-modal .thank {
+    text-align: center;
+    padding: 50px 0;
+}
+.subscribe-modal .thank b {
+    color: green;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 /* Media Screen */
 @media (min-width: 1300px) {
 	header .container {
@@ -905,6 +1055,43 @@ color:#fff;
 	    display: none;
 	}
 	
+    /*Pricing Plan*/
+    .package-banner .content {
+        width: 90%;
+    }
+    .package-banner.gap-large {
+        padding: 10px 0;
+    }
+    .package-wrap {
+        background: #f1f6fa;
+        padding: 20px 0;
+        margin-top: 0;
+        white-space: nowrap;
+        overflow-x: auto;
+        display: block;
+    }
+    .package-item .title {
+        padding: 10px 20px;
+        text-align: left;
+        font-size: 16px;
+    }
+    .package-item li {
+        padding: 10px 0;
+        white-space: pre-wrap;
+    }
+    .package-wrap .item {
+        display: inline-block;
+        width: 500px;
+    }
+    .subscribe-modal .modal-dialog {
+        width: calc(100% - 1rem);
+    }
+    .package-item .submit.top {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 0;
+        display: block;
+    }
 }
 
 @media (max-width: 576px) { 
@@ -945,6 +1132,49 @@ color:#fff;
 	    height: 43px;
 	    font-size: 14px;
 	}
+
+    /*Pricing plan*/
+    .package-banner .content {
+        font-size: 13px;
+    }
+    .package-wrap .item {
+        width: 300px;
+        padding-right: 0;
+    }
+    .package-item .heading {
+        font-size: 18px;
+        padding: 10px 0;
+    }
+    .package-item .heading span {
+        font-size: 12px;
+    }
+    .package-item li span {
+        font-size: 13px;
+    }
+    .package-group .faq {
+        padding: 15px 0;
+        margin: 15px -15px;
+    }
+    .package-group .faq .content {
+        padding: 15px;
+    }
+    .package-group .faq .title-large {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .package-group .info {
+        margin: 15px 0;
+        font-size: 14px;
+    }
+    .package-group .faq b {
+        font-size: 16px;
+    }
+    .package-group .faq p {
+        font-size: 14px;
+    }
+    .package-item .submit {
+        padding: 10px;
+    }
 }
 
 
@@ -988,4 +1218,10 @@ color:#fff;
         padding: 15px;
     }
 
+
+    /*Pricing plan*/
+    .package-wrap .item {
+        width: 250px;
+        padding-right: 0;
+    }
 }

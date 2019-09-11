@@ -360,6 +360,18 @@
     margin-bottom: 20px;
 }
 
+/* Pricing Plan */
+.dashboard .tab-content.package-wrap {
+    margin: 0;
+    padding: 30px 20px;
+}
+.dashboard .package-wrap .info {
+    margin: 50px 0 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+
 @media (max-width: 768px) { 
   .dashboard .review-info li div.label,
   .dashboard .review-info li div.data {
