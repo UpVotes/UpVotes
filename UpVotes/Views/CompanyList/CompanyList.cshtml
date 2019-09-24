@@ -157,29 +157,29 @@
                         <div id="complist">
                             @Html.Partial("~/Views/CompanyList/_CompList.cshtml", Model)
                         </div>
-                       @Html.Partial("~/Views/CompanyList/_CompanyQuickLinks.cshtml")
+                        @Html.Partial("~/Views/CompanyList/_CompanyQuickLinks.cshtml")
                     </div>
                     <div class="tab-pane fade" id="CustomQuote">
                         @{Html.RenderAction("GetQuotation", "Quotation");}
                     </div>
-                    <div class="tab-pane fade" id="userReviews">                        
-                            <div class="d-flex justify-content-between top-bar">
-                                <div class="result">WE FOUND @Model.TotalNoOfCompanies @Model.CategoryHeadLine</div>
-                                <div class="share">
-                                    <div class="list-inline">
-                                        <div class="list-inline-item social">Share:</div>
-                                        <div class="list-inline-item social">
-                                            <a href="https://twitter.com/upvotes_co"><i class="fa fa-twitter bg-picton"></i></a>
-                                        </div>
-                                        <div class="list-inline-item social">
-                                            <a href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook bg-chambray"></i></a>
-                                        </div>
-                                        <div class="list-inline-item social">
-                                            <a href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin bg-denim"></i></a>
-                                        </div>
+                    <div class="tab-pane fade" id="userReviews">
+                        <div class="d-flex justify-content-between top-bar">
+                            <div class="result">WE FOUND @Model.TotalNoOfCompanies @Model.CategoryHeadLine</div>
+                            <div class="share">
+                                <div class="list-inline">
+                                    <div class="list-inline-item social">Share:</div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://twitter.com/upvotes_co"><i class="fa fa-twitter bg-picton"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.facebook.com/upvotes.co/"><i class="fa fa-facebook bg-chambray"></i></a>
+                                    </div>
+                                    <div class="list-inline-item social">
+                                        <a href="https://www.linkedin.com/company/upvotes/"><i class="fa fa-linkedin bg-denim"></i></a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <div class="mobile-refine">
                             <div class="mobile-filter">
                                 <a data-toggle="modal" data-target="#filterReviewModal" class="nav-link" href="#">
@@ -210,19 +210,19 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="bg-title">
-                                <h2 class="title">top @Model.CategoryReviewHeadLine REVIEWS</h2>
-                                <h3 class="title-caption"><i class="fa fa-bars"></i>Reviews</h3>
-                            </div>
+                        <div class="bg-title">
+                            <h2 class="title">top @Model.CategoryReviewHeadLine REVIEWS</h2>
+                            <h3 class="title-caption"><i class="fa fa-bars"></i>Reviews</h3>
+                        </div>
                         <div id="divUserReviews">
                             @{Html.RenderAction("GetUserReviews", "CompanyList");}
                         </div>
-                            <div class="col text-center load-more">
-                                <button type="submit" id="btnLoadMoreReviews" pagesize="10" class="btn btn-sm flat-gray">
-                                    Load more reviews...
-                                </button>
-                            </div>
-                        
+                        <div class="col text-center load-more">
+                            <button type="submit" id="btnLoadMoreReviews" pagesize="10" class="btn btn-sm flat-gray">
+                                Load more reviews...
+                            </button>
+                        </div>
+
 
                     </div>
                     <div class="tab-pane fade" id="Overview">
@@ -247,7 +247,7 @@
                             <h2 class="title">top @Model.CategoryReviewHeadLine resources</h2>
                             <h3 class="title-caption"><i class="fa fa-bars"></i>Latest Posts</h3>
                         </div>
-                        @{Html.RenderAction("GetOverViewNewsForService", "OverViewAndNews",Model);}
+                        @{Html.RenderAction("GetOverViewNewsForService", "OverViewAndNews", Model);}
                         <div class="col text-center hide load-more">
                             <button type="submit" class="btn btn-sm flat-gray">
                                 Load more reviews...
@@ -260,6 +260,28 @@
         </div>
     </div>
 </section>
+<!-- Blog -->
+<div class="blog">
+    <div class="container content-wrap">
+        <div class="row">
+            <div class="col-xl-12">
+                <section id="navOverview">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12">
+@if (Session["FocusAreaName"].ToString() == "mobile-application-developers")
+{
+  @Html.Partial("~/Views/Overview/Blogs/_MobileAppContent.cshtml")
+  
+}
+                            </div>
+                        </div>
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- End Category -->
 @*<h1 class="jumbotron-main"><span style="font-size:26px">TOP @Model.CategoryHeadLine.Replace("globe", "") @DateTime.Now.Year</span></h1>
     <div>

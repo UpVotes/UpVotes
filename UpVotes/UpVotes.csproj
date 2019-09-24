@@ -2670,6 +2670,7 @@
     <Content Include="Views\Authenticated\Center\SchedulerForm.cshtml" />
     <Content Include="Views\Authenticated\Center\PricingPlan.cshtml" />
     <Content Include="Views\Sponsorship\_PublicPricingPlan.cshtml" />
+    <Content Include="Views\Overview\Blogs\_MobileAppContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
