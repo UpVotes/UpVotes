@@ -158,6 +158,40 @@
                             @Html.Partial("~/Views/CompanyList/_CompList.cshtml", Model)
                         </div>
                         @Html.Partial("~/Views/CompanyList/_CompanyQuickLinks.cshtml")
+                        <!-- Blog -->
+                        <div class="blog">
+                            <div class="container content-wrap">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <section id="navOverview">
+                                            <div class="content">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12">
+                                                        @{ 
+                                                            string focusAreaname = Session["FocusAreaName"].ToString();
+                                                            if (Session["SubFocusAreaName"] != null && Session["SubFocusAreaName"].ToString() != "")
+                                                            {
+                                                                focusAreaname = "NotFound";
+                                                            }
+                                                            if (Session["Country"] != null && Session["Country"].ToString() != "")
+                                                            {
+                                                                focusAreaname = "NotFound";
+                                                            }
+
+                                                        if (focusAreaname == "mobile-application-developers")
+                                                        {
+                                                            @Html.Partial("~/Views/Overview/Blogs/_MobileAppContent.cshtml")
+
+                                                        }
+                                                            }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="CustomQuote">
                         @{Html.RenderAction("GetQuotation", "Quotation");}
@@ -260,28 +294,7 @@
         </div>
     </div>
 </section>
-<!-- Blog -->
-<div class="blog">
-    <div class="container content-wrap">
-        <div class="row">
-            <div class="col-xl-12">
-                <section id="navOverview">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12">
-@if (Session["FocusAreaName"].ToString() == "mobile-application-developers")
-{
-  @Html.Partial("~/Views/Overview/Blogs/_MobileAppContent.cshtml")
-  
-}
-                            </div>
-                        </div>
-                        </div>
-                </section>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- End Category -->
 @*<h1 class="jumbotron-main"><span style="font-size:26px">TOP @Model.CategoryHeadLine.Replace("globe", "") @DateTime.Now.Year</span></h1>
     <div>
