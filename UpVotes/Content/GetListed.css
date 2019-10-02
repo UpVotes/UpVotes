@@ -1,0 +1,98 @@
+/*Top agencies*/
+.brand-grid ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.brand-grid li {
+    flex: 1 0 20%;
+    list-style-type: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.get-list-wrap {
+  background: rgba(221, 232, 232,0.3);
+}
+.get-list-wrap .feature-list li {
+    display: inline-block;
+    width: 33%;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+.get-list-wrap .feature-list ul {
+    padding: 0;
+}
+.get-list-wrap .feature-list li i {
+    font-size: 42px;
+}
+.get-list-wrap .feature-list .title {
+    margin: 15px 0;
+    font-weight: 500;
+    color: #333;
+    font-size: 18px;
+}
+.get-list-wrap .feature-list ul ul li {
+    width: 100%;
+    text-align: left;
+    list-style-type: disc;
+    display: block;
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+.get-list-wrap .feature-list ul ul li:before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(25,167,173,0.9);
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+}
+
+.topVotedimg{
+    width:100px;
+    cursor:pointer;
+}
+
+@media (max-width: 780px) {
+  .get-list-banner {
+      text-align: center;
+  }
+  .title-wrap .t-border.left-border:after {
+      margin: 15px auto;
+  }
+  .get-list-banner .banner-image {
+      margin: 50px 0 0 0;
+  }
+  .get-list-wrap .feature-list li {
+      width: 100%;
+      text-align: left;
+      margin-top: 30px;
+  }
+  .get-list-wrap .feature-list li li {
+    margin-top: 0;
+  }
+  .category .banner-image {
+      text-align: center;
+  }
+  .get-list-banner .banner-image img,
+  .category .banner-image img {
+      width: 100%;
+      max-width: 400px;
+  }
+  .brand-grid li {
+      flex: 1 0 33.33%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .get-list-wrap .feature-list li {
+        text-align: center;
+  }
+}

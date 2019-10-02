@@ -67,6 +67,8 @@ namespace UpVotes
             bundles.Add(new StyleBundle("~/Content/Homecss").Include("~/Content/owl.carousel.css", "~/Content/home.css"));
             bundles.Add(new ScriptBundle("~/bundles/homejs").Include("~/Scripts/owl.carousel.min.js"));
 
+            bundles.Add(new StyleBundle("~/Content/GetListedcss").Include("~/Content/GetListed.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/login").Include("~/Scripts/UserScripts/Login.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/softlist").Include("~/Scripts/UserScripts/SoftwareList.js"));

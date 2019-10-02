@@ -26,25 +26,25 @@
             var calledPage = '';
 
             $("#btnlinkedin").click(function () {
-                if ('@Session["calledPage"].ToString()' == 'C') {
+                if ($('#hdncalledpage').val() == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }
-                else if ('@Session["calledPage"].ToString()' == 'N')
+                else if ($('#hdncalledpage').val() == 'N')
                 {
                     compid = $('#hdnSoftwareID')[0].value;
                 }
-                $.LoginWithTwitterAndLinkedIn(compid, '@Session["calledPage"].ToString()', '/Login/LinkedINcall')
+                $.LoginWithTwitterAndLinkedIn(compid, $('#hdncalledpage').val(), '/Login/LinkedINcall')
 
             });
 
             $("#btnLogin").click(function () {
-                if ('@Session["calledPage"].ToString()' == 'C') {
+                if ($('#hdncalledpage').val() == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }
 
                 if ($.ValidateEmail($('#txtWorkEmailId').val()) && $.ValidateWorkEmailID($('#txtWorkEmailId').val()) && $('#txtPassword').val() != '') {
                     $('#errValidWorkEmail').hide();
-                    $.LoginWithRegisteredUser(compid, $('#txtWorkEmailId').val(), $('#txtPassword').val(), '/Login/LoginRegisteredUser')
+                    $.LoginWithRegisteredUser(compid, $('#txtWorkEmailId').val(), $('#txtPassword').val(), '/Login/LoginRegisteredUser', $('#hdncalledpage').val())
                 }
                 else {
                     $('#errValidWorkEmail').show();
@@ -65,23 +65,21 @@
                     $('#errValidWorkEmail').hide();
                     $('#errValidWorkEmail1').show();
                 }
-            });            
+            });
 
             $("#btnTwitter").click(function () {
-                if ('@Session["calledPage"].ToString()' == 'C') {
+                if ($('#hdncalledpage').val() == 'C') {
                     compid = $('#hdnCompanyID')[0].value;
                 }
-                else if ('@Session["calledPage"].ToString()' == 'N') {
+                else if ($('#hdncalledpage').val() == 'N') {
                     compid = $('#hdnSoftwareID')[0].value;
                 }
-                $.LoginWithTwitterAndLinkedIn(compid, '@Session["calledPage"].ToString()', '/Login/TwitterCall')
-                
+                $.LoginWithTwitterAndLinkedIn(compid, $('#hdncalledpage').val(), '/Login/TwitterCall')
+
             });
             $(".myLoginPopUp").click(function () {
                 if ($('#loginimg').length == 0) {
-                    @{
-                        Session["calledPage"] = "U";
-                    }
+                    $('#hdncalledpage').val('U');
                     $('#myModal').modal();
                 }
                 else {
@@ -92,7 +90,7 @@
     </script>
 
 
-    
+    <input type="hidden" id="hdncalledpage" value="@Session["calledPage"].ToString()"/>
         @if (Session["UserObj"] == null)
         {
             @*<ul class="nav navbar-nav navbar-right sign-up">
@@ -103,10 +101,10 @@
             <div class="menu-top">
                 <ul class="navbar-nav menu signin">
                     <li class="nav-item">
-                        <a data-toggle="modal" data-target="#myModal" class="nav-link" href="#">Sign In</a>
+                        <a class="nav-link myLoginPopUp" isDash="1">Sign In</a>
                     </li>
-                    <li class="nav-item myLoginPopUp">
-                        <a class="nav-link" href="#">Get listed</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/get-listed" target="_blank">Get listed</a>
                     </li>
                 </ul>
                 </div>

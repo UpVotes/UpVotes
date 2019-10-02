@@ -154,7 +154,7 @@ namespace UpVotes.Controllers
             return Redirect("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=lkjlkxcxcx66&scope=r_basicprofile");
         }
 
-        public ActionResult LoginRegisteredUser(int companyid,string workemail, string password)
+        public ActionResult LoginRegisteredUser(int companyid,string workemail, string password, char calledPage)
         {
             RegisteredUser registeredUserObj = new RegisteredUser();
             registeredUserObj.WorkEmailID = workemail;
@@ -164,7 +164,14 @@ namespace UpVotes.Controllers
             {
                 Session["UserObj"] = userObj;
                 Session["UserID"] = userObj.UserID;
-                return PartialView("~/Views/Login/_Login.cshtml", userObj);
+                if (calledPage == 'U')
+                {
+                    return Json(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
+                }
+                else
+                {
+                    return Json("success");
+                }
             }            
             return null;
         }

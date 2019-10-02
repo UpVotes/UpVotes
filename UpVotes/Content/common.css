@@ -136,6 +136,10 @@ body {
 .blackfont span{text-transform:capitalize;}
 .capitalize {text-transform:capitalize;}
 
+.img-full-width {
+    max-width: 100%;
+}
+
 /* Typography */
 h1,
 .title-xlarge {
@@ -188,7 +192,9 @@ h6,
     font-size: 18px;
     margin: 10px 0;
 }
-
+.title-wrap .t-border.left-border:after {
+    margin: 15px 0;
+}
 
 /* Buttons */
 .btn {

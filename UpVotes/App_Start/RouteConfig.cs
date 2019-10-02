@@ -33,12 +33,13 @@ namespace UpVotes
             routes.MapRoute("sponsorship", "sponsorship/{id}", new { controller = "Home", action = "Sponsorship", id = UrlParameter.Optional });
             routes.MapRoute("contactUs", "contact-us/{id}", new { controller = "ContactUs", action = "ContactUsForm", id = UrlParameter.Optional });
             routes.MapRoute("newsDetail", "news/{id}", new { controller = "OverViewAndNews", action = "DetailNews", id = UrlParameter.Optional });
+            routes.MapRoute("GetListed", "get-listed", new { controller = "Home", action = "GetListedPage", id = UrlParameter.Optional });
             //routes.MapRoute("categories", "{categoriesname}",new { controller = "CompanyList", action = "CompanyList" }, new RouteValueDictionary { { "categoriesname", "mobile-application-developers|seo-companies|digital-marketing-companies|web-design-companies|software-development-companies|web-development-companies|ui-ux-agencies|wearable-application-developers|ecommerce-developers|social-media-marketing-companies|ppc-companies|content-marketing-companies|iot-application-developers" } });
             //routes.MapRoute("mobilesubcategories", "mobile-application-developers/{id}", new { controller = "Resources", action = "ResourceSub", id = UrlParameter.Optional }, new { id = "(Microsoft)|(Apple)" });
             //routes.MapRoute("mobilelocationcategories", "mobile-application-developers/{id}", new { controller = "Resources", action = "Resource", id = UrlParameter.Optional });
             //routes.MapRoute("resources", "{resources}", new { controller = "Resources", action = "Resource" }, new RouteValueDictionary { { "resources", "resources" } });
             //routes.MapRoute("resourceschild", "resources/{id}", new { controller = "Resources", action = "ResourceChild", id = UrlParameter.Optional }, new { id= "(how-much-cost-to-make-an-mobile-app)" });
-            routes.MapRoute("HomePage", "", new { controller = "Home", action = "HomePage", id = UrlParameter.Optional });
+            routes.MapRoute("HomePage", "", new { controller = "Home", action = "HomePage", id = UrlParameter.Optional });            
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

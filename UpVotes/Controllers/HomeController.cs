@@ -29,6 +29,22 @@ namespace UpVotes.Controllers
             return View(TopVotedCompanyList);
         }
 
+        public ActionResult GetListedPage()
+        {
+            Session["calledPage"] = "G";
+            List<CompanyEntity> TopVotedCompanyList = new List<CompanyEntity>();
+            if (CacheHandler.Exists("TopVoteCompaniesList"))
+            {
+                CacheHandler.Get("TopVoteCompaniesList", out TopVotedCompanyList);
+            }
+            else
+            {
+                TopVotedCompanyList = new CompanyService().GetTopVoteCompanies();
+                CacheHandler.Add(TopVotedCompanyList, "TopVoteCompaniesList");
+            }
+            return View("~/Views/Login/GetListed.cshtml", TopVotedCompanyList);
+        }
+
         public ActionResult PrivatePolicy()
         {
             if (Session["calledPage"] == null)

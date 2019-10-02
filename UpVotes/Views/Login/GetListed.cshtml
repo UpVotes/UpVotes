@@ -1,0 +1,122 @@
+﻿@model List<UpVotes.BusinessEntities.Entities.CompanyEntity>
+@{
+    ViewBag.Title = "Get Listed on Upvotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/GetListedcss")
+
+<!-- start banner Area -->
+<section class="banner-area gap-medium get-list-banner">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-xl-6 col-lg-12 no-padding">
+                <div class="banner-content">
+                    <div class="title-wrap">
+                        <h1 class="title-medium t-border left-border">Create Software/Service profile on Upvotes</h1>
+                    </div>
+                    <p>
+                        Upvotes.co is a platform for technology vendors, that helps with enhance your brand awareness, lead generation and building trust with global audience.
+                    </p>
+                    <button type="button" class="btn btn-primary myLoginPopUp" isDash="1">Create Profile Now</button>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 no-padding banner-image">
+                <img class="img-full-width lazy" data-src="images/get-listed-banner.jpg" alt="Upvotes" title="Upvotes">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+
+<!-- Start How Upvotes works -->
+<section class="get-list-wrap gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="content">
+                    <div class="title-wrap text-center">
+                        <h2 class="title-small t-border">What are the benefits of get listed with us</h2>
+                    </div>
+                </div>
+                <div class="feature-list">
+                    <ul>
+                        <li>
+                            <i class="fa fa-users"></i>
+                            <div class="title">Build Trust With Customers</div>
+                            <ul>
+                                <li>Get positive feedback from your customers</li>
+                                <li>Build trust and enhancing value to your services</li>
+                                <li>Get Authentic & Positive reviews as social evidence of your professionalism</li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-line-chart"></i>
+                            <div class="title">Increase traffic & leads</div>
+                            <ul>
+                                <li>Get listed along with Top-ranked companies on Upvotes.co</li>
+                                <li>Reach more active buyers every month</li>
+                                <li>Get attention from your right audience and bring more targeted traffic and qualified leads</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <i class="fa fa-cogs"></i>
+                            <div class="title">Improve services</div>
+                            <ul>
+                                <li>Monitor customer behaviour on Upvotes vendors dashboard</li>
+                                <li>Get Actionable Insight to the areas that need improvement</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col text-center">
+                    <button type="button" class="btn btn-primary btn-lg myLoginPopUp" isDash="1">Get listed</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End How Upvotes works -->	
+
+<!-- Start Category -->
+<section class="category gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 no-padding">
+                <div class="title-wrap">
+                    <h3 class="title-small t-border left-border">Why it's important to build your company profile reputation with us</h3>
+                    <p>Authentic and positive feedback of your customers on a trusted neutral third party platform, which Upvotes is, serves as a vote base with positive reviews from your customers.</p>
+                    <p>upvotes is an important ranking factor for making a decision while choosing a service company or software provider. This will significantly increase the conversion of existing leads, as well as generate new ones.</p>
+                    <p>Ask your clients and partners to leave a feedback on your company/software and create a Social Proof together with Upvotes.co.</p>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 no-padding banner-image">
+                <img class="img-full-width lazy" data-src="images/Getlisted.jpg" alt="Upvotes" title="Upvotes">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Category -->	
+
+<!-- Start Featured agencies -->
+<section class="brand-grid gap-medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="title-wrap text-center">
+                    <h3 class="title-medium t-border">Top Voted Agencies</h3>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li onclick="GetTopVotedCompanyProfile('@item.CompanyName')"><img class="lazy topVotedimg" data-src="/images/CompanyLogos/@item.LogoName" alt="@item.CompanyName" title="@item.CompanyName"></li>                    
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Featured agencies -->

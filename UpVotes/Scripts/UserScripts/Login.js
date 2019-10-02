@@ -13,16 +13,21 @@
         });
     }
 
-    $.LoginWithRegisteredUser = function (companyID, WorkEmail, Password, url) {
+    $.LoginWithRegisteredUser = function (companyID, WorkEmail, Password, url, calledpage) {
         $("#ajax_loader").show();
         $("#dvforgotpwd").hide();
         $.ajax({
             type: "POST",   //GET or POST or PUT or DELETE verb
             url: $.absoluteurl(url),//?companyid='+compid,
-            data: { companyid: companyID, workemail: WorkEmail, password: Password },// Location of the service
+            data: { companyid: companyID, workemail: WorkEmail, password: Password, calledPage: calledpage },// Location of the service
             success: function (json) {
                 if (json != "") {
-                    location.reload();
+                    if (json.indexOf('my-dashboard') != -1) {
+                        location.href = json;
+                    }
+                    else {
+                        location.reload();
+                    }
                     //$('#myModal').modal('hide');                    
                     //$("#divLogin").html(json);
                     //$("#ajax_loader").hide();                    
