@@ -313,6 +313,12 @@
     <Content Include="images\4.png" />
     <Content Include="images\404-ErrorPage.jpg" />
     <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\Blogs\1.png" />
+    <Content Include="images\Blogs\2.jpg" />
+    <Content Include="images\Blogs\3.png" />
+    <Content Include="images\Blogs\4.jpg" />
+    <Content Include="images\Blogs\link-building.png" />
+    <Content Include="images\Blogs\profile.jpg" />
     <Content Include="images\Blogs\thumb1.jpg" />
     <Content Include="images\Blogs\thumb2.jpg" />
     <Content Include="images\Blogs\thumb3.jpg" />
@@ -2675,6 +2681,9 @@
     <Content Include="Views\Sponsorship\_PublicPricingPlan.cshtml" />
     <Content Include="Views\Overview\Blogs\_MobileAppContent.cshtml" />
     <Content Include="Views\Login\GetListed.cshtml" />
+    <Content Include="Views\Blog\email-marketing-for-financial-advisors.cshtml" />
+    <Content Include="Views\Blog\app-store-optimization.cshtml" />
+    <Content Include="Views\Blog\how-much-cost-make-app.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

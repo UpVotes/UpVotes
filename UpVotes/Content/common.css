@@ -394,7 +394,9 @@ h6,
     color: #666;
     font-size: 14px;
 }
-
+.blogAnchor:hover{
+    text-decoration:none;
+}
 
 /* Modal */
 .modal .close {

@@ -733,6 +733,135 @@ text-transform:capitalize;
 }
 
 
+/*Blog Detail*/
+.blog .main-banner {
+    margin-top: 50px;
+    background-image:none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+.blog .banner-img img {
+    max-width: 100%;
+}
+.blog .banner-info {
+    padding: 0 15px;
+    height: auto;
+    max-width: 780px;
+    margin: 0 auto;
+}
+.blog .banner-info .author-pic {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+}
+.blog .banner-info .author-pic img {
+    min-height: 80px;
+    min-width: 80px;
+    max-width: 100%;
+    border-radius: 100%;
+}
+.blog .banner-info .name,
+.blog .banner-info .date {
+    font-size: 14px;
+    color: #666;
+}
+.blog .content-wrap {
+    max-width: 780px;
+    margin: 70px auto;
+}
+.blog .banner-info .author div {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 0;
+}
+.blog .banner-info .name {
+    text-align: left;
+    width: 48%;
+    padding-left: 100px;
+}
+.blog .banner-info .date {
+    text-align: right;
+    width: 50%;
+}
+.blog .about p, 
+.blog .about li, 
+.blog .about div {
+    font-size: 18px;
+    line-height: 1.9;
+}
+.blog .about p {
+    margin-bottom: 20px;
+}
+.blog .about .img-wrap {
+    margin: 30px 0;
+    text-align: center;
+}
+.blog .about .img-wrap img {
+    max-width: 90%;
+}
+.blog .video-wrap {
+    text-align: center;
+    margin: 30px 0;
+}
+.blog .video-wrap iframe {
+    width: 500px;
+    height: 400px;
+}
+.blog .contact.teal-banner {
+    margin-top: 0;
+}
+.blog .highlight {
+    max-width: 100%;
+    width: 100%;
+    background-color: #ecf4f8;
+    padding: 20px;
+    margin: 20px 0;
+}
+.blog .highlight p {
+    margin: 0;
+}
+
+/*Author box*/
+.author-box {
+    background: #dde8e8;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    padding: 30px;
+    border-radius: 3px;
+}
+.author-box img {
+    border-radius: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+.author-box a {
+    color: #015876;
+}
+.author-box .author-box-title {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.author-box .author-box-title a {
+    text-decoration: none;
+    font-size: 26px;
+    display: block;
+    font-weight: 600;
+}
+.author-box .author-box-content {
+    margin: 20px 0;
+}
+.author-box .other-posts-link {
+    margin: 20px 0 0 0;
+}
+
 @media (max-width: 1200px) {
     .brand-detail .brand-data {
         width: 500px;
@@ -761,6 +890,28 @@ text-transform:capitalize;
     .detail-wrap .jobs-wrap .job-list:nth-of-type(2),
     .detail-wrap .jobs-wrap .job-list:nth-of-type(3) {
         margin-top: 15px;
+    }
+
+    .blog .main-banner {
+        margin-top: 20px;
+    }
+    .blog.news .banner-info {
+        padding: 0;
+        position: relative;
+    }
+    .blog .banner-info .author-pic {
+        bottom: 40px;
+        left: 10px;
+    }
+    .blog .banner-info .name {
+        padding-left: 0;
+    }
+    .blog .main-banner {
+        margin-top: 20px;
+        height: auto;
+    }
+    .blog .video-wrap iframe {
+        width: 90%;
     }
 }
 @media (max-width: 780px) {
@@ -855,6 +1006,59 @@ text-transform:capitalize;
     }
     .detail-wrap .address-wrap .branch-wrap:nth-of-type(1) {
         display: block;
+    }
+
+    /*News Deails*/
+    .news .banner-info {
+        padding: 50px 0;
+        height: auto;
+    }
+    .news .banner-info .title {
+        font-size: 32px;
+    }
+    .news .related-list li {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .news .related-list li:nth-child(odd) {
+        margin-right: 0;
+    }
+    .top-bar,
+    .top-bar div {
+        display: block!important;
+    }
+    .news .status-strip {
+        padding: 10px 0;
+    }
+    .top-bar .result {
+        color: #333;
+    }
+    .top-bar .share {
+        font-size: 14px;
+    }
+    .news .view-more {
+        margin: 20px 0;
+    }
+    .blog .about p, .blog .about li, .blog .about div {
+        font-size: 16px;
+    }
+    .content-wrap .about h1 {
+        font-size: 26px;
+    }
+    .content-wrap .about h2 {
+        font-size: 22px;
+    }
+    .blog .banner-info .author-pic {
+        width: 40px;
+        height: 40px;
+        bottom: 30px;
+    }
+    .blog .banner-info .author-pic img {
+        min-height: 40px;
+        min-width: 40px;
+    }
+    .blog .banner-info .author div {
+        margin: 15px 0 5px 0;
     }
 
 }
