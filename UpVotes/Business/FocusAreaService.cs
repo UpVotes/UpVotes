@@ -243,7 +243,7 @@ namespace UpVotes.Business
         SoftwareDevelopement,
         IOTDevelopement,
         WebDevelopement,
-        CustomSoftwareDevelopemt,
+        //CustomSoftwareDevelopemt,
         SearchEngineOptimization,
         UXUIDesign,
         MobileAppDevelopement,
