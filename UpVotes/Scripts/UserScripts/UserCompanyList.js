@@ -24,6 +24,21 @@ $(document).ready(function ()
         return $(this).IsValidNumber(e);
     });
 
+    $("#txtCompanyName").keypress(function(e) {
+        $("#error_sp_msg").remove();
+        var k = e.keyCode,
+            $return = ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+        if (!$return) {
+            $("<span/>",
+                {
+                    "id": "error_sp_msg",
+                    "html": "Special characters not allowed !!!!!",
+                    "style": "color:red"
+                }).insertAfter($(this));
+            return false;
+        }
+    });
+
     $('.progressChange').change(function ()
     {
         var total = 0;
