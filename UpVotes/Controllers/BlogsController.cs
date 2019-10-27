@@ -37,13 +37,19 @@ namespace UpVotes.Controllers
         {
             Session["calledPage"] = "H";
             string url = "~/Views/Error/PageNotFound.cshtml";
-            string[] articleArray = { "how-much-cost-make-app", "app-store-optimization", "email-marketing-for-financial-advisors" };
+            string[] articleArray = { "how-much-cost-make-app", "app-store-optimization", "email-marketing-for-financial-advisors", "mobile-app-development-trends" };
             bool bol = Array.Exists(articleArray, E => E == id);                        
             if (bol)
             {
                 url = "~/Views/Blog/"+id+".cshtml";                
             }            
             return View(url);
+        }
+
+        public ActionResult QuotationWidget()
+        {
+            ViewBag.isPublicQuote = true;
+            return PartialView("~/Views/Quotation/_Quotation.cshtml");
         }
         //public ActionResult ResourceChild(string id)
         //{

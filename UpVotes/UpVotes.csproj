@@ -317,6 +317,17 @@
     <Content Include="images\Blogs\2.jpg" />
     <Content Include="images\Blogs\3.png" />
     <Content Include="images\Blogs\4.jpg" />
+    <Content Include="images\Blogs\AR-VR-has-just-started.png" />
+    <Content Include="images\Blogs\Beacons–the-market-worth-millions.png" />
+    <Content Include="images\Blogs\Mobile-App-Security-to-Gain-Extra-Attention.png" />
+    <Content Include="images\Blogs\AI-machine-learning.png" />
+    <Content Include="images\Blogs\Technology-for-Mobile-App-Developers.png" />
+    <Content Include="images\Blogs\IoT-Trends-In-the-Sphere-of-Mobile-App-Development.png" />
+    <Content Include="images\Blogs\Mobile-wallets–the-mobile-banking-game-changers.png" />
+    <Content Include="images\Blogs\Blockchain–things-beyond-bitcoin-smart-contracts.png" />
+    <Content Include="images\Blogs\Instant-Apps-for-Mobile-App-Development.png" />
+    <Content Include="images\Blogs\Wearables–future-must-have-accessory.png" />
+    <Content Include="images\Blogs\Cloud–the-necessary-element-of-future-mobile-apps.png" />
     <Content Include="images\Blogs\link-building.png" />
     <Content Include="images\Blogs\profile.jpg" />
     <Content Include="images\Blogs\thumb1.jpg" />
@@ -2684,6 +2695,7 @@
     <Content Include="Views\Blog\email-marketing-for-financial-advisors.cshtml" />
     <Content Include="Views\Blog\app-store-optimization.cshtml" />
     <Content Include="Views\Blog\how-much-cost-make-app.cshtml" />
+    <Content Include="Views\Blog\mobile-app-development-trends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

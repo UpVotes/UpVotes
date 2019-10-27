@@ -27,7 +27,7 @@
                 &nbsp;&nbsp;
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-blue btn-md" id="liClose" public="tab">New Quote</button>
+                <button type="button" class="btn btn-blue btn-md" id="liClose" public=@(ViewBag.isPublicQuote ? "public" : "tab")>New Quote</button>
             </div>
         </div>
         <div id="divbreakdown" class="slideDown" style="display:none">

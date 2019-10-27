@@ -198,10 +198,10 @@ $(document).ready(function ()
                 status = 1;
             }
 
-            if ($("#txtDemoUrl")[0].value === "" || $("#txtDemoUrl")[0].value === undefined)
-            {
-                status = 1;
-            }
+            //if ($("#txtDemoUrl")[0].value === "" || $("#txtDemoUrl")[0].value === undefined)
+            //{
+            //    status = 1;
+            //}
 
             if (($("#txtSummary").Editor("getText") === "<br>" || $("#txtSummary").Editor("getText") === undefined) && status === 0)            
             {
