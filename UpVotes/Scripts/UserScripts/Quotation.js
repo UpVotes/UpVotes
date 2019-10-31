@@ -203,11 +203,11 @@ $(document).ready(function (event) {
                     $('#CustomQuote').html("");
                     $('#CustomQuote').html(response);
                 }
-                //else {
-                //    $('#imgloader').css('display', 'none');
-                //    $('#divPublic').html("");
-                //    $('#divPublic').html(response);
-                //}
+                else {
+                    $('#imgloader').css('display', 'none');
+                    $('#CustomQuote').html("");
+                    $('#CustomQuote').html(response);
+                }
             }
         });
     });
@@ -260,17 +260,9 @@ $(document).ready(function (event) {
         $.ajax({
             url: $.absoluteurl(url),
             type: "POST",
-            success: function (response) {
-                if (publicVar == "tab")
-                {
+            success: function (response) {                
                 $('#CustomQuote').html("");
-                $('#CustomQuote').html(response);
-            }
-            else
-            {
-                $('#divPublic').html("");
-                $('#divPublic').html(response);
-            }
+                $('#CustomQuote').html(response);            
             }
         });
     });
