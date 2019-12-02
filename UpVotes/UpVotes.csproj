@@ -2696,6 +2696,11 @@
     <Content Include="Views\Blog\app-store-optimization.cshtml" />
     <Content Include="Views\Blog\how-much-cost-make-app.cshtml" />
     <Content Include="Views\Blog\mobile-app-development-trends.cshtml" />
+    <Content Include="Views\Overview\Blogs\_DigitalMarketingContent.cshtml" />
+    <Content Include="Views\Overview\Blogs\_SEOContent.cshtml" />
+    <Content Include="Views\Overview\Blogs\_SoftwareDevelopmentContent.cshtml" />
+    <Content Include="Views\Overview\Blogs\_WebDesignContent.cshtml" />
+    <Content Include="Views\Overview\Blogs\_WebDevelopmentContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

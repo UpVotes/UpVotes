@@ -178,12 +178,32 @@
                                                                 focusAreaname = "NotFound";
                                                             }
 
-                                                        if (focusAreaname == "mobile-application-developers")
-                                                        {
-                                                            @Html.Partial("~/Views/Overview/Blogs/_MobileAppContent.cshtml")
+                                                            if (focusAreaname == "mobile-application-developers")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_MobileAppContent.cshtml")
+                                                            }
+                                                            else if (focusAreaname == "digital-marketing-companies")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_DigitalMarketingContent.cshtml")
+                                                            }
+                                                            else if (focusAreaname == "seo-companies")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_SEOContent.cshtml")
+                                                            }
+                                                            else if (focusAreaname == "software-development-companies")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_SoftwareDevelopmentContent.cshtml")
+                                                            }
+                                                            else if (focusAreaname == "web-design-companies")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_WebDesignContent.cshtml")
+                                                            }
+                                                            else if (focusAreaname == "web-development-companies")
+                                                            {
+                                                                @Html.Partial("~/Views/Overview/Blogs/_WebDevelopmentContent.cshtml")
+                                                            }
 
                                                         }
-                                                            }
                                                     </div>
                                                 </div>
                                             </div>
