@@ -2,8 +2,7 @@
 @using UpVotes.Models
 @model List<UpVotes.BusinessEntities.Entities.TeamMemebersEntity>
 
-@{
-    ViewBag.Title = "My Team Members";
+@{    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,14 +14,15 @@
         companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(ViewBag.ServiceSoftwareName).Replace('-', ' ')); ;
     }
     else
-    {        
+    {
         companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(ViewBag.ServiceSoftwareName).Replace('-', ' ')); ;
     }
+    ViewBag.Title = companyOrSoftwareName+" Team Members";
 }
 
 <head>
     @Styles.Render("~/Content/detail")
-    @Scripts.Render("~/bundles/AllListing")
+    @Scripts.Render("~/bundles/AllListing")    
 </head>
 
 <nav aria-label="breadcrumb">

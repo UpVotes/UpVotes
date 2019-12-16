@@ -583,6 +583,12 @@ h6,
     color: #333;
     margin-top: 300px;
 }
+.contact.teal-bannerforlisting {
+    background: #fbfaf6;
+    color: #333;
+    margin-bottom: 100px;
+}
+
 .contact.banner-area {
     height: 70vh;
     position: relative;

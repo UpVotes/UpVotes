@@ -1,15 +1,24 @@
 ﻿@model UpVotes.Models.CompanyViewModel
-@{
-    ViewBag.Title = "Company PortFolio";
+@using System.Globalization
+@{    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
     @Styles.Render("~/Content/detail")
     @Scripts.Render("~/bundles/AllListing")
+    @{ 
+        if(Model != null && Model.CompanyList != null && Model.CompanyList.Count > 0)
+        {
+            string CompSoftName = Model.CompanyList[0].CompanyName.ToString();
+            var myTi = new CultureInfo("en-US", false).TextInfo;
+            ViewBag.Title = myTi.ToTitleCase(CompSoftName) +" PortFolio";
+        }
+
+    }
 </head>
 @foreach (var company in Model.CompanyList)
-{
+{    
     <nav aria-label="breadcrumb">
         <div class="container">
             <div class="row">

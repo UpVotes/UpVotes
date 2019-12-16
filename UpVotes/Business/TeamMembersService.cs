@@ -43,21 +43,29 @@ namespace UpVotes.Business
             }
         }
 
-        public bool DeleteTeamMember(int teamMemberId, bool isService)
+        internal bool DeleteTeamMember(int teamMemberId, bool isService)
         {
             using (_httpClient = new HttpClient())
             {
-                string apiMethod = isService ? "DeleteCompanyTeamMember" : "DeleteSoftwareTeamMember";
-                string completeUrl = WebApiUrl + apiMethod + '/' + teamMemberId;
-                using (var response = _httpClient.DeleteAsync(completeUrl).Result)
+                TeamMemebersEntity filter = new TeamMemebersEntity
                 {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return true;
-                    }
+                    MemberId = teamMemberId
+                };
+                string WebAPIURL = System.Configuration.ConfigurationManager.AppSettings["WebAPIURL"].ToString();
+                string apiMethod = isService ? "DeleteCompanyTeamMember" : "DeleteSoftwareTeamMember";
+                string completeURL = WebAPIURL + apiMethod;
+                StringContent httpContent = new StringContent(JsonConvert.SerializeObject(filter), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = _httpClient.PostAsync(completeURL, httpContent).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
 
-                return false;
             }
         }
 
