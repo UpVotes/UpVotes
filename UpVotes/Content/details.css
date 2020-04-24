@@ -632,6 +632,11 @@ text-transform:capitalize;
     color: #666;
     margin: 0;
 }
+.detail-wrap .news-list div {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
 .detail-wrap .news-list .date {
     height: 60px;
     font-size: 13px;
