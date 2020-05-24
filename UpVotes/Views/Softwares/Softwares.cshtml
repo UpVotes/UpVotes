@@ -201,9 +201,12 @@
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_SoftwareReviews", software.SoftwareReviews)
                                                     <div class="col text-center load-more">
-                                                        <button type="submit" onclick="getAllReviews('@software.SoftwareName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                        @*<button type="submit" onclick="getAllReviews('@software.SoftwareName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
                                                             View more reviews...
-                                                        </button>
+                                                        </button>*@
+                                                        <a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(software.SoftwareName.Replace(" ", "-").ToLower())/reviews" class="btn btn-sm flat-gray">
+                                                            View more reviews...
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,9 +235,9 @@
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_SoftwareMembers", software.SoftwareTeamMembers)
                                                     <div class="col text-center view-more">
-                                                        <button type="submit" onclick="getAllCompanyEmployees('@software.SoftwareName.Replace(" ", "-").ToLower()',2);" class="btn btn-sm flat-gray">
+                                                        <a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(software.SoftwareName.Replace(" ", "-").ToLower())/team-members" class="btn btn-sm flat-gray">
                                                             View more team member
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,9 +287,9 @@
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_SoftwareNews", software.OverviewNewsData)
                                                     <div class="col text-center load-more">
-                                                        <button type="submit" onclick="getAllNews('@software.SoftwareName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                        <a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(software.SoftwareName.Replace(" ", "-").ToLower())/news" class="btn btn-sm flat-gray">
                                                             View more news...
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -247,9 +247,12 @@
                                                 @Html.Partial("_CompanyPortFolio", company.CompanyPortFolio)
                                                 <div class="col-lg-12">
                                                     <div class="col text-center load-more">
-                                                        <button type="submit" onclick="getAllPortFolio('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                        @*<button type="submit" onclick="getAllPortFolio('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
                                                             View more portfolio...
-                                                        </button>
+                                                        </button>*@
+                                                        <a href="/profile/@System.Web.HttpUtility.UrlEncode(company.CompanyName.Replace(" ", "-").ToLower())/portfolio" target="_blank" class="btn btn-sm flat-gray">
+                                                            View more portfolio...
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,10 +279,10 @@
                                             <div class="row review-wrap">
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_CompanyReviews", company.CompanyReviews)
-                                                    <div class="col text-center load-more">
-                                                        <button type="submit" onclick="getAllReviews('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                    <div class="col text-center load-more">                                                       
+                                                        <a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(company.CompanyName.Replace(" ", "-").ToLower())/reviews" class="btn btn-sm flat-gray">
                                                             View more reviews...
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,9 +311,9 @@
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_CompanyMembers", company.CompanyTeamMembers)
                                                     <div class="col text-center view-more">
-                                                        <button type="submit" onclick="getAllCompanyEmployees('@company.CompanyName.Replace(" ", "-").ToLower()',1);" class="btn btn-sm flat-gray">
+                                                        <a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(company.CompanyName.Replace(" ", "-").ToLower())/team-members" class="btn btn-sm flat-gray">
                                                             View more team member
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -361,9 +364,9 @@
                                                 <div class="col-lg-12">
                                                     @Html.Partial("_CompanyNews", company.OverviewNewsData)
                                                     <div class="col text-center load-more">
-                                                        <button type="submit" onclick="getAllNews('@company.CompanyName.Replace(" ", "-").ToLower()');" class="btn btn-sm flat-gray">
+                                                        <a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(company.CompanyName.Replace(" ", "-").ToLower())/news" class="btn btn-sm flat-gray">
                                                             View more news...
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
