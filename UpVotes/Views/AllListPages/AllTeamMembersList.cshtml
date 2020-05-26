@@ -17,7 +17,7 @@
     {
         companyOrSoftwareName = myTi.ToTitleCase(Convert.ToString(ViewBag.ServiceSoftwareName).Replace('-', ' ')); ;
     }
-    ViewBag.Title = companyOrSoftwareName+" Team Members";
+    ViewBag.Title = companyOrSoftwareName + " Team Members";
 }
 
 <head>
@@ -30,7 +30,17 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">@companyOrSoftwareName Team members</li>
+                @{
+                    if (ViewBag.IsService)
+                    {
+                        <li class="breadcrumb-item active" aria-current="page"><a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(companyOrSoftwareName.Replace(" ", "-").ToLower())">@companyOrSoftwareName</a></li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item active" aria-current="page"><a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(companyOrSoftwareName.Replace(" ", "-").ToLower())">@companyOrSoftwareName</a></li>
+                    }
+                }
+                <li class="breadcrumb-item active" aria-current="page">Team members</li>
             </ol>
         </div>
     </div>

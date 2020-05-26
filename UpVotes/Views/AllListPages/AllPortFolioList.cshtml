@@ -24,7 +24,7 @@
             <div class="row">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item title-capitalize active" aria-current="page">@company.CompanyName</li>
+                    <li class="breadcrumb-item title-capitalize active" aria-current="page"><a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(company.CompanyName.Replace(" ", "-").ToLower())">@company.CompanyName</a></li>
                     <li class="breadcrumb-item title-capitalize active" aria-current="page">PortFolio</li>
                 </ol>
             </div>

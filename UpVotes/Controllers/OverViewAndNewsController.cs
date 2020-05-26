@@ -122,11 +122,12 @@ namespace UpVotes.Controllers
                     CompanySoftwareID = 0,
                     CompanySoftwareName = id
                 };
-
+                ViewBag.IsService = true;
                 OverviewAndNewsService newsService = new OverviewAndNewsService();
                 OverviewNewsViewModel newsViewModel = newsService.GetCompanySoftwareNewsByName(NewsFilter);
                 if (newsViewModel != null && (newsViewModel.OverviewNewsData != null && newsViewModel.OverviewNewsData.Count > 0))
                 {
+                    newsViewModel.CompanySoftwareName = id;
                     newsViewModel.Title = id.Replace("-", " ");
                     return View("~/Views/AllListPages/AllNewsList.cshtml", newsViewModel);
                 }
@@ -478,12 +479,13 @@ namespace UpVotes.Controllers
                     CompanySoftwareID = 0,
                     CompanySoftwareName = id
                 };
-
+                ViewBag.IsService = false;
                 OverviewAndNewsService newsService = new OverviewAndNewsService();
                 OverviewNewsViewModel newsViewModel = newsService.GetCompanySoftwareNewsByName(NewsFilter);
                 if (newsViewModel != null && (newsViewModel.OverviewNewsData != null && newsViewModel.OverviewNewsData.Count > 0))
                 {
-                    newsViewModel.Title = id.Replace("-", " ")+" News";
+                    newsViewModel.CompanySoftwareName = id;
+                    newsViewModel.Title = id.Replace("-", " ");
                     return View("~/Views/AllListPages/AllNewsList.cshtml", newsViewModel);
                 }
                 else

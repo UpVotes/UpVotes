@@ -1,7 +1,7 @@
 ﻿@using System.Configuration
 @model UpVotes.Models.OverviewNewsViewModel
 @{
-    ViewBag.Title = @Model.Title+" News";
+    ViewBag.Title = @Model.Title + " News";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,7 +15,17 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item title-capitalize active" aria-current="page">@Model.Title</li>
+                @{
+                    if (ViewBag.IsService)
+                    {
+                        <li class="breadcrumb-item title-capitalize active" aria-current="page"><a target="_blank" href="/profile/@System.Web.HttpUtility.UrlEncode(Model.CompanySoftwareName.Replace(" ", "-").ToLower())">@Model.Title</a></li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item title-capitalize active" aria-current="page"><a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(Model.CompanySoftwareName.Replace(" ", "-").ToLower())">@Model.Title</a></li>
+                    }
+
+                }
                 <li class="breadcrumb-item title-capitalize active" aria-current="page">News</li>
             </ol>
         </div>

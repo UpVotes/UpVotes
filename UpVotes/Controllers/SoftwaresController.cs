@@ -88,6 +88,7 @@ namespace UpVotes.Controllers
             if (teamMembersViewModel.Count > 0)
             {
                 ViewBag.ServiceSoftwareName = id;
+                ViewBag.IsService = false;
                 return View("~/Views/AllListPages/AllTeamMembersList.cshtml", teamMembersViewModel);
             }
             else

@@ -7,5 +7,6 @@ namespace UpVotes.Models
     {      
         public List<OverviewNewsResponseEntity> OverviewNewsData { get; set; }  
         public string Title { get; set; }      
+        public string CompanySoftwareName { get; set; }
     }
 }
