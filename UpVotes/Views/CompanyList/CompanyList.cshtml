@@ -19,10 +19,10 @@
                 <li class="breadcrumb-item"><a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()">Home</a></li>
                 @if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()) || !string.IsNullOrEmpty(Session["Country"].ToString()))
                 {
-                    <li class="breadcrumb-item active" aria-current="page"><a href="/@Session["FocusAreaName"]">@Session["FocusAreaName"]</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a target="_blank" href="/@Session["FocusAreaName"]">@Session["FocusAreaName"]</a></li>
                     if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()) && !string.IsNullOrEmpty(Session["Country"].ToString()))
                     {
-                        <li class="breadcrumb-item active" aria-current="page"><a href="/@Session["FocusAreaName"].ToString()/@Session["SubFocusAreaName"].ToString()">@Session["SubFocusAreaName"]</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a target="_blank" href="/@Session["FocusAreaName"].ToString()/@Session["SubFocusAreaName"].ToString()">@Session["SubFocusAreaName"]</a></li>
                         <li class="breadcrumb-item active" aria-current="page">@Session["Country"]</li>
                     }
                     else if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()))
