@@ -37,7 +37,7 @@ namespace UpVotes.Controllers
                 SoftwareName = "",
                 SoftwareCategoryId= softwareCategoryId,
                 PageNo=1,
-                PageSize=10,
+                PageSize=25,
                 SortBy = "DESC",
                 UserID = Convert.ToInt32(Session["UserID"]),
                 OrderColumn = 1,
@@ -53,7 +53,7 @@ namespace UpVotes.Controllers
             softwareViewModel.TotalNoOfSoftwares = softwareViewModel.SoftwareList.Select(a => a.TotalCount).FirstOrDefault();
             if(softwareViewModel.SoftwareList.Count>0)
             {
-                softwareViewModel.PageCount = (softwareViewModel.SoftwareList[0].TotalCount + 10 - 1) / 10;
+                softwareViewModel.PageCount = (softwareViewModel.SoftwareList[0].TotalCount + 25 - 1) / 25;
             }
             return View(softwareViewModel);
         }
@@ -103,6 +103,7 @@ namespace UpVotes.Controllers
 
         public ActionResult GetSoftwareUserReviews()
         {
+
             int SoftwareCategoryID = 0;
             if (Session["SoftwareCategory"] != null)
             {
@@ -113,7 +114,7 @@ namespace UpVotes.Controllers
                 SoftwareCategoryId = SoftwareCategoryID,
                 SoftwareName = "",
                 PageNo = 1,
-                PageSize = 10
+                PageSize = 25
             };
 
             CompanySoftwareUserReviews companyReViewModel = new CompanySoftwareUserReviews();

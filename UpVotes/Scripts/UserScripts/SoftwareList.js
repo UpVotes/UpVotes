@@ -80,7 +80,7 @@
 
     $('#btnLoadMoreReviews').click(function () {
         var pagesize = $('#btnLoadMoreReviews').attr('pagesize');
-        $('#btnLoadMoreReviews').attr('pagesize', parseInt(pagesize) + 10);
+        $('#btnLoadMoreReviews').attr('pagesize', parseInt(pagesize) + 25);
         $.GetSoftwareUserReviewListBasedOnCriteria(this);
     });
 
@@ -98,7 +98,7 @@
                 success: function (json) {
                     $('#divSoftwareUserReviews').html(json);
                     if (softwarename != "") {
-                        $('#btnLoadMoreReviews').attr('pagesize', 10);
+                        $('#btnLoadMoreReviews').attr('pagesize', 25);
                     }
                 },
                 error: function (a, b, c) {
@@ -114,7 +114,7 @@
 
             var SoftwareCategoryID = parseInt($('#hdnSoftwareCategoryID').val());
             var PageNo = e.className.indexOf('Pagenumber') == -1 ? 1 : parseInt($(e).attr('page'));       
-            var PageSize = 10;
+            var PageSize = 25;
             var FirstPage = isNaN(parseInt($('.FirstPageindex').attr('page'))) ? 1 : parseInt($('.FirstPageindex').attr('page'));
             var LastPage = isNaN(parseInt($('.LastPageindex').attr('page'))) ? 1 : parseInt($('.LastPageindex').attr('page'));
             var softwarename = $("#txtSoftwareSearch")[0].value;

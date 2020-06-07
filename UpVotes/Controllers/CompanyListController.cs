@@ -60,7 +60,7 @@ namespace UpVotes.Controllers
                 SubFocusArea = "0",
                 UserID = Convert.ToInt32(Session["UserID"]),
                 PageNo = 1,
-                PageSize = 10,
+                PageSize = 25,
                 OrderColumn= 1,
             };
 
@@ -78,7 +78,7 @@ namespace UpVotes.Controllers
             {
                 companyViewModel.AverageUserRating = 4;
                 companyViewModel.TotalNoOfUsers = 10;
-                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 10 - 1) / 10;
+                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 25 - 1) / 25;
             }
 
             Session["CompanyNames"] = companyViewModel.CompanyFocusData;
@@ -127,7 +127,7 @@ namespace UpVotes.Controllers
                 SubFocusArea = urlSubFocusAreaName,
                 UserID = Convert.ToInt32(Session["UserID"]),
                 PageNo = 1,
-                PageSize = 10,
+                PageSize = 25,
                 OrderColumn = 1
             };
 
@@ -144,7 +144,7 @@ namespace UpVotes.Controllers
             {
                 companyViewModel.AverageUserRating = 4;
                 companyViewModel.TotalNoOfUsers = 10;
-                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 10 - 1) / 10;
+                companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 25 - 1) / 25;
             }
 
             Session["CompanyNames"] = companyViewModel.CompanyFocusData;
@@ -323,7 +323,7 @@ namespace UpVotes.Controllers
                 FocusAreaID = focusAreaID,
                 CompanyName = "",
                 PageNo = 1,
-                PageSize = 10
+                PageSize = 25
             };
 
             CompanySoftwareUserReviews companyReViewModel = new CompanySoftwareUserReviews();

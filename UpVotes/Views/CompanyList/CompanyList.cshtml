@@ -17,7 +17,28 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">@Session["FocusAreaName"]</li>
+                @if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()) || !string.IsNullOrEmpty(Session["Country"].ToString()))
+                {
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/@Session["FocusAreaName"]">@Session["FocusAreaName"]</a></li>
+                    if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()) && !string.IsNullOrEmpty(Session["Country"].ToString()))
+                    {
+                        <li class="breadcrumb-item active" aria-current="page"><a href="/@Session["FocusAreaName"].ToString()/@Session["SubFocusAreaName"].ToString()">@Session["SubFocusAreaName"]</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Session["Country"]</li>
+                    }
+                    else if (!string.IsNullOrEmpty(Session["SubFocusAreaName"].ToString()))
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@Session["SubFocusAreaName"]</li>
+                    }
+                    else if (!string.IsNullOrEmpty(Session["Country"].ToString()))
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@Session["Country"]</li>
+                    }
+                }
+                else
+                {
+                    <li class="breadcrumb-item active" aria-current="page">@Session["FocusAreaName"]</li>
+                }
+
             </ol>
         </div>
     </div>
@@ -289,7 +310,7 @@
                             @{Html.RenderAction("GetUserReviews", "CompanyList");}
                         </div>
                         <div class="col text-center load-more">
-                            <button type="submit" id="btnLoadMoreReviews" pagesize="10" class="btn btn-sm flat-gray">
+                            <button type="submit" id="btnLoadMoreReviews" pagesize="25" class="btn btn-sm flat-gray">
                                 Load more reviews...
                             </button>
                         </div>
