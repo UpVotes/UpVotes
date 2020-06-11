@@ -1,4 +1,5 @@
-﻿@model UpVotes.Models.SoftwareViewModel
+﻿@using System.Configuration
+@model UpVotes.Models.SoftwareViewModel
 @{
     ViewBag.Title = "Software Reviews";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()">Home</a></li>
                     <li class="breadcrumb-item title-capitalize active" aria-current="page"><a target="_blank" href="/software/@System.Web.HttpUtility.UrlEncode(software.SoftwareName.Replace(" ", "-").ToLower())">@software.SoftwareName</a></li>
                     <li class="breadcrumb-item title-capitalize active" aria-current="page">Reviews</li>
                 </ol>

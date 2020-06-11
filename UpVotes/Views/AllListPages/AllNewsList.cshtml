@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="@ConfigurationManager.AppSettings["WebBaseURL"].ToString()">Home</a></li>
                 @{
                     if (ViewBag.IsService)
                     {
