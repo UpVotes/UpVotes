@@ -8,6 +8,7 @@ using UpVotes.Business;
 using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
 using UpVotes.Utility;
+using HtmlAgilityPack;
 
 namespace UpVotes.Controllers
 {
@@ -388,6 +389,31 @@ namespace UpVotes.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public static string ExtractText(string html)
+        {
+            if (html == null)
+            {
+                throw new ArgumentNullException("html");
+            }
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            var chunks = new List<string>();
+
+            foreach (var item in doc.DocumentNode.DescendantNodesAndSelf())
+            {
+                if (item.NodeType == HtmlNodeType.Text)
+                {
+                    if (item.InnerText.Trim() != "")
+                    {
+                        chunks.Add(item.InnerText.Trim());
+                    }
+                }
+            }
+            return String.Join(" ", chunks);
+        }
+
         [ValidateInput(false)]
         public JsonResult SaveUserNews()
         {
@@ -399,7 +425,7 @@ namespace UpVotes.Controllers
                     string AppPath = string.Empty; string fileName = string.Empty; string extension = string.Empty;
                     OverviewNewsEntity news = JObject.Parse(Request.Params["NewsData"].ToString()).ToObject<OverviewNewsEntity>();
                     news.CreatedBy = Convert.ToInt32(Session["UserID"]);
-
+                    news.Description = ExtractText(news.Description);
                     if (Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
                     {
                         fileName = Request.Files[0].FileName;
