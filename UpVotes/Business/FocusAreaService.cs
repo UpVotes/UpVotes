@@ -36,7 +36,7 @@ namespace UpVotes.Business
             switch (urlfocusAreaName.Trim())
             {
                 case "mobile-application-developers":
-                    focusAreaID = (int)FocusAreas.MobileAppDevelopement;
+                    focusAreaID = (int)FocusAreas.MobileAppDevelopment;
                     break;
 
                 case "seo-companies":
@@ -52,20 +52,20 @@ namespace UpVotes.Business
                     break;
 
                 case "software-development-companies":
-                    focusAreaID = (int)FocusAreas.SoftwareDevelopement;
+                    focusAreaID = (int)FocusAreas.SoftwareDevelopment;
                     break;
 
                 case "web-development-companies":
-                    focusAreaID = (int)FocusAreas.WebDevelopement;
+                    focusAreaID = (int)FocusAreas.WebDevelopment;
                     break;
                 case "ui-ux-agencies":
                     focusAreaID = (int)FocusAreas.UXUIDesign;
                     break;
                 case "wearable-application-developers":
-                    focusAreaID = (int)FocusAreas.WearableAppDevelopement;
+                    focusAreaID = (int)FocusAreas.WearableAppDevelopment;
                     break;
                 case "ecommerce-developers":
-                    focusAreaID = (int)FocusAreas.EcommerceDevelopement;
+                    focusAreaID = (int)FocusAreas.EcommerceDevelopment;
                     break;
                 case "social-media-marketing-companies":
                     focusAreaID = (int)FocusAreas.SocialMediaMarketing;
@@ -77,7 +77,7 @@ namespace UpVotes.Business
                     focusAreaID = (int)FocusAreas.ContentMarketing;
                     break;
                 case "iot-application-developers":
-                    focusAreaID = (int)FocusAreas.IOTDevelopement;
+                    focusAreaID = (int)FocusAreas.IOTDevelopment;
                     break;
                 case "mobile-app-marketing-agencies":
                     focusAreaID = (int)FocusAreas.MobileAppMarketingAgencies;
@@ -140,7 +140,7 @@ namespace UpVotes.Business
                     focusAreaID = (int)FocusAreas.CloudConsultants;
                     break;
                 default:
-                    focusAreaID = (int)FocusAreas.MobileAppDevelopement;
+                    focusAreaID = (int)FocusAreas.MobileAppDevelopment;
                     break;
             }
 
@@ -240,15 +240,15 @@ namespace UpVotes.Business
 
         DigitalMarketing = 1,
         WebDesign = 2,
-        SoftwareDevelopement = 3,
-        IOTDevelopement = 4,
-        WebDevelopement = 5,
+        SoftwareDevelopment = 3,
+        IOTDevelopment = 4,
+        WebDevelopment = 5,
         //CustomSoftwareDevelopemt = 6,
         SearchEngineOptimization = 7,
         UXUIDesign = 8,
-        MobileAppDevelopement = 9,
-        EcommerceDevelopement = 10,
-        WearableAppDevelopement = 11,
+        MobileAppDevelopment = 9,
+        EcommerceDevelopment = 10,
+        WearableAppDevelopment = 11,
         ARVRApplicationDevelopment = 12,
         SocialMediaMarketing = 13,
         PayPerClick = 14,
