@@ -260,7 +260,7 @@ namespace UpVotes.Controllers
                 MetaStr.Append("<meta name='twitter:title' content='" + metaTag.TwitterTitle + "' />");
             }
 
-            MetaStr.Append("<meta property='og:image' content='' />");
+            MetaStr.Append("<meta property='og:image' content='"+ metaTag.OgImageURL+ "' />");
             MetaStr.Append("<meta name='twitter:card' content='summary_large_image' />");
             MetaStr.Append("<meta name='twitter:site' content='@upvotes_co'>");
             MetaStr.Append("<meta name='twitter:creator' content='@upvotes_co'>");
