@@ -401,7 +401,7 @@ namespace UpVotes.Controllers
 
             var chunks = new List<string>();
 
-            foreach (var item in doc.DocumentNode.DescendantNodesAndSelf())
+            foreach (var item in doc.DocumentNode.DescendantsAndSelf())
             {
                 if (item.NodeType == HtmlNodeType.Text)
                 {

@@ -12,7 +12,7 @@ using UpVotes.Models;
 
 namespace UpVotes.Controllers
 {
-    public class SponsorshipController : Controller
+    public class AdminSponsorshipController : Controller
     {
         public ActionResult GetSponsorShipForm()
         {

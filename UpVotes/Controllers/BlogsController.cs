@@ -37,7 +37,7 @@ namespace UpVotes.Controllers
         {
             Session["calledPage"] = "H";
             string url = "~/Views/Error/PageNotFound.cshtml";
-            string[] articleArray = { "how-much-cost-make-app", "app-store-optimization", "email-marketing-for-financial-advisors", "mobile-app-development-trends" };
+            string[] articleArray = { "how-much-cost-make-app", "app-store-optimization", "email-marketing-for-financial-advisors", "mobile-app-development-trends", "digital-marketing-trends-2020" };
             bool bol = Array.Exists(articleArray, E => E == id);                        
             if (bol)
             {

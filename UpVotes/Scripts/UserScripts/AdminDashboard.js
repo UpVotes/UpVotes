@@ -30,7 +30,7 @@
     $('#showUserSponsorShipForm').click(function () {
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/Sponsorship/GetSponsorShipForm'),
+            url: $.absoluteurl('/AdminSponsorship/GetSponsorShipForm'),
             type: "POST",
             success: function (response) {
                 $('#ajax_loaderDashboard').hide();
@@ -44,7 +44,7 @@
     $('#showExpiredSponsorShipForm').click(function () {
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/Sponsorship/GetSchedulerForm'),
+            url: $.absoluteurl('/AdminSponsorship/GetSchedulerForm'),
             type: "POST",
             success: function (response) {
                 $('#ajax_loaderDashboard').hide();

@@ -244,7 +244,7 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SoftwareListController.cs" />
-    <Compile Include="Controllers\SponsorshipController.cs" />
+    <Compile Include="Controllers\AdminSponsorshipController.cs" />
     <Compile Include="Controllers\UserCompanyListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -338,8 +338,12 @@
     <Content Include="images\Blogs\2.jpg" />
     <Content Include="images\Blogs\3.png" />
     <Content Include="images\Blogs\4.jpg" />
+    <Content Include="images\Blogs\app-store-optimization.png" />
     <Content Include="images\Blogs\AR-VR-has-just-started.png" />
     <Content Include="images\Blogs\Beacons–the-market-worth-millions.png" />
+    <Content Include="images\Blogs\email-marketing-for-financial-advisors.png" />
+    <Content Include="images\Blogs\how-much-cost-make-app.png" />
+    <Content Include="images\Blogs\mobile-app-development-trends.png" />
     <Content Include="images\Blogs\Mobile-App-Security-to-Gain-Extra-Attention.png" />
     <Content Include="images\Blogs\AI-machine-learning.png" />
     <Content Include="images\Blogs\Technology-for-Mobile-App-Developers.png" />
@@ -2739,6 +2743,7 @@
     <Content Include="Views\Overview\Blogs\_SoftwareDevelopmentContent.cshtml" />
     <Content Include="Views\Overview\Blogs\_WebDesignContent.cshtml" />
     <Content Include="Views\Overview\Blogs\_WebDevelopmentContent.cshtml" />
+    <Content Include="Views\Blog\digital-marketing-trends-2020.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

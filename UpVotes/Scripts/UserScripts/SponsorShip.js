@@ -130,7 +130,7 @@ $(document).ready(function ()
     $('#btnScheduler').click(function () {
         $('#ajax_loaderDashboard').show();
         $.ajax({
-            url: $.absoluteurl('/Sponsorship/SchedulerToDeactivateSponsor'),
+            url: $.absoluteurl('/AdminSponsorship/SchedulerToDeactivateSponsor'),
             type: "POST",
             success: function (response) {
                 $('#ajax_loaderDashboard').hide();
@@ -157,7 +157,7 @@ $(document).ready(function ()
             var EndDate = $("#txtEndDate").val();
             var CompanyOrSoftwareName = $('#txtCompanySoftware').val();
             $.ajax({
-                url: $.absoluteurl('/Sponsorship/ApplySponsorship'),
+                url: $.absoluteurl('/AdminSponsorship/ApplySponsorship'),
                 data: { Provider: Provider, SponsorshipCategoryID: SponsorshipCategoryID, CompanyOrSoftwareID: CompanyOrSoftwareID,CompanyOrSoftwareName:CompanyOrSoftwareName, StartDate: StartDate, EndDate: EndDate },
                 type: "POST",
                 success: function (response) {
