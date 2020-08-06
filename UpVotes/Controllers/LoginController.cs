@@ -211,7 +211,7 @@ namespace UpVotes.Controllers
                 try
                 {
                     var a = Request.Url;
-                    var client = new RestClient("https://www.linkedin.com/oauth/v2/accessToken");
+                    var client = new RestClient("http://www.linkedin.com/oauth/v2/accessToken");
                     var request = new RestRequest(Method.POST);
                     request.AddParameter("grant_type", "authorization_code");
                     request.AddParameter("code", code);
