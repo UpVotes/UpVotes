@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Web.Mvc;
 using TweetSharp;
 using UpVotes.BusinessEntities.Entities;
+using UpVotes.Helper;
 using UpVotes.Models;
 using UpVotes.Utility;
 
@@ -18,7 +19,7 @@ namespace UpVotes.Controllers
             return View();
         }
 
-        public ActionResult TwitterCallback(string oauth_token, string oauth_verifier,string state)
+        public ActionResult TwitterCallback(string oauth_token, string oauth_verifier, string state)
         {
             var requesttoken = new OAuthRequestToken { Token = oauth_token };
             string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
@@ -95,29 +96,29 @@ namespace UpVotes.Controllers
                     }
                 }
                 if (myArray[1] == "H")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
-                    }
-                    else if (myArray[1] == "L")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["FocusAreaName"]));
-                    }
-                    else if (myArray[1] == "C")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/" + Convert.ToString(Session["CompanyName"]));
-                    }
-                    else if (myArray[1] == "U")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
-                    }
-                    else if (myArray[1] == "S")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
-                    }
-                    else if (myArray[1] == "N")
-                    {
-                        return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
-                    }
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
+                }
+                else if (myArray[1] == "L")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["FocusAreaName"]));
+                }
+                else if (myArray[1] == "C")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/" + Convert.ToString(Session["CompanyName"]));
+                }
+                else if (myArray[1] == "U")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
+                }
+                else if (myArray[1] == "S")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
+                }
+                else if (myArray[1] == "N")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
+                }
 
                 return null;
 
@@ -126,7 +127,7 @@ namespace UpVotes.Controllers
             }
             catch (Exception ex)
             {
-
+                EmailHelper.SendErrorEmail(ex);
                 throw;
             }
         }
@@ -154,62 +155,88 @@ namespace UpVotes.Controllers
             return Redirect("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=lkjlkxcxcx66&scope=r_basicprofile");
         }
 
-        public ActionResult LoginRegisteredUser(int companyid,string workemail, string password, char calledPage)
+        public ActionResult LoginRegisteredUser(int companyid, string workemail, string password, char calledPage)
         {
-            RegisteredUser registeredUserObj = new RegisteredUser();
-            registeredUserObj.WorkEmailID = workemail;
-            registeredUserObj.Password = password;
-            UserEntity userObj = new Business.UserService().LoginRegisteredUser(registeredUserObj);
-            if (userObj!=null && userObj.UserID > 0)
+            try
             {
-                Session["UserObj"] = userObj;
-                Session["UserID"] = userObj.UserID;
-                if (calledPage == 'U')
+                RegisteredUser registeredUserObj = new RegisteredUser();
+                registeredUserObj.WorkEmailID = workemail;
+                registeredUserObj.Password = password;
+                UserEntity userObj = new Business.UserService().LoginRegisteredUser(registeredUserObj);
+                if (userObj != null && userObj.UserID > 0)
                 {
-                    return Json(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
+                    Session["UserObj"] = userObj;
+                    Session["UserID"] = userObj.UserID;
+                    if (calledPage == 'U')
+                    {
+                        return Json(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
+                    }
+                    else
+                    {
+                        return Json("success");
+                    }
                 }
-                else
-                {
-                    return Json("success");
-                }
-            }            
+            }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+            }
+
             return null;
         }
 
         public string ForgotPassword(string workemail)
         {
             string message = "";
-            RegisteredUser ForgetObj = new RegisteredUser();
-            ForgetObj.WorkEmailID = workemail;
-            UserEntity userObj = new Business.UserService().ForgotPassword(ForgetObj);
-            if(userObj != null && userObj.UserID > 0)
+            try
             {
-                message = "Your new password has been emailed to you.";
+                RegisteredUser ForgetObj = new RegisteredUser();
+                ForgetObj.WorkEmailID = workemail;
+                UserEntity userObj = new Business.UserService().ForgotPassword(ForgetObj);
+                if (userObj != null && userObj.UserID > 0)
+                {
+                    message = "Your new password has been emailed to you.";
+                }
             }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+            }
+
             return message;
         }
         public string ChangePassword(string CurrentPassword, string NewPassword)
         {
             string message = "";
-            ChangePassword ChangeObj = new ChangePassword();
-            ChangeObj.Password = CurrentPassword;
-            ChangeObj.NewPassword = NewPassword;
-            ChangeObj.UserID = Convert.ToInt32(Session["UserID"]);
-            UserEntity userObj = new Business.UserService().ChangePassword(ChangeObj);
-            if(userObj != null && userObj.UserID > 0)
+            try
             {
-                message = "Success! Your Password has been changed!";
+                ChangePassword ChangeObj = new ChangePassword();
+                ChangeObj.Password = CurrentPassword;
+                ChangeObj.NewPassword = NewPassword;
+                ChangeObj.UserID = Convert.ToInt32(Session["UserID"]);
+                UserEntity userObj = new Business.UserService().ChangePassword(ChangeObj);
+                if (userObj != null && userObj.UserID > 0)
+                {
+                    message = "Success! Your Password has been changed!";
+                }
             }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+            }
+
             return message;
         }
         public ActionResult LinkedINAuth(string code, string state)
         {
-            //This method path is your return URL
-            string[] myArray = state.Split('-');
-            if (code != null)
+            try
             {
-                try
+                //This method path is your return URL
+                string[] myArray = state.Split('-');
+                if (code != null)
                 {
+                    //try
+                    //{
                     var a = Request.Url;
                     var client = new RestClient("http://www.linkedin.com/oauth/v2/accessToken");
                     var request = new RestRequest(Method.POST);
@@ -309,36 +336,43 @@ namespace UpVotes.Controllers
                             }
                         }
                     }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    throw ex;
+                    //}
                 }
-                catch (Exception ex)
+                if (myArray[1] == "H")
                 {
-                    throw ex;
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
+                }
+                else if (myArray[1] == "L")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["FocusAreaName"]));
+                }
+                else if (myArray[1] == "C")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/" + Convert.ToString(Session["CompanyName"]));
+                }
+                else if (myArray[1] == "U")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
+                }
+                else if (myArray[1] == "S")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
+                }
+                else if (myArray[1] == "N")
+                {
+                    return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
                 }
             }
-            if (myArray[1] == "H")
+            catch (Exception ex)
             {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString());
+                EmailHelper.SendErrorEmail(ex);
+                throw ex;
             }
-            else if (myArray[1] == "L")
-            {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["FocusAreaName"]));
-            }
-            else if (myArray[1] == "C")
-            {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Profile/"+ Convert.ToString(Session["CompanyName"]));
-            }
-            else if (myArray[1] == "U")
-            {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "company/my-dashboard");
-            }
-            else if (myArray[1] == "S")
-            {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + Convert.ToString(Session["SoftwareCategory"]));
-            }
-            else if (myArray[1] == "N")
-            {
-                return Redirect(ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "Software/" + Convert.ToString(Session["SoftwareName"]));
-            }
+
             return null;
         }
 
@@ -346,67 +380,109 @@ namespace UpVotes.Controllers
 
         public ActionResult TwitterAuth()
         {
-            string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
-            string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
+            try
+            {
+                string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
+                string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
 
-            TwitterService service = new TwitterService(key, secret);
-            OAuthRequestToken requestToken = service.GetRequestToken(_baseURL+"Login/TwitterCallback?companyid=12");
+                TwitterService service = new TwitterService(key, secret);
+                OAuthRequestToken requestToken = service.GetRequestToken(_baseURL + "Login/TwitterCallback?companyid=12");
 
-            Uri uri = service.GetAuthenticationUrl(requestToken);
-            //string script = "<html><head><script type='text/javascript'> var popupWindow =window.open('" + uri.ToString() + "','_blank','directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200');</script></head></html>";
-            return Redirect(uri.ToString());
+                Uri uri = service.GetAuthenticationUrl(requestToken);
+                //string script = "<html><head><script type='text/javascript'> var popupWindow =window.open('" + uri.ToString() + "','_blank','directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200');</script></head></html>";
+                return Redirect(uri.ToString());
+            }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+                throw ex;
+            }
             //return Content(script);
         }
 
         [HttpPost]
         public ActionResult LinkedINcall(int companyid, char calledPage)
         {
-            //Need to install below library
-            //Install-Package Restsharp
-            return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_liteprofile");
-            //return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_basicprofile");
+            try
+            {
+                //Need to install below library
+                //Install-Package Restsharp
+                return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_liteprofile");
+                //return Json("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + ConfigurationManager.AppSettings["LinkedInClientID"].ToString() + "&redirect_uri=" + _baseURL + "Login/LinkedINAuth&state=" + companyid + "-" + calledPage + "&scope=r_basicprofile");
+            }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+                return null;
+            }
         }
 
         [HttpPost]
         public ActionResult TwitterCall(int companyid, char calledPage)
         {
-            string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
-            string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
+            try
+            {
+                string key = ConfigurationManager.AppSettings["TwitterKey"].ToString();
+                string secret = ConfigurationManager.AppSettings["TwitterSecret"].ToString();
 
-            TwitterService service = new TwitterService(key, secret);
-            OAuthRequestToken requestToken = service.GetRequestToken(_baseURL + "Login/TwitterCallback?state=" + companyid+ "-" + calledPage);
+                TwitterService service = new TwitterService(key, secret);
+                OAuthRequestToken requestToken = service.GetRequestToken(_baseURL + "Login/TwitterCallback?state=" + companyid + "-" + calledPage);
 
-            Uri uri = service.GetAuthenticationUrl(requestToken);
-            //string script = "<html><head><script type='text/javascript'> var popupWindow =window.open('" + uri.ToString() + "','_blank','directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200');</script></head></html>";
-            return Json(uri.ToString() + "&force_login=true");
+                Uri uri = service.GetAuthenticationUrl(requestToken);
+                //string script = "<html><head><script type='text/javascript'> var popupWindow =window.open('" + uri.ToString() + "','_blank','directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200');</script></head></html>";
+                return Json(uri.ToString() + "&force_login=true");
+            }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+                throw ex;
+            }
         }
 
         public string VoteForCompany(int companyID)
         {
-            int userID = Convert.ToInt32(Session["UserID"]);
-            if (userID != 0)
+            try
             {
-                if (CacheHandler.Exists("TopVoteCompaniesList"))
+
+                int userID = Convert.ToInt32(Session["UserID"]);
+                if (userID != 0)
                 {
-                    CacheHandler.Clear("TopVoteCompaniesList");
+                    if (CacheHandler.Exists("TopVoteCompaniesList"))
+                    {
+                        CacheHandler.Clear("TopVoteCompaniesList");
+                    }
+                    return new Business.CompanyService().VoteForCompany(companyID, userID);
                 }
-                return new Business.CompanyService().VoteForCompany(companyID, userID);
-            }else
+                else
+                {
+                    return "0";
+                }
+            }
+            catch(Exception ex)
             {
-                return "0";
+                EmailHelper.SendErrorEmail(ex);
+                throw ex;
             }
         }
 
         public string VoteForSoftware(int softwareID)
         {
-            int userID = Convert.ToInt32(Session["UserID"]);
-            if (userID != 0)
-            {                
-                return new Business.SoftwareService().VoteForSoftware(softwareID, userID);
-            }
-            else
+            try
             {
-                return "0";
+                int userID = Convert.ToInt32(Session["UserID"]);
+                if (userID != 0)
+                {
+                    return new Business.SoftwareService().VoteForSoftware(softwareID, userID);
+                }
+                else
+                {
+                    return "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                EmailHelper.SendErrorEmail(ex);
+                throw ex;
             }
         }
     }
