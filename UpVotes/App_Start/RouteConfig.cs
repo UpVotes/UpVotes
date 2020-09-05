@@ -31,6 +31,7 @@ namespace UpVotes
             routes.MapRoute("claimSoftware", "Softwares/claimsoftwareverification/{id}", new { controller = "UserCompanyList", action = "SoftwareClaimVerificationByUser", id = UrlParameter.Optional });
             routes.MapRoute("SubmitReview", "submit/submit-review/{id}", new { controller = "SubmitReview", action = "SubmitReview", id = UrlParameter.Optional });
             routes.MapRoute("privatePolicy", "privacy-policy/{id}", new { controller = "Home", action = "PrivatePolicy", id = UrlParameter.Optional });
+            routes.MapRoute("writeForUs", "write-for-us/{id}", new { controller = "Home", action = "WriteForUs", id = UrlParameter.Optional });
             routes.MapRoute("sponsorship", "sponsorship/{id}", new { controller = "Home", action = "Sponsorship", id = UrlParameter.Optional });
             routes.MapRoute("contactUs", "contact-us/{id}", new { controller = "ContactUs", action = "ContactUsForm", id = UrlParameter.Optional });
             routes.MapRoute("newsDetail", "news/{id}", new { controller = "OverViewAndNews", action = "DetailNews", id = UrlParameter.Optional });

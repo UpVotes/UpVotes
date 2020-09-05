@@ -53,6 +53,16 @@ namespace UpVotes.Controllers
             }
             return View("~/Views/Policy/_PrivatePolicy.cshtml");
         }
+
+        public ActionResult WriteForUs()
+        {
+            if (Session["calledPage"] == null)
+            {
+                Session["calledPage"] = "P";
+            }
+            return View("~/Views/Policy/_write-for-us.cshtml");
+        }
+
         public ActionResult Sponsorship()
         {
             if (Session["calledPage"] == null)

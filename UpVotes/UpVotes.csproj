@@ -2750,6 +2750,7 @@
     <Content Include="Views\Overview\Blogs\_WebDesignContent.cshtml" />
     <Content Include="Views\Overview\Blogs\_WebDevelopmentContent.cshtml" />
     <Content Include="Views\Blog\digital-marketing-trends-2020.cshtml" />
+    <Content Include="Views\Policy\_write-for-us.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
