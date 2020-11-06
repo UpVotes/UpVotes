@@ -1,0 +1,130 @@
+﻿@model UpVotes.Models.CompanyViewModel
+@foreach (var company in Model.CompanyList)
+{
+<div class="col-lg-6">
+    <div class="faq">
+        <ol>
+            <li>
+                <h2 class="faq-title">When was @company.CompanyName founded?</h2>
+                <span class="faq-text">@company.CompanyName was founded in @company.FoundedYear</span>
+            </li>
+            <li>
+                <h2 class="faq-title">Where is @company.CompanyName headquarters?</h2>
+                <span class="faq-text">@company.CompanyName headquarters is in @company.City, @company.StateName, @company.CountryName.</span>
+            </li>
+            <li>
+                <h2 class="faq-title">What is hourly Price range @company.CompanyName does charge?</h2>
+                <span class="faq-text">@company.CompanyName charge per hour start from @company.AveragHourlyRate</span>
+            </li>            
+        </ol>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="faq">
+        <ol>
+            <li>
+                <h2 class="faq-title">How many employees does @company.CompanyName have?</h2>
+                <span class="faq-text">@company.CompanyName has @company.TotalEmployees employees</span>
+            </li>
+            <li>
+                <h2 class="faq-title">What services does @company.CompanyName operate in?</h2>
+                @{string focusNames = "";
+                    if (Model.PrimaryCompanyFocus != null && Model.PrimaryCompanyFocus.Count > 0)
+                    {
+                        for (int i = 0; i < Model.PrimaryCompanyFocus.Count; i++)
+                        {
+                            focusNames = focusNames + Model.PrimaryCompanyFocus[i].FocusAreaName.ToString() + (i + 1 == Model.PrimaryCompanyFocus.Count ? "" : ", ");
+                        }
+                    }
+                 }
+                <span class="faq-text">@company.CompanyName is in @focusNames </span>
+            </li>
+            <li>
+                <h2 class="faq-title">Who are @company.CompanyName competitors?</h2>
+
+                <span class="faq-text">@company.CompanyName top competitors are </span>
+                @{string CompititorName = "";
+                    string AllCompititorNames = "";
+                    if (Model.CompanyCompititors != null && Model.CompanyCompititors.Count > 0)
+                    {
+                        for (int i = 0; i < Model.CompanyCompititors.Count; i++)
+                        {
+                            CompititorName = Model.CompanyCompititors[i].CompanyName.ToString();
+                            AllCompititorNames = AllCompititorNames + Model.CompanyCompititors[i].CompanyName.ToString() + (i + 1 == Model.CompanyCompititors.Count ? "" : ", ");
+                            <a target="_blank" href="/profile/@CompititorName.ToLower().Replace(" ", "-")">@CompititorName</a>
+                            if (Model.CompanyCompititors.Count != i + 1)
+                            {
+                                <span>,&nbsp;</span>
+                            }
+                        }
+                    }
+                }
+                
+            </li>            
+        </ol>
+    </div>
+</div>
+
+<script type="application/ld+json">
+
+    {
+    "@("@context")": "https://schema.org",
+    "@("@type")": "FAQPage",
+    "mainEntity": [
+    {
+    "@("@type")": "Question",
+    "name": "When was @company.CompanyName founded?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName was founded in @company.FoundedYear"
+    }
+                        }
+    ,	            {
+    "@("@type")": "Question",
+    "name": "Where is @company.CompanyName headquarters?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName headquarters is in @company.City, @company.StateName, @company.CountryName."
+    }
+    }
+    ,	            {
+    "@("@type")": "Question",
+    "name": "What is hourly Price range @company.CompanyName does charge?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName charge per hour start from @company.AveragHourlyRate"
+    }
+    }
+    ,
+    {
+    "@("@type")": "Question",
+    "name": "How many employees does @company.CompanyName have?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName has @company.TotalEmployees employees"
+    }
+    }
+    ,
+
+    {
+    "@("@type")": "Question",
+    "name": "What services does @company.CompanyName operate in?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName is in @focusNames"
+    }
+    }
+    ,	            {
+    "@("@type")": "Question",
+    "name": "Who are @company.CompanyName competitors?",
+    "acceptedAnswer": {
+    "@("@type")": "Answer",
+    "text": "@company.CompanyName top competitors are @AllCompititorNames"
+    }
+    }
+    ]
+    }
+</script>
+                    }
+
+

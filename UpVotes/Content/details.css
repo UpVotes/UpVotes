@@ -867,6 +867,30 @@ text-transform:capitalize;
     margin: 20px 0 0 0;
 }
 
+/*FAQ*/
+.faq-wrap .faq-title {
+    font-size: 18px;
+}
+.faq-wrap .faq-text {
+    font-size: 16px;
+    color: #666;
+}
+.faq-wrap ol {
+    padding: 0;
+    margin: 0;
+}
+.faq-wrap li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+.faq-wrap li:last-child {
+    margin-bottom: 0;
+}
+.faq-wrap .faq {
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
 @media (max-width: 1200px) {
     .brand-detail .brand-data {
         width: 500px;
@@ -1065,7 +1089,10 @@ text-transform:capitalize;
     .blog .banner-info .author div {
         margin: 15px 0 5px 0;
     }
-
+    /*FAQ*/
+    .faq-wrap .faq {
+        margin-bottom: 20px;
+    }
 }
 
 @media (max-width: 580px) { 
@@ -1176,6 +1203,13 @@ text-transform:capitalize;
     .focus-section .slide-next .arrow {
         height: 15px;
         width: 15px;
+    }
+    .faq-wrap .faq-title {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    .faq-wrap .faq-text {
+        font-size: 14px;
     }
 
 }

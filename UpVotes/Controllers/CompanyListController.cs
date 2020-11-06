@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using UpVotes.Business;
 using UpVotes.BusinessEntities.Entities;
 using UpVotes.Models;
@@ -63,8 +66,8 @@ namespace UpVotes.Controllers
                 PageSize = 25,
                 OrderColumn= 1,
             };
-
-
+            
+                                    
             CompanyViewModel companyViewModel = companyService.GetCompany(companyFilter);
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "),"0");
@@ -80,7 +83,7 @@ namespace UpVotes.Controllers
                 companyViewModel.TotalNoOfUsers = 10;
                 companyViewModel.PageCount = (companyViewModel.CompanyList[0].TotalCount + 25 - 1) / 25;
             }
-
+            LoadJson(companyViewModel);
             Session["CompanyNames"] = companyViewModel.CompanyFocusData;
 
             return View(companyViewModel);
@@ -587,6 +590,25 @@ namespace UpVotes.Controllers
                     break;
             }
             return PartialView(url);
-        }       
+        }
+
+        public void LoadJson(CompanyViewModel cvm)
+        {
+            string url = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
+            url= url+ @"\Json\FAQ_Slp.json";            
+            using (StreamReader r = new StreamReader(url))
+            {
+                cvm.CompanylistFAQ = r.ReadToEnd();
+                //JavaScriptSerializer jss = new JavaScriptSerializer();
+
+                //faq = jss.Deserialize<FAQ>(json);
+                //Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                //foreach (var item in json_Dictionary)
+                //{
+                //    var a=item.Value;
+                //}
+                //var a = json_Dictionary.Select(i => i.Key == "MobileApp_FAQ_Json").ToList();
+            }
+        }
     }
 }

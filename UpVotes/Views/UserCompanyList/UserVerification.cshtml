@@ -7,16 +7,45 @@
 @{
     bool isUserVerified = @Model;    
 }
-
+@Styles.Render("~/Content/detail")
 <div id="divUserVerification" style="align-content:center">
-    @if (isUserVerified)
-    {        
-        <img id="imgUserVerificationSuccess" src="~/images/VerificationSuccess.png" style="width:916px; height:415px;padding:25px 0px 0px 100px;" />
-    }
-    else
-    {        
-        <img id="imgUserVerificationSuccess" src="~/images/VerificationFailure.png" style="width:815px; height:415px; padding:25px 0px 0px 100px;" />
-    }
+
+        <div class="detail-wrap">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Scrollspy menu -->
+                    <div class="container content-wrap">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <section id="navPortfolio">
+                                    <div class="content">
+                                    @if (isUserVerified)
+                                    {
+                                        <div class="thankyou-message">
+                                            <i class="fa fa-check"></i>
+                                            <div class="title">Thank you</div>
+                                            <b>You have been successfully verified your profile</b>
+                                            <p>You have been approved at upvotes, you will receive your login details into verified email ID</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="warning-message">
+                                            <i class="fa fa-remove"></i>     
+                                            <div class="title">Not Approved</div>                                       
+                                            <b>Error: this profile was not successfully approved.</b>                                            
+                                        </div>
+                                    }
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
 </div>
 
 

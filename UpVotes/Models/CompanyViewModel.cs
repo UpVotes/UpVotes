@@ -16,6 +16,8 @@ namespace UpVotes.Models
         public List<CompanyFocusEntity> CompanyClientFocus { get; set; }
         public List<string> SubfocusNames { get; set; }
         public List<CompanyFocusEntity> CompanySubFocus { get; set; }
+        public List<CompanyCompititors> CompanyCompititors { get; set; }
+        public string CompanylistFAQ { get; set;}
         public int AverageUserRating { get; set; }
 
         public int TotalNoOfUsers { get; set; }        

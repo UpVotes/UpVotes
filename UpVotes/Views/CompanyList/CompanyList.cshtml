@@ -1,4 +1,4 @@
-﻿@using System.Configuration
+﻿@using System.Configuration;
 @model UpVotes.Models.CompanyViewModel
 
 @{
@@ -195,6 +195,8 @@
                                 </div>
                             </div>
                         </section>
+
+                        @Html.Partial("~/Views/CompanyList/_CompanyFAQ.cshtml")
                         <!-- End Get Listed -->
                         <!-- Blog -->
                         <div class="blog">
@@ -352,103 +354,3 @@
         </div>
     </div>
 </section>
-
-<!-- End Category -->
-@*<h1 class="jumbotron-main"><span style="font-size:26px">TOP @Model.CategoryHeadLine.Replace("globe", "") @DateTime.Now.Year</span></h1>
-    <div>
-        <div class="container">
-            <div>
-                <ul class="nav nav-tabs main-tabs-navi">
-                    <li><a data-toggle="tab" href="#company-profile"><i class="view-compare"></i>View & Compare</a></li>
-                    <li><a data-toggle="tab" href="#CustomQuote" class="classquote"><i class="custom-quote"></i>Custom Quote</a></li>
-                    <li><a data-toggle="tab" href="#userReviews" class="userReviews"><i class="user-reviews"></i>User Reviews</a></li>
-                    <li><a data-toggle="tab" href="#Overview" class="Over-view"><i class="overview"></i>Overview?</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="tab-content">
-        <div id="company-profile" class="container tab-pane fade in active">
-            <div class="rt-pg-menu-desc">
-                <div class="rt-pg-menu-desc-lbl">
-                    <span>We found @Model.TotalNoOfCompanies @Model.CategoryHeadLine</span>
-                </div>
-                <div class="rt-pg-menu-desc-filter">
-                    <ul>
-                        <li><a class="rt-pg-menu-filter" href="javascript:void(0)"><span class="glyphicon glyphicon-refresh"></span>Clear Filters</a></li>
-                        <li><a class="rt-pg-menu-alert" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-bell"></span>Get Alerts</a></li>
-                        <li><a class="rt-pg-menu-like" href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i>Share</a></li>
-                        <li><a class="rt-pg-menu-share" href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i>Share</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="sf-wrapper">
-                <div class="filter-by">
-                    <span>Filter by:</span>
-                    <span class="dropdown filterdropdown">
-                        <input type="text" id="txtCompanySearch" placeholder="Company Name" class="filterCompanyNameClass" />
-                    </span>
-                    <span class="dropdown filterdropdown">
-                        <select class="filterHourlyRateClass" id="ddlAvgHourlyRateSearch">
-                            <option value="0">Avg Hourly Rate</option>
-                            <option value="0-25">&lt; $25 </option>
-                            <option value="25-50">$25 - $50</option>
-                            <option value="51-100">$51 - $100</option>
-                            <option value="101-150">$101 - $150</option>
-                            <option value="151-200">$151 - $200</option>
-                            <option value="201-300">$201 - $300</option>
-                            <option value="300-0">$300+</option>
-                        </select>
-                    </span>
-                    <span class="dropdown filterdropdown">
-                        <select class="filterEmployeeClass" id="ddlEmployeesSearch">
-                            <option value="0">Employee</option>
-                            <option value="0-10">&lt; 10 </option>
-                            <option value="10-50">10 - 50</option>
-                            <option value="50-250">50 - 250</option>
-                            <option value="250-1000">250 - 1000</option>
-                            <option value="1000-0">1000+</option>
-                        </select>
-                    </span>
-                    <span class="dropdown filterdropdown">
-                        <input type="text" id="txtLocationSearch" placeholder="City or State or Country" class="filterCompanyNameClass">
-                    </span>
-                </div>
-                <div class="sort-by">
-                    <span>Sort by:</span>
-                    <span>Sponsored</span>
-                    <span>Top voted firm</span>
-                    <span>Top reviews</span>
-                    <span>Company names</span>
-                </div>
-            </div>
-
-
-            <input id="hdnSubFocusArea" type="hidden" value="@Model.SubFocusArea"/>
-            <input id="hdnLocation" type="hidden" value="@Model.Location" />
-            <div id="complist">
-                @Html.Partial("~/Views/CompanyList/_CompList.cshtml", Model)
-            </div>
-        </div>*@
-
-@*<div id="userReviews" class="container tab-pane fade" >
-            @Html.Partial("~/Views/CompanyList/_UsersReviewsList.cshtml", "")
-        </div>
-        <div id="Overview" class="container tab-pane fade">
-            <div class="rt-pg-menu-desc">
-                <div class="rt-pg-menu-desc-lbl">
-                    <span>OVERVIEW</span>
-                </div>
-                <div class="rt-pg-menu-desc-filter">
-
-                </div>
-            </div>
-            <div  style="margin-top:80px;">
-                @{Html.RenderAction("GetOverViewPage", "CompanyList");}
-            </div>
-        </div>
-        <div id="CustomQuote" class="container tab-pane fade">
-            @{Html.RenderAction("GetQuotation", "Quotation");}
-        </div>
-    </div>*@

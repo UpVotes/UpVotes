@@ -2524,6 +2524,7 @@
     <Content Include="Content\fonts\Colfax-Bold.woff" />
     <Content Include="Content\fonts\Colfax-Medium.woff" />
     <Content Include="Content\fonts\Colfax-Regular.woff" />
+    <Content Include="Json\FAQ_Slp.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-te-1.4.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -2751,6 +2752,8 @@
     <Content Include="Views\Overview\Blogs\_WebDevelopmentContent.cshtml" />
     <Content Include="Views\Blog\digital-marketing-trends-2020.cshtml" />
     <Content Include="Views\Policy\_write-for-us.cshtml" />
+    <Content Include="Views\Company\_CompanyFAQ.cshtml" />
+    <Content Include="Views\CompanyList\_CompanyFAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -920,6 +920,44 @@ color:#fff;
     font-weight: 500;
 }
 
+/*Thank you message*/
+.thankyou-message {
+    text-align: center;
+}
+.thankyou-message i {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 100%;
+    font-size: 28px;
+}
+.warning-message {
+    text-align: center;
+}
+.warning-message i {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: red;
+    border: 1px solid red;
+    border-radius: 100%;
+    font-size: 28px;
+}
+.thankyou-message .title {
+    color: #4CAF50;
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight:600;
+}
+.thankyou-message b,
+.thankyou-message p {    
+    margin: 10px 0;
+}
+
 /* Media Screen */
 @media (min-width: 1300px) {
 	header .container {

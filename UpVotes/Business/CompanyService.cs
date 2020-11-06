@@ -92,6 +92,11 @@ namespace UpVotes.Business
                                     companyViewModel.SubfocusNames = company.SubfocusNames;
                                     companyViewModel.CompanySubFocus = company.CompanySubFocus;
                                 }
+
+                                if(company.CompanyCompititors != null && company.CompanyCompititors.Count > 0)
+                                {
+                                    companyViewModel.CompanyCompititors = company.CompanyCompititors;
+                                }
                             }
                         }
 
