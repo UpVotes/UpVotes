@@ -1,4 +1,5 @@
 ﻿@model UpVotes.Models.CompanyViewModel
+@using System.Configuration;
 @foreach (var company in Model.CompanyList)
 {
 <div class="col-lg-6">
@@ -28,16 +29,20 @@
             </li>
             <li>
                 <h2 class="faq-title">What services does @company.CompanyName operate in?</h2>
+                <span class="faq-text">
+                    @company.CompanyName is in
                 @{string focusNames = "";
                     if (Model.PrimaryCompanyFocus != null && Model.PrimaryCompanyFocus.Count > 0)
                     {
                         for (int i = 0; i < Model.PrimaryCompanyFocus.Count; i++)
                         {
-                            focusNames = focusNames + Model.PrimaryCompanyFocus[i].FocusAreaName.ToString() + (i + 1 == Model.PrimaryCompanyFocus.Count ? "" : ", ");
+                            <a href="@(ConfigurationManager.AppSettings["WebBaseURL"].ToString()+ Model.PrimaryCompanyFocus[i].URLFocusAreaname.ToString())" target="_blank" title="@Model.PrimaryCompanyFocus[i].FocusAreaName.ToString()">
+                               <span>@(i + 1 == Model.PrimaryCompanyFocus.Count ? Model.PrimaryCompanyFocus[i].FocusAreaName.ToString() : Model.PrimaryCompanyFocus[i].FocusAreaName.ToString()+", ")</span>
+                            </a>
                         }
                     }
-                 }
-                <span class="faq-text">@company.CompanyName is in @focusNames </span>
+                }                
+            </span>
             </li>
             <li>
                 <h2 class="faq-title">Who are @company.CompanyName competitors?</h2>

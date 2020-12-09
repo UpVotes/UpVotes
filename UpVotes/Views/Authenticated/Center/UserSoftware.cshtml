@@ -21,11 +21,11 @@ else
 
 <script type="text/javascript">
     $(document).ready(function ()
-    {
+    {        
         $('.select-category').SumoSelect();
         $("#divRejectionComments").hide();
         $("#btnSoftwraeCancel").hide();
-        $("#txtSummary").Editor("setText",((jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].SoftwareDescription))'))));
+        $("#txtSummary").Editor("setText",('@Html.Raw(Model.SoftwareList[0].SoftwareDescription)'));
         $.BindSoftwareData((jQuery.parseJSON('@Html.Raw(Json.Encode(Model.IsAdmin))')), (jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].SoftwareID))')), (jQuery.parseJSON('@Html.Raw(Json.Encode(Model.SoftwareList[0].LogoName))')));
 
     })
