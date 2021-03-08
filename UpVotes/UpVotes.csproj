@@ -351,11 +351,17 @@
     <Content Include="images\Blogs\AR-VR-has-just-started.png" />
     <Content Include="images\Blogs\Beacons–the-market-worth-millions.png" />
     <Content Include="images\Blogs\email-marketing-for-financial-advisors.png" />
+    <Content Include="images\Blogs\hermit-chawla.jpg" />
     <Content Include="images\Blogs\how-much-cost-make-app.png" />
+    <Content Include="images\Blogs\laravel-banner-homepage.jpg" />
+    <Content Include="images\Blogs\laravel-fortify.jpg" />
     <Content Include="images\Blogs\mobile-app-development-trends.png" />
     <Content Include="images\Blogs\Mobile-App-Security-to-Gain-Extra-Attention.png" />
     <Content Include="images\Blogs\AI-machine-learning.png" />
     <Content Include="images\Blogs\On-Demand-App-services.png" />
+    <Content Include="images\Blogs\pratik-mistry.jpg" />
+    <Content Include="images\Blogs\radixweb-blog-banner.jpg" />
+    <Content Include="images\Blogs\software-development-and-drive-success.jpg" />
     <Content Include="images\Blogs\Technology-for-Mobile-App-Developers.png" />
     <Content Include="images\Blogs\IoT-Trends-In-the-Sphere-of-Mobile-App-Development.png" />
     <Content Include="images\Blogs\Mobile-wallets–the-mobile-banking-game-changers.png" />
@@ -2605,6 +2611,7 @@
       <DependentUpon>UserCompanyList.js</DependentUpon>
     </Content>
     <Content Include="Scripts\_references.js" />
+    <None Include="Views\Blog\laravel-fortify.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2760,6 +2767,7 @@
     <Content Include="Views\Company\_CompanyFAQ.cshtml" />
     <Content Include="Views\CompanyList\_CompanyFAQ.cshtml" />
     <Content Include="Views\Blog\on-demand-app-services.cshtml" />
+    <Content Include="Views\Blog\software-development-and-drive-success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
