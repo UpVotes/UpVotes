@@ -350,7 +350,9 @@
     <Content Include="images\Blogs\app-store-optimization.png" />
     <Content Include="images\Blogs\AR-VR-has-just-started.png" />
     <Content Include="images\Blogs\Beacons–the-market-worth-millions.png" />
+    <Content Include="images\Blogs\david-wood.jpg" />
     <Content Include="images\Blogs\email-marketing-for-financial-advisors.png" />
+    <Content Include="images\Blogs\erp-software.jpg" />
     <Content Include="images\Blogs\hermit-chawla.jpg" />
     <Content Include="images\Blogs\how-much-cost-make-app.png" />
     <Content Include="images\Blogs\laravel-banner-homepage.jpg" />
@@ -358,6 +360,7 @@
     <Content Include="images\Blogs\mobile-app-development-trends.png" />
     <Content Include="images\Blogs\Mobile-App-Security-to-Gain-Extra-Attention.png" />
     <Content Include="images\Blogs\AI-machine-learning.png" />
+    <Content Include="images\Blogs\muhammad-usman.jpg" />
     <Content Include="images\Blogs\On-Demand-App-services.png" />
     <Content Include="images\Blogs\pratik-mistry.jpg" />
     <Content Include="images\Blogs\radixweb-blog-banner.jpg" />
@@ -375,6 +378,7 @@
     <Content Include="images\Blogs\thumb1.jpg" />
     <Content Include="images\Blogs\thumb2.jpg" />
     <Content Include="images\Blogs\thumb3.jpg" />
+    <Content Include="images\Blogs\web-design-tips.png" />
     <Content Include="images\brain.png" />
     <Content Include="images\Clip.png" />
     <Content Include="images\comments.png" />
@@ -2768,6 +2772,8 @@
     <Content Include="Views\Blog\on-demand-app-services.cshtml" />
     <Content Include="Views\Blog\software-development-and-drive-success.cshtml" />
     <Content Include="Views\Blog\laravel-fortify.cshtml" />
+    <Content Include="Views\Blog\tips-for-erp-implementation.cshtml" />
+    <Content Include="Views\Blog\tips-for-web-design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
