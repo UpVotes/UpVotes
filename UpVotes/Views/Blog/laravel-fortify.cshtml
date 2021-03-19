@@ -1,0 +1,172 @@
+﻿﻿@{
+    ViewBag.Title = "Laravel Fortify - Implementing Authentication Scaffolding in Laravel8 | Upvotes.co";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/detail")
+<meta name="description" content="Laravel fortify is a Frontend agnostic authentication backend implementation for Laravel. Fortify registers the routes and controllers needed to implement all of laravel website development authentication features including registration, passwords, login and more. " />
+
+<meta property="og:url" content="https://upvotes.co/blog/laravel-fortify" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Laravel Fortify - Implementing Authentication Scaffolding in Laravel8" />
+<meta property="og:description" content="Laravel fortify is a Frontend agnostic authentication backend implementation for Laravel. Fortify registers the routes and controllers needed to implement all of laravel website development authentication features including registration, passwords, login and more." />
+<meta property="og:image" content="https://upvotes.co/images/Blogs/laravel-fortify.jpg" />
+
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@("@upvotes_co")">
+<meta name="twitter:creator" content="@("@upvotes_co")">
+<meta name="twitter:description" content="Laravel fortify is a Frontend agnostic authentication backend implementation for Laravel. Fortify registers the routes and controllers needed to implement all of laravel website development authentication features including registration, passwords, login and more." />
+<meta name="twitter:title" content="Laravel Fortify - Implementing Authentication Scaffolding in Laravel8" />
+<meta name="twitter:image" content="https://upvotes.co/images/Blogs/laravel-fortify.jpg" />
+
+<link rel="canonical" href="https://upvotes.co/blog/laravel-fortify" />
+<div class="detail-wrap news blog">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Main banner begins -->
+            <div class="main-banner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="banner-img"><center><img class="lazy" src="" data-src="/images/Blogs/laravel-fortify.jpg" /></center></div>
+                            <div class="banner-info">
+                                <div class="author-pic"><img class="lazy" src="" data-src="/images/Blogs/hermit-chawla.jpg" /></div>
+                                <div class="author">
+                                    <div class="name">By:<span>Hermit Chawla</span></div>
+                                    <div class="date">March 08th, 2021</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main banner ends -->
+            <div class="container content-wrap">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <section id="navOverview">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12">
+                                        <div class="about">
+										<br>
+										<br>
+                                            <h1>Laravel Fortify - Implementing Authentication Scaffolding in Laravel8</h1>
+
+                                            <h2>Introduction</h2>
+
+											<p>Laravel fortify is a Frontend agnostic authentication backend implementation for Laravel. Fortify registers the routes and controllers needed to implement all of laravel website development authentication features including registration, passwords, login and more. Since Fortify does not accommodate its own user interface, it is paired with your own interface which makes requests to the routes that Fortify has registered.</p>
+ 
+											<h2>Why to use Laravel Fortify?</h2>
+											
+											<p>If anyone uses Laravel’s application starter kits, then one does not need to install Laravel Fortify as all of Laravel’s application starter kits already provide a full authentication implementation. But if we are not using an application starter kit and application needs authentication features, then we have two options: First is manually implement application’s authentication features and secondly use Laravel Fortify to provide the backend implementation of these features.</p>
+											
+											<p>Choosing to install Fortify, the user interface will make requests to Fortify’s authentication routes that are detailed in documentation in order to authenticate and register users. And instead of using Fortify, choosing manual interaction with Laravel’s authentication service by following the documentation available in the authentication, password reset, and email verification documentation.</p>
+											
+											<h3>Fortify Features</h3>
+											
+											<p>The Fortify configuration files consist of a features configuration array. This array explains which backend routes/features Fortify will expose by default. If one does not use Fortify in combination with Laravel Jetstream, it is recommended to enable only some features that are basic authentication features provided by most Laravel applications: Registration, Reset passwords, email verification.</p>
+											
+											<h3>Steps for Laravel 8 Authentication</h3>
+																						
+											<ul>
+                                                    <li>Create a new Laravel 8 app - First of all, create a Laravel 8 project Composer create-project laravel </li>
+													<li>Install the Laravel UI package - Installing the Laravel UI official package for making auth scaffolding in Laravel8. Then run the composer command to install the Laravel UI package.</li>
+													<li>Composer require laravel/ui Generate authentication scaffolding - After installing Laravel UI packages, we are now able to scaffold our authentication with Bootstrap, Vue, React.</li>
+													<li>Install NPM dependency - To install NPM dependencies run the following command  npm install And to compile assets run the following command Npm run dev</li>
+													<li>Test the authentication system - When Laravel 8 auth system is ready, check whether authentication is successfully installed or not Login check: example.com/login - Registration check: example.com/register</li>
+													<li>Route restriction - After successfully installation of Laravel 8 auth system. We can protect our routes for unauthenticated users by using auth middleware in our routes or controller.</li>
+													<li>Change the Necessary Configuration - When user successfully login the default auth system redirects the user to home/path. If we want to change the path we have to change public const HOME = ‘ /home’; from the RouteServiceProvider</li>
+                                                </ul>
+											<h2>Laravel Frontend Scaffolding</h2>
+											
+											<p>Frontend Scaffolding means to create a basic structure for an application. Laravel provides a very simple way to change the front-end presets/scaffolding with any of the other available scaffolding like Bootstrap, Vue and React. Now Generating Scaffold:</p>
+											
+											<ul>
+                                                    <li>Step1 - To generate scaffolding we need to install laravel/ui, which is composer package and to do that we need to run the command: composer require laravel/ui --dev</li>
+													<li>Step2 - After finishing that, we can run the ui artisan command to generate a base scaffolding.
+													For bootstrap: php artisan ui bootstrap
+													For React: php artisan ui react 
+													For Vue: php artisan ui Vue 
+													This is will create a components directory in resources/js directory </li>
+													<li>After running any of the given commands, we will have to install the npm.</li>
+													<li>Now we have to run npm command to compile scaffolding: npm run dev</li>
+													<li>Generate scaffolding with Authentication -  To generate scaffolding with view files for authentication like login and register, then we just have to add ‘auth’ at the end of the commands like:
+													Bootstrap- php artisan ui bootstrap --auth
+													Vue - php artisan ui vue --auth
+													React - php artisan ui react --auth</li>
+													<li>Remove Scaffolding - To remove generated scaffolding, we will run following command</li>
+											</ul>		
+											
+											<h3>Php artisan preset none.</h3>
+
+										    <p>Specifying Additional Conditions
+											If anyone wishes to add extra query conditions to the authentication query in addition to the user’s mail and password. To conduct this, we may simply add the query conditions to the array passed to the attempt method.</p>
+											
+											<h2>Final words</h2>
+											
+											<p>As we can see that from above points we have mentioned about Laravel Fortify, its features and other points. We can also use Fortify (without Jetstream) to serve a headless authentication backend for Laravel Application. Within the fortify configuration file, one can also disable entire features of fortify like ability to update profile information and passwords. This article has given various information regarding Laravel Authentication. </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="author-box">
+            <img src="" data-src="/images/Blogs/hermit-chawla.jpg" class="avatar avatar-65 photo lazy" height="50" width="50" />
+            <h4 class="author-box-title">
+                <span>About the author</span>
+                <a rel="nofollow" href="https://www.linkedin.com/in/hermit-chawla-lion-82b6513b/" title="" class="external" target="_blank">Hermit Chawla</a>
+            </h4>
+            <div class="author-box-content">
+                Hermit Chawla is a MD at AIS Technolabs which is Web Design and Web development Company, helping global businesses to grow. He love to share his thoughts on how to <a href="https://www.aistechnolabs.com/hire-laravel-developer/" title="" class="external" target="_blank">hire dedicated laravel developer</a>.
+				<br>
+				<a rel="nofollow" href="https://twitter.com/aistechnolabs">Twitter</a>  |  <a rel="nofollow" href="https://www.linkedin.com/company/ais-technolabs">LinkedIn</a>     | <a rel="nofollow" href="https://www.facebook.com/aistechnolabs">Facebook</a>
+            </div>
+            <div class="other-posts-link">
+
+            </div>
+        </section>
+    </div>
+    <section class="teal-banner contact gap-large">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 text-center">
+                    <div class="title-wrap text-center">
+                        <h3 class="title-medium">Are you a Leading professional B2B Service or Software providers?</h3>
+                        <p>Join this community and get more visible to your Business profile</p>
+                    </div>
+                </div>
+                <div class="col-xl-12 text-center">
+                    <a href="/get-listed" target="_blank"><button type="button" class="btn btn-primary btn-lg">Get Listed</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="scroll-top"><i class="fa fa-chevron-circle-up"></i></div>
+<script>
+    //Scroll to top
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop()) {
+                $('.scroll-top').show();
+            } else {
+                $('.scroll-top').hide();
+            }
+        });
+
+        $(".scroll-top").click(function () {
+            $("html, body").scrollTop(0);
+        });
+    });
+</script>

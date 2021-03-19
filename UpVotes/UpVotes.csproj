@@ -2611,7 +2611,6 @@
       <DependentUpon>UserCompanyList.js</DependentUpon>
     </Content>
     <Content Include="Scripts\_references.js" />
-    <None Include="Views\Blog\laravel-fortify.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2768,6 +2767,7 @@
     <Content Include="Views\CompanyList\_CompanyFAQ.cshtml" />
     <Content Include="Views\Blog\on-demand-app-services.cshtml" />
     <Content Include="Views\Blog\software-development-and-drive-success.cshtml" />
+    <Content Include="Views\Blog\laravel-fortify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
