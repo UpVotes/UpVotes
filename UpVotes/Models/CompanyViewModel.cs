@@ -28,6 +28,7 @@ namespace UpVotes.Models
         public string CategoryReviewHeadLine { get; set; }
 
         public string Title { get; set; }
+        public bool IsSpecific { get; set; }
 
         public string MetaTag { get; set; }
 

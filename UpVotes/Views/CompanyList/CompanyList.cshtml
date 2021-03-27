@@ -258,7 +258,14 @@
                     </div>
                     <div class="tab-pane fade" id="userReviews">
                         <div class="d-flex justify-content-between top-bar">
-                            <div class="result">WE FOUND @Model.TotalNoOfCompanies @Model.CategoryHeadLine</div>
+                            @if (Model.IsSpecific)
+                            {
+                                <div class="result">WE FOUND @Model.TotalNoOfCompanies MOBILE APP DEVELOPMENT COMPANIES IN CHICAGO</div>
+                            }
+                            else
+                            {
+                                <div class="result">WE FOUND @Model.TotalNoOfCompanies @Model.CategoryHeadLine</div>
+                            }
                             <div class="share">
                                 <div class="list-inline">
                                     <div class="list-inline-item social">Share:</div>

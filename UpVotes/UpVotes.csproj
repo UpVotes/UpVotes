@@ -353,6 +353,8 @@
     <Content Include="images\Blogs\david-wood.jpg" />
     <Content Include="images\Blogs\email-marketing-for-financial-advisors.png" />
     <Content Include="images\Blogs\erp-software.jpg" />
+    <Content Include="images\Blogs\facebook-ads-campaign.png" />
+    <Content Include="images\Blogs\facebook-website-audience-all-purchases.png" />
     <Content Include="images\Blogs\hermit-chawla.jpg" />
     <Content Include="images\Blogs\how-much-cost-make-app.png" />
     <Content Include="images\Blogs\laravel-banner-homepage.jpg" />
@@ -363,6 +365,7 @@
     <Content Include="images\Blogs\muhammad-usman.jpg" />
     <Content Include="images\Blogs\On-Demand-App-services.png" />
     <Content Include="images\Blogs\pratik-mistry.jpg" />
+    <Content Include="images\Blogs\profitable-audiences.png" />
     <Content Include="images\Blogs\radixweb-blog-banner.jpg" />
     <Content Include="images\Blogs\software-development-and-drive-success.jpg" />
     <Content Include="images\Blogs\Technology-for-Mobile-App-Developers.png" />
@@ -371,6 +374,7 @@
     <Content Include="images\Blogs\Blockchain–things-beyond-bitcoin-smart-contracts.png" />
     <Content Include="images\Blogs\Instant-Apps-for-Mobile-App-Development.png" />
     <Content Include="images\Blogs\The-App-Store-Optimization-Tips.png" />
+    <Content Include="images\Blogs\tips-to-scale-facebook-advertising.png" />
     <Content Include="images\Blogs\Wearables–future-must-have-accessory.png" />
     <Content Include="images\Blogs\Cloud–the-necessary-element-of-future-mobile-apps.png" />
     <Content Include="images\Blogs\link-building.png" />
@@ -379,6 +383,7 @@
     <Content Include="images\Blogs\thumb2.jpg" />
     <Content Include="images\Blogs\thumb3.jpg" />
     <Content Include="images\Blogs\web-design-tips.png" />
+    <Content Include="images\Blogs\website-custom-audience.png" />
     <Content Include="images\brain.png" />
     <Content Include="images\Clip.png" />
     <Content Include="images\comments.png" />
@@ -2774,6 +2779,7 @@
     <Content Include="Views\Blog\laravel-fortify.cshtml" />
     <Content Include="Views\Blog\tips-for-erp-implementation.cshtml" />
     <Content Include="Views\Blog\tips-for-web-design.cshtml" />
+    <Content Include="Views\Blog\facebook-advertising-tips.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

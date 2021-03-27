@@ -240,9 +240,21 @@ namespace UpVotes.Controllers
                 metaTagObj = new CompanyService().GetCategoryMetaTags(urlFocusAreaName.Trim(), urlSubFocusAreaName.Trim());
                 CacheHandler.Add(metaTagObj, cachename);
             }
-            companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + Country.ToUpper();
-            companyViewModel.CategoryReviewHeadLine = metaTagObj.Title.Replace(" in ", " ").ToUpper();
-            companyViewModel.Title = headLine + metaTagObj.Title + Country + "- " + year + " | upvotes.co";
+
+            if(Country.ToLower() == "chicago" && urlFocusAreaName.Trim() == "mobile-application-developers")
+            {
+                companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPERS IN CHICAGO ";
+                companyViewModel.CategoryReviewHeadLine = "MOBILE APP DEVELOPERS";
+                companyViewModel.Title = "Top App Developers in Chicago - 2021 Reviews | Upvotes.co";
+                companyViewModel.IsSpecific = true;
+            }
+            else
+            {
+                companyViewModel.IsSpecific = false;
+                companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + Country.ToUpper();
+                companyViewModel.CategoryReviewHeadLine = metaTagObj.Title.Replace(" in ", " ").ToUpper();
+                companyViewModel.Title = headLine + metaTagObj.Title + Country + "- " + year + " | upvotes.co";
+            }            
             companyViewModel.MetaTag = CategoryMetaTags(metaTagObj, Country);
         }
 

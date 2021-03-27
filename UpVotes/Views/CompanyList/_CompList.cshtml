@@ -300,3 +300,45 @@
         </ul>
     </div>
 </div>
+<head>
+@if (Model.IsSpecific)
+{
+foreach (var company in Model.CompanyList)
+{
+    <script type="application/ld+json">
+        {
+        "@("@context")": "http://schema.org",
+        "@("@type")": "Event",
+        "name": "@company.CompanyName",
+        "url": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile/" + company.CompanyName.Replace(" ", "-"))"
+        ,"image": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "images/CompanyLogos/" + company.LogoName)"
+        ,"description": "@(UpVotes.Utility.Utility.ExtractText(company.Summary))"
+        ,"sameAs": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile / " + company.CompanyName.Replace(" ", " - "))"
+        ,"startDate": "2020-08-01T07:00:00.000Z"
+        ,"endDate": "2021-06-05T07:00:00.000Z"
+        ,"performer" :  {
+        "@("@type")" : "PerformingGroup"
+        ,"name": "Upvotes Media Solutions"
+        }
+        ,"organizer" :  {
+        "@("@type")" : "Organization"
+        ,"name": "Upvotes Media Solutions"
+        }
+        ,"location" :  {
+        "@("@type")" : "Place"
+        ,"name": "@(company.CompanyName)"
+        ,"address" :  {
+            "@("@type")" : "PostalAddress"
+        ,"streetAddress": "@(company.Address)"
+        ,"addressLocality": "@(company.City)"
+        ,"addressRegion": "@(company.StateName)"
+        ,"postalCode": "@(company.PostalCode)"
+        ,"addressCountry": "@(company.CountryName)"
+        }
+    }
+}
+
+    </script>
+}
+}
+</head>
