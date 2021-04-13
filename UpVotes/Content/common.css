@@ -3,18 +3,21 @@
 	font-family: 'Colfax';
 	font-style: normal;
 	font-weight: 400;
+    font-display:swap; 
 	src: local('Colfax Regular'), url('fonts/Colfax-Regular.woff') format('woff');
 }
 @font-face {
 font-family: 'Colfax';
 font-style: normal;
 font-weight: 500;
+font-display:swap; 
 src: local('Colfax Medium'), url('fonts/Colfax-Medium.woff') format('woff');
 }
 @font-face {
 font-family: 'Colfax';
 font-style: normal;
 font-weight:600;
+font-display:swap; 
 src: local('Colfax Bold'), url('fonts/Colfax-Bold.woff') format('woff');
 }
 
