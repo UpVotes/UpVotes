@@ -241,11 +241,16 @@ namespace UpVotes.Controllers
                 CacheHandler.Add(metaTagObj, cachename);
             }
 
-            if(Country.ToLower() == "chicago" && urlFocusAreaName.Trim() == "mobile-application-developers")
+            if((Country.ToLower() == "chicago" || Country.ToLower() == "bangalore") && urlFocusAreaName.Trim() == "mobile-application-developers")
             {
-                companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPERS IN CHICAGO ";
+                Country = "Bangalore";
+                if (Country.ToLower() == "chicago")
+                {
+                    Country = "Chicago";
+                }
+                companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPERS IN "+ Country.ToUpper() + " ";
                 companyViewModel.CategoryReviewHeadLine = "MOBILE APP DEVELOPERS";
-                companyViewModel.Title = "Top App Developers in Chicago - 2021 Reviews | Upvotes.co";
+                companyViewModel.Title = "Top App Developers in "+ Country + " - 2021 Reviews | Upvotes.co";
                 companyViewModel.IsSpecific = true;
             }
             else
