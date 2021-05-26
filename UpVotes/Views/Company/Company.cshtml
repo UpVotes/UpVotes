@@ -435,6 +435,44 @@
                 </div>
             </div>
         }
+        string minrate = "";
+        string maxrate = "";
+        if (company.AveragHourlyRate != null)
+        {
+            string averagerate = company.AveragHourlyRate.Replace("/hr", "");
+            var minMax = averagerate.Split('-');
+            if (minMax.Count() > 1)
+            {
+                minrate = minMax[0].ToString();
+                maxrate = minMax[1].ToString();
+            }
+        }
+        <script type="application/ld+json">
+            {
+            
+
+            "@("@context")": "https://schema.org/",
+            "@("@type")": "Product",
+            "name": "@company.CompanyName",
+            "image": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "images/CompanyLogos/" + company.LogoName)",
+            "description": "Company Profile Summary",
+            "offers": {
+                "@("@type"): "AggregateOffer",
+            "url": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile/" + company.CompanyName.Replace(" ", " - "))",
+            "priceCurrency": "USD",
+            "lowPrice": "@minrate",
+            "highPrice": "@maxrate"
+            },
+            "aggregateRating": {
+            "@("@type"): "AggregateRating",
+            "ratingValue": "@company.UserRating",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "@company.NoOfVotes"
+            }
+            }
+        </script>
+
     }
 
 </div>

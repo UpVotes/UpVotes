@@ -225,7 +225,7 @@ namespace UpVotes.Controllers
             Country = Country.ToUpper() == "UNITED STATES" ? "USA" : Country;
             int year = DateTime.Now.Year;
 
-            string headLine = Country == "globe" ? "Top " : "Top 10+ ";
+            string headLine = "Top ";//Country == "globe" ? "Top " : "Top 10+ ";
 
             string cachename = urlFocusAreaName.Trim() + urlSubFocusAreaName.Trim();
             CategoryMetaTagsDetails metaTagObj;
@@ -241,20 +241,20 @@ namespace UpVotes.Controllers
                 CacheHandler.Add(metaTagObj, cachename);
             }
 
-            if(Country.ToLower() == "chicago" && urlFocusAreaName.Trim() == "mobile-application-developers")
-            {                
-                companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPERS IN "+ Country.ToUpper() + " ";
-                companyViewModel.CategoryReviewHeadLine = "MOBILE APP DEVELOPERS";
-                companyViewModel.Title = "Top App Developers in "+ Country + " - 2021 Reviews | Upvotes.co";
-                companyViewModel.IsSpecific = true;
-            }
-            else
-            {
+            //if(Country.ToLower() == "chicago" && urlFocusAreaName.Trim() == "mobile-application-developers")
+            //{                
+            //    companyViewModel.CategoryHeadLine = "MOBILE APP DEVELOPERS IN "+ Country.ToUpper() + " ";
+            //    companyViewModel.CategoryReviewHeadLine = "MOBILE APP DEVELOPERS";
+            //    companyViewModel.Title = "Top App Developers in "+ Country + " - 2021 Reviews | Upvotes.co";
+            //    companyViewModel.IsSpecific = true;
+            //}
+            //else
+            //{
                 companyViewModel.IsSpecific = false;
-                companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + Country.ToUpper();
+                companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + (Country.ToUpper() != "GLOBE" ? Country.ToUpper() : "");
                 companyViewModel.CategoryReviewHeadLine = metaTagObj.Title.Replace(" in ", " ").ToUpper();
                 companyViewModel.Title = headLine + metaTagObj.Title + Country + "- " + year + " | upvotes.co";
-            }            
+            //}            
             companyViewModel.MetaTag = CategoryMetaTags(metaTagObj, Country);
         }
 
