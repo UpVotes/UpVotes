@@ -455,16 +455,16 @@
             "@("@type")": "Product",
             "name": "@company.CompanyName",
             "image": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "images/CompanyLogos/" + company.LogoName)",
-            "description": "Company Profile Summary",
+            "description": "@Html.Raw(company.Summary)",
             "offers": {
-                "@("@type"): "AggregateOffer",
+                "@("@type")": "AggregateOffer",
             "url": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile/" + company.CompanyName.Replace(" ", " - "))",
             "priceCurrency": "USD",
             "lowPrice": "@minrate",
             "highPrice": "@maxrate"
             },
             "aggregateRating": {
-            "@("@type"): "AggregateRating",
+            "@("@type")": "AggregateRating",
             "ratingValue": "@company.UserRating",
             "bestRating": "5",
             "worstRating": "1",
