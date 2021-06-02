@@ -457,12 +457,13 @@
             "name": "@company.CompanyName",
             "image": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "images/CompanyLogos/" + company.LogoName)",
             "description": "@(Html.Raw(Utility.ExtractText(company.Summary)))",
+            "brand": "Upvotes Media Solutions"
             "offers": {
             "@("@type")": "AggregateOffer",
             "url": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile/" + company.CompanyName.Replace(" ", " - "))",
             "priceCurrency": "USD",
             "lowPrice": "@minrate",
-            "highPrice": "@maxrate"
+            "highPrice": "@maxrate",
             "itemCondition": "https://schema.org/NewCondition"
             },
             "aggregateRating": {
@@ -471,7 +472,7 @@
             "bestRating": "5",
             "worstRating": "1",
             "ratingCount": "@(company.NoOfVotes == 0 ? 1 : company.NoOfVotes)",
-            "reviewCount": "@(company.CompanyReviews.Count == 0 ? 1 : company.CompanyReviews.Count)",
+            "reviewCount": "@(company.CompanyReviews.Count == 0 ? 1 : company.CompanyReviews.Count)"
             },
             "review": [{
             "@("@type")": "Review",
