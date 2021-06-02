@@ -250,7 +250,7 @@ namespace UpVotes.Controllers
             //}
             //else
             //{
-                companyViewModel.IsSpecific = false;
+                companyViewModel.IsSpecific = true;
                 companyViewModel.CategoryHeadLine = metaTagObj.Title.ToUpper() + (Country.ToUpper() != "GLOBE" ? Country.ToUpper() : "");
                 companyViewModel.CategoryReviewHeadLine = metaTagObj.Title.Replace(" in ", " ").ToUpper();
                 companyViewModel.Title = headLine + metaTagObj.Title + Country + "- " + year + " | upvotes.co";

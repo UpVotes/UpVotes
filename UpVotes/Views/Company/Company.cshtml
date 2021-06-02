@@ -1,4 +1,5 @@
 ﻿@using System.web.Mvc
+@using UpVotes.Utility;
 @model UpVotes.Models.CompanyViewModel
 
 @{
@@ -439,7 +440,7 @@
         string maxrate = "";
         if (company.AveragHourlyRate != null)
         {
-            string averagerate = company.AveragHourlyRate.Replace("/hr", "");
+            string averagerate = company.AveragHourlyRate.Replace("/hr", "").Replace(".00","").Replace("$","");
             var minMax = averagerate.Split('-');
             if (minMax.Count() > 1)
             {
@@ -455,22 +456,50 @@
             "@("@type")": "Product",
             "name": "@company.CompanyName",
             "image": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "images/CompanyLogos/" + company.LogoName)",
-            "description": "@Html.Raw(company.Summary)",
+            "description": "@(Html.Raw(Utility.ExtractText(company.Summary)))",
             "offers": {
-                "@("@type")": "AggregateOffer",
+            "@("@type")": "AggregateOffer",
             "url": "@(@System.Configuration.ConfigurationManager.AppSettings["WebBaseURL"].ToString() + "profile/" + company.CompanyName.Replace(" ", " - "))",
             "priceCurrency": "USD",
             "lowPrice": "@minrate",
             "highPrice": "@maxrate"
+            "itemCondition": "https://schema.org/NewCondition"
             },
             "aggregateRating": {
             "@("@type")": "AggregateRating",
-            "ratingValue": "@company.UserRating",
+            "ratingValue": "@(company.UserRating == 0 ? 1 : company.UserRating)",
             "bestRating": "5",
             "worstRating": "1",
-            "ratingCount": "@company.NoOfVotes"
-            }
-            }
+            "ratingCount": "@(company.NoOfVotes == 0 ? 1 : company.NoOfVotes)",
+            "reviewCount": "@(company.CompanyReviews.Count == 0 ? 1 : company.CompanyReviews.Count)",
+            },
+            "review": [{
+            "@("@type")": "Review",
+            "name": "Kevin Nathan",
+            "reviewBody": "Developed a mobile app for my eCommerce store,as they build with the latest technologies and they ensure with provided services.The product delivers was awesome and the team responded very well.",
+            "reviewRating": {
+            "@("@type")": "Rating",
+            "ratingValue": "4",
+            "bestRating": "5",
+            "worstRating": "1"
+            },
+            "datePublished": "2021-06-01",
+            "author": {"@("@type")": "Person", "name": ""}
+            },{
+            "@("@type")": "Review",
+            "name": "Sharma",
+            "reviewBody": "Excellent work! Works with an agile and problem-solving approach. The team’s in-depth expertise helps them yield quality products always. They are supportive and reliable partners.",
+            "reviewRating": {
+            "@("@type")": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1"
+            },
+            "datePublished": "2021-06-01",
+            "author": {"@("@type")": "Person", "name": ""}
+            }]
+
+    }
         </script>
 
     }
