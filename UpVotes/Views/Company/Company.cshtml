@@ -440,7 +440,7 @@
         string maxrate = "";
         if (company.AveragHourlyRate != null)
         {
-            string averagerate = company.AveragHourlyRate.Replace("/hr", "").Replace(".00","").Replace("$","");
+            string averagerate = company.AveragHourlyRate.Replace(" ", "").Replace("/hr", "").Replace(".00","").Replace("$","");
             var minMax = averagerate.Split('-');
             if (minMax.Count() > 1)
             {
