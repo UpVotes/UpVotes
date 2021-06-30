@@ -603,8 +603,8 @@ $(document).ready(function ()
             companyProfileData.TwitterProfileURL = $("#txtTwitterProfile")[0].value;
             companyProfileData.FacebookProfileURL = $("#txtFacebookProfile")[0].value;
             companyProfileData.GooglePlusProfileURL = $("#txtGooglePlusProfile")[0].value;
-            companyProfileData.Summary = ($("#txtCompanySummary").Editor("getText")); //$("#txtCompanySummary")[0].value;
-            companyProfileData.KeyClients = $("#txtKeyClients").Editor("getText") == "<br>" ? "" : ($("#txtKeyClients").Editor("getText"));//$("#txtKeyClients")[0].value;
+            companyProfileData.Summary = encodeURI($("#txtCompanySummary").Editor("getText")); //$("#txtCompanySummary")[0].value;
+            companyProfileData.KeyClients = encodeURI($("#txtKeyClients").Editor("getText") == "<br>" ? "" : ($("#txtKeyClients").Editor("getText")));//$("#txtKeyClients")[0].value;
             companyProfileData.IsAdminUser = companyOwnedByObj.IsAdminUser;
             if (CompanyID == 0)
             {

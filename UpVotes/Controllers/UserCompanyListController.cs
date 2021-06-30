@@ -601,7 +601,12 @@ namespace UpVotes.Controllers
                 if (Request.Params["ProfileData"] != null)
                 {
                     string AppPath = string.Empty; string fileName = string.Empty; string extension = string.Empty;
-                    CompanyEntity company = JObject.Parse(Request.Params["ProfileData"].ToString()).ToObject<CompanyEntity>();
+                    CompanyEntity company = JObject.Parse(Request.Params["ProfileData"].ToString()).ToObject<CompanyEntity>();                    
+                    company.Summary = System.Uri.UnescapeDataString(company.Summary);
+                    if(!string.IsNullOrEmpty(company.KeyClients))
+                    {
+                        company.KeyClients = System.Uri.UnescapeDataString(company.KeyClients);
+                    }
                     company.LoggedInUser = Convert.ToInt32(Session["UserID"]);
                     company.CreatedBy = company.CompanyID == 0 ? company.LoggedInUser : company.CreatedBy;
                     if (Request.Files.Count > 0 && Request.Files[0].FileName != string.Empty)
