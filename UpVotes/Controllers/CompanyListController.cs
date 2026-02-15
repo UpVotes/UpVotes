@@ -71,6 +71,10 @@ namespace UpVotes.Controllers
             CompanyViewModel companyViewModel = companyService.GetCompany(companyFilter);
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "),"0");
+            if (companyViewModel.CompanyList.Count > 0 && companyViewModel.CompanyList.Count <= 5)
+            {
+                companyViewModel.MetaTag = companyViewModel.MetaTag + " <meta name='robots' content='noindex, follow'/>";
+            }
             companyViewModel.PageCount = 0;
             companyViewModel.PageNumber = 1;
             companyViewModel.PageIndex = 1;
@@ -137,6 +141,10 @@ namespace UpVotes.Controllers
             CompanyViewModel companyViewModel = companyService.GetCompany(companyFilter);            
             companyViewModel.WebBaseURL = _webBaseURL;
             GetCategoryHeadLine(urlFocusAreaName, companyViewModel, id.Replace("space", " "), urlSubFocusAreaName);
+            if (companyViewModel.CompanyList.Count > 0 && companyViewModel.CompanyList.Count <= 5)
+            {
+                companyViewModel.MetaTag = companyViewModel.MetaTag + " <meta name='robots' content='noindex, follow'/>";
+            }
             companyViewModel.SubFocusArea = urlSubFocusAreaName;
             companyViewModel.Location = id;
             companyViewModel.PageCount = 0;
